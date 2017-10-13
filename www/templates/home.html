@@ -1,0 +1,13 @@
+<!--首页-->
+<ion-view>
+  <ion-content>
+    首页
+    <button ng-click="carinfo()">获取名下车辆</button>
+    <button ng-click="loginout()">销毁登陆</button>
+    <ul>
+      <li ng-repeat="item in cars">
+        {{item.Name}}
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>
