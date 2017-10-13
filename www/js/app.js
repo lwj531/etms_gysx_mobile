@@ -58,7 +58,7 @@ angular.module('starter', ['ionic', 'route'])
       })
       .state('main.home', {
         url: '/home',
-        templateUrl: "templates/home.html",
+        templateUrl: "templates/Home/home.html",
         controller: "HomeCtrl"
       })
       .state('main.dailymgt', {
