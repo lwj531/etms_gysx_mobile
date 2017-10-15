@@ -1,5 +1,10 @@
 /* Empty. Add your own CSS if you like */
 /* Empty. Add your own CSS if you like */
+
+::-webkit-scrollbar {
+  height: 1px !important;
+  width: 0px !important;
+}
 .map-container{
   height: 100%;
   width: 100%;
@@ -74,6 +79,7 @@
 .list-item {
   box-sizing: border-box;
   position: relative;
+  background-color: #fff;
 }
 
 ul {
@@ -219,6 +225,17 @@ ul {
   position: relative;
   max-width: 100%;
 }
+.list-item .item-title.ellipsis {
+  -webkit-flex-shrink: 1;
+  -ms-flex: 0 1 auto;
+  flex-shrink: 1;
+  min-width: 0;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
 
 .list-item .item-text {
   font-size: 13px;
@@ -287,7 +304,7 @@ ul {
   -webkit-align-items: flex-start;
   align-items: flex-start;
 }
-.overflow-scroll > .scroll{
+.pane, .view{
   background-color: #f5f7fa;
 }
 .overflow-scroll.sidemenu-content > .scroll{
@@ -325,22 +342,23 @@ ul {
   padding: 0;
 }
 [class*=graphic-block]{
-  padding: 0 0 10px 0;
+  padding: 0;
 }
 [class*=graphic-block]>.graphic-block{
   background-color: #fff;
   width: 100%;
   border-radius: 2px;
   text-align: center;
+  padding-bottom: 10px;
 }
 .graphic-block1{
-  padding-right: 2px;
+  padding-right: 1px;
 }
 .graphic-block2{
-  padding-left: 2px;
+  padding-left: 1px;
 }
 .graphic-block +.img-block{
-  
+
 }
 .img-block +.img-block{
 color: #dddddd;
