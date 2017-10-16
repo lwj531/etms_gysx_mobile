@@ -1,5 +1,5 @@
 angular.module('main.ctrl', [])
-  .controller('MainCtrl', function ($scope,$ionicSideMenuDelegate) {
+  .controller('MainCtrl', function ($scope,$state,$ionicSideMenuDelegate) {
     //模拟菜单数据
     $scope.menus = [{
       name:" 首页",
@@ -21,4 +21,5 @@ angular.module('main.ctrl', [])
       iconName:"routesetting",
       state:"main.routesetting"
     }];
+    $scope.currentstate = $state;
   });

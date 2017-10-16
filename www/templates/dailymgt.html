@@ -2,5 +2,22 @@
 <ion-view>
   <ion-content>
     日程管理
+    <!--<div class="voice-btn" on-hold="rec_voice()" on-release="endrec_voice()" ng-show="!isOk2"
+         style="display: inline-block;">
+      <i class="ico ion-mic-a"></i> 说点什么
+      <ion-spinner icon="spiral" ng-show="isrec"></ion-spinner>
+    </div>-->
+    <div class="list">
+      <label class="item">
+       <p>{{state}}</p>
+      </label>
+      <label class="item">
+        <button class="button button-block button-positive" type="button" ng-click="start()">开始</button>
+      </label>
+      <label class="item">
+        <button class="button button-block button-positive" type="button" ng-click="end()">结束</button>
+      </label>
+    </div>
+
   </ion-content>
 </ion-view>
