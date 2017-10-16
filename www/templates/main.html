@@ -20,13 +20,36 @@
     <header class="bar bar-header bar-stable">
       <h1 class="title">Left</h1>
     </header>
-    <ion-content class="has-header">
+    <ion-content class="has-header sidemenu-content">
       {{currentstate.current.name}}
-      <ion-list>
-        <ion-item nav-clear menu-close  ng-repeat="item in menus" ui-sref="{{item.state}}">
-          {{item.name}}
-        </ion-item>
-      </ion-list>
+      <div class="sidemenu-banner">
+        <img src="../img/menu_logo.png">
+      </div>
+      <ul>
+        <li class="list-item no-line" menu-close ng-repeat="item in menus" ui-sref="{{item.state}}">
+          <div class="item-content item-link">
+            <div class="item-media">
+              <i class="uicon uicon-{{item.iconName}}"></i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">{{item.name}}</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="bottom-item">
+        <div class="list-item no-line" menu-close>
+          <div class="item-content item-link">
+            <div class="item-media">
+              <i class="uicon uicon-setting"></i>
+            </div>
+            <div class="item-inner">
+              <div class="item-title">系统设置</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </ion-content>
     <ion-side-menu>
 </ion-side-menus>

@@ -58,7 +58,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       .state('main.home', {
         url: '/home',
-        templateUrl: "templates/home.html",
+        templateUrl: "templates/Home/home.html",
         controller: "HomeCtrl"
       })
       .state('main.dailymgt', {
@@ -71,6 +71,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/callguide',
         templateUrl: "templates/callguide.html",
         controller: "CallGuideCtrl"
+      })
+      //路线设定
+      .state('main.routesetting', {
+        url: '/callguide',
+        templateUrl: "templates/routesetting/routesetting.html",
+        controller: "RouteSettingCtrl"
       })
       .state('carinfo', {
         url: '/carinfo',
