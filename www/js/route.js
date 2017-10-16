@@ -6,8 +6,10 @@ angular.module('route', [
   "home.ctrl",
   'car.ctrl',
   'callguide.ctrl',
+  'dailymgt.ctrl',
   //service
   'account.srv',
   'car.srv',
+
 ]);
 

@@ -21,6 +21,7 @@
       <h1 class="title">Left</h1>
     </header>
     <ion-content class="has-header">
+      {{currentstate.current.name}}
       <ion-list>
         <ion-item nav-clear menu-close  ng-repeat="item in menus" ui-sref="{{item.state}}">
           {{item.name}}

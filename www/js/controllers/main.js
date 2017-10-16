@@ -1,5 +1,5 @@
 angular.module('main.ctrl', [])
-  .controller('MainCtrl', function ($scope,$ionicSideMenuDelegate) {
+  .controller('MainCtrl', function ($scope,$state,$ionicSideMenuDelegate) {
     //模拟菜单数据
     $scope.menus = [{
       name:" 首页",
@@ -11,4 +11,5 @@ angular.module('main.ctrl', [])
       name:"拜访向导",
       state:"main.callguide"
     }];
+    $scope.currentstate = $state;
   });
