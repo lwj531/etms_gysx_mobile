@@ -71,6 +71,12 @@ angular.module('starter', ['ionic', 'route'])
         templateUrl: "templates/callguide.html",
         controller: "CallGuideCtrl"
       })
+      //路线设定
+      .state('main.routesetting', {
+        url: '/callguide',
+        templateUrl: "templates/routesetting/routesetting.html",
+        controller: "RouteSettingCtrl"
+      })
       .state('carinfo', {
         url: '/carinfo',
         templateUrl: "templates/carinfo.html",
