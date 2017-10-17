@@ -62,6 +62,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/home/home.html",
         controller: "HomeCtrl"
       })
+      //日程管理
       //消息通知
       .state('main.msgcenter', {
         url: '/msgcenter',
@@ -109,7 +110,7 @@ var interceptor = function ($q, $rootScope) {
       config.headers = config.headers || {};
       var random = toolkit.getrandomnumbers();
       var timeStamp = toolkit.gettimeStamp();
-      var str = localStorage.appid + "." + random + "." + timeStamp + "." + toolkit.SHA256(random + timeStamp + localStorage.token);
+      var str = localStorage.userid + "." + random + "." + timeStamp + "." + toolkit.SHA256(random + timeStamp + localStorage.token);
       config.headers.authorization = "Basic " + toolkit.Base64Encryption(str);
       return config;
     },
