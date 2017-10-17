@@ -4,6 +4,7 @@ angular.module('route', [
   'account.ctrl',
   "main.ctrl",
   "home.ctrl",
+  "msgcenter.ctrl",
   'car.ctrl',
   'callguide.ctrl',
   'dailymgt.ctrl',

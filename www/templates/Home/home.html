@@ -1,6 +1,27 @@
 <!--首页-->
 <ion-view title="首页" view-title="首页">
-  <ion-content>
+  <!--<ion-header-bar class="bar-positive bar bar-header" align-title="center">-->
+  <!--<button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">-->
+  <!--<i class="icon ion-android-arrow-back"></i>-->
+  <!--<span class="back-text" style=""></span>-->
+  <!--</button>-->
+  <!--<div class="buttons buttons-left header-item" style="">-->
+  <!--<span class="left-buttons"><button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button></span>-->
+  <!--</div>-->
+  <!--<div class="title title-center header-item">首页</div>-->
+  <!--</ion-header-bar>-->
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
+      <i class="icon ion-android-arrow-back"></i>
+      <span class="back-text" style=""></span>
+    </button>
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    <div class="h1 title">首页</div>
+    <button class="button button-icon" style="padding-top: 4px;" ng-click="">
+      <img src="../../img/send_white_48.png" width="25">
+    </button>
+  </div>
+  <ion-content class="has-header">
     <!--首页-->
     <!--<button ng-click="carinfo()">获取名下车辆</button>-->
     <!--<button ng-click="loginout()">销毁登陆</button>-->
@@ -14,10 +35,18 @@
         <li class="list-item no-line">
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title"><i class="icon ion-ios-locked-outline"></i>消息<i
-                class="icon ion-ios-locked-outline"></i>消息
+              <div class="item-title flex-center">
+                <img src="../../img/mail_yellow_44.png" alt="" width="22">
+                <span style="margin-left: 8px;margin-right: 12px;">消息</span>
+                <a class="button button-clear button-small button-energized flex-center color-orange" style="font-size: 14px;">
+                  <img src="../../img/refresh_orange_32.png" width="18"> <span style="margin-left: 5px;">刷新</span>
+                </a>
               </div>
-              <div class="item-after"><i class="icon ion-ios-locked-outline"></i>更多</div>
+              <div class="item-after">
+                <a class="button button-clear button-small button-positive flex-center" ui-sref="main.msgcenter" style="font-size: 14px;color:#4190e7;">
+                  <img src="../../img/list_blue_32.png" width="18"> <span style="margin-left: 5px;">更多</span>
+                </a>
+              </div>
             </div>
           </div>
         </li>
@@ -57,7 +86,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i><i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/building_blue_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">辖区机构渗透率</div>
@@ -65,9 +94,8 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
         <div class="col graphic-block2">
@@ -75,8 +103,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i>
-                  <i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/shakehand_purple_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">ABC等级拜访频次</div>
@@ -84,9 +111,8 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
       </div>
@@ -98,7 +124,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i><i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/building_blue_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">连锁总部覆盖率</div>
@@ -106,9 +132,8 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
         <div class="col graphic-block2">
@@ -116,8 +141,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i>
-                  <i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/paper_yellow_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">日均拜访次数</div>
@@ -125,9 +149,8 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
       </div>
@@ -146,17 +169,16 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i><i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/building_blue_48.png" width="22">
                 </div>
                 <div class="item-inner">
-                  <div class="item-title">辖区机构渗透率</div>
+                  <div class="item-title">连锁总部覆盖率</div>
                 </div>
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
         <div class="col graphic-block2">
@@ -164,8 +186,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i>
-                  <i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/paper_yellow_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">ABC等级拜访频次</div>
@@ -173,9 +194,8 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
       </div>
@@ -194,7 +214,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i><i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/building_blue_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">辖区机构渗透率</div>
@@ -202,9 +222,8 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
         <div class="col graphic-block2">
@@ -212,8 +231,7 @@
             <div class="list-item no-line">
               <div class="item-content">
                 <div class="item-media">
-                  <i class="uicon uicon-building"></i>
-                  <i class="icon ion-ios-locked-outline"></i>
+                  <img src="../../img/shakehand_purple_48.png" width="22">
                 </div>
                 <div class="item-inner">
                   <div class="item-title">ABC等级拜访频次</div>
@@ -221,34 +239,119 @@
               </div>
             </div>
             <div class="img-block">
-              <img src="../../img/developing.png" alt="">
+              <img src="../../img/deploying_226.png" style="width: 70%;">
             </div>
-            <div class="img-block">开发中</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="content-block">
-      <div>
-        <button class="button">
-          Default
-        </button>
-        <button class="button">
-          Default
-        </button>
+    <div class="content-block bg-white home-schedule">
+      <div class="button-row" ng-init="activeTab=1">
+        <button class="button button-stable button-small round" ng-class="{'active':activeTab==1}" ng-click="activeTab=1">今日行程</button>
+        <span class="button-connect"></span>
+        <button class="button button-stable button-small round" ng-class="{'active':activeTab==2}" ng-click="activeTab=2">明日行程</button>
       </div>
-      <div>
-        <div class="list-item no-line" style="margin-bottom: 2px;">
-          <div class="item-content">
-            <div class="item-inner">
-<div class="item-title-row">
-  <div class="item-title">路线名称11</div>
-
-</div>
-              <div class="item-text">
-                <div>process</div>
+      <div class="crl-tabs">
+        <div class="crl-tab" ng-show="activeTab==1">
+          <div class="list-item multi-line no-line">
+            <div class="item-content">
+              <div class="item-media"><img src="../../img/route_green_44.png" width="28"></div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title">路线名称11</div>
+                </div>
+                <div class="item-title-row">
+                  <div class="item-title" style="width: 100%;">
+                    <div class="progress-track">
+                      <div class="progress" style="width: 70%;"></div>
+                    </div>
+                  </div>
+                  <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;70%</div>
+                </div>
               </div>
             </div>
+          </div>
+          <ul>
+            <li class="list-item multi-line schedule-called">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="list-dot"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">北京xxxxx分部(A)</div>
+                  </div>
+                  <div class="item-text">北京市朝阳区xxxx院</div>
+                  <div class="flex-row align-end">
+                    <div class="col-40 color-green">签入时间&nbsp;10:21:21</div>
+                    <div class="col-40 color-green">签出时间&nbsp;10:21:21</div>
+                    <div class="col-20">
+                      <a class="button button-clear button-stable button-small flex-center"
+                         style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
+                        src="../../img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item multi-line schedule-called">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="list-dot"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">北京xxxxx分部(A)</div>
+                  </div>
+                  <div class="item-text">北京市朝阳区xxxx院</div>
+                  <div class="flex-row align-end">
+                    <div class="col-40 color-green">签入时间&nbsp;10:21:21</div>
+                    <div class="col-40 color-green">签出时间&nbsp;10:21:21</div>
+                    <div class="col-20">
+                      <a class="button button-clear button-stable button-small flex-center"
+                         style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
+                        src="../../img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item multi-line schedule-plan">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="list-dot"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">北京xxxxx分部(A)</div>
+                  </div>
+                  <div class="flex-row align-end">
+                    <div class="col-80 color-gray">北京市朝阳区xxxx院</div>
+                    <div class="col-20">
+                      <a class="button button-clear button-stable button-small flex-center color-blue"
+                         style="font-size: 14px; line-height: 19px;min-height: 21px;"><img
+                        src="../../img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item multi-line schedule-plan">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="list-dot"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">北京xxxxx分部(A)</div>
+                  </div>
+                  <div class="flex-row align-end">
+                    <div class="col-80 color-gray">北京市朝阳区xxxx院</div>
+                    <div class="col-20">
+                      <a class="button button-clear button-stable button-small flex-center color-blue"
+                         style="font-size: 14px; line-height: 19px;min-height: 21px;"><img
+                        src="../../img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="crl-tab" ng-show="activeTab==2">
+          <div class="content-block">
+            <div class="">
+              <img src="../../img/none_plan.png" style="width: 100%;">
+            </div>
+            <div class="flex-center"><button class="button button-balanced button-small round" style="padding: 0 20px;">创建计划</button></div>
           </div>
         </div>
       </div>

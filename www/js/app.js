@@ -56,10 +56,17 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/main.html",
         controller: "MainCtrl"
       })
+      //首页
       .state('main.home', {
         url: '/home',
-        templateUrl: "templates/Home/home.html",
+        templateUrl: "templates/home/home.html",
         controller: "HomeCtrl"
+      })
+      //消息通知
+      .state('main.msgcenter', {
+        url: '/msgcenter',
+        templateUrl: "templates/home/msgcenter.html",
+        controller: "MsgcenterCtrl"
       })
       .state('main.dailymgt', {
         url: '/dailymgt',

@@ -17,16 +17,15 @@
   </ion-side-menu-content>
   <ion-side-menu side="left">
     <!--左侧菜单-->
-    <header class="bar bar-header bar-stable">
-      <h1 class="title">Left</h1>
-    </header>
-    <ion-content class="has-header sidemenu-content">
-      {{currentstate.current.name}}
+    <!--<header class="bar bar-header bar-stable">-->
+      <!--<h1 class="title">Left</h1>-->
+    <!--</header>-->
+    <ion-content class="sidemenu-content">
       <div class="sidemenu-banner">
-        <img src="../img/menu_logo.png">
+        <img src="../img/menu_banner.png">
       </div>
       <ul>
-        <li class="list-item no-line" menu-close ng-repeat="item in menus" ui-sref="{{item.state}}" ng-class="{'stick-highlight':true}">
+        <li class="list-item no-line" menu-close ng-repeat="item in menus" ui-sref="{{item.state}}" ng-class="{'stick-highlight':currentstate.current.name==item.state}">
           <div class="item-content item-link">
             <div class="item-media">
               <i class="uicon uicon-{{item.iconName}}"></i>
