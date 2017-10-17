@@ -7,6 +7,12 @@ color:#4e4e4e;
   background-color: #419de7;
   background-image: linear-gradient(0deg, #4687f5, #4687f5 50%, transparent 50%);
 }
+.bar.bar-stable {
+  background-image: linear-gradient(0deg, #e8e8e8, #e8e8e8 50%, transparent 50%);
+}
+.bar.bar-stable .item-input-wrapper{
+  background: #fff;
+}
 .button-small.round{
   border-radius: 50px;
   border:none;
@@ -259,6 +265,7 @@ ul {
   min-width: 0;
   position: relative;
   max-width: 100%;
+  white-space: normal;
 }
 .list-item .item-title.ellipsis {
   -webkit-flex-shrink: 1;
@@ -347,7 +354,7 @@ ul {
 }
 .bottom-item{
   position: absolute;
-  bottom: 80px;
+  bottom: 40px;
   width: 100%;
 }
 .uicon{
@@ -653,8 +660,8 @@ height: 15px;
   text-align: center;
 }
 .table td.title-td{
-  max-width: 200px;
-  min-width: 200px;
+  max-width: 165px;
+  min-width: 165px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -724,4 +731,76 @@ width: 100%;
 .pagination ul li:last-child{
   border-right:1px solid #ddd;
 
+}
+textarea{
+  resize: none;
+}
+.input-label{
+  font-size:14px;
+}
+select{
+  opacity: 0;
+}
+.has-select{
+  position: relative;
+  overflow: visible;
+  display: block;
+  z-index: 9999999;
+}
+.select-ul{
+  display: block;
+  position: absolute;
+  left: 0;
+  float: left;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  z-index: 9999999;
+  width: 100%;
+  max-height: 400px;
+  overflow: auto;
+}
+.select-ul li{
+  padding: 10px 20px;
+  color: dimgray;
+}
+.select-ul li:not(:last-child){
+  border-bottom:1px solid #ddd;
+
+}
+.has-select+label{
+  z-index: 20;
+}
+.list-item.msg-title{
+  background-color: #f5f5f5;
+}
+.list-item.msg-title .item-content{
+  padding-left: 0;
+}
+
+.list-item.msg-title .item-inner{
+  margin-left: 0;
+  padding: 0 10px;
+}
+.msg-alert .popup{
+width: 350px;
+}
+.button-alert{
+  text-align: right;
+  position: absolute;
+  right: 20px;
+  padding: 10px;
+}
+.space-10{
+  display: inline-block;
+width: 10px;
 }

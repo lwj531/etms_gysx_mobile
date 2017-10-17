@@ -17,7 +17,7 @@
     </button>
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <div class="h1 title">首页</div>
-    <button class="button button-icon" style="padding-top: 4px;" ng-click="">
+    <button class="button button-icon" style="padding-top: 4px;" ng-click="openModal()">
       <img src="../../img/send_white_48.png" width="25">
     </button>
   </div>
@@ -53,27 +53,11 @@
       </ul>
 
       <ul class="dense-list">
-        <li class="list-item no-line">
+        <li class="list-item no-line" ng-click="msgPopup()" ng-repeat="item in homeMsgList">
           <div class="item-content">
             <div class="item-inner">
-              <div class="item-title ellipsis">消息消息消息消息消息消息消息消息消息</div>
-              <div class="item-after">2017-12-12&nbsp;09:20:20</div>
-            </div>
-          </div>
-        </li>
-        <li class="list-item no-line">
-          <div class="item-content">
-            <div class="item-inner">
-              <div class="item-title ellipsis">消息消息消息消息消息消息消息消息消息</div>
-              <div class="item-after">2017-12-12&nbsp;09:20:20</div>
-            </div>
-          </div>
-        </li>
-        <li class="list-item no-line">
-          <div class="item-content">
-            <div class="item-inner">
-              <div class="item-title ellipsis">消息消息消息消息消息消息消息消息消息</div>
-              <div class="item-after">2017-12-12&nbsp;09:20:20</div>
+              <div class="item-title ellipsis">{{item.title}}</div>
+              <div class="item-after">{{item.sendTime}}</div>
             </div>
           </div>
         </li>

@@ -28,8 +28,8 @@ angular.module('main.ctrl', [])
       },
       {
         name: " 客户管理",
-        iconName: "dailymgt",
-        state: "main.xx"
+        iconName: "clientmgt",
+        state: "main.clientmgt"
       },
       {
         name: " 附近药店",

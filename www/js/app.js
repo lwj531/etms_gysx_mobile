@@ -68,10 +68,17 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/home/msgcenter.html",
         controller: "MsgcenterCtrl"
       })
+      //日程管理
       .state('main.dailymgt', {
         url: '/dailymgt',
         templateUrl: "templates/dailymgt.html",
         controller: "DailyMgtCtrl"
+      })
+      //客户管理
+      .state('main.clientmgt', {
+        url: '/clientmgt',
+        templateUrl: "templates/clientmgt/clientmgt.html",
+        controller: "ClientMgtCtrl"
       })
       //拜访向导
       .state('main.callguide', {
