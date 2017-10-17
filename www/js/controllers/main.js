@@ -1,25 +1,27 @@
 angular.module('main.ctrl', [])
-  .controller('MainCtrl', function ($scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup,$timeout) {
+  .controller('MainCtrl', function ($scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup, $timeout) {
     //模拟菜单数据
-    $scope.menus = [{
-      name: " 首页",
-      iconName: "home",
-      state: "main.home"
-    },
+    $scope.menus = [
+      {
+        name: " 首页",
+        iconName: "home",
+        state: "main.home"
+      },
       {
         name: " 日程管理",
         iconName: "dailymgt",
         state: "main.dailymgt"
-      },{
+      },
+      {
         name: "辅导下属",
         iconName: "coaching",
         state: "main.xx"
       },
       {
-      name:"拜访向导",
-      iconName:"callguide",
-      state:"main.callguide"
-    },
+        name: "拜访向导",
+        iconName: "callguide",
+        state: "main.callguide"
+      },
       {
         name: "路线设定",
         iconName: "routesetting",
@@ -48,7 +50,7 @@ angular.module('main.ctrl', [])
     $scope.currentstate = $state;
 
     //清空缓存
-    $scope.clear=function(){
+    $scope.clear = function () {
       localStorage.clear();
       alert("localStorage.clear");
     };
@@ -61,9 +63,9 @@ angular.module('main.ctrl', [])
       $scope.modal = modal;
     });
     //已存放的手势密码
-    if(localStorage.cipher==null){
+    if (localStorage.cipher == null) {
       $scope.cipherinfo = "请设置手势密码";
-    }else{
+    } else {
       $scope.cipherinfo = "手势密码登陆";
     }
     //设置手势密码
@@ -72,20 +74,24 @@ angular.module('main.ctrl', [])
       if (str == null || str.length < 4) {
         $scope.cipherinfo = "密码位数至少4位数";
         $scope.lock.error();
-        $timeout(function(){  $scope.lock.reset();},1000);
+        $timeout(function () {
+          $scope.lock.reset();
+        }, 1000);
       } else {
         ////如果已经设置了密码判断是否可以正常登陆
-        if(localStorage.cipher!=null){
+        if (localStorage.cipher != null) {
           if (localStorage.cipher == str) {
             //通过验证关闭modal
             $scope.cipherinfo = "手势密码登陆";
             $scope.modal.hide();
-          }else{
+          } else {
             $scope.cipherinfo = "密码错误";
             $scope.lock.error();
-            $timeout(function(){  $scope.lock.reset();},1000);
+            $timeout(function () {
+              $scope.lock.reset();
+            }, 1000);
           }
-        }else{
+        } else {
           //临时存放的手势
           if ($scope.currentcipher == null) {
             $scope.currentcipher = str;
@@ -101,7 +107,9 @@ angular.module('main.ctrl', [])
               //两次密码不正确
               $scope.cipherinfo = "两次密码不正确";
               $scope.lock.error();
-              $timeout(function(){  $scope.lock.reset();},1000);
+              $timeout(function () {
+                $scope.lock.reset();
+              }, 1000);
             }
           }
         }
