@@ -1,18 +1,33 @@
 
 <ion-view>
-  <ion-content>
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Username</span>
-        <input type="text" ng-model="loginData.UserId">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Password</span>
-        <input type="password" ng-model="loginData.Password">
-      </label>
-      <label class="item">
-        <button class="button button-block button-positive" type="button" ng-click="signin()">登录1</button>
-      </label>
+  <ion-content class="bg-white">
+    <div class="flex-end paddinglr-20 margintb-20">
+      <a class="button button-clear button-assertive">忘记密码</a>
     </div>
+    <div class="flex-center paddinglr-20 paddingtb-20">
+      <img src="../img/logo_blue_460.png" width="108">
+    </div>
+    <div class="flex-center paddinglr-20 margintb-20">
+      <a class="button button-small button-light" style="padding: 3px 15px 3px; margin:0 10px;">嘉兴1</a>
+    </div>
+    <form ng-submit="doLogin()" class="paddinglr-20 paddingtb-20">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon uicon-login-account placeholder-icon"></i>
+          <input type="text" placeholder="账号" ng-model="loginData.UserId" maxlength="20" style="padding-left: 8px;">
+        </label>
+      </div>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon uicon-login-password placeholder-icon"></i>
+          <input type="password" placeholder="密码" ng-model="loginData.Password" maxlength="20" style="padding-left: 8px;">
+        </label>
+      </div>
+      <div class="list list-inset">
+        <label class="item-login">
+          <button class="button button-block button-positive" type="button" ng-click="signin()">登录</button>
+        </label>
+      </div>
+    </form>
   </ion-content>
 </ion-view>

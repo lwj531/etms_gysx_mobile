@@ -46,17 +46,14 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
-      //登陆页
       .state('app', {
         url: '/app',
         templateUrl: "templates/signin.html",
-        controller: "AccountCtrl"
+        controller: "AccountCtrl",
       })
-      //菜单页（主容器）
       .state('main', {
         url: '/main',
         templateUrl: "templates/main.html",
-        abstract:true,
         controller: "MainCtrl"
       })
       //首页
@@ -66,6 +63,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         controller: "HomeCtrl"
       })
       //日程管理
+      //消息通知
+      .state('main.msgcenter', {
+        url: '/msgcenter',
+        templateUrl: "templates/home/msgcenter.html",
+        controller: "MsgcenterCtrl"
+      })
       .state('main.dailymgt', {
         url: '/dailymgt',
         templateUrl: "templates/dailymgt.html",

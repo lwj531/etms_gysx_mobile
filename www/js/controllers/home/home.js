@@ -10,5 +10,7 @@ angular.module('home.ctrl', ['car.srv'])
     };
     $scope.loginout=function(){
       localStorage.clear();
-    }
+    };
+
+
   });
