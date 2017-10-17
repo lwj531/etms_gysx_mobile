@@ -46,21 +46,26 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
     // Set up the various states which the app can be in.
     // Each state's controller can be found in controllers.js
     $stateProvider
+      //登陆页
       .state('app', {
         url: '/app',
         templateUrl: "templates/signin.html",
-        controller: "AccountCtrl",
+        controller: "AccountCtrl"
       })
+      //菜单页（主容器）
       .state('main', {
         url: '/main',
         templateUrl: "templates/main.html",
+        abstract:true,
         controller: "MainCtrl"
       })
+      //首页
       .state('main.home', {
         url: '/home',
-        templateUrl: "templates/Home/home.html",
+        templateUrl: "templates/home/home.html",
         controller: "HomeCtrl"
       })
+      //日程管理
       .state('main.dailymgt', {
         url: '/dailymgt',
         templateUrl: "templates/dailymgt.html",
@@ -95,7 +100,7 @@ var interceptor = function ($q, $rootScope) {
       config.headers = config.headers || {};
       var random = toolkit.getrandomnumbers();
       var timeStamp = toolkit.gettimeStamp();
-      var str = localStorage.appid + "." + random + "." + timeStamp + "." + toolkit.SHA256(random + timeStamp + localStorage.token);
+      var str = localStorage.userid + "." + random + "." + timeStamp + "." + toolkit.SHA256(random + timeStamp + localStorage.token);
       config.headers.authorization = "Basic " + toolkit.Base64Encryption(str);
       return config;
     },

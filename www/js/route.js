@@ -10,6 +10,7 @@ angular.module('route', [
   //service
   'account.srv',
   'car.srv',
+  'http.srv',
 
 ]);
 
