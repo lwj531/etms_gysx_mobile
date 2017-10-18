@@ -1,18 +1,5 @@
 <!--路线设定-->
 <ion-view>
-  <!--<div class="bar bar-header bar-positive">
-    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
-      <span class="back-text" style=""></span>
-    </button>
-    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
-    <div class="h1 title">路线设定</div>
-    <div class="buttons" style="padding-top: 3px;">
-      <button class="button button-icon ion-information-circled" ng-click="search_nopositionstore()"><img src="img/nolatlng-store-icon.png" style="width: 32px;">
-      </button>
-      <button class="button button-icon ion-search" ng-click="searchstore()"><img src="img/search-icon.png" style="width: 32px;">
-      </button>
-    </div>
-  </div>-->
   <ion-header-bar class="bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
       <i class="icon ion-android-arrow-back"></i>
@@ -41,7 +28,23 @@
 
     <div class="bg-white" id="addnewline"  ng-click="addnewroute()" style="position:absolute;height:40px;width:40px;top:1px;z-index:999;text-align:center;right:0;box-shadow: -2px 0px 3px 2px lightgrey"><img src="/img/addroute-icon.png" style="width: 18px;height: 20px;position: absolute;top: 2px;left: 0;right: 0;margin: auto;" /><span style="display:inline-block;font-size: 12px;position: absolute;width: 40px;bottom: 0;left: 0;color: #419DE7;">新增</span></div>
     <!--地图div-->
-    <div id="routemap" style="width:100%;height:700px;position:absolute;z-index:0;"></div>
+    <!--<div id="routemap" style="width:100%;height:700px;position:absolute;z-index:0;"></div>-->
+    <amap></amap>
+    <div id="infowindow" ng-show="false">
+          <div class="info">
+            <div class="info-top">
+              <div class="div1">
+                <span ng-click="Addinline()"  class="span1">
+                  加入路线</span>
+              </div>
+              <div class="div2">
+                <span class="span2" ng-bind="currentins.InstitutionName"></span>
+              </div>
+            </div>
+            <div class="info-bottom">
+        <img src="https://webapi.amap.com/images/sharp.png"></div>
+          </div>
+    </div>
     <!--点击新增路线出现的弹出框-->
     <div class="addnewroutediv" style="position:absolute;z-index:800;width:88%;right:25px;top:60px;display: none">
       <div class="bg-white" style="height:52px;line-height:68px;">

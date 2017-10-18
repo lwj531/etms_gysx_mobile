@@ -1,104 +1,54 @@
-var editor;
-var type_1 = new Array();
-var type_2 = new Array();
-var type_3 = new Array();
-var type_4 = new Array();
-var type_5 = new Array();
-var type_6 = new Array();
-var all_marker = new Array();
-var position;
-
 angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
   .controller('RouteSettingCtrl', function($scope,$ionicPopup,routesettingsrv) {
-    $scope.insdata ={};
     //初次加载用户所有机构
     routesettingsrv.getins().then(function (data) {
-      $scope.insdata = data;
-      var originalpoint  =  new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
-      //实例地图
-      var map = new AMap.Map("routemap",
-        {
-          view:new AMap.View2D({
-            center:originalpoint,
-            resizeEnable: true,
-            zoom: 15
-          }),
-          lang:"zh_cn"
-        });
-      //加载Marker
-      for (var i = 0; i < data.length; i++) {
-        var position = new AMap.LngLat(data[i].InstitutionLng, data[i].InstitutionLat);
-          marker = new AMap.Marker({
+      $scope.insdata= data;
+      //设置原点
+      $scope.center= new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
+      //通知数据已获取
+      $scope.$broadcast("amap", "datacompleted");
+    });
+    //初始化完成后执行
+    $scope.$on('amap', function (errorType,data) {
+      if(data=="mapcompleted"){
+        //加载Marker
+        for (var i = 0; i < $scope.insdata.length; i++) {
+          var ins = $scope.insdata[i];
+          var position = new AMap.LngLat(ins.InstitutionLng, ins.InstitutionLat);
+          var marker = new AMap.Marker({
             icon: new AMap.Icon({
-              image:data[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(data[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
+              image:ins.InstitutionPriority=="A"? "/img/GradeA-icon.png":(ins.InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
               size: new AMap.Size(26, 30)
             }),
-            extData: { address: data[i].Address, name: data[i].InstitutionName },
+            extData: ins,
             position: position //图标定位
           });
-          marker.setMap(map);
-          AMap.event.addListener(marker,'click',_onClick);
-
-
-
-        function _onClick(e) {
-
+          marker.setMap($scope.map);
+          AMap.event.addListener(marker, 'click', $scope.showInfoWindow);
         }
-
-        marker.on("click", function (e) {
-          //debugger;
-          //这里写了一个用来做已经存在于几个路线中的店铺的加入提示信息
-          if (e.target.G.extData.name == "长寿大药房") {
-            var title2 = '<div style="width:40px;background-color:#0076FF;text-align:center;height:45px;border-radius:5px 0 0 5px;"><img src="img/store-icon.png" style="display:inline-block;height:45px;color:white;position:absolute;left:-2px;"/></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-            $(".warnremind").show();
-          }
-          else {
-            var title2 = '<div style="width:40px;background-color:#0076FF;text-align:center;height:45px;border-radius:5px 0 0 5px;"><img src="img/store-icon.png" style="display:inline-block;height:45px;color:white;position:absolute;left:-2px;"/></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-          }
-
-          var hs = e.target.G.extData;
-          var marker_window = new AMap.InfoWindow({
-            isCustom: true,
-            content:createInfoWindow(title2,content2),
-            autoMove: true,
-            closeWhenClickMap: true,
-            offset: new AMap.Pixel(110, -24)
-          });
-          marker_window.open(map, e.target.getPosition());
-        });
       }
     });
-// 点击marker出现窗体信息函数
-    $scope.createInfoWindow=function(){
-
+    //当前点击的机构
+    $scope.currentins;
+    //点击Marker
+    $scope.showInfoWindow = function (event) {
+      //点击的机构数据
+      $scope.currentins = event.target.getExtData();
+      $scope.$apply();
+      var infowindow = new AMap.InfoWindow({
+        isCustom: true,
+        content :$("#infowindow").html(),
+        autoMove:true,
+        closeWhenClickMap:true,
+        offset: new AMap.Pixel(110, -22)
+      });
+      var center = new AMap.LngLat($scope.currentins .InstitutionLng,$scope.currentins .InstitutionLat);
+      infowindow.open($scope.map,center);
     };
-    function createInfoWindow(title, content) {
-      var info = document.createElement("div");
-      info.className = "info";
+    //加入路线图
+    $scope.addinline = function(){
 
-      //可以通过下面的方式修改自定义窗体的宽高
-      //info.style.width = "400px";
-      // 定义顶部标题
-      var top = document.createElement("div");
-      top.className = "info-top";
-      top.innerHTML = title;
-
-      info.appendChild(top);
-
-      // 定义底部内容
-      var bottom = document.createElement("div");
-      bottom.className = "info-bottom";
-      bottom.style.position = 'relative';
-      bottom.style.top = '0px';
-      bottom.style.margin = '0 auto';
-      var sharp = document.createElement("img");
-      sharp.src = "https://webapi.amap.com/images/sharp.png";
-      bottom.appendChild(sharp);
-      info.appendChild(bottom);
-      return info;
-    }
-
-
+    }; 
 
     //路线顶部显示有几条路线区域
     $scope.routName=[

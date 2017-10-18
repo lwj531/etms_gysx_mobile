@@ -867,3 +867,44 @@ a{
   background: none;
   color:white;
 }
+div.info-top {
+  height:45px;
+  position: relative;
+  background: none repeat scroll 0 0 white;
+  border-radius: 5px;
+}
+div.info-top div {
+  display: inline-block;
+  color: #333333;
+  font-size: 13px;
+}
+.info-top .div1{
+  width:40px;
+  background-color:#4DCC89;
+  text-align:center;
+  height:45px;
+  border-radius:5px 0 0 5px;
+}
+.info-top .div2{
+  width:190px;
+  height:45px;
+}
+.info-top .span1{
+  display:inline-block;
+  width:30px;
+  height:45px;
+  color:white;
+  position:absolute;
+  top:5px;
+  left:6px;
+}
+.info-top .span2{
+  position:absolute;
+  top:6px;
+  left:48px;
+}
+.info-bottom {
+  position:relative;
+  top:0px;
+  margin:0px auto;
+}

@@ -14,6 +14,8 @@ angular.module('route', [
   'account.srv',
   'car.srv',
   'http.srv',
-  'routesetting.srv'
+  'routesetting.srv',
+  //directive
+  'amap.dt'
 ]);
 
