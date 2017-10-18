@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'route'])
+angular.module('starter', ['ionic', 'route','ngCordova'])
 
   .run(function ($ionicPlatform, $rootScope, $state, $ionicPopup) {
     $ionicPlatform.ready(function () {
@@ -56,14 +56,30 @@ angular.module('starter', ['ionic', 'route'])
         templateUrl: "templates/main.html",
         controller: "MainCtrl"
       })
+      //首页
       .state('main.home', {
         url: '/home',
-        templateUrl: "templates/Home/home.html",
+        templateUrl: "templates/home/home.html",
         controller: "HomeCtrl"
       })
+      //日程管理
+      //消息通知
+      .state('main.msgcenter', {
+        url: '/msgcenter',
+        templateUrl: "templates/home/msgcenter.html",
+        controller: "MsgcenterCtrl"
+      })
+      //日程管理
       .state('main.dailymgt', {
         url: '/dailymgt',
-        templateUrl: "templates/dailymgt.html"
+        templateUrl: "templates/dailymgt.html",
+        controller: "DailyMgtCtrl"
+      })
+      //客户管理
+      .state('main.clientmgt', {
+        url: '/clientmgt',
+        templateUrl: "templates/clientmgt/clientmgt.html",
+        controller: "ClientMgtCtrl"
       })
       //拜访向导
       .state('main.callguide', {
@@ -94,7 +110,7 @@ var interceptor = function ($q, $rootScope) {
       config.headers = config.headers || {};
       var random = toolkit.getrandomnumbers();
       var timeStamp = toolkit.gettimeStamp();
-      var str = localStorage.appid + "." + random + "." + timeStamp + "." + toolkit.SHA256(random + timeStamp + localStorage.token);
+      var str = localStorage.userid + "." + random + "." + timeStamp + "." + toolkit.SHA256(random + timeStamp + localStorage.token);
       config.headers.authorization = "Basic " + toolkit.Base64Encryption(str);
       return config;
     },

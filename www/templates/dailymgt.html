@@ -1,6 +1,20 @@
 <!--日程管理-->
 <ion-view>
   <ion-content>
+    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     日程管理
+
+    <div class="list">
+      <label class="item">
+       <p>{{state}}</p>
+      </label>
+      <label class="item">
+        <button class="button button-block button-positive" type="button" ng-click="start()">开始</button>
+      </label>
+      <label class="item">
+        <button class="button button-block button-positive" type="button" ng-click="end()">结束</button>
+      </label>
+    </div>
+
   </ion-content>
 </ion-view>

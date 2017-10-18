@@ -22,14 +22,19 @@
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
   <link href="css/ionic.app.css" rel="stylesheet">
   -->
-  <!-- jquery js -->
-  <script src="lib/ionic/js/jquery-1.10.2.js"></script>
+  <!-- 第三方css -->
+  <link href="lib/patternLock/patternLock.css" rel="stylesheet">
+  <!-- 第三方包 -->
+  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src="lib/patternLock/patternLock.js"></script>
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
   <script src="cordova.js"></script>
+
   <!-- toolkit js -->
   <script src="js/extend/sha256.js"></script>
   <script src="js/extend/toolkit.js"></script>
@@ -47,11 +52,15 @@
   <script src="js/controllers/car.js"></script>
   <script src="js/controllers/callguide.js"></script>
   <script src="js/controllers/Routesetting/routesetting.js"></script>
+  <script src="js/controllers/dailymgt.js"></script>
+  <script src="js/controllers/home/msgcenter.js"></script>
+  <script src="js/controllers/clientmgt/clientmgt.js"></script>
 
   <!-- service js -->
   <script src="js/services/account.js"></script>
   <script src="js/services/car.js"></script>
   <script src="js/services/Routesetting/nocoordinatestore.js"></script>
+  <script src="js/services/httpservice.js"></script>
 
 </head>
 <body ng-app="starter">

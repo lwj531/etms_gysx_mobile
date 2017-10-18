@@ -4,12 +4,16 @@ angular.module('route', [
   'account.ctrl',
   "main.ctrl",
   "home.ctrl",
+  "msgcenter.ctrl",
   'car.ctrl',
   'routesetting.ctrl',
   'callguide.ctrl',
+  'dailymgt.ctrl',
+  'clientmgt.ctrl',
   //service
   'account.srv',
   'car.srv',
+  'http.srv',
   'routesetting.srv'
 ]);
 
