@@ -4,6 +4,10 @@ angular.module("routesetting.srv", ["http.srv"])
     this.nocoordinatestoreinfo = function () {
       return httpsrv.service("/api/Account/SignIn/", {}, "get", true);
     };
+    //获取用户下所有的机构
+    this.getins = function(){
+      return httpsrv.service("/api/Institution/GetInstitutions",{},"get");
+    }
     //关键字搜索查询机构
     this.keywordsearchstore = function(){
       return httpsrv.service("/api/Account/SignIn/", {}, "get", true);

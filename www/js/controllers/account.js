@@ -65,7 +65,10 @@ angular.module('account.ctrl', ['account.srv'])
         $scope.showcipher();
       }
     });
-    $scope.loginData = {};
+    $scope.loginData = {
+      UserId:18521734007,
+      Password:123456
+    };
     //显示手势密码
     $scope.showcipher = function () {
       $scope.modal.show();

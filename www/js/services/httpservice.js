@@ -2,7 +2,7 @@ angular.module("http.srv", [])
   .service("httpsrv", [
     "$http", "$q","$ionicLoading", function ($http, $q,$ionicLoading) {
       this.service = function(url,data,method,showloading){
-        if(showloading){
+        if(showloading || showloading==null){
           //显示菊花
           $ionicLoading.show({
             template: 'Loading...'
