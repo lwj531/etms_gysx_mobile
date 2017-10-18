@@ -75,7 +75,7 @@ angular.module('account.ctrl', ['account.srv'])
         },
         lineOnMove: false
       });
-    }
+    };
     //登陆
     $scope.signin = function () {
       var loginmodel = {

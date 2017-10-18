@@ -512,6 +512,9 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
     //编辑路线之后保存
     $scope.saveeditlineinfo = function(){
       alert(1);
+      routesettingsrv.keywordsearchstore().then(function (data) {
+        console.log(data);
+      });
     };
 
     //删除路线
@@ -540,6 +543,9 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
             type:'button-assertive',
             onTap:function(e){
               alert(1);
+              routesettingsrv.deleterouteline().then(function (data) {
+                console.log(data);
+              });
             }
           }
         ]
@@ -552,22 +558,28 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
       $("._editlinediv").fadeOut(300);
       $(".editlinediv").show();
     };
+
     $scope.searchstore = function(){
        $(".searchstorediv").fadeIn(300);
       $(".lineinfodiv").fadeIn(300);
       $(".addnewroutediv").fadeOut(300);
       $(".nolatlng-storediv").fadeOut(300);
     };
+
+     //关键字搜索机构函数
+    $scope.searchstorebykeyword = function(){
+     // debugger;
+      var namekeyword = $("#KeyWordOfStoreName").val();
+      routesettingsrv.keywordsearchstore().then(function (data) {
+        console.log(data);
+      });
+    };
+    //请求无坐标机构数据函数
     $scope.search_nopositionstore = function(){
       $(".nolatlng-storediv").fadeIn(300);
       $(".lineinfodiv").fadeIn(300);
       $(".addnewroutediv").fadeOut(300);
       $(".searchstorediv").fadeOut(300);
-      routesettingsrv.nocoordinatestoreinfo().then(function(info){
-        console.log(info);
-      })
-
-
       routesettingsrv.nocoordinatestoreinfo().then(function (data) {
         console.log(data);
       });
