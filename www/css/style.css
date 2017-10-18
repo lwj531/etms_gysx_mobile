@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 /* Empty. Add your own CSS if you like */
 body, .ionic-body{
-color:#5e5e5e;
+color:#4e4e4e;
 }
 .bar.bar-positive{
   background-color: #419de7;
@@ -227,7 +227,7 @@ ul {
   align-self: stretch;
 }
 
-.list-item:not(:last-child) .item-inner:after,.list-item.has-line .item-inner:after {
+.list-item:not(:last-child) .item-inner:after {
   content: '';
   position: absolute;
   left: 0;
@@ -279,28 +279,6 @@ ul {
   max-width: 100%;
   white-space: normal;
 }
-.list-item .item-title.label {
-  width: 35%;
-  -webkit-flex-shrink: 0;
-  -ms-flex: 0 0 auto;
-  flex-shrink: 0;
-}
-.list-item .item-title.label-narrow {
-  width: 25%;
-  -webkit-flex-shrink: 0;
-  -ms-flex: 0 0 auto;
-  flex-shrink: 0;
-}
-.list-item .item-input{
-  width: 100%;
-  margin-top: -8px;
-  margin-bottom: -7px;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  -webkit-flex-shrink: 1;
-  -ms-flex: 0 1 auto;
-  flex-shrink: 1;
-}
 .list-item .item-title.ellipsis {
   -webkit-flex-shrink: 1;
   -ms-flex: 0 1 auto;
@@ -312,9 +290,7 @@ ul {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-.list-item .item-title img{
-margin-right: 8px;
-}
+
 .list-item .item-text {
   font-size: 13px;
   color: #b5b5b5;
@@ -391,7 +367,6 @@ margin-right: 8px;
 .bottom-item{
   position: absolute;
   bottom: 40px;
-  top: auto;
   width: 100%;
 }
 .uicon{
@@ -542,18 +517,18 @@ color: #d3ba93;
   width: 100%;
 }
 .uicon-login-password{
-  content: url(/img/password_blue_90.png);
+  content: url(../img/password_blue_90.png);
   width: 25px;
   height: 22px;
 }
 
 .uicon-login-account{
-  content: url(/img/account_blue_90.png);
+  content: url(../img/account_blue_90.png);
   width: 25px;
   height: 22px;
 }
 .uicon-list-more{
-  content: url(/img/list_blue_32.png);
+  content: url(../img/list_blue_32.png);
   width: 20px;
   height: 20px;
 }
@@ -840,6 +815,111 @@ width: 350px;
 .space-10{
   display: inline-block;
 width: 10px;
+}
+.tj-ul{
+  list-style: none;
+  overflow-x: scroll;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display:-webkit-box;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-transition-property:-webkit-transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property:-o-transform;
+  -ms-transition-property:-ms-transform;
+  transition-property:transform;
+  -webkit-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  box-sizing:content-box;
+}
+.tj-ul li {
+  display: inline-block;
+  text-align: center;
+  flex-shrink:0;
+  position:relative;
+}
+.box {
+  height: 40px;
+  line-height: 40px;
+
+}
+.bg-white {
+  background-color: white;
+}
+div.info-top {
+  height:45px;
+  position: relative;
+  background: none repeat scroll 0 0 white;
+  border-radius: 5px;
+}
+div.info-top div {
+  display: inline-block;
+  color: #333333;
+  font-size: 13px;
+}
+a{
+  text-decoration: none;
+}
+.selected-line{
+  color:#419DE7;
+  border-bottom: 3px solid #419DE7;
+}
+.route-line{
+  color: dimgray;
+}
+
+.route-line.selected-line{
+  color: #419DE7;
+}
+.amap-marker-label{
+  border:none;
+  background: none;
+  color:white;
+}
+div.info-top {
+  height:45px;
+  position: relative;
+  background: none repeat scroll 0 0 white;
+  border-radius: 5px;
+}
+div.info-top div {
+  display: inline-block;
+  color: #333333;
+  font-size: 13px;
+}
+.info-top .div1{
+  width:40px;
+  background-color:#4DCC89;
+  text-align:center;
+  height:45px;
+  border-radius:5px 0 0 5px;
+}
+.info-top .div2{
+  width:190px;
+  height:45px;
+}
+.info-top .span1{
+  display:inline-block;
+  width:30px;
+  height:45px;
+  color:white;
+  position:absolute;
+  top:5px;
+  left:6px;
+}
+.info-top .span2{
+  position:absolute;
+  top:6px;
+  left:48px;
+}
+.info-bottom {
+  position:relative;
+  top:0px;
+  margin:0px auto;
 }
 [class*=uicon-blankmarker]{
   width: 30px;

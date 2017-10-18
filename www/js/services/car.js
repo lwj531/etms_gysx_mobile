@@ -11,7 +11,7 @@ angular.module("car.srv", [])
           deferred.resolve(data);
         }).error(function (data) {
           deferred.reject(data);
-        })
+        });
         return deferred.promise;
       }
     }

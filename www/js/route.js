@@ -6,6 +6,7 @@ angular.module('route', [
   "home.ctrl",
   "msgcenter.ctrl",
   'car.ctrl',
+  'routesetting.ctrl',
   'callguide.ctrl',
   'dailymgt.ctrl',
   'clientmgt.ctrl',
@@ -15,6 +16,8 @@ angular.module('route', [
   'account.srv',
   'car.srv',
   'http.srv',
-
+  'routesetting.srv',
+  //directive
+  'amap.dt'
 ]);
 
