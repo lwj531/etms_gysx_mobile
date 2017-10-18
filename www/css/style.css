@@ -517,18 +517,18 @@ color: #d3ba93;
   width: 100%;
 }
 .uicon-login-password{
-  content: url(../img/password_blue_90.png);
+  content: url(/img/password_blue_90.png);
   width: 25px;
   height: 22px;
 }
 
 .uicon-login-account{
-  content: url(../img/account_blue_90.png);
+  content: url(/img/account_blue_90.png);
   width: 25px;
   height: 22px;
 }
 .uicon-list-more{
-  content: url(../img/list_blue_32.png);
+  content: url(/img/list_blue_32.png);
   width: 20px;
   height: 20px;
 }
