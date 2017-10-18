@@ -48,7 +48,7 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
     //加入路线图
     $scope.addinline = function(){
 
-    }; 
+    };
 
     //路线顶部显示有几条路线区域
     $scope.routName=[
