@@ -71,7 +71,7 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
 // 点击marker出现窗体信息函数
     $scope.createInfoWindow=function(){
 
-    }
+    };
     function createInfoWindow(title, content) {
       var info = document.createElement("div");
       info.className = "info";
