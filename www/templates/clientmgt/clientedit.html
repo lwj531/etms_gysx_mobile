@@ -1,0 +1,63 @@
+<ion-view title="机构详情" view-title="机构详情">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">编辑客户</div>
+    <button class="button button-clear back-button">
+      保存
+    </button>
+  </div>
+
+  <ion-content class="has-header">
+    <div class="bg-white">
+      <ul class="ins-detail">
+        <li class="list-item">
+          <div class="item-content">
+            <div class="item-media"><span class="client-gender" ng-class="{'client-gender':gender=='none','client-gender-male':gender=='male'&&!clientLocked,'client-gender-female':gender=='female'&&!clientLocked,'client-gender-malelocked':gender=='male'&&clientLocked,'client-gender-femalelocked':gender=='female'&&clientLocked,}"></span></div>
+            <div class="item-inner" style="padding-right: 0;padding-bottom: 0;">
+              <div class="" style="width: 100%;">
+                <div class="input-row">
+                  <input type="text" maxlength="10" placeholder="客户姓名">
+                </div>
+                <div class="flex-row gender-radio">
+                  <div class="col-40"><span class="gender-item male" ng-class="{'selected':gender=='male'}" ng-click="gender='male'"><span class="uicon uicon-gender"></span> 男</span></div>
+                  <div class="col-60"><span class="gender-item female" ng-class="{'selected':gender=='female'}" ng-click="gender='female'"><span class="uicon uicon-gender"></span>女</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item inverse">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title align-center label-narrow"><img src="/img/job_gray_48.png" width="26">职务</div>
+              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入职务"></div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item inverse">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title align-center label-narrow"><img src="/img/major_gray_48.png" width="26">专业背景</div>
+              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入专业背景"></div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item inverse has-line">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title align-center label-narrow"><img src="/img/cellphone_gray_48.png" width="26">手机号</div>
+              <div class="item-input"><input type="tel" maxlength="20" placeholder="请输入手机号"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="flex-center" style="padding: 20px;">
+        <button class="button icon-left ion-ios-locked button-lock" ng-show="!clientLocked" ng-click="clientLocked=true">冻结客户</button>
+        <button class="button icon-left ion-ios-unlocked button-unlock" ng-show="clientLocked" ng-click="clientLocked=false">解除冻结</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

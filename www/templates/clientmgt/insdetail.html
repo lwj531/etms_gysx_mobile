@@ -1,0 +1,104 @@
+<ion-view title="机构详情" view-title="机构详情">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">机构详情</div>
+  </div>
+
+  <ion-content class="has-header">
+    <div class="bg-white">
+      <div class="list-item multi-line no-line">
+        <div class="item-content align-top">
+          <div class="item-media"><span class="uicon uicon-blankmarkerA">A</span></div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">xxxxxxxxxx大药房xxxxxxxxxxxx连锁店(A)</div>
+            </div>
+            <div class="flex-row align-end">
+              <div class="col-70 color-gray">xxxxxxxxxxxx市xx区xx街1号</div>
+              <div class="col-30">
+                <a class="button button-outline button-energized button-small flex-center"
+                   style="font-size: 14px; line-height: 19px;min-height: 21px;">SKU排序</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white" style="margin-top: 1px;">
+      <div class="flex-row" ng-init="activeTab=1" style="border-bottom: 3px solid #f5f7fa;">
+        <div class="col-50 flex-center">
+          <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==1}"
+                  ng-click="activeTab=1">基本信息
+          </button>
+        </div>
+        <div class="col-50 flex-center">
+          <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==2}"
+                  ng-click="activeTab=2">人员信息
+          </button>
+        </div>
+      </div>
+      <div class="crl-tabs">
+        <div class="crl-tab" ng-show="activeTab==1">
+          <div id="ins-map"></div>
+          <ul>
+            <li class="list-item inverse">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">90码</div>
+                  <div class="item-after"></div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item inverse">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">联系电话</div>
+                  <div class="item-after">021-23232332</div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item inverse">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">药店类型</div>
+                  <div class="item-after">单体门店</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="crl-tab" ng-show="activeTab==2">
+          <div class="list-item inverse no-line">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">该机构人员（5）</div>
+                <div class="item-after">
+                  <a class="button button-outline button-positive button-small flex-center"
+                     style="font-size: 14px; line-height: 19px;min-height: 21px;">添加客户</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li class="list-item multi-line no-line" ui-sref="main.clientedit">
+              <div class="item-content item-link">
+                <div class="item-media"><img src="/img/" width="40"></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title"><span>王王王</span><span class="space-stick">|</span><span>女</span></div>
+                  </div>
+                  <div class="flex-row color-gray">
+                    <div class="col-40">所属职务</div>
+                    <div class="col-60">132345566777</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

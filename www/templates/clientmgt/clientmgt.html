@@ -1,13 +1,4 @@
 <ion-view title="消息通知" view-title="消息通知">
-  <!--<ion-header-bar class="bar-positive bar bar-header" align-title="center">-->
-  <!--<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">-->
-  <!--<i class="icon ion-android-arrow-back"></i>-->
-  <!--<span class="back-text" style="">返回</span>-->
-  <!--</button>-->
-  <!--<div class="buttons buttons-left header-item" style="">-->
-  <!--</div>-->
-  <!--<div class="title title-center header-item">消息通知</div>-->
-  <!--</ion-header-bar>-->
   <div class="bar bar-header bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
       <i class="icon ion-android-arrow-back"></i>
@@ -31,9 +22,9 @@
 
 <div>
   <ul>
-    <li class="list-item multi-line align-top" ng-repeat="item in clientList">
+    <li class="list-item multi-line" ng-repeat="item in clientList" ui-sref="main.insdetail">
       <div class="item-content align-top">
-        <div class="item-media"><img src="../../img/marker{{item.icon}}_52.png" width="20"></div>
+        <div class="item-media"><img src="/img/marker{{item.icon}}_52.png" width="20"></div>
         <div class="item-inner">
           <div class="item-title-row">
             <div class="item-title">{{item.name}}</div>

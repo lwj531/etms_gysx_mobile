@@ -9,6 +9,8 @@ angular.module('route', [
   'callguide.ctrl',
   'dailymgt.ctrl',
   'clientmgt.ctrl',
+  'insdetail.ctrl',
+  'clientedit.ctrl',
   //service
   'account.srv',
   'car.srv',

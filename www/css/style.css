@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
 /* Empty. Add your own CSS if you like */
 body, .ionic-body{
-color:#4e4e4e;
+color:#5e5e5e;
 }
 .bar.bar-positive{
   background-color: #419de7;
@@ -60,6 +60,18 @@ color:#4e4e4e;
   -ms-flex-pack: justify;
   -webkit-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.align-center{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   -webkit-box-align: center;
   -ms-flex-align: center;
   -webkit-align-items: center;
@@ -215,7 +227,7 @@ ul {
   align-self: stretch;
 }
 
-.list-item:not(:last-child) .item-inner:after {
+.list-item:not(:last-child) .item-inner:after,.list-item.has-line .item-inner:after {
   content: '';
   position: absolute;
   left: 0;
@@ -267,6 +279,28 @@ ul {
   max-width: 100%;
   white-space: normal;
 }
+.list-item .item-title.label {
+  width: 35%;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
+}
+.list-item .item-title.label-narrow {
+  width: 25%;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
+}
+.list-item .item-input{
+  width: 100%;
+  margin-top: -8px;
+  margin-bottom: -7px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex: 0 1 auto;
+  flex-shrink: 1;
+}
 .list-item .item-title.ellipsis {
   -webkit-flex-shrink: 1;
   -ms-flex: 0 1 auto;
@@ -278,7 +312,9 @@ ul {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-
+.list-item .item-title img{
+margin-right: 8px;
+}
 .list-item .item-text {
   font-size: 13px;
   color: #b5b5b5;
@@ -355,6 +391,7 @@ ul {
 .bottom-item{
   position: absolute;
   bottom: 40px;
+  top: auto;
   width: 100%;
 }
 .uicon{
@@ -505,18 +542,18 @@ color: #d3ba93;
   width: 100%;
 }
 .uicon-login-password{
-  content: url(../img/password_blue_90.png);
+  content: url(/img/password_blue_90.png);
   width: 25px;
   height: 22px;
 }
 
 .uicon-login-account{
-  content: url(../img/account_blue_90.png);
+  content: url(/img/account_blue_90.png);
   width: 25px;
   height: 22px;
 }
 .uicon-list-more{
-  content: url(../img/list_blue_32.png);
+  content: url(/img/list_blue_32.png);
   width: 20px;
   height: 20px;
 }
@@ -803,4 +840,163 @@ width: 350px;
 .space-10{
   display: inline-block;
 width: 10px;
+}
+[class*=uicon-blankmarker]{
+  width: 30px;
+  background-size: 26px;
+  height: 40px;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  font-size: 15px;
+  text-align: center;
+  padding-top: 5px;
+  padding-right: 4px;
+}
+.uicon-blankmarkerA{
+  background-image: url("/img/markerA_blank_52.png");
+}
+
+.uicon-blankmarkerB{
+  background-image: url("/img/markerB_blank_52.png");
+}
+
+.uicon-blankmarkerC{
+  background-image: url("/img/markerC_blank_52.png");
+}
+.button.button-clear.tab-button{
+  padding: 0 13px;
+color: #5e5e5e;
+  font-size:16px;
+}
+.button.tab-button.active{
+  border-bottom:2px solid #419de7;
+  opacity: 1;
+  border-radius: 0;
+  color:#419de7;
+}
+#ins-map{
+  height: 160px;
+  width:100%;
+}
+.list-item.inverse .item-title{
+  color: #b5b5b5;
+}
+.list-item.inverse .item-after{
+  color: #5e5e5e;
+}
+.button.button-positive.button-outline {
+  border-color: #419de7;
+  background: transparent;
+  color: #419de7;
+}
+.button.button-energized.button-outline {
+  border-color: #fdae5e;
+  background: transparent;
+  color: #fdae5e;
+}
+.space-stick{
+  padding: 0 5px;
+}
+.button-lock{
+  width: 80%;
+  padding: 0 20px;
+  background-color: #fbf5f2;
+  color:#fd814e;
+}
+.button-lock:hover{
+  color:#fd814e;
+}
+.button-unlock{
+  width: 80%;
+  padding: 0 20px;
+  background-color: #fbf5f2;
+  color:#9b9b9b;
+}
+.button-unlock:hover{
+  color:#9b9b9b;
+}
+.button.icon-left.button-unlock:before,
+.button.icon-left.button-lock:before{
+  float: none;
+  padding-right: 12px;
+}
+ul.ins-detail .list-item .item-inner{
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: 15px;
+}
+
+.input-row{
+  min-height:48px;
+  width: 100%;
+  color:#419de7;
+  overflow: hidden;
+  border-bottom: 1px solid #e4e4e4;
+  padding-top: 4px;
+}
+.input-row input{
+  width:100%;
+  color:#419de7;
+  font-size:16px;
+  padding-right: 15px;
+}
+[class*=client-gender]{
+  background-image: url("/img/avatar_doe.png");
+  height:90px;
+  width: 90px;
+  background-size: 90px;
+}
+.client-gender-male{
+  background-image: url("/img/avatar_m.png");
+}
+.client-gender-female{
+  background-image: url("/img/avatar_f.png");
+}
+.client-gender-malelocked{
+  background-image: url("/img/avatar_m_lock.png");
+}
+.client-gender-femalelocked{
+  background-image: url("/img/avatar_f_lock.png");
+}
+.gender-radio{
+  font-size:16px;
+  min-height: 44px;
+}
+.gender-radio .gender-item{
+  color:#c1c1c3;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  padding: 19px 0;
+}
+.gender-radio .gender-item.male.selected {
+  color: #419de7;
+}
+.gender-radio .gender-item.female.selected {
+  color: #ff9d9d;
+}
+ul.ins-detail .list-item .item-input input{
+  color: #419de7;
+  font-size: 15px;
+}
+.male .uicon-gender{
+  background-image: url("/img/male_gray_32.png");
+  width:18px;
+  height: 18px;
+  background-size: 18px;
+  margin-right: 8px;
+}
+.female .uicon-gender{
+  background-image: url("/img/female_gray_32.png");
+  width:18px;
+  height: 18px;
+  background-size: 18px;
+  margin-right: 6px;
+}
+.male.selected .uicon-gender{
+  background-image: url("/img/male_blue_32.png");
+}
+
+.female.selected .uicon-gender{
+  background-image: url("/img/female_pink_32.png");
 }

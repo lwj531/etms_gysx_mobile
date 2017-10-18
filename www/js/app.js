@@ -62,7 +62,6 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/home/home.html",
         controller: "HomeCtrl"
       })
-      //日程管理
       //消息通知
       .state('main.msgcenter', {
         url: '/msgcenter',
@@ -80,6 +79,18 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/clientmgt',
         templateUrl: "templates/clientmgt/clientmgt.html",
         controller: "ClientMgtCtrl"
+      })
+      //机构详情
+      .state('main.insdetail', {
+        url: '/insdetail',
+        templateUrl: "templates/clientmgt/insdetail.html",
+        controller: "InsDetailCtrl"
+      })
+      //编辑客户
+      .state('main.clientedit', {
+        url: '/clientedit',
+        templateUrl: "templates/clientmgt/clientedit.html",
+        controller: "ClientEditCtrl"
       })
       //拜访向导
       .state('main.callguide', {
