@@ -49,7 +49,7 @@ angular.module('starter', ['ionic', 'route'])
       .state('app', {
         url: '/app',
         templateUrl: "templates/signin.html",
-        controller: "AccountCtrl",
+        controller: "AccountCtrl"
       })
       .state('main', {
         url: '/main',
@@ -73,7 +73,7 @@ angular.module('starter', ['ionic', 'route'])
       })
       //路线设定
       .state('main.routesetting', {
-        url: '/callguide',
+        url: '/routesetting',
         templateUrl: "templates/routesetting/routesetting.html",
         controller: "RouteSettingCtrl"
       })
@@ -81,7 +81,7 @@ angular.module('starter', ['ionic', 'route'])
         url: '/carinfo',
         templateUrl: "templates/carinfo.html",
         controller: "CarCtrl"
-      })
+      });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app');

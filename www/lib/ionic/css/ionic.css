@@ -6800,6 +6800,7 @@ button.item.item-button-right {
   width: 100%; }
 
 .slider-pager {
+  display: none;
   position: absolute;
   bottom: 20px;
   z-index: 1;

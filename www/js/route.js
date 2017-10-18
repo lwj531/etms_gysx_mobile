@@ -5,9 +5,11 @@ angular.module('route', [
   "main.ctrl",
   "home.ctrl",
   'car.ctrl',
+  'routesetting.ctrl',
   'callguide.ctrl',
   //service
   'account.srv',
   'car.srv',
+  'routesetting.srv'
 ]);
 
