@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'route','ngCordova'])
+angular.module('starter', ['ionic', 'route', 'ngCordova'])
 
   .run(function ($ionicPlatform, $rootScope, $state, $ionicPopup) {
     $ionicPlatform.ready(function () {
@@ -21,21 +21,28 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         StatusBar.styleDefault();
       }
       //如果未登录
-      $rootScope.$on('userIntercepted', function (errorType,data) {
-        if(data=="notLogin"){
+      $rootScope.$on('userIntercepted', function (errorType, data) {
+        if (data == "notLogin") {
           $ionicPopup.alert({
             title: '提示',
             template: '尚未登陆'
-          }).then(function(res) {
+          }).then(function (res) {
             $state.go("app");
           });
         }
-        if(data=="loginfailed"){
+        if (data == "loginfailed") {
           $ionicPopup.alert({
             title: '提示',
             template: '用户名或密码错误'
           });
         }
+      });
+      //系统错误
+      $rootScope.$on('systemerror', function (errorType, data) {
+        $ionicPopup.alert({
+          title: '提示',
+          template: '系统故障'
+        });
       });
     });
   })
@@ -136,6 +143,10 @@ var interceptor = function ($q, $rootScope) {
       //登陆失败
       if (rejection.status == 401) {
         $rootScope.$broadcast("userIntercepted", "loginfailed", rejection);
+      }
+      //500
+      if (rejection.status == 500) {
+        $rootScope.$broadcast("systemerror", "systemerror", rejection);
       }
       return $q.reject(rejection);
     }

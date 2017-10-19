@@ -11,13 +11,10 @@ angular.module('amap.dt', [])
           //地图初始化
           $rootScope.map =  new AMap.Map("map",
             {
-              view:new AMap.View2D({
-                center:$scope.center,
-                resizeEnable: true,
-                zoom: 15,
-                draggable: true,  //是否可拖动
-              }),
-              lang:"zh_cn"
+              center:$scope.center,
+              resizeEnable: true,
+              zoom: 10,
+              draggable: true,
             });
           //通知初始化完成
           $rootScope.$broadcast("amap", "mapcompleted");
