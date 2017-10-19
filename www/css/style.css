@@ -868,7 +868,7 @@ select{
   z-index: 20;
 }
 .list-item.msg-title{
-  background-color: #f5f5f5;
+  background-color: transparent;
 }
 .list-item.msg-title .item-content{
   padding-left: 0;
@@ -1205,85 +1205,3 @@ ul.ins-detail .list-item .item-input input{
   margin-left:-5px;
 }
 
-/*pattern lock start*/
-/*
-	patternLock.js v 1.0.1
-	Author: Sudhanshu Yadav
-	Copyright (c) 2016 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.
-	Demo and documentaion on: ignitersworld.com/lab/patternLock.html
-*/
-
-.patt-holder {
-  background: #fff;
-  -ms-touch-action: none;
-}
-
-.patt-wrap {
-  position: relative;
-  cursor: pointer;
-}
-
-.patt-wrap ul, .patt-wrap li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.patt-circ {
-  position: relative;
-  float: left;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  z-index:255;
-}
-
-.patt-circ.hovered {
-  border: 1px solid #419DE7;
-}
-
-.patt-error .patt-circ.hovered {
-  border: 2px solid #f7303e;
-}
-
-.patt-hidden .patt-circ.hovered {
-  border: 0;
-}
-
-.patt-dots {
-  background: #419DE7;
-  width: 14px;
-  height: 14px;
-  border-radius: 7px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -7px;
-  margin-left: -7px;
-  opacity: 0;
-}
-.patt-circ.hovered .patt-dots{
-  opacity: 1;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  -ms-transition: all .2s;
-  -o-transition: all .2s;
-  transition: all .2s;
-}
-.patt-lines {
-  border-radius: 5px;
-  height: 10px;
-  /*background: rgba(255, 0, 0, .8);*/
-  background: rgba(65, 157, 231, .3);
-  position: absolute;
-  transform-origin: 5px 5px;
-  -ms-transform-origin: 5px 5px; /* IE 9 */
-  -webkit-transform-origin: 5px 5px;
-  z-index: 244;
-}
-
-.patt-hidden .patt-lines {
-  display: none;
-}
-/*pattern lock end*/
