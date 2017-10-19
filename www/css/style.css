@@ -428,7 +428,7 @@ ul {
   /*margin-top: 10px;*/
 /*}*/
 .content-block{
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 .dense-list .list-item .item-content{
   min-height: 32px;
@@ -624,7 +624,7 @@ color: #d3ba93;
   display: inline-block;
   background-color: #efefef;
   padding-top: 5px;
-  margin: 12px 2px 0;
+  margin: 12px 3px 0;
 position: relative;
 }
 .button-connect:after{
