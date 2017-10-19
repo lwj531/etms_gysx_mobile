@@ -19,6 +19,7 @@ angular.module('route', [
   'http.srv',
   'routesetting.srv',
   //directive
-  'amap.dt'
+  'amap.dt',
+  'toast.dt'
 ]);
 

@@ -1,5 +1,5 @@
 angular.module('main.ctrl', [])
-  .controller('MainCtrl', function ($scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup, $timeout) {
+  .controller('MainCtrl', function ($rootScope, $scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup, $timeout) {
     //模拟菜单数据
     $scope.menus = [
       {
@@ -154,7 +154,14 @@ angular.module('main.ctrl', [])
       });
     }
 
-    //Then when this scope is destroyed, remove the function
     $scope.$on('$destroy', deregister)
 
+    //提示信息
+    $rootScope.toast = function (message) {
+      $scope.message = message;
+      $scope.showtoast = true;
+      $timeout(function () {
+        $scope.showtoast = false;
+      }, 2000);
+    }
   });

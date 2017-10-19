@@ -114,20 +114,6 @@ color:#4e4e4e;
   -webkit-align-items: center;
   align-items: center;
 }
-.flex-around{
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
 .button.button-light {
   border-color: #ccc;
 }
@@ -155,18 +141,6 @@ color:#4e4e4e;
 /*---------------------------------------------*/
 /*------------multi-line list style------------*/
 /*---------------------------------------------*/
-.content-block-title {
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  text-transform: uppercase;
-  line-height: 1;
-  color: #919192;
-  margin: 15px 15px 10px;
-}
 .list-item {
   box-sizing: border-box;
   position: relative;
@@ -308,11 +282,11 @@ ul {
   display: flex;
   max-height: 28px;
 }
-.list-count{
+.list-item .list-count{
   color:#b5b5b5;
   margin-top: 5px;
-  width: 20px;
-  display: inline-block;
+  width: 10px;
+  text-align: center;
 }
 .list-item .item-title {
   -webkit-flex-shrink: 1;
@@ -402,9 +376,7 @@ ul {
 .list-item.multi-line .item-media img {
   display: block;
 }
-.list-item.multi-line .align-top .item-media {
-  padding-top: 13px;
-}
+
 .stick-highlight {
   position: relative;
   color: #007aff;
@@ -746,8 +718,8 @@ height: 15px;
   text-align: center;
 }
 .table td.title-td{
-  max-width: 105px;
-  min-width: 105px;
+  max-width: 165px;
+  min-width: 165px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -878,7 +850,7 @@ select{
   padding: 0 10px;
 }
 .msg-alert .popup{
-width: 320px;
+width: 350px;
 }
 .button-alert{
   text-align: right;
@@ -1158,6 +1130,46 @@ ul.ins-detail .list-item .item-input input{
 
 .female.selected .uicon-gender{
   background-image: url("/img/female_pink_32.png");
+}
+/*动画*/
+.animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.msdtoast{
+  z-index: 999;
+  position: fixed;
+  width:100%;
+  height:50px;
+  background-color: #4d4d4d;
+  color: #FFFFFF;
 }
 .text-row{
   margin-top: 8px;

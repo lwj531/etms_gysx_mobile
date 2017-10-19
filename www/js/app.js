@@ -37,6 +37,13 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
           });
         }
       });
+      //系统错误
+      $rootScope.$on('systemerror', function (errorType, data) {
+        $ionicPopup.alert({
+          title: '提示',
+          template: '系统故障'
+        });
+      });
     });
   })
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
@@ -142,6 +149,10 @@ var interceptor = function ($q, $rootScope) {
       //登陆失败
       if (rejection.status == 401) {
         $rootScope.$broadcast("userIntercepted", "loginfailed", rejection);
+      }
+      //500
+      if (rejection.status == 500) {
+        $rootScope.$broadcast("systemerror", "systemerror", rejection);
       }
       return $q.reject(rejection);
     }
