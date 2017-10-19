@@ -19,15 +19,14 @@
             <div class="flex-row align-end padding-top">
               <div class="col-70 color-gray">xxxxxxxxxxxx市xx区xx街1号</div>
               <div class="col-30 flex-end">
-                <a class="button button-outline button-energized button-small"
-                   style="line-height: 19px;min-height: 21px;" ui-sref="main.skusort">SKU排序</a></div>
+                <a class="button button-outline button-energized button-small" ui-sref="main.skusort">SKU排序</a></div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="bg-white" style="margin-top: 1px;">
-      <div class="flex-around" ng-init="activeTab=1" style="border-bottom: 3px solid #f5f7fa;">
+      <div class="flex-around tab-row" ng-init="activeTab=1">
         <div class="flex-center">
           <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==1}"
                   ng-click="activeTab=1">基本信息
@@ -80,8 +79,7 @@
               <div class="item-inner">
                 <div class="item-title">该机构人员（{{memberList.length}}）</div>
                 <div class="item-after">
-                  <a class="button button-outline button-positive button-small"
-                     style="line-height: 19px;min-height: 21px;">添加客户</a>
+                  <a class="button button-outline button-positive button-small">添加客户</a>
                 </div>
               </div>
             </div>

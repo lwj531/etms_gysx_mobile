@@ -1,5 +1,16 @@
 <!--日程管理-->
 <ion-view>
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
+      <i class="icon ion-android-arrow-back"></i>
+      <span class="back-text" style=""></span>
+    </button>
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    <div class="h1 title">首页</div>
+    <button class="button button-icon" style="padding-top: 4px;" ng-click="openModal()">
+      <img src="img/send_white_48.png" width="25">
+    </button>
+  </div>
   <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     日程管理
