@@ -16,26 +16,31 @@
             <div class="item-title-row">
               <div class="item-title">xxxxxxxxxx大药房xxxxxxxxxxxx连锁店(A)</div>
             </div>
-            <div class="flex-row align-end">
+            <div class="flex-row align-end padding-top">
               <div class="col-70 color-gray">xxxxxxxxxxxx市xx区xx街1号</div>
-              <div class="col-30">
-                <a class="button button-outline button-energized button-small flex-center"
-                   style="font-size: 14px; line-height: 19px;min-height: 21px;" ui-sref="main.skusort">SKU排序</a></div>
+              <div class="col-30 flex-end">
+                <a class="button button-outline button-energized button-small"
+                   style="line-height: 19px;min-height: 21px;" ui-sref="main.skusort">SKU排序</a></div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="bg-white" style="margin-top: 1px;">
-      <div class="flex-row" ng-init="activeTab=1" style="border-bottom: 3px solid #f5f7fa;">
-        <div class="col-50 flex-center">
+      <div class="flex-around" ng-init="activeTab=1" style="border-bottom: 3px solid #f5f7fa;">
+        <div class="flex-center">
           <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==1}"
                   ng-click="activeTab=1">基本信息
           </button>
         </div>
-        <div class="col-50 flex-center">
+        <div class="flex-center">
           <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==2}"
                   ng-click="activeTab=2">人员信息
+          </button>
+        </div>
+        <div class="flex-center">
+          <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==3}"
+                  ng-click="activeTab=3">终端信息
           </button>
         </div>
       </div>
@@ -73,26 +78,48 @@
           <div class="list-item inverse no-line">
             <div class="item-content">
               <div class="item-inner">
-                <div class="item-title">该机构人员（5）</div>
+                <div class="item-title">该机构人员（{{memberList.length}}）</div>
                 <div class="item-after">
-                  <a class="button button-outline button-positive button-small flex-center"
-                     style="font-size: 14px; line-height: 19px;min-height: 21px;">添加客户</a>
+                  <a class="button button-outline button-positive button-small"
+                     style="line-height: 19px;min-height: 21px;">添加客户</a>
                 </div>
               </div>
             </div>
           </div>
           <ul>
-            <li class="list-item multi-line no-line" ui-sref="main.clientedit">
+            <li class="list-item multi-line" ng-repeat="item in memberList" ui-sref="main.clientedit">
               <div class="item-content item-link">
-                <div class="item-media"><img src="img/" width="40"></div>
+                <div class="item-media"><span class="uicon-50" ng-class="{'client-gender':(item.gender==''||null),'client-gender-male':item.gender=='m'&&!item.lock,'client-gender-female':item.gender=='f'&&!item.lock,'client-gender-malelocked':item.gender=='m'&&item.lock,'client-gender-femalelocked':item.gender=='f'&&item.lock}"></span></div>
                 <div class="item-inner">
                   <div class="item-title-row">
-                    <div class="item-title"><span>王王王</span><span class="space-stick">|</span><span>女</span></div>
+                    <div class="item-title"><span>{{item.name}}</span><span class="space-stick">|</span><span>{{item.gender=='f'?'男':'女'}}</span></div>
                   </div>
-                  <div class="flex-row color-gray">
-                    <div class="col-40">所属职务</div>
-                    <div class="col-60">132345566777</div>
+                  <div class="flex-row color-gray text-row">
+                    <div class="col-50 align-center"><img src="img/job_gray_48.png" width="20">{{item.job}}</div>
+                    <div class="col-50 align-center"><img src="img/cellphone_gray_48.png" width="20">{{item.tel}}</div>
                   </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="crl-tab" ng-show="activeTab==3">
+          <div class="list-item inverse no-line">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">下游门店（{{terminalList.length}}）</div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li class="list-item multi-line" ng-repeat="item in terminalList">
+              <div class="item-content align-top item-link">
+                <div class="item-media"><img src="img/marker{{item.icon}}_52.png" width="20"></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title"><span>{{item.name}}</span>(<span>{{item.icon}}</span>)</div>
+                  </div>
+                  <div class="item-text">{{item.address}}</div>
                 </div>
               </div>
             </li>

@@ -8,18 +8,19 @@
   </div>
 
   <ion-content class="has-header">
-    <div class="bg-white">
-      <ul>
-        <li class="list-item">
-          <div class="item-content">
-            <div class="item-media"><span class="list-count">1</span></div>
-            <div class="item-inner">
-              <div class="item-title">xxxxxxxxxx大药房xxxxxxxxxxxx连锁店(A)</div>
-              <div class="item-after" on-reorder="moveItem(item, $fromIndex, $toIndex)">(A)</div>
-            </div>
-          </div>
-        </li>
-      </ul>
+
+    <div class="">
+      <div class="content-block-title">SKU数：{{items.length}}个</div>
+      <ion-list show-reorder="data.showReorder">
+        <ion-item ng-repeat="item in items"
+                  item="item"
+                  href="#/item/{{item.id}}" class="item-remove-animate">
+          <span class="list-count">{{ item.id }}</span>
+          盐酸特比萘芬喷雾剂1*15ml/瓶
+          <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+        </ion-item>
+
+      </ion-list>
     </div>
   </ion-content>
 </ion-view>
