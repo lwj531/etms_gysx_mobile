@@ -1,11 +1,12 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">手势密码</h1>
 
-  </ion-header-bar>
   <ion-content>
-    <p>{{cipherinfo}}</p>
-    <div id="patternHolder"></div>
-<button ng-click="clear()">清空缓存</button>
+    <div class="cipherinfo flex-center">
+      <div class="">
+        <div class="flex-center"><h4>请输入手势密码</h4></div>
+        <div class="flex-center"><p class="tips">{{cipherinfo}}</p></div>
+        <div class="flex-center"><div id="patternHolder"></div></div>
+      </div>
+    </div>
   </ion-content>
 </ion-modal-view>

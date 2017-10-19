@@ -29,6 +29,15 @@ color:#4e4e4e;
   background-color: #ffffff;
   width: 100%;
 }
+.cipherinfo{
+  height: 100%;
+}
+.cipherinfo h4{
+  line-height: 50px;
+}
+.cipherinfo .tips{
+  color: #72ace6;
+}
 .map-container{
   height: 100%;
   width: 100%;
@@ -269,6 +278,12 @@ ul {
   display: -webkit-flex;
   display: flex;
   max-height: 28px;
+}
+.list-item .list-count{
+  color:#b5b5b5;
+  margin-top: 5px;
+  width: 10px;
+  text-align: center;
 }
 .list-item .item-title {
   -webkit-flex-shrink: 1;
@@ -580,6 +595,9 @@ color: #d3ba93;
 }
 .color-orange{
   color:#efc240!important;
+}
+.color-red{
+  color: #ef595e !important;
 }
 .color-green{
   color:#6ed5be!important;

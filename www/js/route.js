@@ -12,6 +12,7 @@ angular.module('route', [
   'clientmgt.ctrl',
   'insdetail.ctrl',
   'clientedit.ctrl',
+  'skusort.ctrl',
   //service
   'account.srv',
   'car.srv',

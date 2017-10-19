@@ -4,7 +4,7 @@ angular.module('account.ctrl', ['account.srv'])
     if (localStorage.cipher == null) {
       $scope.cipherinfo = "请设置手势密码";
     } else {
-      $scope.cipherinfo = "手势密码登陆";
+      $scope.cipherinfo = "手势密码登录";
     }
     //设置手势密码
     $scope.settingcipher = function (str) {
@@ -14,11 +14,11 @@ angular.module('account.ctrl', ['account.srv'])
         $scope.lock.error();
         $timeout(function(){  $scope.lock.reset();},1000);
       } else {
-        ////如果已经设置了密码判断是否可以正常登陆
+        ////如果已经设置了密码判断是否可以正常登录
         if (localStorage.cipher != null) {
           if (localStorage.cipher == str) {
             //通过验证关闭modal
-            $scope.cipherinfo = "手势密码登陆";
+            $scope.cipherinfo = "手势密码登录";
             $scope.modal.hide();
             $scope.modal.remove();
             $state.go("main.home");
@@ -37,7 +37,7 @@ angular.module('account.ctrl', ['account.srv'])
             if (str == $scope.currentcipher) {
               localStorage.cipher = str;
               //通过验证关闭modal
-              $scope.cipherinfo = "手势密码登陆";
+              $scope.cipherinfo = "手势密码登录";
               $scope.modal.hide();
               $scope.modal.remove();
               $state.go("main.home");

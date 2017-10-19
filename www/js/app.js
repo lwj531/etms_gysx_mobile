@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         if(data=="notLogin"){
           $ionicPopup.alert({
             title: '提示',
-            template: '尚未登陆'
+            template: '尚未登录'
           }).then(function(res) {
             $state.go("app");
           });
@@ -91,6 +91,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/clientedit',
         templateUrl: "templates/clientmgt/clientedit.html",
         controller: "ClientEditCtrl"
+      })
+      //SKU排序
+      .state('main.skusort', {
+        url: '/skusort',
+        templateUrl: "templates/clientmgt/skusort.html",
+        controller: "SKUSortCtrl"
       })
       //拜访向导
       .state('main.callguide', {
