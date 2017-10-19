@@ -114,6 +114,20 @@ color:#4e4e4e;
   -webkit-align-items: center;
   align-items: center;
 }
+.flex-around{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
 .button.button-light {
   border-color: #ccc;
 }
@@ -141,6 +155,18 @@ color:#4e4e4e;
 /*---------------------------------------------*/
 /*------------multi-line list style------------*/
 /*---------------------------------------------*/
+.content-block-title {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #919192;
+  margin: 15px 15px 10px;
+}
 .list-item {
   box-sizing: border-box;
   position: relative;
@@ -282,7 +308,7 @@ ul {
   display: flex;
   max-height: 28px;
 }
-.list-item .list-count{
+.list-count{
   color:#b5b5b5;
   margin-top: 5px;
   width: 10px;
@@ -377,6 +403,9 @@ ul {
   display: block;
 }
 
+.list-item.multi-line .align-top .item-media {
+  padding-top: 13px;
+}
 .stick-highlight {
   position: relative;
   color: #007aff;
@@ -428,7 +457,7 @@ ul {
   /*margin-top: 10px;*/
 /*}*/
 .content-block{
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 .dense-list .list-item .item-content{
   min-height: 32px;
@@ -624,7 +653,7 @@ color: #d3ba93;
   display: inline-block;
   background-color: #efefef;
   padding-top: 5px;
-  margin: 12px 2px 0;
+  margin: 12px 3px 0;
 position: relative;
 }
 .button-connect:after{
@@ -718,8 +747,8 @@ height: 15px;
   text-align: center;
 }
 .table td.title-td{
-  max-width: 165px;
-  min-width: 165px;
+  max-width: 105px;
+  min-width: 105px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -850,7 +879,7 @@ select{
   padding: 0 10px;
 }
 .msg-alert .popup{
-width: 350px;
+width: 320px;
 }
 .button-alert{
   text-align: right;
@@ -1170,3 +1199,86 @@ ul.ins-detail .list-item .item-input input{
   margin-top: 8px;
   margin-left:-5px;
 }
+
+/*pattern lock start*/
+/*
+	patternLock.js v 1.0.1
+	Author: Sudhanshu Yadav
+	Copyright (c) 2016 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.
+	Demo and documentaion on: ignitersworld.com/lab/patternLock.html
+*/
+
+.patt-holder {
+  background: #fff;
+  -ms-touch-action: none;
+}
+
+.patt-wrap {
+  position: relative;
+  cursor: pointer;
+}
+
+.patt-wrap ul, .patt-wrap li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.patt-circ {
+  position: relative;
+  float: left;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index:255;
+}
+
+.patt-circ.hovered {
+  border: 1px solid #419DE7;
+}
+
+.patt-error .patt-circ.hovered {
+  border: 2px solid #f7303e;
+}
+
+.patt-hidden .patt-circ.hovered {
+  border: 0;
+}
+
+.patt-dots {
+  background: #419DE7;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -7px;
+  margin-left: -7px;
+  opacity: 0;
+}
+.patt-circ.hovered .patt-dots{
+  opacity: 1;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
+}
+.patt-lines {
+  border-radius: 5px;
+  height: 10px;
+  /*background: rgba(255, 0, 0, .8);*/
+  background: rgba(65, 157, 231, .3);
+  position: absolute;
+  transform-origin: 5px 5px;
+  -ms-transform-origin: 5px 5px; /* IE 9 */
+  -webkit-transform-origin: 5px 5px;
+  z-index: 244;
+}
+
+.patt-hidden .patt-lines {
+  display: none;
+}
+/*pattern lock end*/
