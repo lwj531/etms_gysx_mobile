@@ -29,6 +29,15 @@ color:#4e4e4e;
   background-color: #ffffff;
   width: 100%;
 }
+.cipherinfo{
+  height: 100%;
+}
+.cipherinfo h4{
+  line-height: 50px;
+}
+.cipherinfo .tips{
+  color: #72ace6;
+}
 .map-container{
   height: 100%;
   width: 100%;
@@ -227,7 +236,7 @@ ul {
   align-self: stretch;
 }
 
-.list-item:not(:last-child) .item-inner:after {
+.list-item:not(:last-child) .item-inner:after,.list-item.has-line .item-inner:after {
   content: '';
   position: absolute;
   left: 0;
@@ -270,6 +279,12 @@ ul {
   display: flex;
   max-height: 28px;
 }
+.list-item .list-count{
+  color:#b5b5b5;
+  margin-top: 5px;
+  width: 10px;
+  text-align: center;
+}
 .list-item .item-title {
   -webkit-flex-shrink: 1;
   -ms-flex: 0 1 auto;
@@ -278,6 +293,31 @@ ul {
   position: relative;
   max-width: 100%;
   white-space: normal;
+}
+.list-item .item-title.label {
+  width: 35%;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
+}
+.list-item .item-title.label-narrow {
+  width: 25%;
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  flex-shrink: 0;
+}
+.list-item .item-input{
+  width: 100%;
+  margin-top: -8px;
+  margin-bottom: -7px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex: 0 1 auto;
+  flex-shrink: 1;
+}
+.list-item .item-title img{
+  margin-right: 8px;
 }
 .list-item .item-title.ellipsis {
   -webkit-flex-shrink: 1;
@@ -365,8 +405,8 @@ ul {
   background-color: #fff;
 }
 .bottom-item{
-  position: absolute;
-  bottom: 40px;
+  position: relative;
+  top: 40px;
   width: 100%;
 }
 .uicon{
@@ -555,6 +595,9 @@ color: #d3ba93;
 }
 .color-orange{
   color:#efc240!important;
+}
+.color-red{
+  color: #ef595e !important;
 }
 .color-green{
   color:#6ed5be!important;

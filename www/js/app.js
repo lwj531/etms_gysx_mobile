@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'route', 'ngCordova'])
+angular.module('starter', ['ionic', 'route','ngCordova'])
 
   .run(function ($ionicPlatform, $rootScope, $state, $ionicPopup) {
     $ionicPlatform.ready(function () {
@@ -21,16 +21,16 @@ angular.module('starter', ['ionic', 'route', 'ngCordova'])
         StatusBar.styleDefault();
       }
       //如果未登录
-      $rootScope.$on('userIntercepted', function (errorType, data) {
-        if (data == "notLogin") {
+      $rootScope.$on('userIntercepted', function (errorType,data) {
+        if(data=="notLogin"){
           $ionicPopup.alert({
             title: '提示',
-            template: '尚未登陆'
-          }).then(function (res) {
+            template: '尚未登录'
+          }).then(function(res) {
             $state.go("app");
           });
         }
-        if (data == "loginfailed") {
+        if(data=="loginfailed"){
           $ionicPopup.alert({
             title: '提示',
             template: '用户名或密码错误'
@@ -98,6 +98,12 @@ angular.module('starter', ['ionic', 'route', 'ngCordova'])
         url: '/clientedit',
         templateUrl: "templates/clientmgt/clientedit.html",
         controller: "ClientEditCtrl"
+      })
+      //SKU排序
+      .state('main.skusort', {
+        url: '/skusort',
+        templateUrl: "templates/clientmgt/skusort.html",
+        controller: "SKUSortCtrl"
       })
       //拜访向导
       .state('main.callguide', {
