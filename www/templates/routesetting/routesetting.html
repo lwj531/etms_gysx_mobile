@@ -37,9 +37,9 @@
     <div id="infowindow" ng-show="false">
       <div class="info">
         <div class="info-top">
-          <div class="inf-top-left" ng-show="isnewly==false && routeedit==false">
+          <div class="inf-top-left pic" ng-show="!(isnewly==false && routeedit==false)">
           </div>
-          <div class="inf-top-left" ng-show="isnewly || routeedit" ng-click="addinline()">
+          <div class="inf-top-left txt" ng-show="isnewly || routeedit" ng-click="addinline()">
           </div>
           <div class="inf-top-right">
             <span class="span2" ng-bind="currentins.InstitutionName"></span>
