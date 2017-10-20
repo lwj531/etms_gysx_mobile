@@ -85,7 +85,7 @@
         <ion-scroll class="window-list">
           <ion-list show-delete="routeedit"
                     show-reorder="routeedit">
-            <ion-item ng-repeat="item in currentRoute.Institutions">
+            <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
               <span class="item-title">({{item.InstitutionName}})</span><br>
               <span class="item-text">{{item.Address}}</span>
               <ion-delete-button class="ion-minus-circled"

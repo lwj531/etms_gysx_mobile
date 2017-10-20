@@ -40,30 +40,52 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
           $scope.$broadcast("close", "detail");
           $scope.$apply();
         });
-        var style = [{
-          url: "img/list-gradeA-icon.png",
-          anchor: new AMap.Pixel(6, 6),
-          size: new AMap.Size(24, 24)
-        },
+        $scope.style = [
+          {
+            url: "img/list-gradeA-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(28, 28)
+          },
           {
             url: "img/list-gradeB-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(24, 24)
-          }
+            size: new AMap.Size(28, 28)
+          },
+          {
+            url: "img/list-gradeC-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(28, 28)
+          },
+          //小图
+          {
+            url: "img/list-gradeA-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(20, 20)
+          },
+          {
+            url: "img/list-gradeB-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(20, 20)
+          },
+          {
+            url: "img/list-gradeC-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(20, 20)
+          },
         ];
-        var mass = new AMap.MassMarks($scope.insdata, {
+        $scope.mass = new AMap.MassMarks($scope.insdata, {
           zIndex: 111,
           cursor: 'pointer',
-          style: style,
+          style: $scope.style,
         });
-        mass.on('click', $scope.showInfoWindow);
-        mass.setMap($scope.map);
-        mass.setStyle(style);
+        $scope.mass.on('click', $scope.showInfoWindow);
+        $scope.mass.setMap($scope.map);
+
       }
     });
     //接收关闭窗口命令
     $scope.$on('close', function (errorType, data) {
-      if (data == "detail") {
+      if (data == "detail" && $scope.routeedit==false) {
         $scope.closeroutedetail();
       }
     });
@@ -150,12 +172,44 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     //显示路线明细
     $scope.routedetail = false;
     $scope.currentRoute = {};
+    //显示路线明细
     $scope.showroutedetail = function (model) {
       routesettingsrv.getroutedetail(model.LineID).then(function (data) {
         $scope.currentRoute = data;
         $scope.isnewly = false;
         $scope.routedetail = true;
         $scope.routeedit = false;
+        //绘制路线图
+        var lineArr = [];
+        var markers = $scope.mass.getData();
+        for (var k = 0; k < markers.length; k++) {
+          if(markers[k].style < 3 ){
+            markers[k].style=markers[k].style + 3;
+          }
+        }
+        for (var i = 0; i < $scope.currentRoute.Institutions.length; i++) {
+          lineArr.push($scope.currentRoute.Institutions[i].lnglat);
+          if (i == $scope.currentRoute.Institutions.length - 1) {
+            //删除原来的折线
+            if ($scope.polyline != null) {
+              $scope.map.remove($scope.polyline);
+            }
+            $scope.polyline = new AMap.Polyline({
+              path: lineArr,          //设置线覆盖物路径
+              strokeColor: "#419de7", //线颜色
+              strokeOpacity: 1,       //线透明度
+              strokeWeight: 2,        //线宽
+              strokeStyle: "dashed",   //线样式
+              //strokeDasharray: [10, 5] //补充线样式
+            });
+            $scope.polyline.setMap($scope.map);
+          }
+          for (var k = 0; k < markers.length; k++) {
+            if (markers[k].InstitutionID == $scope.currentRoute.Institutions[i].InstitutionID) {
+              markers[k].style=markers[k].InstitutionPriority=="A"?0:(markers[k].InstitutionPriority=="B"?1:2);
+            }
+          }
+        }
       });
     };
     //编辑线路模式
@@ -215,4 +269,11 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.routeedit = false;
       $scope.routedetail = false;
     };
+    //点击明细中的机构
+    $scope.openinsinfo = function (model) {
+      $scope.map.clearInfoWindow();
+      $scope.currentins = model;
+      $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
+      $scope.infoWindow.open($scope.map, model.lnglat);
+    }
   });
