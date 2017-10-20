@@ -82,7 +82,7 @@
           <button class="button button-stable button-thin" ng-show="routeedit" ng-click="closerouteedit()">取消</button>
           <button class="button button-positive button-thin" ng-show="routeedit" ng-click="updateroute()">保存</button>
         </div>
-        <ion-scroll class="window-list">
+        <ion-scroll class="window-list" ng-show="route.cart.length>0">
           <ion-list show-delete="routeedit"
                     show-reorder="routeedit">
             <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
