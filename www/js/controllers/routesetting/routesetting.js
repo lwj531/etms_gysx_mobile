@@ -28,11 +28,18 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.getins();
     };
     $scope.init();
+
     //初始化完成后执行
     $scope.$on('amap', function (errorType, data) {
       if (data == "mapcompleted") {
+        //点击地图关闭编辑窗口
         $scope.map.clearMap();
         $scope.map.clearInfoWindow();
+        $scope.map.on('click', function (e) {
+          //通知关闭详细
+          $scope.$broadcast("close", "detail");
+          $scope.$apply();
+        });
         var style = [{
           url: "img/list-gradeA-icon.png",
           anchor: new AMap.Pixel(6, 6),
@@ -54,20 +61,26 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         mass.setStyle(style);
       }
     });
+    //接收关闭窗口命令
+    $scope.$on('close', function (errorType, data) {
+      if (data == "detail") {
+        $scope.closeroutedetail();
+      }
+    });
     //当前点击的机构
     $scope.currentins;
     //加入路线图
     $scope.addinline = function () {
       //新增到路线篮子或者编辑的路线中
       //更新
-      if($scope.routeedit){
+      if ($scope.routeedit) {
         if ($scope.currentRoute.Institutions.indexOf($scope.currentins) == -1) {
           $scope.currentRoute.Institutions.push($scope.currentins);
         } else {
           //提示
           $rootScope.toast("已选择该机构");
         }
-      }else{
+      } else {
         if ($scope.route.cart.indexOf($scope.currentins) == -1) {
           $scope.route.cart.push($scope.currentins);
         } else {
@@ -145,13 +158,13 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       });
     };
     //编辑线路模式
-    $scope.showrouteedit = function(){
+    $scope.showrouteedit = function () {
       $scope.routeedit = true;
       $scope.isnewly = false;
       $scope.routedetail = true;
     };
-    //编辑线路模式
-    $scope.closerouteedit = function(){
+    //退出编辑线路模式
+    $scope.closerouteedit = function () {
       $scope.routeedit = false;
     };
     //删除路线
@@ -175,9 +188,8 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         }
       });
     }
-
     //更新路线保存
-    $scope.updateroute = function(){
+    $scope.updateroute = function () {
       if ($scope.currentRoute.LineName == "") {
         $rootScope.toast("请输入路线名");
       } else if ($scope.currentRoute.Institutions.length <= 0) {
@@ -197,5 +209,9 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         });
       }
     }
-
+    //关闭明细框
+    $scope.closeroutedetail = function () {
+      $scope.routeedit = false;
+      $scope.routedetail = false;
+    };
   });
