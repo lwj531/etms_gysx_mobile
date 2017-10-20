@@ -10,10 +10,12 @@ body, .ionic-body {
 
 .bar.bar-positive {
   background-color: #419de7;
+  border-color: #4c83e0;
   background-image: linear-gradient(0deg, #4687f5, #4687f5 50%, transparent 50%);
 }
 
 .bar.bar-stable {
+  border-color: #e2e2e2;
   background-image: linear-gradient(0deg, #e8e8e8, #e8e8e8 50%, transparent 50%);
 }
 
@@ -1328,38 +1330,38 @@ ul.ins-detail .list-item .item-input input {
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
-    top: -300px;
+    bottom: -300px;
   }
   7% {
     opacity: 1;
-    top: 10px;
+    bottom: 10px;
   }
   90% {
     opacity: 1;
-    top: 10px;
+    bottom: 10px;
   }
   100% {
     opacity: 0;
-    top: -300px;
+    bottom: -300px;
   }
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    top: -300px;
+    bottom: -300px;
   }
   7% {
     opacity: 1;
-    top: 10px;
+    bottom: 10px;
   }
   90% {
     opacity: 1;
-    top: 10px;
+    bottom: 10px;
   }
   100% {
     opacity: 0;
-    top: -300px;
+    bottom: -300px;
   }
 }
 
@@ -1396,4 +1398,78 @@ ul.ins-detail .list-item .item-input input {
 
 .tab-row {
   border-bottom: 3px solid #f5f7fa;
+}
+
+.coordinate-alert .popup {
+  width: 320px;
+  border-radius: 2px;
+  background-color: #fafafa;
+  -webkit-box-shadow: 0 8px 20px rgba(0,0,0,.4);
+  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+}
+.coordinate-alert .popup-body{
+  padding: 0;
+  background-color: #eff5f6;
+}
+
+.coordinate-alert .coordinate-title{
+  padding: 8px 15px;
+}
+.coordinate-alert #coordinate-map{
+  height: 360px;
+  position: relative;
+  width: 100%;
+}
+.button-green{
+background-color: #27d3b3;
+  color: #ffffff;
+  padding: 0 10px;
+}
+.coordinate-alert .button-green{
+ position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.coordinate-alert .popup-buttons{
+ height: 0;
+  min-height:0;
+  padding: 0;
+}
+.coordinate-alert .title-button-left{
+  position: absolute;
+  top:0;
+  left: 0;
+}
+
+.coordinate-alert .title-button-right{
+  position: absolute;
+  top:0;
+  right: 0;
+}
+.bar.week-view{
+  display: block;
+  height:88px;
+  padding: 0;
+}
+
+.bar.week-view .week-title{
+  background-color: #f5fafc;
+  padding: 5px 15px;
+  font-size: 13px;
+}
+
+.bar.week-view .week-day{
+  background-color: #ffffff;
+  padding: 10px 15px;
+  font-size: 16px;
+  color:#000;
+}
+.bar.week-view .week-day div{
+  height: 34px;
+  line-height: 34px;
+}
+
+.bar.week-view .week-day .today{
+  color:#419de7;
+  border-bottom:2px solid #419de7;
 }
