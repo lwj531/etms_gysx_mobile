@@ -8,9 +8,17 @@ angular.module("routesetting.srv", ["http.srv"])
     this.getroutes=function(){
       return httpsrv.service("/api/Routeline/GetRoutelines",{},"get");
     };
+    //获取路线图明细
+    this.getroutedetail=function(routeid){
+      return httpsrv.service("/api/Routeline/GetRouteline/"+routeid,{},"get");
+    };
     //保存路线
     this.saveroute=function(model){
       return httpsrv.service("/api/Routeline/SaveRouteline",model,"post");
+    };
+    //删除路线
+    this.deteteroute=function(id){
+      return httpsrv.service("/api/Routeline/DelRouteline/"+id,{},"delete");
     };
 
 
