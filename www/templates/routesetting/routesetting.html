@@ -110,7 +110,7 @@
       <ion-scroll style="margin-top: 4px;max-height:225px;" class="bg-white">
         <ion-list show-delete="routeedit"
                   show-reorder="routeedit">
-          <ion-item ng-repeat="item in currentRoute.Institutions">
+          <ion-item ng-repeat="item in currentRoute.Institutions"ng-click="openinsinfo(item)">
             <span>({{item.InstitutionName}})</span><br>
             <span style="font-size: 13px;color: darkgray;">{{item.Address}}</span>
             <ion-delete-button class="ion-minus-circled"
@@ -120,6 +120,7 @@
           </ion-item>
         </ion-list>
       </ion-scroll>
+      <div class="bg-white text-center" ng-show="currentRoute.Institutions.length>3">....</div>
     </div>
     <!--搜索机构弹出框-->
     <div class="searchstorediv" style="position:absolute;z-index:800;width:88%;right:25px;top:60px;display: none">
