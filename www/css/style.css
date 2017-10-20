@@ -38,6 +38,10 @@ body, .ionic-body {
   background-color: #3fe383;
 }
 
+.button.button-positive {
+  background-color: #419de7;
+}
+
 ::-webkit-scrollbar {
   height: 1px !important;
   width: 0px !important;
@@ -49,6 +53,10 @@ body, .ionic-body {
 }
 
 .cipherinfo {
+  height: 100%;
+}
+
+.cipherinfo .scroll {
   height: 100%;
 }
 
@@ -101,7 +109,7 @@ body, .ionic-body {
   align-items: center;
 }
 
-.align-center {
+.align-center, .flex-row.align-center {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -1010,7 +1018,7 @@ select {
   list-style: none;
   overflow-x: scroll;
   position: relative;
-  width: 100%;
+  width: calc(100% - 48px);
   height: 100%;
   display: -webkit-box;
   display: -moz-box;
@@ -1035,9 +1043,8 @@ select {
 }
 
 .box {
-  height: 40px;
-  line-height: 40px;
-
+  height: 48px;
+  line-height: 48px;
 }
 
 .bg-white {
@@ -1045,7 +1052,7 @@ select {
 }
 
 div.info-top {
-  height: 45px;
+  height: 54px;
   position: relative;
   background: none repeat scroll 0 0 white;
   border-radius: 5px;
@@ -1068,6 +1075,9 @@ a {
 
 .route-line {
   color: dimgray;
+  width: 25%;
+  font-size: 14px;
+  height: 47px;
 }
 
 .route-line.selected-line {
@@ -1080,24 +1090,39 @@ a {
   color: white;
 }
 
-div.info-top {
-  height: 45px;
-  position: relative;
-  background: none repeat scroll 0 0 white;
-  border-radius: 5px;
-}
-
 .info-top .inf-top-left {
   width: 40px;
-  background-color: #4DCC89;
+  background-color: #419de7;
   text-align: center;
-  height: 45px;
+  height: 100%;
   border-radius: 5px 0 0 5px;
+  position: relative;
+  color: #fff;
+  font-size: 12px;
+}
+.info-top .inf-top-left:before{
+  content: '加入';
+  position: absolute;
+  display: block;
+  top:8px;
+  left: 7px;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.info-top .inf-top-left:after{
+  content: '路线';
+  position: absolute;
+  display: block;
+  bottom:8px;
+  left: 7px;
+  color: #ffffff;
+  font-size: 12px;
 }
 
 .info-top .inf-top-right {
   width: 190px;
-  height: 45px;
+  /*height: 45px;*/
 }
 
 .info-top .span1 {
@@ -1404,72 +1429,204 @@ ul.ins-detail .list-item .item-input input {
   width: 320px;
   border-radius: 2px;
   background-color: #fafafa;
-  -webkit-box-shadow: 0 8px 20px rgba(0,0,0,.4);
-  box-shadow: 0 8px 20px rgba(0,0,0,.4);
+  -webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
 }
-.coordinate-alert .popup-body{
+
+.coordinate-alert .popup-body {
   padding: 0;
   background-color: #eff5f6;
 }
 
-.coordinate-alert .coordinate-title{
+.coordinate-alert .coordinate-title {
   padding: 8px 15px;
 }
-.coordinate-alert #coordinate-map{
+
+.coordinate-alert #coordinate-map {
   height: 360px;
   position: relative;
   width: 100%;
 }
-.button-green{
-background-color: #27d3b3;
+
+.button-green {
+  background-color: #27d3b3;
   color: #ffffff;
   padding: 0 10px;
 }
-.coordinate-alert .button-green{
- position: fixed;
+
+.coordinate-alert .button-green {
+  position: fixed;
   bottom: 20px;
   right: 20px;
 }
-.coordinate-alert .popup-buttons{
- height: 0;
-  min-height:0;
+
+.coordinate-alert .popup-buttons {
+  height: 0;
+  min-height: 0;
   padding: 0;
 }
-.coordinate-alert .title-button-left{
+
+.coordinate-alert .title-button-left {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
 }
 
-.coordinate-alert .title-button-right{
+.coordinate-alert .title-button-right {
   position: absolute;
-  top:0;
+  top: 0;
   right: 0;
 }
-.bar.week-view{
+
+.bar.week-view {
   display: block;
-  height:88px;
+  height: 88px;
   padding: 0;
 }
 
-.bar.week-view .week-title{
+.bar.week-view .week-title {
   background-color: #f5fafc;
   padding: 5px 15px;
   font-size: 13px;
 }
 
-.bar.week-view .week-day{
+.bar.week-view .week-day {
   background-color: #ffffff;
   padding: 10px 15px;
   font-size: 16px;
-  color:#000;
+  color: #000;
 }
-.bar.week-view .week-day div{
+
+.bar.week-view .week-day div {
   height: 34px;
   line-height: 34px;
 }
 
-.bar.week-view .week-day .today{
-  color:#419de7;
-  border-bottom:2px solid #419de7;
+.bar.week-view .week-day .today {
+  color: #419de7;
+  border-bottom: 2px solid #419de7;
+}
+
+.route-addbtn {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  top: 1px;
+  z-index: 999;
+  text-align: center;
+  right: 0;
+  padding: 8px;
+  box-shadow: -1px 2px 20px 0px rgba(0, 0, 0, 0.20);
+}
+
+.route-addbtn img {
+  width: 18px;
+
+}
+
+.route-addbtn span {
+  font-size: 12px;
+  color: #419DE7;
+  height: 12px;
+  display: block;
+  width: 100%;
+  line-height: 9px;
+}
+
+.route-action-block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 100px;
+  z-index: 800;
+}
+
+.route-action-bar {
+  padding: 5px 8px;
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.route-action-bar .button {
+
+}
+
+input[type="text"].route-name-input {
+  flex-shrink: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex: 0 1 auto;
+  flex-shrink: 1;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  max-width: 130px;
+  /*border: 1px solid #ccc;*/
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  line-height: 37px;
+  height: 37px;
+  width: 100%;
+  padding: 0 10px;
+}
+input[type="text"].route-name-input.wide{
+  max-width: 180px;
+}
+.crl-buttons .button {
+}
+
+.route-action {
+  width: 92%;
+}
+
+.button.button-thin {
+  height: 35px;
+  line-height: 33px;
+  min-height: 35px;
+  font-size: 15px;
+}
+
+.window-list {
+  margin-top: 3px;
+  max-height: 225px;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.window-list .item{
+  background-color: transparent;
+}
+
+.window-list .item-complex .item-content{
+  background-color: transparent;
+  padding: 10px 49px 9px 16px;
+}
+
+.window-list .item-content{
+font-size: 15px;
+  color:#3e3e3e;
+}
+.window-list .item-title{
+font-size: 15px;
+  color:#3e3e3e;
+}
+.window-list .item-text{
+font-size: 13px;
+  color:#b5b5b5;
 }

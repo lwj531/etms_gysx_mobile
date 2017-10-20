@@ -95,6 +95,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     $scope.addinline = function () {
       //新增到路线篮子或者编辑的路线中
       //更新
+      console.log('skkjkjkjl');
       if ($scope.routeedit) {
         if ($scope.currentRoute.Institutions.indexOf($scope.currentins) == -1) {
           $scope.currentRoute.Institutions.push($scope.currentins);
