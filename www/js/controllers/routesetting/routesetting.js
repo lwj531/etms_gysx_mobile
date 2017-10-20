@@ -64,8 +64,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       //点击的机构数据
       $scope.currentins = event.target.getExtData();
       var center = new AMap.LngLat($scope.currentins.InstitutionLng, $scope.currentins.InstitutionLat);
-      $scope.map.panTo(center);
-      $scope.map.panBy(0, 100);
+
       $scope.$apply();
       var infowindow = new AMap.InfoWindow({
         isCustom: true,

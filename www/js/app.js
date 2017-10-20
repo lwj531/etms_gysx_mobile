@@ -81,6 +81,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/dailymgt.html",
         controller: "DailyMgtCtrl"
       })
+      //日程管理
+      .state('main.schedulemgt', {
+        url: '/schedulemgt',
+        templateUrl: "templates/schedulemgt/schedulemgt.html",
+        controller: "ScheduleMgtCtrl"
+      })
       //客户管理
       .state('main.clientmgt', {
         url: '/clientmgt',

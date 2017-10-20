@@ -8,9 +8,14 @@ angular.module('main.ctrl', [])
         state: "main.home"
       },
       {
-        name: " 日程管理",
+        name: " 日程管理-录音",
         iconName: "dailymgt",
         state: "main.dailymgt"
+      },
+      {
+        name: " 真 · 日程管理",
+        iconName: "schedulemgt",
+        state: "main.schedulemgt"
       },
       {
         name: "辅导下属",

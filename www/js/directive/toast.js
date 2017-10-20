@@ -3,7 +3,7 @@ angular.module('toast.dt', [])
     return {
       restrict: "E",
       replace: true,
-      template: "<div class='msdtoast animated fadeIn' ng-show='showtoast'>" +
+      template: "<div class='msdtoast animated' ng-class='{fadeIn:showtoast}' ng-show='showtoast'>" +
       "<div class='toast-inner'><span ng-bind='message'></span></div>" +
       "</div>"
     };
