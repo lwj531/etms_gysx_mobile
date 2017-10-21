@@ -1053,9 +1053,12 @@ select {
 
 div.info-top {
   height: 54px;
+  width: 245px;
   position: relative;
-  background: none repeat scroll 0 0 white;
+  background-color: #fff;
   border-radius: 5px;
+  z-index: 150;
+  box-shadow: 0px 3px 10px rgba(136, 136, 136, 0.7);
 }
 
 div.info-top div {
@@ -1096,19 +1099,24 @@ a {
   text-align: center;
   height: 100%;
   border-radius: 5px 0 0 5px;
-  position: relative;
+  position: absolute;
   color: #fff;
   font-size: 12px;
+  left: 0;
+  top: 0;
 }
 
 .info-top .pic.inf-top-left:after {
-  content: url("/img/store-icon.png");
-  width: 20px;
-  height: 20px;
-  background-size: 20px;
+  content: '';
+  width: 45px;
+  height: 54px;
+  background-size: 45px;
   display: block;
   top:0;
   left: 0;
+  background-image: url("/img/store-icon.png");
+  background-position: 0px 5px;
+  background-repeat: no-repeat;
 }
 
 .info-top .txt.inf-top-left:before {
@@ -1116,7 +1124,7 @@ a {
   position: absolute;
   display: block;
   top: 8px;
-  left: 7px;
+  left: 11px;
   color: #ffffff;
   font-size: 12px;
 }
@@ -1126,14 +1134,25 @@ a {
   position: absolute;
   display: block;
   bottom: 8px;
-  left: 7px;
+  left: 11px;
   color: #ffffff;
   font-size: 12px;
 }
 
 .info-top .inf-top-right {
-  width: 190px;
-  /*height: 45px;*/
+  position: relative;
+  left: 45px;
+  top: 0;
+  height: 54px;
+  width: 200px;
+  padding: 6px;
+}
+
+.info-top .inf-top-right span{
+  display: block;
+  overflow: scroll;
+  height: 100%;
+  font-size: 13px;
 }
 
 .info-top .span1 {
@@ -1146,16 +1165,24 @@ a {
   left: 6px;
 }
 
-.info-top .span2 {
-  position: absolute;
-  top: 6px;
-  left: 48px;
-}
-
 .info-bottom {
   position: relative;
-  top: 0px;
-  margin: 0px auto;
+  top: -11px;
+  width: 100%;
+  text-align: center;
+}
+
+.info-bottom span{
+  display: inline-block;
+  background-color: #ffffff;
+  width: 20px;
+  height:20px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  box-shadow: 0px 3px 10px rgba(136, 136, 136, 0.7);
 }
 
 [class*=uicon-blankmarker] {
