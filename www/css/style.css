@@ -1527,6 +1527,10 @@ ul.ins-detail .list-item .item-input input {
   padding: 5px 15px;
   font-size: 13px;
 }
+.bar.week-view .week-title li{
+  width: 20px;
+  text-align: center;
+}
 
 .bar.week-view .week-day {
   background-color: #ffffff;
@@ -1535,12 +1539,14 @@ ul.ins-detail .list-item .item-input input {
   color: #000;
 }
 
-.bar.week-view .week-day div {
+.bar.week-view .week-day li {
   height: 34px;
   line-height: 34px;
+  width: 20px;
+  text-align: center;
 }
 
-.bar.week-view .week-day .today {
+.bar.week-view .week-day li.today {
   color: #419de7;
   border-bottom: 2px solid #419de7;
 }
