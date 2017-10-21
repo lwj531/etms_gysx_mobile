@@ -20,6 +20,30 @@ angular.module("routesetting.srv", ["http.srv"])
     this.deteteroute=function(id){
       return httpsrv.service("/api/Routeline/DelRouteline/"+id,{},"delete");
     };
+    //搜索门店
+    this.searchins=function(model){
+      return httpsrv.service("/api/Institution/GetInstitutionsByKey/",model,"post");
+    };
+    //无坐标门店
+    this.getnolatlngins=function(){
+      var model =[{
+        Key:"InstitutionLat",
+        Value:0
+      },
+        {
+          Key:"InstitutionLng",
+          Value:0
+        }
+      ]
+      return httpsrv.service("/api/Institution/GetInstitutionsByKey/",model,"post");
+    };
+
+    //根据机构返回所在线路
+    this.getRoutelinesByInstitution = function(insid){
+      return httpsrv.service("/api/Routeline/GetRoutelinesByInstitution/"+insid,{},"get");
+    }
+
+
 
 
 
