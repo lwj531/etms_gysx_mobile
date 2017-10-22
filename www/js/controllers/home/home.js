@@ -37,6 +37,8 @@ angular.module('home.ctrl', ['car.srv'])
     //   // 执行动作
     // });
 
+    $scope.progressNum = 20+'%';
+    $scope.progress = {"width":$scope.progressNum};
     $scope.reciever=[];
     for(var i=0;i<100;i++){
       $scope.reciever.push({name:''});
