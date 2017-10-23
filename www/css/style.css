@@ -3,6 +3,9 @@
 body, .ionic-body {
   color: #4e4e4e;
 }
+.bar .title,.bar-positive .button.button-clear{
+  font-size: 15px;
+}
 
 .gesture-modal {
   z-index: 999;
@@ -1160,8 +1163,7 @@ a {
   top: 0;
 }
 
-.info-top .pic.inf-top-left:after {
-  content: '';
+.info-top .pic.inf-top-left {
   width: 45px;
   height: 54px;
   background-size: 45px;
@@ -1200,13 +1202,19 @@ a {
   height: 54px;
   width: 200px;
   padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-top .inf-top-right span{
-  display: block;
-  overflow: scroll;
-  height: 100%;
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-align: center;
 }
 
 .info-top .span1 {
@@ -1704,7 +1712,7 @@ input[type="text"].route-name-input.wide {
   height: 35px;
   line-height: 33px;
   min-height: 35px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .window-list {
