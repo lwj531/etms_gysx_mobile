@@ -442,7 +442,7 @@ ul {
 }
 
 .list-item .item-text {
-  font-size: 13px;
+  font-size: 12px;
   color: #b5b5b5;
   position: relative;
   min-height: 20px;
@@ -597,7 +597,7 @@ ul {
 
 .img-block + .img-block {
   color: #d3ba93;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -749,7 +749,7 @@ ul {
 }
 
 .dense-list .item-title {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .home-schedule .button-row {
@@ -968,7 +968,7 @@ ul {
 
 .pagination ul li:first-child,
 .pagination ul li:last-child {
-  font-size: 22px;
+  font-size: 16px;
   color: #419de7;
 }
 
@@ -1118,7 +1118,7 @@ div.info-top {
 div.info-top div {
   display: inline-block;
   color: #333333;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 a {
@@ -1133,7 +1133,7 @@ a {
 .route-line {
   color: dimgray;
   width: 25%;
-  font-size: 14px;
+  font-size: 13px;
   height: 47px;
 }
 
@@ -1206,7 +1206,7 @@ a {
   display: block;
   overflow: scroll;
   height: 100%;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .info-top .span1 {
@@ -1266,7 +1266,7 @@ a {
 .button.button-clear.tab-button {
   padding: 0 13px;
   color: #5e5e5e;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .button.tab-button.active {
@@ -1352,7 +1352,7 @@ ul.ins-detail .list-item .item-inner {
 .input-row input {
   width: 100%;
   color: #419de7;
-  font-size: 16px;
+  font-size: 15px;
   padding-right: 15px;
 }
 
@@ -1386,7 +1386,7 @@ ul.ins-detail .list-item .item-inner {
 }
 
 .gender-radio {
-  font-size: 16px;
+  font-size: 15px;
   min-height: 44px;
 }
 
@@ -1408,7 +1408,7 @@ ul.ins-detail .list-item .item-inner {
 
 ul.ins-detail .list-item .item-input input {
   color: #419de7;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .male .uicon-gender {
@@ -1593,7 +1593,7 @@ ul.ins-detail .list-item .item-input input {
 .bar.week-view .week-day {
   background-color: #ffffff;
   padding: 10px 15px;
-  font-size: 16px;
+  font-size: 15px;
   color: #000;
 }
 
@@ -1723,17 +1723,17 @@ input[type="text"].route-name-input.wide {
 }
 
 .window-list .item-content {
-  font-size: 15px;
+  font-size: 14px;
   color: #3e3e3e;
 }
 
 .window-list .item-title {
-  font-size: 15px;
+  font-size: 14px;
   color: #3e3e3e;
 }
 
 .window-list .item-text {
-  font-size: 13px;
+  font-size: 12px;
   color: #b5b5b5;
 }
 .schedule-title{

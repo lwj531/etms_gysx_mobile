@@ -50,6 +50,7 @@
           <span></span>
       </div>
     </div>
+    </div>
     <!--点击新增路线出现的弹出框-->
     <div class="route-action-block">
       <div class="route-action" ng-show="isnewly">
@@ -62,7 +63,7 @@
           <ion-list show-delete="true"
                     show-reorder="true">
             <ion-item ng-repeat="item in route.cart">
-              <span class="item-title">({{item.InstitutionName}})</span><br>
+              <span class="item-title">{{item.InstitutionName}}</span><br>
               <span class="item-text">{{item.Address}}</span>
               <ion-delete-button class="ion-minus-circled" ng-click="route.cart.splice($index, 1)"></ion-delete-button>
               <ion-reorder-button class="ion-navicon"
@@ -87,7 +88,7 @@
           <ion-list show-delete="routeedit"
                     show-reorder="routeedit">
             <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
-              <span class="item-title">({{item.InstitutionName}})</span><br>
+              <span class="item-title">{{item.InstitutionName}}</span><br>
               <span class="item-text">{{item.Address}}</span>
               <ion-delete-button class="ion-minus-circled"
                                  ng-click="currentRoute.Institutions.splice($index, 1)"></ion-delete-button>
