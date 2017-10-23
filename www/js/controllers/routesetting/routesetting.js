@@ -42,7 +42,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         });
         $scope.style = [
           {
-            url: "img/list-gradeA-icon.png",
+            url: "img/markerA.svg",
             anchor: new AMap.Pixel(6, 6),
             size: new AMap.Size(28, 28)
           },
@@ -52,13 +52,13 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
             size: new AMap.Size(28, 28)
           },
           {
-            url: "img/list-gradeC-icon.png",
+            url: "img/markerC_52.png",
             anchor: new AMap.Pixel(6, 6),
             size: new AMap.Size(28, 28)
           },
           //小图
           {
-            url: "img/list-gradeA-icon.png",
+            url: "img/markerA.svg",
             anchor: new AMap.Pixel(6, 6),
             size: new AMap.Size(20, 20)
           },
@@ -68,7 +68,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
             size: new AMap.Size(20, 20)
           },
           {
-            url: "img/list-gradeC-icon.png",
+            url: "img/markerC_52.png",
             anchor: new AMap.Pixel(6, 6),
             size: new AMap.Size(20, 20)
           },
@@ -93,6 +93,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     $scope.currentins;
     //加入路线图
     $scope.addinline = function () {
+      console.log('wqqqq12222222222');
       //新增到路线篮子或者编辑的路线中
       if ($scope.routeedit) {
         if ($scope.currentRoute.Institutions.indexOf($scope.currentins) == -1) {
