@@ -47,9 +47,9 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
             size: new AMap.Size(28, 28)
           },
           {
-            url: "img/list-gradeB-icon.png",
+            url: "img/GradeB-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(28, 28)
+            size: new AMap.Size(26, 30)
           },
           {
             url: "img/markerC_52.png",
@@ -63,9 +63,9 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
             size: new AMap.Size(20, 20)
           },
           {
-            url: "img/list-gradeB-icon.png",
+            url: "img/GradeB-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(20, 20)
+            size: new AMap.Size(26, 23)
           },
           {
             url: "img/markerC_52.png",

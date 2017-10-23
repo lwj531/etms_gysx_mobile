@@ -64,7 +64,7 @@
           <ion-list show-delete="true"
                     show-reorder="true">
             <ion-item ng-repeat="item in route.cart">
-              <span class="item-title">({{item.InstitutionName}})</span><br>
+              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
               <span class="item-text">{{item.Address}}</span>
               <ion-delete-button class="ion-minus-circled" ng-click="route.cart.splice($index, 1)"></ion-delete-button>
               <ion-reorder-button class="ion-navicon"
@@ -89,7 +89,7 @@
           <ion-list show-delete="routeedit"
                     show-reorder="routeedit">
             <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
-              <span class="item-title">({{item.InstitutionName}})</span><br>
+              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
               <span class="item-text">{{item.Address}}</span>
               <ion-delete-button class="ion-minus-circled"
                                  ng-click="currentRoute.Institutions.splice($index, 1)"></ion-delete-button>
@@ -113,7 +113,7 @@
         <ion-scroll class="window-list" ng-show="searchresult.length>0">
           <ion-list>
             <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
-              <span class="item-title">{{item.InstitutionName}}</span><br>
+              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
               <span class="item-text">{{item.Address}}</span>
             </ion-item>
           </ion-list>
@@ -132,7 +132,7 @@
         <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
           <ion-list>
             <ion-item ng-repeat="item in nolatlngresult"  ng-click="openinsinfo(item)">
-              <span class="item-title">{{item.InstitutionName}}</span><br>
+              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
               <span class="item-text">{{item.Address}}</span>
             </ion-item>
           </ion-list>
@@ -144,7 +144,7 @@
     <!--点击机构，若机构已存在于某条路线中弹出的提示框-->
     <div class="bg-white warnremind"
          style="opacity:0.9;position:absolute;width:88%;height:45px;line-height:45px;left:0;right:0;margin:auto;bottom:60px;" ng-show="routetoast">
-      <img src="img/warn-icon.png" style="margin:0 10px;margin-top: 8px;"/><span
+      <img src="img/warning_red_46.png" style="margin:0 10px;margin-top: 8px;" width="27"/><span
       style="color:#E65045;font-size:13px;position: absolute;" ng-bind="insroutesinfo"></span>
     </div>
   </ion-content>

@@ -24,6 +24,10 @@ angular.module("routesetting.srv", ["http.srv"])
     this.searchins=function(model){
       return httpsrv.service("/api/Institution/GetInstitutionsByKey/",model,"post");
     };
+    //搜索门店不显示菊花
+    this.searchinsnoloading=function(model){
+      return httpsrv.service("/api/Institution/GetInstitutionsByKey/",model,"post",false);
+    };
     //无坐标门店
     this.getnolatlngins=function(){
       var model =[{
