@@ -9,12 +9,12 @@ angular.module('main.ctrl', [])
       },
       {
         name: " 日程管理-录音",
-        iconName: "dailymgt",
+        iconName: "calendar",
         state: "main.dailymgt"
       },
       {
         name: " 真 · 日程管理",
-        iconName: "schedulemgt",
+        iconName: "calendar",
         state: "main.schedulemgt"
       },
       {
@@ -24,32 +24,32 @@ angular.module('main.ctrl', [])
       },
       {
         name: "拜访向导",
-        iconName: "callguide",
+        iconName: "guide",
         state: "main.callguide"
       },
       {
         name: "路线设定",
-        iconName: "routesetting",
+        iconName: "map",
         state: "main.routesetting"
       },
       {
         name: " 客户管理",
-        iconName: "clientmgt",
+        iconName: "building",
         state: "main.clientmgt"
       },
       {
         name: " 附近药店",
-        iconName: "dailymgt",
+        iconName: "map",
         state: "main.xx"
       },
       {
         name: "辅导记录",
-        iconName: "guidance",
+        iconName: "coaching",
         state: "main.xx"
       },
       {
         name: " 学习资料库",
-        iconName: "db",
+        iconName: "folder",
         state: "main.xx"
       }];
     $scope.currentstate = $state;

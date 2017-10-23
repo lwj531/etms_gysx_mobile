@@ -1,4 +1,4 @@
-<ion-view title="日程管理" view-title="日程管理">
+<ion-view title="日程管理" view-title="日程管理" ng-init="viewActive=2">
   <div class="bar bar-header bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
       <i class="icon ion-android-arrow-back"></i>
@@ -7,12 +7,12 @@
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <div class="h1 title">
       <div class="button-group">
-        <div class="group-button button selected">日</div>
-        <div class="group-button button">周</div>
+        <div class="group-button button" ng-click="viewActive=1" ng-class="{'selected':viewActive==1}">日</div>
+        <div class="group-button button" ng-click="viewActive=2" ng-class="{'selected':viewActive==2}">周</div>
       </div>
     </div>
   </div>
-  <div class="bar bar-subheader bar-stable week-view">
+  <div class="bar bar-subheader bar-stable week-slide" ng-show="viewActive==1">
     <ul class="flex-row week-title">
       <li>日</li>
       <li>一</li>
@@ -33,163 +33,312 @@
       <li ng-repeat="item in weekChange">{{item}}</li>
     </ul>
   </div>
+  <div class="bar bar-subheader bar-stable week-tap" ng-show="viewActive==2">
+    <div class="flex-between">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
   <ion-content class="has-header has-subheader">
-    <div class="height-100" ng-init="activeTab=1">
-      <div class="list-item schedule-title">
-        <div class="item-content">
-          <div class="item-media"><img src="img/calendar_blue_42.png" width="24"></div>
-          <div class="item-inner">
-            <div class="item-title color-blue">2017/03/03</div>
-            <div class="item-after">
-              <a class="button button-clear button-stable button-small flex-center" ng-click="activeTab=1" ng-class="{'selected':activeTab==1}"><span class="uicon list-view"></span></a>
-              <span class="space-stick" style="font-size: 17px;color: #d5d5d5;">|</span>
-              <a class="button button-clear button-stable button-small flex-center" ng-click="activeTab=2" ng-class="{'selected':activeTab==2}"><span class="uicon map-view"></span></a>
+    <div class="crl-tab height-100" ng-show="viewActive==1">
+      <div class="height-100" ng-init="activeTab=1">
+        <div class="list-item schedule-title">
+          <div class="item-content">
+            <div class="item-media"><img src="img/calendar_blue_42.png" width="24"></div>
+            <div class="item-inner">
+              <div class="item-title color-blue">2017/03/03</div>
+              <div class="item-after">
+                <a class="button button-clear button-stable button-small flex-center" ng-click="activeTab=1"
+                   ng-class="{'selected':activeTab==1}"><span class="uicon list-view"></span></a>
+                <span class="space-stick" style="font-size: 17px;color: #d5d5d5;">|</span>
+                <a class="button button-clear button-stable button-small flex-center" ng-click="activeTab=2"
+                   ng-class="{'selected':activeTab==2}"><span class="uicon map-view"></span></a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="crl-tabs">
-        <div class="crl-tab height-100" ng-show="activeTab==1">
-          <div class="bg-white home-schedule height-100">
-            <div class="list-item multi-line no-line">
-              <div class="item-content">
-                <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">路线名称11</div>
+        <div class="crl-tabs">
+          <div class="crl-tab height-100" ng-show="activeTab==1">
+            <div class="bg-white home-schedule height-100">
+              <div class="list-item multi-line no-line">
+                <div class="item-content">
+                  <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">路线名称11</div>
+                    </div>
+                    <div class="item-title-row">
+                      <div class="item-title" style="width: 100%;">
+                        <div class="progress-track">
+                          <div class="progress" ng-style="progress"></div>
+                        </div>
+                      </div>
+                      <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;{{progressNum}}</div>
+                    </div>
                   </div>
-                  <div class="item-title-row">
-                    <div class="item-title" style="width: 100%;">
-                      <div class="progress-track">
-                        <div class="progress" ng-style="progress"></div>
+                </div>
+              </div>
+              <div class="list-item no-line" ng-show="AE">
+                <div class="item-content">
+                  <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title">城市名称11</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ul>
+                <li class="list-item multi-line schedule-called">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="flex-row align-end">
+                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <div class="col-33 flex-end">
+                          <a class="button button-clear button-stable button-small flex-center"
+                             style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
+                            src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
                       </div>
                     </div>
-                    <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;{{progressNum}}</div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="list-item no-line" ng-show="AE">
-              <div class="item-content">
-                <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">城市名称11</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <ul>
-              <li class="list-item multi-line schedule-called">
-                <div class="item-content align-top">
-                  <div class="item-media"><span class="list-dot"></span></div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">北京xxxxx分部(A)</div>
-                    </div>
-                    <div class="item-text">北京市朝阳区xxxx院</div>
-                    <div class="flex-row align-end">
-                      <div class="col-33 color-green">签入&nbsp;10:21:21</div>
-                      <div class="col-33 color-green">签出&nbsp;10:21:21</div>
-                      <div class="col-33 flex-end">
-                        <a class="button button-clear button-stable button-small flex-center"
-                           style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
-                          src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                </li>
+                <li class="list-item multi-line schedule-calledout">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="flex-row align-end">
+                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <div class="col-33 flex-end">
+                          <a class="button button-clear button-stable button-small flex-center"
+                             style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
+                            src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="list-item multi-line schedule-calledout">
-                <div class="item-content align-top">
-                  <div class="item-media"><span class="list-dot"></span></div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">北京xxxxx分部(A)</div>
-                    </div>
-                    <div class="item-text">北京市朝阳区xxxx院</div>
-                    <div class="flex-row align-end">
-                      <div class="col-33 color-green">签入&nbsp;10:21:21</div>
-                      <div class="col-33 color-green">签出&nbsp;10:21:21</div>
-                      <div class="col-33 flex-end">
-                        <a class="button button-clear button-stable button-small flex-center"
-                           style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
-                          src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-item multi-line schedule-called">
-                <div class="item-content align-top">
-                  <div class="item-media"><span class="list-dot"></span></div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">北京xxxxx分部(A)</div>
-                    </div>
-                    <div class="item-text">北京市朝阳区xxxx院</div>
-                    <div class="flex-row align-end">
-                      <div class="col-33 color-green">签入&nbsp;10:21:21</div>
-                      <div class="col-33 color-green">签出&nbsp;10:21:21</div>
-                      <div class="col-33 flex-end">
-                        <a class="button button-clear button-stable button-small flex-center"
-                           style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
-                          src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                </li>
+                <li class="list-item multi-line schedule-called">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="flex-row align-end">
+                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <div class="col-33 flex-end">
+                          <a class="button button-clear button-stable button-small flex-center"
+                             style="font-size: 14px; color:#c0cce0;line-height: 19px;min-height: 21px;"><img
+                            src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="list-item multi-line schedule-plan">
-                <div class="item-content align-top">
-                  <div class="item-media"><span class="list-dot"></span></div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">北京xxxxx分部(A)</div>
-                    </div>
-                    <div class="flex-row align-end">
-                      <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
-                      <div class="col-33 flex-end">
-                        <a class="button button-clear button-stable button-small flex-center color-blue"
-                           style="font-size: 14px; line-height: 19px;min-height: 21px;"><img
-                          src="img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a></div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="list-item multi-line schedule-plan">
-                <div class="item-content align-top">
-                  <div class="item-media"><span class="list-dot"></span></div>
-                  <div class="item-inner">
-                    <div class="item-title-row">
-                      <div class="item-title">北京xxxxx分部(A)</div>
-                    </div>
-                    <div class="flex-row align-end">
-                      <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
-                      <div class="col-33 flex-end">
-                        <a class="button button-clear button-stable button-small flex-center color-blue"
-                           style="font-size: 14px; line-height: 19px;min-height: 21px;"><img
-                          src="img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a></div>
+                </li>
+                <li class="list-item multi-line schedule-plan">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="flex-row align-end">
+                        <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
+                        <div class="col-33 flex-end">
+                          <a class="button button-clear button-stable button-small flex-center color-blue"
+                             style="font-size: 14px; line-height: 19px;min-height: 21px;"><img
+                            src="img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="crl-tab height-100" ng-show="activeTab==2">
-          <div class="route-action-block daily">
-            <div class="sign-info">
-              <div class="route-action flex-between">
-                <div class="sign-time flex-start"><span>首次签入时间</span><div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div></div>
-                <div class="block-button flex-center actual"><img src="img/route_green_44.png" width="22">实际路线</div>
-              </div>
-              <div class="route-action flex-between">
-                <div class="sign-time flex-start"><span>末次签出时间</span><div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div></div>
-                <div class="block-button flex-center plan"><img src="img/route_blue_44.png" width="22">计划路线</div>
-              </div>
+                </li>
+                <li class="list-item multi-line schedule-plan">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="flex-row align-end">
+                        <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
+                        <div class="col-33 flex-end">
+                          <a class="button button-clear button-stable button-small flex-center color-blue"
+                             style="font-size: 14px; line-height: 19px;min-height: 21px;"><img
+                            src="img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="height-100" id="dailyMap"></div>
+          <div class="crl-tab height-100" ng-show="activeTab==2">
+            <div class="route-action-block daily">
+              <div class="sign-info">
+                <div class="route-action flex-between">
+                  <div class="sign-time flex-start"><span>首次签入时间</span>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                  </div>
+                  <div class="block-button flex-center actual"><img src="img/route_green_44.png" width="22">实际路线</div>
+                </div>
+                <div class="route-action flex-between">
+                  <div class="sign-time flex-start"><span>末次签出时间</span>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                  </div>
+                  <div class="block-button flex-center plan"><img src="img/route_blue_42.png" width="22">计划路线</div>
+                </div>
+              </div>
+            </div>
+            <div class="height-100" id="dailyMap"></div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="crl-tab height-100" ng-show="viewActive==2">
+      <ul class="schedule-week-list" ng-show="true">
+        <li>
+          <div class="content-block-title">周一(10/22)</div>
+          <div class="schedule-week-row">
+            <div class="col-40">
+              <div class="flex-between">
+                <img src="img/route_green_44.png" width="18">
+                <div class="progress-block">
+                  <div class="">路线名称啊(9)65%</div>
+                  <div class="progress-track">
+                    <div class="progress" ng-style="progress"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-33 flex-center">
+              <div>
+                <div class="">首次签入 09:03:02</div>
+                <div class="">首次签入 09:03:02</div>
+              </div>
+            </div>
+            <div class="col-27 flex-center">
+              <div class="width-100">
+                <div class="flex-between affair-gray">
+                  <div>无半天事务</div>
+                  <div class="affair-dot"></div>
+                </div>
+                <div class="flex-between affair-orange">
+                  <div>年假</div>
+                  <div class="affair-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="content-block-title">周二(10/23)</div>
+          <div class="schedule-week-row">
+            <div class="col-40">
+              <div class="flex-between">
+                <img src="img/route_green_44.png" width="18">
+                <div class="progress-block">
+                  <div class="">路线名称啊(9)65%</div>
+                  <div class="progress-track">
+                    <div class="progress" ng-style="progress"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-33 flex-center">
+              <div>
+                <div class="">首次签入 09:03:02</div>
+                <div class="">首次签入 09:03:02</div>
+              </div>
+            </div>
+            <div class="col-27 flex-center">
+              <div class="width-100">
+                <div class="flex-between affair-red">
+                  <div>不可抗不可抗不可抗</div>
+                  <div class="affair-dot"></div>
+                </div>
+                <div class="flex-between affair-blue">
+                  <div>年假</div>
+                  <div class="affair-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul class="schedule-week-list" ng-show="false">
+        <li>
+          <div class="content-block-title">周一(10/22)</div>
+          <div class="schedule-week-row">
+            <div class="col-40">
+              <div class="flex-start">
+                <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
+                <div class="">城市名称啊(9)</div>
+              </div>
+            </div>
+            <div class="col-33 flex-center">
+              <div>
+                <div class="">首次签入 09:03:02</div>
+                <div class="">首次签入 09:03:02</div>
+              </div>
+            </div>
+            <div class="col-27 flex-center">
+              <div class="width-100">
+                <div class="flex-between affair-gray">
+                  <div>无半天事务</div>
+                  <div class="affair-dot"></div>
+                </div>
+                <div class="flex-between affair-orange">
+                  <div>年假</div>
+                  <div class="affair-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="content-block-title">周二(10/23)</div>
+          <div class="schedule-week-row">
+            <div class="col-40">
+              <div class="flex-start">
+                <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
+                <div class="">城市名称啊(9)</div>
+              </div>
+            </div>
+            <div class="col-33 flex-center">
+              <div>
+                <div class="">首次签入 09:03:02</div>
+                <div class="">首次签入 09:03:02</div>
+              </div>
+            </div>
+            <div class="col-27 flex-center">
+              <div class="width-100">
+                <div class="flex-between affair-red">
+                  <div>不可抗不可抗不可抗</div>
+                  <div class="affair-dot"></div>
+                </div>
+                <div class="flex-between affair-blue">
+                  <div>年假</div>
+                  <div class="affair-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </ion-content>
 </ion-view>
