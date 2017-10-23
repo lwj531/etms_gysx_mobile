@@ -1,7 +1,10 @@
-angular.module('insdetail.ctrl', [])
-  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup) {
+angular.module('insdetail.ctrl', ['routesetting.srv'])
+  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams,routesettingsrv) {
     $scope.terminalList = [];
     $scope.memberList = [];
+    console.log($stateParams.insId);
+
+
 
     for (var i = 0; i < 20; i++) {
       $scope.terminalList.push({name: 'xxxxxxxxxxxxxx大药房', icon: 'A', address: 'xx路xx街12号'}, {

@@ -95,7 +95,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //机构详情
       .state('main.insdetail', {
-        url: '/insdetail',
+        url: '/insdetail/:insId',
         templateUrl: "templates/clientmgt/insdetail.html",
         controller: "InsDetailCtrl"
       })
