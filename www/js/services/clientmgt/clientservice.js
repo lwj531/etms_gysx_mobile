@@ -5,8 +5,6 @@ angular.module("client.srv", ["http.srv"])
       return httpsrv.service("/api/Client/GetClients/"+insid, {}, "get");
     };
 
-  }]);
-
 
 
 
@@ -42,5 +40,4 @@ angular.module("client.srv", ["http.srv"])
       return httpsrv.service("/api/Account/SignIn/", {}, "get", true);
     };
 
-    }
-  ]);
+    }]);

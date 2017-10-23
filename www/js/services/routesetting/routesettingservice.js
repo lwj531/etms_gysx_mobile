@@ -46,7 +46,6 @@ angular.module("routesetting.srv", ["http.srv"])
     this.getRoutelinesByInstitution = function(insid){
       return httpsrv.service("/api/Routeline/GetRoutelinesByInstitution/"+insid,{},"get");
     }
-  }]);
 
 
 

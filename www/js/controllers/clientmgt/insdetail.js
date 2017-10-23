@@ -1,8 +1,8 @@
-angular.module('insdetail.ctrl', ['routesetting.srv'])
-  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams,routesettingsrv) {
+angular.module('insdetail.ctrl', [])
+  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams) {
     $scope.terminalList = [];
     $scope.memberList = [];
-    console.log($stateParams.insId);
+    console.log($stateParams.insid);
 
 
 
