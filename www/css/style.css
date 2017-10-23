@@ -1584,8 +1584,8 @@ ul.ins-detail .list-item .item-input input {
   height: 88px;
   padding: 0;
 }
-.bar.week-slide +.has-subheader{
- top:133px;
+.has-subheader.top-135{
+ top:135px;
 }
 
 .bar.week-slide .week-title {
