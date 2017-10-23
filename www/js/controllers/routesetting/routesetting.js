@@ -115,7 +115,8 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     $scope.infoWindow = new AMap.InfoWindow({
       offset: new AMap.Pixel(5, 0),
       isCustom: true,
-      //closeWhenClickMap:true
+      //closeWhenClickMap:true,
+      autoMove:true
     });
     //点击Marker
     $scope.showInfoWindow = function (event) {
@@ -124,6 +125,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.$apply();
       $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
       $scope.infoWindow.open($scope.map, event.data.lnglat);*/
+      $scope.currentins = event.data;
       $scope.openinsinfo(event.data);
     };
     //是否为新增状态
@@ -149,7 +151,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.route.cart = [];
       $scope.route.name = "";
     };
-    //保存路线
+    //保存路线到服务器
     $scope.saveroute = function () {
       if ($scope.route.name == "") {
         $rootScope.toast("请输入路线名");
@@ -211,6 +213,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
               //strokeDasharray: [10, 5] //补充线样式
             });
             $scope.polyline.setMap($scope.map);
+            $scope.map.setFitView();
           }
           for (var k = 0; k < markers.length; k++) {
             if (markers[k].InstitutionID == $scope.currentRoute.Institutions[i].InstitutionID) {
@@ -284,6 +287,8 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.map.clearInfoWindow();
       $scope.currentins = model;
       $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
+      $scope.map.setCenter( model.lnglat);
+      $scope.map.panBy(0,50);
       $scope.infoWindow.open($scope.map, model.lnglat);
       //机构提示存在线路
       routesettingsrv.getRoutelinesByInstitution(model.InstitutionID).then(function (data) {
