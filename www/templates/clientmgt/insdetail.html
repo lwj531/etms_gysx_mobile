@@ -14,10 +14,10 @@
           <div class="item-media"><span class="uicon uicon-blankmarkerA">A</span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">机构名称 (机构等级)</div>
+              <div class="item-title">{{currentIns.InstitutionName + '('+currentIns.InstitutionPriority+')'}}</div>
             </div>
             <div class="flex-row align-end padding-top">
-              <div class="col-70 color-gray">xxxxxxxxxxxx市xx区xx街1号</div>
+              <div class="col-70 color-gray">{{currentIns.Address}}</div>
               <div class="col-30 flex-end">
                 <a class="button button-outline button-energized button-small" ui-sref="main.skusort">SKU排序</a></div>
             </div>
@@ -37,7 +37,7 @@
                   ng-click="activeTab=2">人员信息
           </button>
         </div>
-        <div class="flex-center">
+        <div class="flex-center" ng-show="showstore">
           <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==3}"
                   ng-click="activeTab=3">终端信息
           </button>
@@ -50,7 +50,7 @@
             <li class="list-item inverse">
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title">90码</div>
+                  <div class="item-title">{{currentIns.InstitutionID}}</div>
                   <div class="item-after"></div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-title">联系电话</div>
-                  <div class="item-after">021-23232332</div>
+                  <div class="item-after">{{currentIns.Phone}}</div>
                 </div>
               </div>
             </li>
@@ -67,7 +67,7 @@
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-title">药店类型</div>
-                  <div class="item-after">单体门店</div>
+                  <div class="item-after">{{currentIns.InstitutionTypeName	}}</div>
                 </div>
               </div>
             </li>
@@ -101,7 +101,7 @@
             </li>
           </ul>
         </div>
-        <div class="crl-tab" ng-show="activeTab==3">
+        <div class="crl-tab" ng-show="activeTab==3" ng-show="showstore">
           <div class="list-item inverse no-line">
             <div class="item-content">
               <div class="item-inner">

@@ -1,9 +1,18 @@
-angular.module('insdetail.ctrl', [])
-  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams) {
+angular.module('insdetail.ctrl', ['client.srv'])
+  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams,clientsrv) {
     $scope.terminalList = [];
     $scope.memberList = [];
-    console.log($stateParams.insid);
-
+    //是否显示终端信息
+    $scope.showstore=false;
+    //当前人员的信息
+    clientsrv.getcurrentstaff().then(function (staff) {
+      $scope.staff = staff;
+      $scope.showstore =!(staff.Roles.indexOf('CCR_REP')!=-1);
+      //根据传来的insId获取机构信息
+      clientsrv.getins($stateParams.insid).then(function (data) {
+        $scope.currentIns = data;
+      });
+    });
 
 
     for (var i = 0; i < 20; i++) {
