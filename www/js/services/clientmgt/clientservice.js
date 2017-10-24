@@ -12,4 +12,8 @@ angular.module("client.srv", ["http.srv"])
     this.getclients=function(insId){
       return httpsrv.service("/api/Client/GetClients/"+insId,{},"get");
     };
+    //保存新增的门店人员信息
+    this.saveclient=function(model){
+      return httpsrv.service("/api/Client/SaveClient/",model,"post");
+    };
     }]);
