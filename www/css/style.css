@@ -42,7 +42,7 @@ body, .ionic-body {
 }
 
 .button.button-balanced {
-  background-color: #3fe383;
+  background-color: #27d383;
 }
 
 .button.button-positive {
@@ -2101,4 +2101,55 @@ background-color: #fff;
   font-size: 14px;
   line-height: 19px;
   min-height: 21px;
+}
+.map-block{
+  position: relative;
+  border-bottom: 2px solid #f5f7fa;
+}
+.map-block .button{
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  z-index: 150;
+}
+.uicon-blue-next{
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'm60%2061.5-38.25%2038.25-9.75-9.75%2029.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23419de7'%2F%3E%3C%2Fsvg%3E");
+  background-size: 12px 24px;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 37px;
+  background-position: center;
+}
+.uicon-blue-prev{
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'm60%2061.5-38.25%2038.25-9.75-9.75%2029.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23419de7'%2F%3E%3C%2Fsvg%3E");
+  background-size: 12px 24px;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 37px;
+  background-position: center;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.uicon-add{
+  background-image: url("/img/add_gray_36.png");
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+.selected .uicon-add{
+  background-image: url("/img/add_active_36.png");
+}
+
+.uicon-schlist{
+  background-image: url("/img/schedule_gray_36.png");
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+.selected .uicon-schlist{
+  background-image: url("/img/schedule_active_36.png");
 }
