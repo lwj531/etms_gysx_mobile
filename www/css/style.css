@@ -3,7 +3,8 @@
 body, .ionic-body {
   color: #4e4e4e;
 }
-.bar .title,.bar-positive .button.button-clear{
+
+.bar .title, .bar-positive .button.button-clear {
   font-size: 15px;
 }
 
@@ -166,7 +167,8 @@ body, .ionic-body {
   -webkit-align-items: center;
   align-items: center;
 }
-.flex-between ,.schedule-week-row{
+
+.flex-between, .schedule-week-row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -180,6 +182,7 @@ body, .ionic-body {
   -webkit-align-items: center;
   align-items: center;
 }
+
 .flex-start {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -819,6 +822,7 @@ ul {
   left: 4px;
   top: 4px;
 }
+
 .home-schedule li.schedule-calledout .list-dot {
   height: 15px;
   width: 15px;
@@ -869,14 +873,14 @@ ul {
 }
 
 /*.home-schedule li.schedule-called .item-media + .item-inner:before {*/
-  /*background-color: #48d38e;*/
+/*background-color: #48d38e;*/
 /*}*/
 /*.home-schedule li.schedule-calledout .item-media + .item-inner:before {*/
-  /*background-color: #f2c221;*/
+/*background-color: #f2c221;*/
 /*}*/
 
 /*.home-schedule li.schedule-plan .item-media + .item-inner:before {*/
-  /*background-color: #50a5e8;*/
+/*background-color: #50a5e8;*/
 /*}*/
 
 .home-schedule li.list-item .item-media + .item-inner:after {
@@ -1168,7 +1172,7 @@ a {
   height: 54px;
   background-size: 45px;
   display: block;
-  top:0;
+  top: 0;
   left: 0;
   background-image: url("/img/store-icon.png");
   background-position: 0px 5px;
@@ -1207,7 +1211,7 @@ a {
   align-items: center;
 }
 
-.info-top .inf-top-right span{
+.info-top .inf-top-right span {
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1234,11 +1238,11 @@ a {
   text-align: center;
 }
 
-.info-bottom span{
+.info-bottom span {
   display: inline-block;
   background-color: #ffffff;
   width: 20px;
-  height:20px;
+  height: 20px;
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -1584,8 +1588,9 @@ ul.ins-detail .list-item .item-input input {
   height: 88px;
   padding: 0;
 }
-.has-subheader.top-135{
- top:135px;
+
+.has-subheader.top-135 {
+  top: 135px;
 }
 
 .bar.week-slide .week-title {
@@ -1593,7 +1598,8 @@ ul.ins-detail .list-item .item-input input {
   padding: 5px 15px;
   font-size: 13px;
 }
-.bar.week-slide .week-title li{
+
+.bar.week-slide .week-title li {
   width: 20px;
   text-align: center;
 }
@@ -1744,46 +1750,56 @@ input[type="text"].route-name-input.wide {
   font-size: 12px;
   color: #b5b5b5;
 }
-.schedule-title{
+
+.schedule-title {
 
 }
-.schedule-title .uicon.list-view{
+
+.schedule-title .uicon.list-view {
   background-image: url("/img/listview_gray_32.png");
   height: 21px;
   width: 25px;
   background-size: 21px;
   margin: 0 5px;
 }
-.schedule-title .uicon.map-view{
+
+.schedule-title .uicon.map-view {
   background-image: url("/img/mapview_gray_30.png");
   height: 25px;
   width: 25px;
   background-size: 24px;
   margin: 0 0 0 5px;
 }
-.schedule-title .selected .uicon.list-view{
+
+.schedule-title .selected .uicon.list-view {
   background-image: url("/img/listview_blue_32.png");
 }
-.schedule-title .selected .uicon.map-view{
+
+.schedule-title .selected .uicon.map-view {
   background-image: url("/img/mapview_blue_30.png");
 }
-.schedule-title + .crl-tabs{
-height: calc(100% - 44px);
+
+.schedule-title + .crl-tabs {
+  height: calc(100% - 44px);
   overflow: scroll;
 }
-.height-100{
+
+.height-100 {
   height: 100%;
 }
-.width-100{
+
+.width-100 {
   width: 100%;
 }
-.button-group{
+
+.button-group {
   height: 31px;
   width: 150px;
   display: inline-flex;
 }
-.button-group .group-button{
-width: 50%;
+
+.button-group .group-button {
+  width: 50%;
   height: 29px;
   line-height: 30px;
   border-left: none;
@@ -1797,41 +1813,49 @@ width: 50%;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
+
 .button-group .group-button.selected,
-.button-group .group-button.active{
+.button-group .group-button.active {
   background-color: #fff;
-  color:#419de7;
+  color: #419de7;
 }
-.bar-positive .button-group .button.activated{
-  background-color: #419de7;
-  border-color:#fff;
-  color:#fff;
+
+.bar-positive .button-group .button.activated {
+  background-color: #fff;
+  border-color: #fff;
+  color: #419de7;
 }
-.button-group .group-button:first-child{
+
+.button-group .group-button:first-child {
   border-left: 1px solid #ffffff;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
 }
 
-.button-group .group-button:last-child{
+.button-group .group-button:last-child {
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
 }
-.route-action-block.daily{
-  top:65px;
+
+.route-action-block.daily {
+  top: 65px;
 }
-.route-action-block.daily .route-action{
+
+.route-action-block.daily .route-action {
   width: 100%;
 }
-.sign-info{
+
+.sign-info {
   width: 92%;
   display: block;
 }
-.sign-info .route-action + .route-action{
+
+.sign-info .route-action + .route-action {
   margin-top: 10px;
 }
-.block-button{
-  border:1px solid;
+
+.block-button {
+  border: 1px solid;
   padding: 10px 0;
   background-color: rgba(255, 255, 255, 0.8);
   width: 30%;
@@ -1840,124 +1864,154 @@ width: 50%;
   border-radius: 4px;
 }
 
-.sign-time{
+.sign-time {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 12px 10px;
   width: 65%;
 }
-.sign-time .align-center{
-  color:#419de7;
+
+.sign-time .align-center {
+  color: #419de7;
   padding-left: 20px;
 }
-.sign-time img{
+
+.sign-time img {
   margin-right: 8px;
 }
-.block-button img{
+
+.block-button img {
   margin-right: 8px;
 }
-.block-button.plan{
+
+.block-button.plan {
   border-color: #419de7;
-  color:#419de7;
+  color: #419de7;
 }
-.block-button.actual{
+
+.block-button.actual {
   border-color: #26d07c;
   color: #26d07c;
 }
-.uicon-home{
-background-image: url("/img/home_gray_44.png");
+
+.uicon-home {
+  background-image: url("/img/home_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-home{
+
+.stick-highlight .uicon-home {
   background-image: url("/img/home_active_44.png");
 }
 
-.uicon-calendar{
-background-image: url("/img/calendar_gray_44.png");
+.uicon-calendar {
+  background-image: url("/img/calendar_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-calendar{
+
+.stick-highlight .uicon-calendar {
   background-image: url("/img/calendar_active_44.png");
 }
 
-.uicon-coaching{
-background-image: url("/img/coaching_gray_44.png");
+.uicon-coaching {
+  background-image: url("/img/coaching_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-coaching{
+
+.stick-highlight .uicon-coaching {
   background-image: url("/img/coaching_active_44.png");
 }
 
-.uicon-building{
-background-image: url("/img/building_gray_44.png");
+.uicon-building {
+  background-image: url("/img/building_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-building{
+
+.stick-highlight .uicon-building {
   background-image: url("/img/building_active_44.png");
 }
 
-.uicon-guide{
-background-image: url("/img/guide_gray_44.png");
+.uicon-guide {
+  background-image: url("/img/guide_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-guide{
+
+.stick-highlight .uicon-guide {
   background-image: url("/img/guide_active_44.png");
 }
 
-.uicon-folder{
-background-image: url("/img/folder_gray_44.png");
+.uicon-store {
+  background-image: url("/img/store_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-folder{
+
+.stick-highlight .uicon-store {
+  background-image: url("/img/store_active_44.png");
+}
+
+.uicon-folder {
+  background-image: url("/img/folder_gray_44.png");
+  height: 20px;
+  width: 20px;
+  background-size: 20px;
+}
+
+.stick-highlight .uicon-folder {
   background-image: url("/img/folder_active_44.png");
 }
 
-.uicon-map{
-background-image: url("/img/map_gray_44.png");
+.uicon-map {
+  background-image: url("/img/map_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-map{
+
+.stick-highlight .uicon-map {
   background-image: url("/img/map_active_44.png");
 }
 
-.uicon-setting{
-background-image: url("/img/setting_gray_44.png");
+.uicon-setting {
+  background-image: url("/img/setting_gray_44.png");
   height: 20px;
   width: 20px;
   background-size: 20px;
 }
-.stick-highlight .uicon-setting{
+
+.stick-highlight .uicon-setting {
   background-image: url("/img/setting_active_44.png");
 }
-.schedule-week-list{
+
+.schedule-week-list {
 
 }
+
 ul.schedule-week-list {
-background-color: transparent;
+  background-color: transparent;
 }
-.schedule-week-list .content-block-title{
-margin: 8px 15px;
+
+.schedule-week-list .content-block-title {
+  margin: 8px 15px;
   font-size: 13px;
 }
-.schedule-week-row{
-  font-size:12px;
+
+.schedule-week-row {
+  font-size: 12px;
 }
-.schedule-week-row .col-33{
+
+.schedule-week-row .col-33 {
   padding: 8px;
-  border-right:1px solid #f5f7fa;
+  border-right: 1px solid #f5f7fa;
   width: 33.333333333333333%;
   width: -webkit-calc((100% - 1px * 2) / 3);
   width: calc((100% - 1px * 2) / 3);
@@ -1965,13 +2019,16 @@ margin: 8px 15px;
   display: flex;
   align-self: stretch;
 }
-.schedule-week-row .col-40 .progress-block{
+
+.schedule-week-row .col-40 .progress-block {
   width: calc(100% - 22px);
 }
-.schedule-week-row .col-40 .progress-track{
-margin: 6px 0;
+
+.schedule-week-row .col-40 .progress-track {
+  margin: 6px 0;
 }
-.schedule-week-row .col-27{
+
+.schedule-week-row .col-27 {
   padding: 8px;
   width: 27%;
   width: -webkit-calc(27% - 1px);
@@ -1980,9 +2037,10 @@ margin: 6px 0;
   display: flex;
   align-self: stretch;
 }
-.schedule-week-row .col-40{
+
+.schedule-week-row .col-40 {
   padding: 8px;
-  border-right:1px solid #f5f7fa;
+  border-right: 1px solid #f5f7fa;
   width: 40%;
   width: -webkit-calc(40% - 1px);
   width: calc(40% - 1px);
@@ -1990,40 +2048,52 @@ margin: 6px 0;
   display: flex;
   align-self: stretch;
 }
-.schedule-week-row .col-40 .flex-between{
+
+.schedule-week-row .col-40 .flex-between {
   width: 100%;
 }
-.affair-dot{
+
+.affair-dot {
   width: 14px;
-  height:14px;
+  height: 14px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.affair-blue .affair-dot{
+
+.affair-blue .affair-dot {
   background-color: #419de7;
 }
 
-.affair-red .affair-dot{
+.affair-red .affair-dot {
   background-color: #e75a5a;
 }
-.affair-red div:first-child{
+
+.affair-red div:first-child {
   width: 5em;
   overflow: hidden;
   text-overflow: ellipsis;
-white-space: nowrap;
+  white-space: nowrap;
 }
 
-.affair-orange .affair-dot{
+.affair-orange .affair-dot {
   background-color: #faa437;
 }
 
-.affair-gray{
-  color:#b5b5b5;
+.affair-gray {
+  color: #b5b5b5;
 }
-.affair-gray .affair-dot{
+
+.affair-gray .affair-dot {
   background-color: #b5b5b5;
 }
-.bar.week-tap{
 
+.bar.week-tap {
+
+}
+
+.icon-button {
+  font-size: 14px;
+  line-height: 19px;
+  min-height: 21px;
 }

@@ -39,7 +39,7 @@ angular.module('main.ctrl', [])
       },
       {
         name: " 附近药店",
-        iconName: "map",
+        iconName: "store",
         state: "main.xx"
       },
       {

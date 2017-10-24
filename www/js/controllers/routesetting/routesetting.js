@@ -42,9 +42,9 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         });
         $scope.style = [
           {
-            url: "img/markerA.svg",
+            url: "img/GradeA-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(28, 28)
+            size: new AMap.Size(26, 30)
           },
           {
             url: "img/GradeB-icon.png",
@@ -52,25 +52,25 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
             size: new AMap.Size(26, 30)
           },
           {
-            url: "img/markerC_52.png",
+            url: "img/GradeC-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(28, 28)
+            size: new AMap.Size(26, 30)
           },
           //小图
           {
-            url: "img/markerA.svg",
+            url: "img/GradeA-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(20, 20)
+            size: new AMap.Size(26, 30)
           },
           {
             url: "img/GradeB-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 23)
+            size: new AMap.Size(26, 30)
           },
           {
-            url: "img/markerC_52.png",
+            url: "img/GradeC-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(20, 20)
+            size: new AMap.Size(26, 30)
           },
         ];
         $scope.mass = new AMap.MassMarks($scope.insdata, {
