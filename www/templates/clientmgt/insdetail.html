@@ -45,7 +45,10 @@
       </div>
       <div class="crl-tabs">
         <div class="crl-tab" ng-show="activeTab==1">
-          <div id="ins-map"></div>
+          <div class="map-block">
+            <div id="ins-map"></div>
+            <a class="button button-balanced button-small" ui-sref="main.skusort">修改坐标</a></div>
+          </div>
           <ul>
             <li class="list-item inverse">
               <div class="item-content">
@@ -87,8 +90,7 @@
           <ul>
             <li class="list-item multi-line" ng-repeat="item in memberList" ui-sref="main.clientedit">
               <div class="item-content item-link">
-                <div class="item-media"><span class="uicon-50"
-                                              ng-class="{'client-gender':(item.Gender==''||null),'client-gender-male':(item.Gender=='M'&& item.StatusEnum!='INACTIVE'),'client-gender-female':(item.Gender=='F'&& item.StatusEnum!='INACTIVE'),'client-gender-malelocked':(item.Gender=='M'&&item.StatusEnum!='INACTIVE'),'client-gender-femalelocked':(item.Gender=='F'&&item.StatusEnum!='INACTIVE')}"></span>
+                <div class="item-media"><span class="uicon-50 {{getAvatarClass(item)}}"></span>
                 </div>
                 <div class="item-inner">
                   <div class="item-title-row">
