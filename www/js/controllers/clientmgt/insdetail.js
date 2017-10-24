@@ -18,7 +18,7 @@ angular.module('insdetail.ctrl', ['client.srv'])
       $scope.staff = staff;
       $scope.showstore = !(staff.Roles.indexOf('CCR_REP') != -1);
       //根据传来的insId获取机构信息
-      clientsrv.getins($stateParams.insid).then(function (data) {
+      clientsrv.getins($stateParams.insId).then(function (data) {
         $scope.currentIns = data;
         $scope.getclients();
       });
@@ -41,6 +41,10 @@ angular.module('insdetail.ctrl', ['client.srv'])
     });
     //打开新增客户窗体
     $scope.addClient = function () {
+      $scope.client = {
+        Gender: '',
+        Status: 'ACTIVE'
+      };
       $scope.addClientModal.show();
     };
     //关闭新增modal

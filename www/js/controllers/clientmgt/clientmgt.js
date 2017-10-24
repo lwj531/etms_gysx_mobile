@@ -7,8 +7,6 @@ angular.module('clientmgt.ctrl', ['routesetting.srv'])
       Key:"InstitutionName",
       Value:""
     };
-
-
     $scope.search = function(){
       var model =[$scope.searchmodel];
       routesettingsrv.searchinsnoloading(model).then(function (data) {
@@ -20,8 +18,4 @@ angular.module('clientmgt.ctrl', ['routesetting.srv'])
     $scope.$watch('searchmodel.Value',function(newValue,oldValue, scope){
       $scope.search();
     });
-
-
-
-
   });
