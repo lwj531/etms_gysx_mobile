@@ -11,19 +11,23 @@
   </div>
 
   <ion-content class="has-header">
+    <!--编辑信息-->
     <div class="bg-white">
       <ul class="ins-detail">
         <li class="list-item">
           <div class="item-content">
-            <div class="item-media"><span class="client-gender" ng-class="{'client-gender':gender=='none','client-gender-male':gender=='male'&&!clientLocked,'client-gender-female':gender=='female'&&!clientLocked,'client-gender-malelocked':gender=='male'&&clientLocked,'client-gender-femalelocked':gender=='female'&&clientLocked,}"></span></div>
+            <div class="item-media"><span class="client-gender {{avatarClass}}"></span></div>
             <div class="item-inner" style="padding-right: 0;padding-bottom: 0;">
               <div class="" style="width: 100%;">
                 <div class="input-row">
+                  <!--只读状态input加readonly-->
                   <input type="text" maxlength="10" placeholder="客户姓名">
                 </div>
+                <!--只读状态gender-radio 这行加disabled-->
                 <div class="flex-row gender-radio">
-                  <div class="col-40"><span class="gender-item male" ng-class="{'selected':gender=='male'}" ng-click="gender='male'"><span class="uicon uicon-gender"></span> 男</span></div>
-                  <div class="col-60"><span class="gender-item female" ng-class="{'selected':gender=='female'}" ng-click="gender='female'"><span class="uicon uicon-gender"></span>女</span></div>
+                  <div class="col-50" ng-repeat="item in Genders" ng-click="changeGender(item)">
+                    <span class="gender-item {{item.Class}}"  ng-class="{selected:item.Code==client.Gender}"><span class="uicon uicon-gender"></span> {{item.Name}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -55,8 +59,9 @@
         </li>
       </ul>
       <div class="flex-center" style="padding: 20px;">
-        <button class="button icon-left ion-ios-locked button-lock" ng-show="!clientLocked" ng-click="clientLocked=true">冻结客户</button>
-        <button class="button icon-left ion-ios-unlocked button-unlock" ng-show="clientLocked" ng-click="clientLocked=false">解除冻结</button>
+        <div ng-repeat-start="item in Status"></div>
+        <button class="button icon-left ion-ios-locked button-lock" ng-class="{'ion-ios-locked button-lock':item.Code=='INACTIVE','ion-ios-unlocked button-unlock':item.Code=='ACTIVE'}" ng-show="client.Status!=item.Code" ng-click="lockClient(item)">{{item.Name}}</button>
+        <div ng-repeat-end></div>
       </div>
     </div>
   </ion-content>

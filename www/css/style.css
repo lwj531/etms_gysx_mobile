@@ -1354,7 +1354,9 @@ ul.ins-detail .list-item .item-inner {
   padding-bottom: 14px;
   font-size: 15px;
 }
-
+ul.ins-detail input[readonly]:not(.cloned-text-input){
+  background-color: #fff;
+}
 .input-row {
   min-height: 48px;
   width: 100%;

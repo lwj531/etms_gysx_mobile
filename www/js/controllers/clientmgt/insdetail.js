@@ -46,6 +46,38 @@ angular.module('insdetail.ctrl', ['client.srv'])
     };
 
 
+    $scope.client={
+      Gender:'',
+      Status:'ACTIVE'
+    };
+    $scope.Genders=[{Code:'M',Name:'男',Class:'male'},{Code:'F',Name:'女',Class:'female'}];
+    $scope.Status=[{Code:'ACTIVE',Name:'解除冻结'},{Code:'INACTIVE',Name:'冻结客户'}];
+    //头像class
+    $scope.avatarClass ="";
+
+    $scope.$watch("client.Gender + client.Status",function(newValue,oldValue, scope){{
+      if($scope.client.Gender==""){
+        $scope.avatarClass ="client-gender";
+      }
+      else if($scope.client.Gender=="M"){
+        $scope.avatarClass =$scope.client.Status=="INACTIVE"?"client-gender-malelocked":"client-gender-male";
+      }
+      else if($scope.client.Gender=="F"){
+        $scope.avatarClass =$scope.client.Status=="INACTIVE"?"client-gender-femalelocked":"client-gender-female";
+      }
+
+    }});
+    //选择性别
+    $scope.changeGender=function (gender) {
+      $scope.client.Gender=gender.Code;
+    }
+    //冻结客户
+    $scope.lockClient =function(status){
+      $scope.client.Status=status.Code;
+    }
+
+
+
 
 
 
