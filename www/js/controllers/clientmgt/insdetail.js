@@ -1,10 +1,28 @@
 angular.module('insdetail.ctrl', [])
-  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams) {
+  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams,$ionicModal) {
     $scope.terminalList = [];
     $scope.memberList = [];
     console.log($stateParams.insid);
 
+    $ionicModal.fromTemplateUrl('/templates/clientmgt/clientedit.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modalSendInfo = modal;
+    });
+    $scope.openInfoModal = function() {
+      $scope.modalSendInfo.show();
+    };
+    $scope.closeInfoModal = function() {
+      $scope.modalSendInfo.hide();
+    };
+    // //当我们用到模型时，清除它！
+    $scope.$on('$destroy', function() {
+      $scope.modalSendInfo.remove();
+    });
+$scope.showClientDetail=function(){
 
+}
 
     for (var i = 0; i < 20; i++) {
       $scope.terminalList.push({name: 'xxxxxxxxxxxxxx大药房', icon: 'A', address: 'xx路xx街12号'}, {

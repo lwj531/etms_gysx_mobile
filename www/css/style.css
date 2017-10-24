@@ -3,7 +3,10 @@
 body, .ionic-body {
   color: #4e4e4e;
 }
-
+.disabled, [disabled] {
+  opacity: .55;
+  pointer-events: none;
+}
 .bar .title, .bar-positive .button.button-clear {
   font-size: 15px;
 }
@@ -2089,7 +2092,7 @@ ul.schedule-week-list {
 }
 
 .bar.week-tap {
-
+background-color: #fff;
 }
 
 .icon-button {

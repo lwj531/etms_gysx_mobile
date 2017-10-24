@@ -100,11 +100,11 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         controller: "InsDetailCtrl"
       })
       //编辑客户
-      .state('main.clientedit', {
-        url: '/clientedit',
-        templateUrl: "templates/clientmgt/clientedit.html",
-        controller: "ClientEditCtrl"
-      })
+      // .state('main.clientedit', {
+      //   url: '/clientedit',
+      //   templateUrl: "templates/clientmgt/clientedit.html",
+      //   controller: "ClientEditCtrl"
+      // })
       //SKU排序
       .state('main.skusort', {
         url: '/skusort',
