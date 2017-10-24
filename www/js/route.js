@@ -11,7 +11,6 @@ angular.module('route', [
   'dailymgt.ctrl',
   'clientmgt.ctrl',
   'insdetail.ctrl',
-  // 'clientedit.ctrl',
   'skusort.ctrl',
   'schedulemgt.ctrl',
   //service

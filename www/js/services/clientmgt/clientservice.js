@@ -16,4 +16,12 @@ angular.module("client.srv", ["http.srv"])
     this.saveclient=function(model){
       return httpsrv.service("/api/Client/SaveClient/",model,"post");
     };
+    //获取门店的SKU
+    this.getskus=function(insId){
+      return httpsrv.service("/api/Institution/GetInstitutionSkuSort/"+ insId,{},"get");
+    };
+    //保存门店sku排序
+    this.saveSkuSort=function(model){
+      return httpsrv.service("/api/Institution/SaveInstitutionSkuSort/",model,"post");
+    };
     }]);

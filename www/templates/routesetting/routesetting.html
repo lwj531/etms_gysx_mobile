@@ -80,7 +80,7 @@
       <div class="route-action">
         <div class="route-action-bar">
           <button ng-click="deleteroute()" class="button button-clear button-assertive button-thin">删除</button>
-          <input type="text" ng-model="route.name" placeholder="请输入路线名称" maxlength="5" class="route-name-input"/>
+          <input type="text" ng-model="currentRoute.LineName" placeholder="请输入路线名称" maxlength="5" class="route-name-input"/>
           <button class="button button-positive button-thin" ng-show="!routeedit" ng-click="showrouteedit()">编辑</button>
           <button class="button button-stable button-thin" ng-show="routeedit" ng-click="closerouteedit()">取消</button>
           <button class="button button-positive button-thin" ng-show="routeedit" ng-click="updateroute()">保存</button>

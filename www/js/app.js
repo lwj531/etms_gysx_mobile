@@ -95,19 +95,13 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //机构详情
       .state('main.insdetail', {
-        url: '/insdetail/:insid',
+        url: '/insdetail/:insId',
         templateUrl: "templates/clientmgt/insdetail.html",
         controller: "InsDetailCtrl"
       })
-      //编辑客户
-      // .state('main.clientedit', {
-      //   url: '/clientedit',
-      //   templateUrl: "templates/clientmgt/clientedit.html",
-      //   controller: "ClientEditCtrl"
-      // })
       //SKU排序
       .state('main.skusort', {
-        url: '/skusort',
+        url: '/skusort/:insId',
         templateUrl: "templates/clientmgt/skusort.html",
         controller: "SKUSortCtrl"
       })
