@@ -159,14 +159,34 @@ angular.module('main.ctrl', [])
       });
     }
 
-    $scope.$on('$destroy', deregister)
+    $scope.$on('$destroy', deregister);
 
     //提示信息
-    $rootScope.toast = function (message) {
+    $rootScope.toast = function (message,callback) {
       $scope.message = message;
       $scope.showtoast = true;
       $timeout(function () {
         $scope.showtoast = false;
+        if(callback!=null){
+          callback();
+        }
+      }, 2000);
+    }
+    //自定义弹窗
+    $rootScope.popup = function(message,callback){
+      if(message==null){
+        message="操作成功";
+      }
+      var _popup = $ionicPopup.show({
+        template: '<p class="useralert">'+ message +"</p>",
+        title: '提示',
+        scope: $scope,
+      });
+      $timeout(function() {
+        _popup.close();
+        if(callback!=null){
+          callback();
+        }
       }, 2000);
     }
   });

@@ -1,5 +1,5 @@
 angular.module('insdetail.ctrl', ['client.srv'])
-  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicModal, $stateParams,$rootScope, clientsrv) {
+  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicModal,$stateParams,$rootScope,clientsrv,$timeout) {
     $scope.terminalList = [];
     //门店人员
     $scope.memberList = [];
@@ -77,7 +77,6 @@ angular.module('insdetail.ctrl', ['client.srv'])
     };
     $scope.$watch("client.Gender + client.Status",function(newValue,oldValue, scope){{
       $scope.avatarClass = $scope.getAvatarClass($scope.client);
-
     }});
     //选择性别
     $scope.changeGender = function (gender) {
@@ -97,12 +96,12 @@ angular.module('insdetail.ctrl', ['client.srv'])
         $scope.client.Institution= $scope.currentIns;
         clientsrv.saveclient($scope.client).then(function (status) {
           if (status) {
-            $rootScope.toast("操作成功");
-            $scope.closeAddClientModal();
+            $rootScope.popup("操作成功",function(){
+              $scope.closeAddClientModal();
+            });
           } else {
-            $rootScope.toast("操作失败");
+            $rootScope.popup("操作失败");
           }
-
         });
       }
     };
