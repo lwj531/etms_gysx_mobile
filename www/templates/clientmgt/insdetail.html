@@ -14,10 +14,10 @@
           <div class="item-media"><span class="uicon uicon-blankmarkerA">A</span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">机构名称 (机构等级)</div>
+              <div class="item-title">{{currentIns.InstitutionName + '('+currentIns.InstitutionPriority+')'}}</div>
             </div>
             <div class="flex-row align-end padding-top">
-              <div class="col-70 color-gray">xxxxxxxxxxxx市xx区xx街1号</div>
+              <div class="col-70 color-gray">{{currentIns.Address}}</div>
               <div class="col-30 flex-end">
                 <a class="button button-outline button-energized button-small" ui-sref="main.skusort">SKU排序</a></div>
             </div>
@@ -37,7 +37,7 @@
                   ng-click="activeTab=2">人员信息
           </button>
         </div>
-        <div class="flex-center">
+        <div class="flex-center" ng-show="showstore">
           <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==3}"
                   ng-click="activeTab=3">终端信息
           </button>
@@ -50,7 +50,7 @@
             <li class="list-item inverse">
               <div class="item-content">
                 <div class="item-inner">
-                  <div class="item-title">90码</div>
+                  <div class="item-title">{{currentIns.InstitutionID}}</div>
                   <div class="item-after"></div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-title">联系电话</div>
-                  <div class="item-after">021-23232332</div>
+                  <div class="item-after">{{currentIns.Phone}}</div>
                 </div>
               </div>
             </li>
@@ -67,7 +67,7 @@
               <div class="item-content">
                 <div class="item-inner">
                   <div class="item-title">药店类型</div>
-                  <div class="item-after">单体门店</div>
+                  <div class="item-after">{{currentIns.InstitutionTypeName }}</div>
                 </div>
               </div>
             </li>
@@ -79,7 +79,7 @@
               <div class="item-inner">
                 <div class="item-title">该机构人员（{{memberList.length}}）</div>
                 <div class="item-after">
-                  <a class="button button-outline button-positive button-small">添加客户</a>
+                  <a class="button button-outline button-positive button-small" ng-click="addClient()">添加客户</a>
                 </div>
               </div>
             </div>
@@ -87,21 +87,24 @@
           <ul>
             <li class="list-item multi-line" ng-repeat="item in memberList" ui-sref="main.clientedit">
               <div class="item-content item-link">
-                <div class="item-media"><span class="uicon-50" ng-class="{'client-gender':(item.gender==''||null),'client-gender-male':item.gender=='m'&&!item.lock,'client-gender-female':item.gender=='f'&&!item.lock,'client-gender-malelocked':item.gender=='m'&&item.lock,'client-gender-femalelocked':item.gender=='f'&&item.lock}"></span></div>
+                <div class="item-media"><span class="uicon-50"
+                                              ng-class="{'client-gender':(item.Gender==''||null),'client-gender-male':(item.Gender=='M'&& item.StatusEnum!='INACTIVE'),'client-gender-female':(item.Gender=='F'&& item.StatusEnum!='INACTIVE'),'client-gender-malelocked':(item.Gender=='M'&&item.StatusEnum!='INACTIVE'),'client-gender-femalelocked':(item.Gender=='F'&&item.StatusEnum!='INACTIVE')}"></span>
+                </div>
                 <div class="item-inner">
                   <div class="item-title-row">
-                    <div class="item-title"><span>{{item.name}}</span><span class="space-stick">|</span><span>{{item.gender=='f'?'男':'女'}}</span></div>
+                    <div class="item-title"><span>{{item.ClientName}}</span><span class="space-stick">|</span><span>{{item.Gender=='F'?'男':'女'}}</span>
+                    </div>
                   </div>
                   <div class="flex-row color-gray text-row">
-                    <div class="col-50 align-center"><img src="img/job_gray_48.png" width="20">{{item.job}}</div>
-                    <div class="col-50 align-center"><img src="img/cellphone_gray_48.png" width="20">{{item.tel}}</div>
+                    <div class="col-50 align-center"><img src="img/job_gray_48.png" width="20">{{item.Titile}}</div>
+                    <div class="col-50 align-center"><img src="img/cellphone_gray_48.png" width="20">{{item.Phone}}</div>
                   </div>
                 </div>
               </div>
             </li>
           </ul>
         </div>
-        <div class="crl-tab" ng-show="activeTab==3">
+        <div class="crl-tab" ng-show="activeTab==3" ng-show="showstore">
           <div class="list-item inverse no-line">
             <div class="item-content">
               <div class="item-inner">

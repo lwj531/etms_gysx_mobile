@@ -75,7 +75,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/home/msgcenter.html",
         controller: "MsgcenterCtrl"
       })
-      //日程管理
+      //日程管理(测试)
       .state('main.dailymgt', {
         url: '/dailymgt',
         templateUrl: "templates/dailymgt.html",

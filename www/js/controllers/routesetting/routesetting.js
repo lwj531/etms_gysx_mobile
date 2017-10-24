@@ -93,7 +93,6 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     $scope.currentins;
     //加入路线图
     $scope.addinline = function () {
-      console.log('wqqqq12222222222');
       //新增到路线篮子或者编辑的路线中
       if ($scope.routeedit) {
         if ($scope.currentRoute.Institutions.indexOf($scope.currentins) == -1) {
