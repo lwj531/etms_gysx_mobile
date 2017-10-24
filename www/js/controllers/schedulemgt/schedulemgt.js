@@ -1,8 +1,23 @@
 angular.module('schedulemgt.ctrl', [])
-  .controller('ScheduleMgtCtrl', function ($scope) {
+  .controller('ScheduleMgtCtrl', function ($scope,$ionicBackdrop) {
+   //进度条百分比
     $scope.progressNum = 40+'%';
     $scope.progress = {"width":$scope.progressNum};
-    //原生js写法
+
+    //日程管理初始化tab 打开日视图  (dayView | weekView)
+    $scope.viewActive='weekView';
+    //日视图里切列表和地图 dayInfoTab：(list | map )
+    $scope.dayInfoTab='list';
+    //周视图内的实际和计划tab初始化 (actual | plan)
+    $scope.statusTab='plan';
+
+    $scope.action = function() {
+      $ionicBackdrop.retain();
+    };
+    $scope.releaseMask=function(){
+      $ionicBackdrop.release();
+    }
+    //日历的原生js写法--------------/
     var cells = document.getElementById('weekDay').getElementsByTagName('li');
     var clen = cells.length;
     var currentFirstDate;
@@ -39,8 +54,10 @@ angular.module('schedulemgt.ctrl', [])
       }
     };
     setDate(new Date());
+    //日历的原生js写法==============/
 
-    //angular写法
+
+    //日历的angular写法--------------/
     $scope.week = [];
     $scope.weekChange = [];
     $scope.today = new Date();
@@ -51,6 +68,7 @@ angular.module('schedulemgt.ctrl', [])
       $scope.week.push(i == 0 ? new Date($scope.weekStartDay.setDate($scope.weekStartDay.getDate() + 0)) : new Date($scope.weekStartDay.setDate($scope.weekStartDay.getDate() + 1)));
       $scope.weekChange[i] = $scope.week[i].getDate();
     }
+    //日历的angular写法==============/
 
     $scope.NextWeek = function () {
       for (var n = 0; n < 7; n++) {
