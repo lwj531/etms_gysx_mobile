@@ -1,40 +1,53 @@
 angular.module('insdetail.ctrl', ['client.srv'])
-  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicPopup,$stateParams,clientsrv) {
+  .controller('InsDetailCtrl', function ($scope, $ionicBackdrop, $ionicModal,$stateParams,clientsrv) {
     $scope.terminalList = [];
+    //门店人员
     $scope.memberList = [];
     //是否显示终端信息
     $scope.showstore=false;
-    //当前人员的信息
+    //初始化
     clientsrv.getcurrentstaff().then(function (staff) {
+      //当前人员的信息
       $scope.staff = staff;
       $scope.showstore =!(staff.Roles.indexOf('CCR_REP')!=-1);
       //根据传来的insId获取机构信息
       clientsrv.getins($stateParams.insid).then(function (data) {
         $scope.currentIns = data;
+         //获取该机构下的人员
+        clientsrv.getclients($stateParams.insid).then(function (clients) {
+          $scope.memberList = clients;
+
+        });
       });
     });
+    //新增客户窗体
+    $ionicModal.fromTemplateUrl('templates/modal/createclient.html', {
+      scope: $scope,
+      animation: 'slide-in-up',
+      hardwareBackButtonClose: false
+    }).then(function (modal) {
+      $scope.addClientModal = modal;
+    });
+    //查看、编辑客户信息窗体
+    $ionicModal.fromTemplateUrl('templates/modal/clientinfo.html', {
+      scope: $scope,
+      animation: 'slide-in-up',
+      hardwareBackButtonClose: false
+    }).then(function (modal) {
+      $scope.clientInfoModal = modal;
+    });
+    //打开新增客户窗体
+    $scope.addClient = function () {
+      $scope.addClientModal.show();
+    };
+    //查看客户信息（查看、编辑）
+    $scope.viewClient =function(){
+      $scope.clientInfoModal.show();
+    };
 
 
-    for (var i = 0; i < 20; i++) {
-      $scope.terminalList.push({name: 'xxxxxxxxxxxxxx大药房', icon: 'A', address: 'xx路xx街12号'}, {
-        name: 'xxxxxxx大药房',
-        icon: 'B',
-        address: 'xxxxx路xxx街12号'
-      }, {name: 'xxxxxxxxxxxxx大药房', icon: 'C', address: 'xx路xx街12号'});
-      $scope.memberList.push({name: '王思聪', gender: 'm', job: '职务', tel: '13234940596', lock: true}, {
-        name: '王思聪',
-        gender: 'm',
-        job: '职务',
-        tel: '13234940596',
-        lock: false
-      }, {name: '王思聪', gender: 'f', job: '职务', tel: '13234940596', lock: false}, {
-        name: '王思聪',
-        gender: 'f',
-        job: '职务',
-        tel: '13234940596',
-        lock: true
-      });
-    }
+
+
 
     $scope.showPopup = function () {
       var coordinatePopup = $ionicPopup.show({

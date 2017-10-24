@@ -8,4 +8,8 @@ angular.module("client.srv", ["http.srv"])
     this.getcurrentstaff=function(){
       return httpsrv.service("/api/Staff/GetCurrentStaffInfo/",{},"get");
     };
+    //获取门店人员信息
+    this.getclients=function(insId){
+      return httpsrv.service("/api/Client/GetClients/"+insId,{},"get");
+    };
     }]);
