@@ -32,9 +32,9 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     //初始化完成后执行
     $scope.$on('amap', function (errorType, data) {
       if (data == "mapcompleted") {
-        //点击地图关闭编辑窗口
         $scope.map.clearMap();
         $scope.map.clearInfoWindow();
+        //点击地图关闭编辑窗口
         $scope.map.on('click', function (e) {
           //通知关闭详细
           $scope.$broadcast("close", "detail");

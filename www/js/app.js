@@ -97,7 +97,8 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       .state('main.insdetail', {
         url: '/insdetail/:insId',
         templateUrl: "templates/clientmgt/insdetail.html",
-        controller: "InsDetailCtrl"
+        controller: "InsDetailCtrl",
+        cache: false
       })
       //SKU排序
       .state('main.skusort', {
@@ -115,7 +116,8 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       .state('main.routesetting', {
         url: '/routesetting',
         templateUrl: "templates/routesetting/routesetting.html",
-        controller: "RouteSettingCtrl"
+        controller: "RouteSettingCtrl",
+        cache: false
       })
       .state('carinfo', {
         url: '/carinfo',
