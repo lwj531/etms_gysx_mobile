@@ -2274,3 +2274,87 @@ background-color: #fff;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.45);
 }
+.img-test .col-33{
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+background-color: #fff;
+}
+.testimg-1{
+  background-image: url("img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+}
+.testimg-2{
+  background-image: url("/img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+}
+.testimg-3{
+  background-image: url("./img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+}
+.testimg-4{
+  background-image: url("../img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+}
+.testimg-5{
+  background-image: url("/../img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+}
+.testimg-6{
+  background-image: url("./../img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+}
+
+.testimg-11{
+  background-image: url("img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+display: block;
+}
+.testimg-21{
+  background-image: url("/img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+  display: block;
+}
+.testimg-31{
+  background-image: url("./img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+  display: block;
+}
+.testimg-41{
+  background-image: url("../img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+  display: block;
+}
+.testimg-51{
+  background-image: url("/../img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+  display: block;
+}
+.testimg-61{
+  background-image: url("./../img/avatar_f.png");
+  height: 50px;
+  width: 50px;
+  background-size: 50px;
+  display: block;
+}
