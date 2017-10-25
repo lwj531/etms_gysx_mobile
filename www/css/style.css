@@ -2269,10 +2269,19 @@ background-color: #fff;
 }
 .mask{
   z-index: 21;
-  display: block;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.45);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: 0.1s opacity linear;
+  transition: 0.1s opacity linear;
+}
+
+.mask.active{
+  opacity:1;
 }
 .img-test .col-33{
   border-right: 1px solid #ccc;

@@ -459,7 +459,7 @@
       </div>
     </div>
   </ion-content>
-  <div class="mask" ng-show="planReport"></div>
+  <div class="mask" ng-if="planReport" ng-class="{'active':planReport}"></div>
   <div class="footer-block" ng-show="planReport">
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray">取消</button>

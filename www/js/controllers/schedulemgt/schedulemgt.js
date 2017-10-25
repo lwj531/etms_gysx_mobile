@@ -15,7 +15,7 @@ angular.module('schedulemgt.ctrl', [])
 
     $scope.action = function() {
       $scope.planReport=true;
-      $ionicBackdrop.retain();
+      //$ionicBackdrop.retain();
     };
     $scope.releaseMask=function(){
       $ionicBackdrop.release();
