@@ -11,7 +11,8 @@ angular.module('insdetail.ctrl', ['client.srv'])
       clientsrv.getclients($scope.currentIns.InstitutionID).then(function (clients) {
         $scope.memberList = clients;
       });
-    }
+    };
+
     //初始化
     clientsrv.getcurrentstaff().then(function (staff) {
       //当前人员的信息
@@ -20,6 +21,8 @@ angular.module('insdetail.ctrl', ['client.srv'])
       //根据传来的insId获取机构信息
       clientsrv.getins($stateParams.insId).then(function (data) {
         $scope.currentIns = data;
+        //通知地图数据已获取
+        $scope.$broadcast("amap", "datacompleted");
         $scope.getclients();
       });
     });

@@ -12,7 +12,11 @@ angular.module('clientmgt.ctrl', ['routesetting.srv'])
       routesettingsrv.searchinsnoloading(model).then(function (data) {
         $scope.clientList = data;
       });
+    };
+    $scope.cannel = function(){
+      $scope.searchmodel.Value="";
     }
+
     //第一次打开页面 默认搜索一次
     $scope.search();
     $scope.$watch('searchmodel.Value',function(newValue,oldValue, scope){
