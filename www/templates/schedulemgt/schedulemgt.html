@@ -459,7 +459,8 @@
       </div>
     </div>
   </ion-content>
-  <div class="footer-block">
+  <div class="mask" ng-show="planReport"></div>
+  <div class="footer-block" ng-show="planReport">
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray">取消</button>
       <div class="h1 title">周一(9/21)</div>
@@ -487,7 +488,7 @@
            <!--点击选中，在选中的li的item-media上添加checked-->
            <div class="item-media checked"><span class="uicon radio-button"></span></div>
            <div class="item-inner">
-             <div class="item-title ellipsis"><img src="img/route_green_44.png" width="18"> 路线名称啊</div>
+             <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18"> 路线名称啊</div>
              <div class="item-after color-blue">编辑</div>
            </div>
          </div>
@@ -498,9 +499,9 @@
   <div class="fab-week align-center" ng-click="action()">
     <div>
       <div class="flex-center">
-        <img src="img/seal_blue_44.png" width="24">
+        <img src="img/seal_blue_124.png" width="80">
       </div>
-      <div>计划报告</div>
+      <!--<div>计划报告</div>-->
     </div>
   </div>
 </ion-view>

@@ -11,12 +11,15 @@ angular.module('schedulemgt.ctrl', [])
     //周视图内的实际和计划tab初始化 (actual | plan)
     $scope.statusTab='plan';
 
+    $scope.planReport=false;
+
     $scope.action = function() {
+      $scope.planReport=true;
       $ionicBackdrop.retain();
     };
     $scope.releaseMask=function(){
       $ionicBackdrop.release();
-    }
+    };
     //日历的原生js写法--------------/
     var cells = document.getElementById('weekDay').getElementsByTagName('li');
     var clen = cells.length;
