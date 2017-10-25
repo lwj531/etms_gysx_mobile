@@ -3,6 +3,10 @@
 body, .ionic-body {
   color: #4e4e4e;
 }
+.bar .button.button-clear{
+  font-size: 13px;
+}
+
 .disabled, [disabled] {
   opacity: .55;
   pointer-events: none;
@@ -241,7 +245,7 @@ body, .ionic-body {
   text-overflow: ellipsis;
   font-size: 14px;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 14px;
   color: #919192;
   margin: 15px 15px 10px;
 }
@@ -435,7 +439,7 @@ ul {
 }
 
 .list-item .item-title img {
-  margin-right: 8px;
+  margin-right: 5px;
 }
 
 .list-item .item-title.ellipsis {
@@ -1797,12 +1801,18 @@ input[type="text"].route-name-input.wide {
   width: 100%;
 }
 
-.button-group {
-  height: 31px;
-  width: 150px;
-  display: inline-flex;
+.width-90 {
+  width: 90%;
 }
 
+.button-group {
+  height: 31px;
+  width: 100%;
+  display: inline-flex;
+}
+.bar-positive .button-group{
+  width:150px;
+}
 .button-group .group-button {
   width: 50%;
   height: 29px;
@@ -1861,7 +1871,7 @@ input[type="text"].route-name-input.wide {
 
 .block-button {
   border: 1px solid;
-  padding: 10px 0;
+  padding: 6px 0;
   background-color: rgba(255, 255, 255, 0.8);
   width: 30%;
   -webkit-border-radius: 4px;
@@ -1871,7 +1881,7 @@ input[type="text"].route-name-input.wide {
 
 .sign-time {
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 12px 10px;
+  padding: 7px 10px;
   width: 65%;
 }
 
@@ -2034,7 +2044,7 @@ ul.schedule-week-list {
 }
 
 .schedule-week-row .col-27 {
-  padding: 8px;
+  padding: 6px;
   width: 27%;
   width: -webkit-calc(27% - 1px);
   width: calc(27% - 1px);
@@ -2049,6 +2059,14 @@ ul.schedule-week-list {
   width: 40%;
   width: -webkit-calc(40% - 1px);
   width: calc(40% - 1px);
+  background-color: #fff;
+  display: flex;
+  align-self: stretch;
+}
+.schedule-week-row .col-73 {
+  padding: 8px;
+  border-right: 1px solid #f5f7fa;
+  width: 73%;
   background-color: #fff;
   display: flex;
   align-self: stretch;
@@ -2072,13 +2090,15 @@ ul.schedule-week-list {
 
 .affair-red .affair-dot {
   background-color: #e75a5a;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  margin-left: 5px;
 }
 
 .affair-red div:first-child {
-  width: 5em;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .affair-orange .affair-dot {
@@ -2152,4 +2172,98 @@ background-color: #fff;
 
 .selected .uicon-schlist{
   background-image: url("/img/schedule_active_36.png");
+}
+.schedule-week-row .col-73 .width-50 img{
+  margin-right: 3%;
+}
+.schedule-week-row .col-73 .width-50{
+  width: 50%;
+}
+[class*=ins] .dot{
+  width: 11px;
+  height: 11px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-right: 3px;
+}
+[class*=ins] .count{
+  width: 20px;
+  display: inline-block;
+}
+.insA .dot{
+  background-color: #045abe;
+}
+
+.insB .dot{
+  background-color: #52b0ec;
+}
+
+.insC .dot{
+  background-color: #50e3c2;
+}
+.footer-block{
+  z-index: 12;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 300px;
+  width: 100%;
+  background-color: #fff;
+}
+.fab-week{
+  background-color: #fff;
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  font-size: 12px;
+  padding: 12px 10px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.schedule-btg {
+  position: relative;
+  top:53px;
+  height: calc(100% - 63px);
+}
+.schedule-btg .button-group .button.group-button {
+  font-size: 12px;
+  min-height: 30px;
+  height: 30px;
+  background-color: #fff;
+  color: #4190e7;
+  border-color: #419de7;
+}
+.schedule-btg .button-group .button.group-button.selected {
+  background-color: #4190e7;
+  color: #fff;
+}
+.schedule-bottom-list{
+  margin-top: 3px;
+  height: calc(100% - 30px);
+  overflow: scroll;
+}
+.radio-button{
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border:1px solid #ddd;
+  position: relative;
+}
+
+.checked .radio-button:after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 10px;
+  width: 10px;
+  border-radius: 9px;
+  background-color: #419de7;
+  top: 7px;
+  left: 7px;
 }
