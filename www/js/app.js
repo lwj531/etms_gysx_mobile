@@ -87,6 +87,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/schedulemgt/schedulemgt.html",
         controller: "ScheduleMgtCtrl"
       })
+      //日程管理编辑路线
+      .state('main.editroute', {
+        url: '/editroute',
+        templateUrl: "templates/schedulemgt/editroute.html",
+        controller: "EditRouteCtrl"
+      })
       //客户管理
       .state('main.clientmgt', {
         url: '/clientmgt',

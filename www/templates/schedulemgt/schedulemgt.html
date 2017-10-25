@@ -128,8 +128,8 @@
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
                         <div class="col-33 flex-end">
-                          <a class="button button-clear button-stable button-small flex-center icon-button"><img
-                            src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                          <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                            src="img/search_gray_30.png" width="18">查看</a></div>
                       </div>
                     </div>
                   </div>
@@ -146,8 +146,8 @@
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
                         <div class="col-33 flex-end">
-                          <a class="button button-clear button-stable button-small flex-center icon-button"><img
-                            src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                          <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                            src="img/search_gray_30.png" width="18">查看</a></div>
                       </div>
                     </div>
                   </div>
@@ -164,8 +164,8 @@
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
                         <div class="col-33 flex-end">
-                          <a class="button button-clear button-stable button-small flex-center icon-button"><img
-                            src="img/search_gray_30.png" width="18"><span style="margin-left: 5px;">查看</span></a></div>
+                          <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                            src="img/search_gray_30.png" width="18">查看</a></div>
                       </div>
                     </div>
                   </div>
@@ -181,8 +181,8 @@
                         <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
                         <div class="col-33 flex-end">
                           <a
-                            class="button button-clear button-stable button-small flex-center color-blue icon-button"><img
-                            src="img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a>
+                            class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
+                            src="img/entrance_blue_30.png" width="18">拜访</a>
                         </div>
                       </div>
                     </div>
@@ -199,8 +199,8 @@
                         <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
                         <div class="col-33 flex-end">
                           <a
-                            class="button button-clear button-stable button-small flex-center color-blue icon-button"><img
-                            src="img/entrance_blue_30.png" width="18"><span style="margin-left: 5px;">拜访</span></a>
+                            class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
+                            src="img/entrance_blue_30.png" width="18">拜访</a>
                         </div>
                       </div>
                     </div>
@@ -460,11 +460,12 @@
     </div>
   </ion-content>
   <div class="mask" ng-if="planReport" ng-class="{'active':planReport}"></div>
-  <div class="footer-block" ng-show="planReport">
+  <!-- ng-show="planReport"-->
+  <div class="footer-block" ng-class="{'visible':planReport}">
     <div class="bar bar-header bar-stable">
-      <button class="button back-button button-clear color-gray">取消</button>
+      <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
       <div class="h1 title">周一(9/21)</div>
-      <button class="button button-clear back-button color-blue">确定</button>
+      <button class="button button-clear back-button color-blue" ng-click="confirmPlanFooter()">确定</button>
     </div>
    <div class="schedule-btg">
      <div class="flex-center">
@@ -489,14 +490,14 @@
            <div class="item-media checked"><span class="uicon radio-button"></span></div>
            <div class="item-inner">
              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18"> 路线名称啊</div>
-             <div class="item-after color-blue">编辑</div>
+             <div class="item-after color-blue" ui-sref="main.editroute">编辑</div>
            </div>
          </div>
        </li>
      </ul>
    </div>
   </div>
-  <div class="fab-week align-center" ng-click="action()">
+  <div class="fab-week align-center" ng-click="showPlanFooter()">
     <div>
       <div class="flex-center">
         <img src="img/seal_blue_124.png" width="80">

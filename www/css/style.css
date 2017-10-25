@@ -2206,24 +2206,23 @@ background-color: #fff;
 .footer-block{
   z-index: 22;
   position: fixed;
-  bottom: 0;
+  bottom: -300px;
   left: 0;
   height: 300px;
   width: 100%;
   background-color: #fff;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
+.footer-block.visible{
+  bottom: 0;
+}
+
 .fab-week{
-  /*background-color: #fff;*/
   position: fixed;
   bottom: 30px;
   right: 20px;
   font-size: 9px;
-  padding: 12px 10px;
-  /*-webkit-border-radius: 50%;*/
-  /*-moz-border-radius: 50%;*/
-  /*border-radius: 50%;*/
-  /*-webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);*/
-  /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);*/
 }
 
 .schedule-btg {
@@ -2283,6 +2282,7 @@ background-color: #fff;
 .mask.active{
   opacity:1;
 }
+/*测试图片路径，最后删除*/
 .img-test .col-33{
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -2366,4 +2366,7 @@ display: block;
   width: 50px;
   background-size: 50px;
   display: block;
+}
+.margin-img img{
+  margin-right: 5px;
 }
