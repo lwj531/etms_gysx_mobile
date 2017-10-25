@@ -128,7 +128,8 @@
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
                         <div class="col-33 flex-end">
-                          <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                          <a
+                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
                             src="img/search_gray_30.png" width="18">查看</a></div>
                       </div>
                     </div>
@@ -146,7 +147,8 @@
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
                         <div class="col-33 flex-end">
-                          <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                          <a
+                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
                             src="img/search_gray_30.png" width="18">查看</a></div>
                       </div>
                     </div>
@@ -164,7 +166,8 @@
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
                         <div class="col-33 flex-end">
-                          <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                          <a
+                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
                             src="img/search_gray_30.png" width="18">查看</a></div>
                       </div>
                     </div>
@@ -459,50 +462,87 @@
       </div>
     </div>
   </ion-content>
-  <div class="mask" ng-if="planReport" ng-class="{'active':planReport}"></div>
-  <!-- ng-show="planReport"-->
-  <div class="footer-block" ng-class="{'visible':planReport}">
+  <div class="mask" ng-if="halfAffair||planReport" ng-class="{'active':halfAffair||planReport,'visible':halfAffair||planReport}"></div>
+  <!-- ng-show="halfAffair"-->
+  <div class="footer-block" ng-class="{'visible':halfAffair}">
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
       <div class="h1 title">周一(9/21)</div>
       <button class="button button-clear back-button color-blue" ng-click="confirmPlanFooter()">确定</button>
     </div>
-   <div class="schedule-btg">
-     <div class="flex-center">
-       <div class="width-90">
-         <div class="button-group">
-           <div class="group-button button flex-center selected">
-             路线图
-           </div>
-           <div class="group-button button flex-center" >
-             半天事物(上午)
-           </div>
-           <div class="group-button button flex-center" >
-             半天事物(上午)
-           </div>
-         </div>
-       </div>
-     </div>
-     <ul class="schedule-bottom-list">
-       <li class="list-item">
-         <div class="item-content">
-           <!--点击选中，在选中的li的item-media上添加checked-->
-           <div class="item-media checked"><span class="uicon radio-button"></span></div>
-           <div class="item-inner">
-             <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18"> 路线名称啊</div>
-             <div class="item-after color-blue" ui-sref="main.editroute">编辑</div>
-           </div>
-         </div>
-       </li>
-     </ul>
-   </div>
+    <div class="schedule-btg">
+      <div class="flex-center">
+        <div class="width-90">
+          <div class="button-group">
+            <div class="group-button button flex-center selected">
+              路线图
+            </div>
+            <div class="group-button button flex-center">
+              半天事物(上午)
+            </div>
+            <div class="group-button button flex-center">
+              半天事物(上午)
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="schedule-bottom-list">
+        <li class="list-item">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media checked"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18"> 路线名称啊</div>
+              <div class="item-after color-blue" ui-sref="main.editroute" ng-click="cancelPlanFooter()">编辑</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="fab-week align-center" ng-click="showPlanFooter()">
+  <!--CCR显示计划报告-->
+  <div class="fab-week align-center" ng-click="showHalfFooter()" ng-show="CCR">
     <div>
       <div class="flex-center">
         <img src="img/seal_blue_124.png" width="80">
       </div>
+      <!--<div>半天事务</div>-->
+    </div>
+  </div>
+  <!--AE显示计划报告-->
+  <div class="fab-week align-center" ng-click="showPlanAlert()" ng-show="true">
+    <div>
+      <div class="flex-center">
+        <img src="img/doc_blue_126.png" width="80">
+      </div>
       <!--<div>计划报告</div>-->
+    </div>
+  </div>
+  <!--24K纯手工打造弹框,点计划报告出来的-->
+  <div class="alert-container" ng-class="{'alert-showing':planReport,'active':planReport}">
+    <div class="alert-box">
+      <div class="flex-between">
+        <button class="button button-clear button-positive" ng-click="hidePlanAlert()">关闭</button>
+        <div>计划 <span class="color-blue">(2)</span></div>
+        <button class="button button-clear button-positive" ng-click="confirmPlanAlert()">保存</button>
+      </div>
+      <div class="list-title">连锁总部(5)</div>
+      <div class="content-block">
+        <ul>
+          <li class="list-item multi-line schedule-plan" ui-sref="main.planreport">
+            <div class="item-content align-top">
+              <div class="item-media"><span class="user-checkbox uicon"></span></div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title">北京xxxxx分部(A)</div>
+                  <div class="item-after color-blue">3</div>
+                </div>
+                <div class="item-text">上海市<span class="space-10"></span>xxxxxx路xxxxxxxxx号xxxxx弄</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </ion-view>
