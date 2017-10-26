@@ -14,13 +14,19 @@ body, .ionic-body {
   pointer-events: none;
 }
 .bar .title, .bar-positive .button.button-clear {
+  font-size: 14px;
+  color: #419de7;
+}
+.button.button-positive.button-clear{
+  color: #419de7;
   font-size: 15px;
 }
-
 .gesture-modal {
   z-index: 999;
 }
-
+.padding-top5{
+  padding-top: 5px;
+}
 .bar.bar-positive {
   background-color: #419de7;
   border-color: #4c83e0;
@@ -413,6 +419,8 @@ ul {
   position: relative;
   max-width: 100%;
   white-space: normal;
+  font-size: 13px;
+  line-height: 18px;
 }
 
 .list-item .item-title.label {
@@ -2534,6 +2542,25 @@ color: #fff;
   background-color: #e75a5a;
 }
 
-.plan-alert .popup{
+.user-searchbar{
+  margin-top: 54px;
+  height: 44px;
+}
 
+.user-searchbar .button{
+  width: 60px;
+  line-height: 29px;
+  border-radius: 0;
+}
+
+.user-searchbar input{
+  width: 100%;
+  border:1px solid #419de7;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #3e3e3e;
+}
+.footer-searchlist{
+  height: calc(100% - 105px);
+  overflow: scroll;
 }

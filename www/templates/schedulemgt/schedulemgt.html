@@ -31,7 +31,9 @@
     <!--左右滑动切周-->
     <ul class="flex-row week-day" id="weekDay" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
       <!--repeat周的日期-->
-      <li ng-repeat="item in weekChange" ng-click="clickDate(item)" ng-class="{true: 'today'}[item.toLocaleDateString()==today.toLocaleDateString()]">{{item.getDate()}}</li>
+      <li ng-repeat="item in weekChange" ng-click="clickDate(item)"
+          ng-class="{true: 'today'}[item.toLocaleDateString()==today.toLocaleDateString()]">{{item.getDate()}}
+      </li>
     </ul>
   </div>
   <div class="bar bar-subheader bar-stable week-tap" ng-show="viewActive=='weekView'">
@@ -45,11 +47,11 @@
           <span class="uicon uicon-blue-next"></span>
         </button>
       </div>
-      <button class="button button-icon align-center" ng-click="statusTab='actual'"
+      <button class="button button-icon align-center" ng-click="changePA('actual')"
               ng-class="{'selected':statusTab=='actual'}">
         <span class="uicon uicon-schlist"></span>
       </button>
-      <button class="button button-icon align-center" ng-click="statusTab='plan'"
+      <button class="button button-icon align-center" ng-click="changePA('plan')"
               ng-class="{'selected':statusTab=='plan'}">
         <span class="uicon uicon-add"></span>
       </button>
@@ -64,11 +66,11 @@
           <span class="uicon uicon-blue-next"></span>
         </button>
       </div>
-      <button class="button button-icon align-center" ng-click="statusTab='actual'"
+      <button class="button button-icon align-center" ng-click="changePA('actual')"
               ng-class="{'selected':statusTab=='actual'}">
         <span class="uicon uicon-schlist"></span>
       </button>
-      <button class="button button-icon align-center" ng-click="statusTab='plan'"
+      <button class="button button-icon align-center" ng-click="changePA('plan')"
               ng-class="{'selected':statusTab=='plan'}">
         <span class="uicon uicon-add"></span>
       </button>
@@ -93,12 +95,12 @@
             </div>
           </div>
         </div>
-        <div class="crl-tabs">
+        <!--当角色为CCR时显示-->
+        <div class="crl-tabs" ng-if="CCR">
           <!--日视图里的列表-->
           <div class="crl-tab height-100" ng-show="dayInfoTab=='list'">
             <div class="bg-white home-schedule height-100">
-              <!--当角色为CCR时显示-->
-              <div class="list-item multi-line no-line" ng-show="CCR">
+              <div class="list-item multi-line no-line">
                 <div class="item-content">
                   <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
                   <div class="item-inner">
@@ -116,8 +118,139 @@
                   </div>
                 </div>
               </div>
-              <!--当角色为AE时显示-->
-              <div class="list-item no-line" ng-show="AE">
+              <ul>
+                <!--(schedule-called | schedule-calledout | schedule-plan)-->
+                <!--schedule-called :	实心绿色圈：已实际拜访的计划内机构-->
+                <!--schedule-calledout : 实心橙色圈：已实际拜访的计划外机构-->
+                <!--schedule-plan : 空心蓝色圈：未拜访的计划内机构-->
+                <li class="list-item multi-line schedule-called">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="flex-row align-end">
+                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <!--跳到拜访向导模块/拜访概览-->
+                        <div class="col-33 flex-end">
+                          <a
+                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                            src="img/search_gray_30.png" width="18">查看</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-item multi-line schedule-plan">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="flex-row align-end">
+                        <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
+                        <!--跳到拜访向导模块/签到页面-->
+                        <div class="col-33 flex-end">
+                          <a
+                            class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
+                            src="img/entrance_blue_30.png" width="18">拜访</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-item multi-line schedule-calledout">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="flex-row align-end">
+                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <!--跳到拜访向导模块/拜访概览-->
+                        <div class="col-33 flex-end">
+                          <a
+                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                            src="img/search_gray_30.png" width="18">查看</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-item multi-line schedule-called">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="flex-row align-end">
+                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <!--跳到拜访向导模块/拜访概览-->
+                        <div class="col-33 flex-end">
+                          <a
+                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                            src="img/search_gray_30.png" width="18">查看</a></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-item multi-line schedule-plan">
+                  <div class="item-content align-top">
+                    <div class="item-media"><span class="list-dot"></span></div>
+                    <div class="item-inner">
+                      <div class="item-title-row">
+                        <div class="item-title">北京xxxxx分部(A)</div>
+                      </div>
+                      <div class="flex-row align-end">
+                        <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
+                        <!--跳到拜访向导模块/签到页面-->
+                        <div class="col-33 flex-end">
+                          <a
+                            class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
+                            src="img/entrance_blue_30.png" width="18">拜访</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!--日视图里的地图-->
+          <div class="crl-tab height-100" ng-show="dayInfoTab=='map'">
+            <div class="route-action-block daily">
+              <div class="sign-info">
+                <div class="route-action flex-between">
+                  <div class="sign-time flex-start"><span>首次签入时间</span>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                  </div>
+                  <div class="block-button flex-center actual"><img src="img/route_green_44.png" width="22">实际路线</div>
+                </div>
+                <div class="route-action flex-between">
+                  <div class="sign-time flex-start"><span>末次签出时间</span>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                  </div>
+                  <div class="block-button flex-center plan"><img src="img/route_blue_42.png" width="22">计划路线</div>
+                </div>
+              </div>
+            </div>
+            <div class="height-100" id="dailyMap"></div>
+          </div>
+        </div>
+        <!--当角色为AE时显示-->
+        <div class="crl-tabs" ng-show="AE">
+          <!--日视图里的列表-->
+          <div class="crl-tab height-100">
+            <div class="bg-white home-schedule height-100">
+              <div class="list-item no-line">
                 <div class="item-content">
                   <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
                   <div class="item-inner">
@@ -224,26 +357,6 @@
               </ul>
             </div>
           </div>
-          <!--日视图里的地图-->
-          <div class="crl-tab height-100" ng-show="dayInfoTab=='map'">
-            <div class="route-action-block daily">
-              <div class="sign-info">
-                <div class="route-action flex-between">
-                  <div class="sign-time flex-start"><span>首次签入时间</span>
-                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
-                  </div>
-                  <div class="block-button flex-center actual"><img src="img/route_green_44.png" width="22">实际路线</div>
-                </div>
-                <div class="route-action flex-between">
-                  <div class="sign-time flex-start"><span>末次签出时间</span>
-                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
-                  </div>
-                  <div class="block-button flex-center plan"><img src="img/route_blue_42.png" width="22">计划路线</div>
-                </div>
-              </div>
-            </div>
-            <div class="height-100" id="dailyMap"></div>
-          </div>
         </div>
       </div>
     </div>
@@ -252,15 +365,15 @@
       <!--statusTab：actual | plan 周视图里切实际-->
       <div ng-show="statusTab=='actual'">
         <!--角色为CCR 时显示下面列表-->
-        <ul class="schedule-week-list" ng-show="CCR">
+        <ul class="schedule-week-list" ng-if="CCR">
           <li>
-            <div class="content-block-title">周一(10/22)</div>
+            <div class="content-block-title">周一(11/22)</div>
             <div class="schedule-week-row">
               <div class="col-40">
                 <div class="flex-between">
                   <img src="img/route_green_44.png" width="18">
                   <div class="progress-block">
-                    <div class="">路线名称啊(9)65%</div>
+                    <div class="">CCR实际(9)65%</div>
                     <div class="progress-track">
                       <div class="progress" ng-style="progress"></div>
                     </div>
@@ -323,14 +436,14 @@
           </li>
         </ul>
         <!--角色为AE时显示下面列表-->
-        <ul class="schedule-week-list" ng-show="AE">
+        <ul class="schedule-week-list" ng-if="AE">
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
               <div class="col-40">
                 <div class="flex-start">
                   <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
-                  <div class="">城市名称啊(9)</div>
+                  <div class="">AE实际(9)</div>
                 </div>
               </div>
               <div class="col-33 flex-center">
@@ -386,15 +499,16 @@
       </div>
       <!--statusTab：actual | plan 周视图里切计划-->
       <div ng-show="statusTab=='plan'">
-        <ul class="schedule-week-list" ng-show="CCR">
+        <!--角色为CCR 时显示下面列表-->
+        <ul class="schedule-week-list" ng-if="CCR">
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
-              <div class="col-73">
+              <div class="col-73" ng-click="showHalfFooter('route')">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
                     <img src="img/route_green_44.png" width="18">
-                    <div class="align-center">路线名称啊(9)</div>
+                    <div class="align-center">CCR计划(9)</div>
                   </div>
                   <div class="width-50 flex-between">
                     <div class="insA align-center">
@@ -409,7 +523,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <div class="width-100">
                   <div class="flex-between affair-gray">
                     <div>无半天事务</div>
@@ -426,7 +540,7 @@
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
-              <div class="col-73">
+              <div class="col-73" ng-click="showHalfFooter('route')">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
                     <img src="img/route_green_44.png" width="18">
@@ -445,7 +559,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <div class="width-100">
                   <div class="flex-between affair-red">
                     <div>不可抗不可抗不可抗</div>
@@ -462,10 +576,71 @@
           <li>
             <div class="content-block-title">周三(10/22)</div>
             <div class="schedule-week-row">
-              <div class="col-73 flex-center">
+              <div class="col-73 flex-center" ng-click="showHalfFooter('route')">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-27 flex-center" ng-click="showPlanPopup()">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
+                <img src="img/add_gray_64.png" width="36">
+              </div>
+            </div>
+          </li>
+        </ul>
+        <!--角色为AE时显示下面列表-->
+        <ul class="schedule-week-list" ng-if="AE">
+          <li>
+            <div class="content-block-title">周一(10/22)</div>
+            <div class="schedule-week-row">
+              <div class="col-73" ng-click="showPlanPopup()">
+                <div class="flex-start width-100 margin-img">
+                  <img src="img/route_green_44.png" width="18">
+                  <div class="align-center">城市名称(9)</div>
+                </div>
+              </div>
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
+                <div class="width-100">
+                  <div class="flex-between affair-gray">
+                    <div>无半天事务</div>
+                    <div class="affair-dot"></div>
+                  </div>
+                  <div class="flex-between affair-orange">
+                    <div>年假</div>
+                    <div class="affair-dot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="content-block-title">周一(10/22)</div>
+            <div class="schedule-week-row">
+              <div class="col-73" ng-click="showPlanPopup()">
+                <div class="flex-start width-100 margin-img">
+                  <img src="img/route_green_44.png" width="18">
+                  <div class="align-center">城市名称(9)</div>
+                </div>
+              </div>
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
+                <div class="width-100">
+                  <div class="flex-between affair-red">
+                    <div>不可抗不可抗不可抗</div>
+                    <div class="affair-dot"></div>
+                  </div>
+                  <div class="flex-between affair-blue">
+                    <div>年假</div>
+                    <div class="affair-dot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!--为空显示添加图标-->
+          <li>
+            <div class="content-block-title">周三(10/22)</div>
+            <div class="schedule-week-row">
+              <div class="col-73 flex-center" ng-click="showPlanPopup()">
+                <img src="img/add_gray_64.png" width="36">
+              </div>
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <img src="img/add_gray_64.png" width="36">
               </div>
             </div>
@@ -474,8 +649,8 @@
       </div>
     </div>
   </ion-content>
-  <div class="mask" ng-if="halfAffair||planReport" ng-class="{'active':halfAffair||planReport,'visible':halfAffair||planReport}"></div>
-  <!-- ng-show="halfAffair"-->
+  <div class="mask" ng-if="showMask" ng-class="{'active':showMask,'visible':showMask}"></div>
+  <!-- 底部上滑框半天事务-->
   <div class="footer-block" ng-class="{'visible':halfAffair}">
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
@@ -485,20 +660,24 @@
     <div class="schedule-btg">
       <div class="flex-center">
         <div class="width-90">
-          <div class="button-group">
-            <div class="group-button button flex-center selected" ng-if="CCR">
+          <ul class="button-group">
+            <li class="group-button button flex-center" ng-if="CCR" ng-class="{'selected':footerTab=='route'}"
+                ng-click="changeFooterTab('route')">
               路线图
-            </div>
-            <div class="group-button button flex-center">
+            </li>
+            <li class="group-button button flex-center" ng-class="{'selected':footerTab=='morning'}"
+                ng-click="changeFooterTab('morning')">
               半天事物(上午)
-            </div>
-            <div class="group-button button flex-center">
-              半天事物(上午)
-            </div>
-          </div>
+            </li>
+            <li class="group-button button flex-center" ng-class="{'selected':footerTab=='afternoon'}"
+                ng-click="changeFooterTab('afternoon')">
+              半天事物(下午)
+            </li>
+          </ul>
         </div>
       </div>
-      <ul class="schedule-bottom-list">
+      <!--路线列表，单选-->
+      <ul class="schedule-bottom-list" ng-if="CCR" ng-show="footerTab=='route'">
         <li class="list-item">
           <div class="item-content">
             <!--点击选中，在选中的li的item-media上添加checked-->
@@ -510,24 +689,81 @@
           </div>
         </li>
       </ul>
+      <!--半天事务列表：上午，单选-->
+      <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
+        <li class="list-item checked">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务shang</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <!--半天事务列表：下午，单选-->
+      <ul class="schedule-bottom-list" ng-show="footerTab=='afternoon'">
+        <li class="list-item checked">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-  <!--CCR显示计划报告-->
-  <div class="fab-week align-center" ng-click="showHalfFooter()" ng-show="CCR">
-    <div>
-      <div class="flex-center">
-        <img src="img/seal_blue_124.png" width="80">
+  <!--计划的FAB-->
+  <div ng-show="statusTab=='plan'&&viewActive=='weekView'">
+    <!--CCR显示计划报告-->
+    <div class="fab-week align-center" ng-show="CCR">
+      <div>
+        <div class="flex-center">
+          <img src="img/seal_blue_124.png" width="80">
+        </div>
+        <!--<div>半天事务</div>-->
       </div>
-      <!--<div>半天事务</div>-->
+    </div>
+    <!--AE显示计划报告-->
+    <div class="fab-week align-center" ng-show="AE">
+      <div>
+        <div class="flex-center">
+          <img src="img/doc_blue_126.png" width="80">
+        </div>
+        <!--<div>计划报告</div>-->
+      </div>
     </div>
   </div>
-  <!--AE显示计划报告-->
-  <div class="fab-week align-center" ng-click="showPlanPopup()" ng-show="AE">
-    <div>
-      <div class="flex-center">
-        <img src="img/doc_blue_126.png" width="80">
+  <!--实际的FAB-->
+  <div ng-show="statusTab=='actual'&&viewActive=='weekView'">
+    <!--CCR显示计划报告-->
+    <div class="fab-week align-center" ng-show="CCR">
+      <div>
+        <div class="flex-center">
+          <img src="img/seal_blue_124.png" width="80">
+        </div>
+        <!--<div>半天事务</div>-->
       </div>
-      <!--<div>计划报告</div>-->
+    </div>
+    <!--AE显示计划报告-->
+    <div class="fab-week align-center" ng-show="AE">
+      <div>
+        <div class="flex-center">
+          <img src="img/doc_blue_126.png" width="80">
+        </div>
+        <!--<div>计划报告</div>-->
+      </div>
     </div>
   </div>
 </ion-view>

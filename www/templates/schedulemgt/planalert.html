@@ -1,16 +1,16 @@
 <!--计划报告弹框-->
 <div class="list-title">连锁总部(5)</div>
-<div class="content-block">
+<div class="content-block bg-white">
   <ul>
-    <li class="list-item multi-line schedule-plan">
+    <li class="list-item multi-line schedule-plan" ng-repeat="item in planStoreList">
       <div class="item-content align-top">
-        <div class="item-media"><span class="user-checkbox uicon"></span></div>
+        <div class="item-media" ng-click="addSelected($index)" ng-class="{'checked':planIndex==$index}"><span class="user-checkbox uicon"></span></div>
         <div class="item-inner">
           <div class="item-title-row">
-            <div class="item-title">北京xxxxx分部(A)</div>
-            <div class="item-after color-blue">3</div>
+            <div class="item-title">{{item.name}}</div>
+            <div class="item-after color-blue">{{item.activities}}</div>
           </div>
-          <div class="item-text">上海市<span class="space-10"></span>xxxxxx路xxxxxxxxx号xxxxx弄</div>
+          <div class="item-text">{{item.city}}<span class="space-10"></span>{{item.address}}</div>
         </div>
       </div>
     </li>
