@@ -1,5 +1,5 @@
 angular.module('schedulemgt.ctrl', [])
-  .controller('ScheduleMgtCtrl', function ($scope,$ionicBackdrop) {
+  .controller('ScheduleMgtCtrl', function ($scope) {
    //进度条百分比
     $scope.progressNum = 40+'%';
     $scope.progress = {"width":$scope.progressNum};
@@ -11,12 +11,36 @@ angular.module('schedulemgt.ctrl', [])
     //周视图内的实际和计划tab初始化 (actual | plan)
     $scope.statusTab='plan';
 
-    $scope.action = function() {
-      $ionicBackdrop.retain();
+    $scope.halfAffair=false;
+    $scope.planReport=false;
+    //点半天事务弹出底部框
+    $scope.showHalfFooter = function() {
+      $scope.halfAffair=true;
     };
-    $scope.releaseMask=function(){
-      $ionicBackdrop.release();
-    }
+    //点取消关闭底部计划框
+    $scope.cancelPlanFooter=function(){
+      $scope.halfAffair=false;
+    };
+    //点确定关闭底部计划框
+    $scope.confirmPlanFooter=function(){
+      $scope.halfAffair=false;
+    };
+
+    //点计划报告弹出底部框
+    $scope.showPlanAlert = function() {
+      $scope.planReport=true;
+    };
+    //点弹框关闭按钮
+    $scope.hidePlanAlert = function() {
+      $scope.planReport=false;
+    };
+
+    //点弹框保存按钮
+    $scope.confirmPlanAlert = function() {
+      $scope.planReport=false;
+    };
+
+
     //日历的原生js写法--------------/
     var cells = document.getElementById('weekDay').getElementsByTagName('li');
     var clen = cells.length;

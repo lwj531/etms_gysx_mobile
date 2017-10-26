@@ -64,10 +64,10 @@
           <ion-list show-delete="true"
                     show-reorder="true">
             <ion-item ng-repeat="item in route.cart">
-              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
-              <span class="item-text">{{item.Address}}</span>
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
               <ion-delete-button class="ion-minus-circled" ng-click="route.cart.splice($index, 1)"></ion-delete-button>
-              <ion-reorder-button class="ion-navicon"
+              <ion-reorder-button class="ion-arrow-swap"
                                   on-reorder="moveRoute(route.cart,item,$fromIndex,$toIndex)"></ion-reorder-button>
             </ion-item>
           </ion-list>
@@ -89,11 +89,11 @@
           <ion-list show-delete="routeedit"
                     show-reorder="routeedit">
             <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
-              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
-              <span class="item-text">{{item.Address}}</span>
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
               <ion-delete-button class="ion-minus-circled"
                                  ng-click="currentRoute.Institutions.splice($index, 1)"></ion-delete-button>
-              <ion-reorder-button class="ion-navicon"
+              <ion-reorder-button class="ion-arrow-swap"
                                   on-reorder="moveRoute(currentRoute.Institutions,item,$fromIndex,$toIndex)"></ion-reorder-button>
             </ion-item>
           </ion-list>
@@ -113,8 +113,8 @@
         <ion-scroll class="window-list" ng-show="searchresult.length>0">
           <ion-list>
             <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
-              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
-              <span class="item-text">{{item.Address}}</span>
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
             </ion-item>
           </ion-list>
         </ion-scroll>
@@ -132,8 +132,8 @@
         <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
           <ion-list>
             <ion-item ng-repeat="item in nolatlngresult"  ng-click="openinsinfo(item)">
-              <span class="item-title">({{item.InstitutionPriority}}) {{item.InstitutionName}}</span><br>
-              <span class="item-text">{{item.Address}}</span>
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
             </ion-item>
           </ion-list>
         </ion-scroll>
