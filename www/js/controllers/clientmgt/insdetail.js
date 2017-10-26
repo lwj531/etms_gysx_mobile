@@ -20,6 +20,20 @@ angular.module('insdetail.ctrl', ['client.srv'])
       //根据传来的insId获取机构信息
       clientsrv.getins($stateParams.insId).then(function (data) {
         $scope.currentIns = data;
+        //机构左侧图标
+        switch ($scope.currentIns.InstitutionPriority){
+          case "A":
+            $scope.inslevelflag = "uicon-blankmarkerA";
+            break;
+          case "B":
+            $scope.inslevelflag = "uicon-blankmarkerB";
+            break;
+          case "C":
+            $scope.inslevelflag = "uicon-blankmarkerC";
+            break;
+          default:
+            $scope.inslevelflag = "uicon-blankmarkerA";
+        }
         //通知地图数据已获取
         $scope.$broadcast("amap", "datacompleted");
         $scope.getclients();
@@ -155,7 +169,6 @@ angular.module('insdetail.ctrl', ['client.srv'])
       $scope.clientInfoModal.hide();
     };
 
-
     $scope.client = {
       Gender: '',
       StatusEnum: 0
@@ -230,6 +243,7 @@ angular.module('insdetail.ctrl', ['client.srv'])
         });
       }
     };
+
 
     /* $scope.showPopup = function () {
        var coordinatePopup = $ionicPopup.show({

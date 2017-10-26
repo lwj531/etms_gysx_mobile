@@ -55,9 +55,10 @@ angular.module('main.ctrl', [])
     $scope.currentstate = $state;
 
     //清空缓存
-    $scope.clear = function () {
+    $scope.clearCache = function () {
       localStorage.clear();
-      alert("localStorage.clear");
+      ionic.Platform.exitApp();
+
     };
     //手势密码Model
     $ionicModal.fromTemplateUrl('templates/modal/gesture.html', {
