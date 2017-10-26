@@ -11,47 +11,42 @@
     <div class="bg-white">
       <div class="list-item multi-line no-line">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-blankmarker{{currentIns.InstitutionPriority}}"></span></div>
+          <div class="item-media"><span class="uicon {{inslevelflag}}"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">{{currentIns.InstitutionName + ' ('+currentIns.InstitutionPriority+')'}}</div>
+              <div class="item-title">
+                {{currentIns.InstitutionName + (currentIns.InstitutionPriority!=''?('('+currentIns.InstitutionPriority+')'):'') }}
+                </div>
             </div>
             <div class="flex-row align-end padding-top">
               <div class="col-70 color-gray">{{currentIns.Address}}</div>
               <div class="col-30 flex-end">
-                <a class="button button-outline button-energized button-small" ui-sref="main.skusort({insId:currentIns.InstitutionID})">SKU排序</a></div>
+                <a class="button button-outline button-energized button-small"
+                   ui-sref="main.skusort({insId:currentIns.InstitutionID})">SKU排序</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="bg-white" style="margin-top: 1px;">
-      <div class="flex-around tab-row" ng-init="activeTab=1">
-        <div class="flex-center">
-          <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==1}"
-                  ng-click="activeTab=1">基本信息
-          </button>
-        </div>
-        <div class="flex-center">
-          <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==2}"
-                  ng-click="activeTab=2">人员信息
-          </button>
-        </div>
-        <div class="flex-center" ng-show="showstore">
-          <button class="button button-light button-clear tab-button" ng-class="{'active':activeTab==3}"
-                  ng-click="activeTab=3">终端信息
+      <div class="flex-around tab-row" >
+        <div class="flex-center" ng-repeat="tab in tabs" ng-show="(tab.Code=='clientInfo'?showstore:true)">
+          <button class="button button-light button-clear tab-button" ng-class="{'active':currentTab==tab}" ng-click="switchTab(tab)" >
+            {{tab.Name}}
           </button>
         </div>
       </div>
       <div class="crl-tabs">
-        <div class="crl-tab" ng-show="activeTab==1">
+        <div class="crl-tab" ng-show="currentTab.Code=='baseInfo'">
           <div class="map-block">
             <div id="ins-map">
               <amap></amap>
             </div>
 
-            <a class="button button-balanced button-small" ng-click="saveLngLat()">修改坐标</a></div>
+            <a class="button button-balanced button-small" ng-click="saveLngLat()">修改坐标</a>
           </div>
+
           <ul>
             <li class="list-item inverse">
               <div class="item-content">
@@ -79,7 +74,7 @@
             </li>
           </ul>
         </div>
-        <div class="crl-tab" ng-show="activeTab==2">
+        <div class="crl-tab" ng-show="currentTab.Code=='personInfo'">
           <div class="list-item inverse no-line">
             <div class="item-content">
               <div class="item-inner">
@@ -93,44 +88,51 @@
           <ul>
             <li class="list-item multi-line" ng-repeat="item in memberList" ng-click="viewClient(item)">
               <div class="item-content item-link">
-                <div class="item-media"><span class="uicon-50 {{getAvatarClass(item)}}"></span>
+                <div class="item-media">
+                  <span class="uicon-50 {{getAvatarClass(item)}}"></span>
                 </div>
                 <div class="item-inner">
                   <div class="item-title-row">
-                    <div class="item-title"><span>{{item.ClientName}}</span><span class="space-stick">|</span><span>{{item.Gender=='F'?'女':'男'}}</span>
+                    <div class="item-title">
+                      <span>{{item.ClientName}}</span><span class="space-stick">|</span><span>{{item.Gender=='F'?'女':'男'}}</span>
                     </div>
                   </div>
                   <div class="flex-row color-gray text-row">
-                    <div class="col-50 align-center margin-img"><img src="img/job_gray_48.png" width="20">{{item.Titile}}</div>
-                    <div class="col-50 align-center margin-img"><img src="img/cellphone_gray_48.png" width="20">{{item.Phone}}</div>
+                    <div class="col-50 align-center margin-img">
+                      <img src="img/job_gray_48.png" width="20">{{item.Titile}}
+                    </div>
+                    <div class="col-50 align-center margin-img">
+                      <img src="img/cellphone_gray_48.png" width="20">{{item.Phone}}
+                    </div>
                   </div>
                 </div>
               </div>
             </li>
           </ul>
         </div>
-        <div class="crl-tab" ng-show="activeTab==3" ng-show="showstore">
+        <div class="crl-tab" ng-show="currentTab.Code=='clientInfo'">
           <div class="list-item inverse no-line">
             <div class="item-content">
               <div class="item-inner">
-                <div class="item-title">下游门店（{{terminalList.length}}）</div>
+                <div class="item-title">下游门店（{{stores.TotalCount}}）</div>
               </div>
             </div>
           </div>
           <ul>
-            <li class="list-item multi-line" ng-repeat="item in terminalList" ng-click="showPopup()">
+            <li class="list-item multi-line" ng-repeat="item in stores.Institutions" ng-click="showPopup()">
               <div class="item-content align-top item-link">
-                <div class="item-media"><img src="img/marker{{item.icon}}_52.png" width="20"></div>
+                <div class="item-media"><img src="img/marker{{item.InstitutionPriority==''?'A':item.InstitutionPriority}}_52.png" width="20"></div>
                 <div class="item-inner">
                   <div class="item-title-row">
-                    <div class="item-title"><span>{{item.name}}</span>(<span>{{item.icon}}</span>)</div>
+                    <div class="item-title"><span>{{item.InstitutionPriority==''?item.InstitutionName:item.InstitutionName+'('+item.InstitutionPriority+')'}}</span></div>
                   </div>
-                  <div class="item-text">{{item.address}}</div>
+                  <div class="item-text">{{item.Address}}</div>
                 </div>
               </div>
             </li>
           </ul>
         </div>
       </div>
+    </div>
   </ion-content>
 </ion-view>

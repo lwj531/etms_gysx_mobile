@@ -43,6 +43,7 @@
           <div class="inf-top-left txt" ng-show="isnewly || routeedit" ng-click="addinline()">
           </div>
           <div class="inf-top-right">
+            <span ng-click="closeInfoWindow()">X</span>
             <span ng-bind="currentins.InstitutionName"></span>
           </div>
         </div>
@@ -54,7 +55,7 @@
 
     <!--点击新增路线出现的弹出框-->
     <div class="route-action-block">
-      <div class="route-action" ng-show="isnewly">
+      <div class="route-action" ng-show="isnewly && nolatlngmodal==false && searchmodal==false">
         <div class="route-action-bar">
           <button ng-click="closeaddroute()" class="button button-clear button-positive button-thin">取消</button>
           <input type="text" ng-model="route.name" placeholder="请输入路线名称" maxlength="5" class="route-name-input"/>
@@ -76,11 +77,12 @@
       </div>
     </div>
     <!--点击某一条路线出现的弹出框-->
-    <div class="route-action-block" ng-show="routedetail">
+    <div class="route-action-block" ng-show="routedetail && nolatlngmodal==false && searchmodal==false">
       <div class="route-action">
         <div class="route-action-bar">
           <button ng-click="deleteroute()" class="button button-clear button-assertive button-thin">删除</button>
           <input type="text" ng-model="currentRoute.LineName" placeholder="请输入路线名称" maxlength="5" class="route-name-input"/>
+          <button class="button button-stable button-thin" ng-show="!routeedit" ng-click="closeroutedetail()">关闭</button>
           <button class="button button-positive button-thin" ng-show="!routeedit" ng-click="showrouteedit()">编辑</button>
           <button class="button button-stable button-thin" ng-show="routeedit" ng-click="closerouteedit()">取消</button>
           <button class="button button-positive button-thin" ng-show="routeedit" ng-click="updateroute()">保存</button>
@@ -98,7 +100,7 @@
             </ion-item>
           </ion-list>
         </ion-scroll>
-        <div class="bg-white text-center" ng-show="route.cart.length>3" style="padding: 6px 0;color: #ff6868;">已加入{{route.cart.length}}家</div>
+        <div class="bg-white text-center" ng-show="currentRoute.Institutions.length>3" style="padding: 6px 0;color: #ff6868;">已加入{{currentRoute.Institutions.length}}家</div>
       </div>
     </div>
 
@@ -107,7 +109,7 @@
       <div class="route-action">
         <div class="route-action-bar">
           <button class="button button-clear button-positive button-thin" ng-click="closesearchmodal()">取消</button>
-          <input type="text" ng-model="searchmodel.Value" placeholder="请输入店名称关键字" maxlength="20" class="route-name-input wide"/>
+          <input type="text" ng-model="searchmodel.Value" placeholder="请输入机构名称关键字" maxlength="20" class="route-name-input wide"/>
           <button class="button button-clear button-positive button-thin" ng-click="searchstorebykeyword()">搜索</button>
         </div>
         <ion-scroll class="window-list" ng-show="searchresult.length>0">

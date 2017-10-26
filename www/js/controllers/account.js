@@ -65,9 +65,18 @@ angular.module('account.ctrl', ['account.srv'])
         $scope.showcipher();
       }
     });
+    //测试登陆用
+    $scope.roules =[
+      {Name:'AE',UserId:18521734092,Password:123456},
+      {Name:'CCR',UserId:18521734007,Password:123456}
+      ];
+    //测试登陆用
+    $scope.selectroute =function(item){
+      $scope.loginData = item;
+    };
     $scope.loginData = {
-      UserId:18521734007,
-      Password:123456
+      UserId:"",
+      Password:""
     };
     //显示手势密码
     $scope.showcipher = function () {

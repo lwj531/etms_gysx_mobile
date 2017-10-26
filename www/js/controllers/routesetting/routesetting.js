@@ -36,9 +36,9 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         $scope.map.clearInfoWindow();
         //点击地图关闭编辑窗口
         $scope.map.on('click', function (e) {
-          //通知关闭详细
+         /* //通知关闭详细
           $scope.$broadcast("close", "detail");
-          $scope.$apply();
+          $scope.$apply();*/
         });
         $scope.style = [
           {
@@ -97,6 +97,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       if ($scope.routeedit) {
         if ($scope.currentRoute.Institutions.indexOf($scope.currentins) == -1) {
           $scope.currentRoute.Institutions.push($scope.currentins);
+          $rootScope.toast("添加成功");
         } else {
           //提示
           $rootScope.toast("已选择该机构");
@@ -104,12 +105,16 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       } else {
         if ($scope.route.cart.indexOf($scope.currentins) == -1) {
           $scope.route.cart.push($scope.currentins);
+          $rootScope.toast("添加成功");
         } else {
           //提示
           $rootScope.toast("已选择该机构");
         }
       }
-
+    };
+    //关闭信息窗体
+    $scope.closeInfoWindow=function(){
+      $scope.map.clearInfoWindow();
     };
     $scope.infoWindow = new AMap.InfoWindow({
       offset: new AMap.Pixel(5, 0),
@@ -317,10 +322,11 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       Value:""
     };
     $scope.searchresult=[];
+    //打开搜索窗体
     $scope.showsearchmodal=function(){
       //关闭其他窗体
-      $scope.closeroutedetail();
-      $scope.closeaddroute();
+      /*$scope.closeroutedetail();
+      $scope.closeaddroute();*/
       $scope.closenolatlngmodal();
       //清空当前搜索结果
       $scope.searchmodal=true;
@@ -329,6 +335,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     //关闭搜索窗体
     $scope.closesearchmodal=function(){
       $scope.searchmodal=false;
+      $scope.searchresult=[];
     }
     //搜索门店
     $scope.searchstorebykeyword= function(){
@@ -342,8 +349,8 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     $scope.nolatlngresult=[];
     $scope.shownolatlngmodal=function(){
       //关闭其他窗体
-      $scope.closeroutedetail();
-      $scope.closeaddroute();
+      /*$scope.closeroutedetail();
+      $scope.closeaddroute();*/
       $scope.closesearchmodal();
       routesettingsrv.getnolatlngins().then(function (data) {
         $scope.nolatlngresult = data;

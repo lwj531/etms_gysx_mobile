@@ -1,6 +1,16 @@
 angular.module('insdetail.ctrl', ['client.srv'])
   .controller('InsDetailCtrl', function ($scope, $ionicBackdrop,$ionicPopup, $ionicModal, $stateParams, $rootScope, clientsrv, $timeout) {
-    $scope.terminalList = [];
+    //tabs
+    $scope.tabs=[{Name:'基本信息',Code:'baseInfo'},{Name:'人员信息',Code:'personInfo'},{Name:'终端信息',Code:'clientInfo'}];
+    $scope.currentTab =$scope.tabs[0];
+    //切换tab
+    $scope.switchTab = function(tab){
+      $scope.currentTab =tab;
+      if($scope.currentTab.Code=='clientInfo'){
+        //搜索下游门店
+        $scope.getStores();
+      }
+    }
     //门店人员
     $scope.memberList = [];
     //是否显示终端信息
@@ -20,6 +30,20 @@ angular.module('insdetail.ctrl', ['client.srv'])
       //根据传来的insId获取机构信息
       clientsrv.getins($stateParams.insId).then(function (data) {
         $scope.currentIns = data;
+        //机构左侧图标
+        switch ($scope.currentIns.InstitutionPriority){
+          case "A":
+            $scope.inslevelflag = "uicon-blankmarkerA";
+            break;
+          case "B":
+            $scope.inslevelflag = "uicon-blankmarkerB";
+            break;
+          case "C":
+            $scope.inslevelflag = "uicon-blankmarkerC";
+            break;
+          default:
+            $scope.inslevelflag = "uicon-blankmarkerA";
+        }
         //通知地图数据已获取
         $scope.$broadcast("amap", "datacompleted");
         $scope.getclients();
@@ -155,7 +179,6 @@ angular.module('insdetail.ctrl', ['client.srv'])
       $scope.clientInfoModal.hide();
     };
 
-
     $scope.client = {
       Gender: '',
       StatusEnum: 0
@@ -230,6 +253,26 @@ angular.module('insdetail.ctrl', ['client.srv'])
         });
       }
     };
+    //获取连锁门店列表
+    $scope.stores ={
+      Page:1,
+      RemainingCount:0,
+      TotalCount:0,
+      Institutions:[]
+    };
+    //搜索参数
+    $scope.storePara ={
+      InstitutionID:$stateParams.insId,
+      Key:"",
+      Page:1
+    };
+    $scope.getStores = function(){
+      clientsrv.getStores($scope.storePara).then(function (data) {
+        $scope.stores = data;
+      });
+    };
+
+
 
     /* $scope.showPopup = function () {
        var coordinatePopup = $ionicPopup.show({
