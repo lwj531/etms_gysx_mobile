@@ -170,7 +170,7 @@ angular.module('main.ctrl', [])
         if(callback!=null){
           callback();
         }
-      }, 2000);
+      }, 1000);
     }
     //自定义弹窗
     $rootScope.popup = function(message,callback){
@@ -178,7 +178,7 @@ angular.module('main.ctrl', [])
         message="操作成功";
       }
       var _popup = $ionicPopup.show({
-        template: '<p class="useralert">'+ message +"</p>",
+        template: '<p class="text-center">'+ message +"</p>",
         title: '提示',
         scope: $scope,
       });
@@ -187,6 +187,6 @@ angular.module('main.ctrl', [])
         if(callback!=null){
           callback();
         }
-      }, 2000);
+      }, 1000);
     }
   });

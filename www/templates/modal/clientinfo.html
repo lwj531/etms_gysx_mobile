@@ -5,12 +5,14 @@
       <span class="back-text"  >返回</span>
     </button>
     <div class="h1 title">编辑客户</div>
-    <button class="button button-clear back-button" ng-show="infoedit" ng-click="saveClient()">
-      保存
-    </button>
-    <button class="button button-clear back-button" ng-click="clickinfoedit()" ng-show="!infoedit">
-      编辑
-    </button>
+    <div class="buttons">
+      <button class="button button-clear back-button" ng-show="infoedit" ng-click="saveClient()">
+        保存
+      </button>
+      <button class="button button-clear back-button" ng-show="!infoedit" ng-click="clickinfoedit()">
+        编辑
+      </button>
+    </div>
   </div>
 
   <ion-content class="has-header">
