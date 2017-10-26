@@ -6,7 +6,7 @@
     </button>
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <div class="h1 title">
-      <!--切日和周的按钮-->
+      <!--viewActive：dayView | weekView 切日视图和周视图-->
       <div class="button-group">
         <div class="group-button button" ng-click="viewActive='dayView'" ng-class="{'selected':viewActive=='dayView'}">
           日
@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <!--viewActive：dayView | weekView 切日视图和周视图-->
+  <!--日视图时显示周日历-->
   <div class="bar bar-subheader bar-stable week-slide" ng-show="viewActive=='dayView'">
     <ul class="flex-row week-title">
       <li>日</li>
@@ -30,15 +30,8 @@
     </ul>
     <!--左右滑动切周-->
     <ul class="flex-row week-day" id="weekDay" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
-      <!--<li>11</li>-->
-      <!--<li>12</li>-->
-      <!--<li>13</li>-->
-      <!--<li>14</li>-->
-      <!--<li class="today">15</li>-->
-      <!--<li>16</li>-->
-      <!--<li>17</li>-->
       <!--repeat周的日期-->
-      <li ng-repeat="item in weekChange">{{item}}</li>
+      <li ng-repeat="item in weekChange" ng-click="clickDate(item)" ng-class="{true: 'today'}[item.toLocaleDateString()==today.toLocaleDateString()]">{{item.getDate()}}</li>
     </ul>
   </div>
   <div class="bar bar-subheader bar-stable week-tap" ng-show="viewActive=='weekView'">
@@ -68,10 +61,10 @@
       <div class="height-100">
         <div class="list-item schedule-title">
           <div class="item-content">
-            <div class="item-media"><img src="img/calendar_blue_42.png" width="24"></div>
+            <div class="item-media"><img src="img/calendar_active_44.png" width="24"></div>
             <div class="item-inner">
               <div class="item-title color-blue">2017/03/03</div>
-              <div class="item-after">
+              <div class="item-after" ng-show="CCR">
                 <a class="button button-clear button-stable button-small flex-center" ng-click="dayInfoTab='list'"
                    ng-class="{'selected':dayInfoTab=='list'}"><span class="uicon list-view"></span></a>
                 <span class="space-stick" style="font-size: 17px;color: #d5d5d5;">|</span>
@@ -86,7 +79,7 @@
           <div class="crl-tab height-100" ng-show="dayInfoTab=='list'">
             <div class="bg-white home-schedule height-100">
               <!--当角色为CCR时显示-->
-              <div class="list-item multi-line no-line" ng-show="true">
+              <div class="list-item multi-line no-line" ng-show="CCR">
                 <div class="item-content">
                   <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
                   <div class="item-inner">
@@ -240,7 +233,7 @@
       <!--statusTab：actual | plan 周视图里切实际-->
       <div ng-show="statusTab=='actual'">
         <!--角色为CCR 时显示下面列表-->
-        <ul class="schedule-week-list" ng-show="true">
+        <ul class="schedule-week-list" ng-show="CCR">
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
@@ -374,7 +367,7 @@
       </div>
       <!--statusTab：actual | plan 周视图里切计划-->
       <div ng-show="statusTab=='plan'">
-        <ul class="schedule-week-list" ng-show="true">
+        <ul class="schedule-week-list" ng-show="CCR">
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
@@ -453,7 +446,7 @@
               <div class="col-73 flex-center">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showPlanPopup()">
                 <img src="img/add_gray_64.png" width="36">
               </div>
             </div>
@@ -474,7 +467,7 @@
       <div class="flex-center">
         <div class="width-90">
           <div class="button-group">
-            <div class="group-button button flex-center selected">
+            <div class="group-button button flex-center selected" ng-if="CCR">
               路线图
             </div>
             <div class="group-button button flex-center">
@@ -510,39 +503,12 @@
     </div>
   </div>
   <!--AE显示计划报告-->
-  <div class="fab-week align-center" ng-click="showPlanAlert()" ng-show="true">
+  <div class="fab-week align-center" ng-click="showPlanPopup()" ng-show="AE">
     <div>
       <div class="flex-center">
         <img src="img/doc_blue_126.png" width="80">
       </div>
       <!--<div>计划报告</div>-->
-    </div>
-  </div>
-  <!--24K纯手工打造弹框,点计划报告出来的-->
-  <div class="alert-container" ng-class="{'alert-showing':planReport,'active':planReport}">
-    <div class="alert-box">
-      <div class="flex-between">
-        <button class="button button-clear button-positive" ng-click="hidePlanAlert()">关闭</button>
-        <div>计划 <span class="color-blue">(2)</span></div>
-        <button class="button button-clear button-positive" ng-click="confirmPlanAlert()">保存</button>
-      </div>
-      <div class="list-title">连锁总部(5)</div>
-      <div class="content-block">
-        <ul>
-          <li class="list-item multi-line schedule-plan" ui-sref="main.planreport">
-            <div class="item-content align-top">
-              <div class="item-media"><span class="user-checkbox uicon"></span></div>
-              <div class="item-inner">
-                <div class="item-title-row">
-                  <div class="item-title">北京xxxxx分部(A)</div>
-                  <div class="item-after color-blue">3</div>
-                </div>
-                <div class="item-text">上海市<span class="space-10"></span>xxxxxx路xxxxxxxxx号xxxxx弄</div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 </ion-view>
