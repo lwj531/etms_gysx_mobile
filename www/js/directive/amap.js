@@ -13,7 +13,7 @@ angular.module('amap.dt', [])
             {
               center:$scope.center,
               resizeEnable: true,
-              zoom: 10,
+              //zoom: 10,
               draggable: true,
             });
           //通知初始化完成

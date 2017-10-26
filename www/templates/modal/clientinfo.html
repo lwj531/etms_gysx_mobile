@@ -1,12 +1,15 @@
 <ion-view title="机构详情" view-title="机构详情">
   <div class="bar bar-header bar-positive">
-    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+    <button ng-click="closeClientInfoModal()" class="button back-button buttons button-clear header-item" style="">
       <i class="icon ion-ios-arrow-back"></i>
-      <span class="back-text" style="">返回</span>
+      <span class="back-text"  >返回</span>
     </button>
     <div class="h1 title">编辑客户</div>
-    <button class="button button-clear back-button">
+    <button class="button button-clear back-button" ng-show="infoedit" ng-click="saveClient()">
       保存
+    </button>
+    <button class="button button-clear back-button" ng-click="clickinfoedit()" ng-show="!infoedit">
+      编辑
     </button>
   </div>
 
@@ -21,10 +24,10 @@
               <div class="" style="width: 100%;">
                 <div class="input-row">
                   <!--只读状态input加readonly-->
-                  <input type="text" maxlength="10" placeholder="客户姓名">
+                  <input type="text" maxlength="10" placeholder="客户姓名" ng-model="client.ClientName" readonly>
                 </div>
                 <!--只读状态gender-radio 这行加disabled-->
-                <div class="flex-row gender-radio">
+                <div class="flex-row gender-radio" ng-class="{'disabled':!infoedit}">
                   <div class="col-50" ng-repeat="item in Genders" ng-click="changeGender(item)">
                     <span class="gender-item {{item.Class}}"  ng-class="{selected:item.Code==client.Gender}"><span class="uicon uicon-gender"></span> {{item.Name}}</span>
                   </div>
@@ -37,7 +40,7 @@
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title align-center label"><img src="img/job_gray_48.png" width="26">职务</div>
-              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入职务"></div>
+              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入职务" ng-model="client.Titile"  ng-readonly="!infoedit"></div>
             </div>
           </div>
         </li>
@@ -45,7 +48,7 @@
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title align-center label"><img src="img/major_gray_48.png" width="26">专业背景</div>
-              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入专业背景"></div>
+              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入专业背景" ng-model="client.ProfessionInfo"  ng-readonly="!infoedit"></div>
             </div>
           </div>
         </li>
@@ -53,14 +56,14 @@
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title align-center label"><img src="img/cellphone_gray_48.png" width="26">手机号</div>
-              <div class="item-input"><input type="tel" maxlength="20" placeholder="请输入手机号"></div>
+              <div class="item-input"><input type="tel" maxlength="20" placeholder="请输入手机号" ng-model="client.Phone"  ng-readonly="!infoedit"></div>
             </div>
           </div>
         </li>
       </ul>
-      <div class="flex-center" style="padding: 20px;">
+      <div class="flex-center" style="padding: 20px;"  ng-show="infoedit">
         <div ng-repeat-start="item in Status"></div>
-        <button class="button icon-left ion-ios-locked button-lock" ng-class="{'ion-ios-locked button-lock':item.Code=='INACTIVE','ion-ios-unlocked button-unlock':item.Code=='ACTIVE'}" ng-show="client.Status!=item.Code" ng-click="lockClient(item)">{{item.Name}}</button>
+        <button  class="button icon-left ion-ios-locked button-lock" ng-class="{'ion-ios-locked button-lock':item.Code==1,'ion-ios-unlocked button-unlock':item.Code==0}" ng-show="client.StatusEnum!=item.Code" ng-click="lockClient(item)">{{item.Name}}</button>
         <div ng-repeat-end></div>
       </div>
     </div>
