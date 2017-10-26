@@ -3,11 +3,11 @@ angular.module('schedulemgt.ctrl', [])
    //进度条百分比
     $scope.progressNum = 40+'%';
     $scope.CCR = false;
-    $scope.AE = true;
+    $scope.AE = !$scope.CCR;
     $scope.progress = {"width":$scope.progressNum};
 
     //日程管理初始化tab 打开日视图  (dayView | weekView)
-    $scope.viewActive='weekView';
+    $scope.viewActive='dayView';
     //日视图里切列表和地图 dayInfoTab：(list | map )
     $scope.dayInfoTab='list';
     //周视图内的实际和计划tab初始化 (actual | plan)

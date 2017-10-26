@@ -35,7 +35,26 @@
     </ul>
   </div>
   <div class="bar bar-subheader bar-stable week-tap" ng-show="viewActive=='weekView'">
-    <div class="flex-between width-100">
+    <div class="flex-between width-100" ng-if="CCR">
+      <div class="flex-between">
+        <button class="button button-icon align-center">
+          <span class="uicon uicon-blue-prev"></span>
+        </button>
+        <div>2017/09/23 ~ 2017/09/29</div>
+        <button class="button button-icon align-center">
+          <span class="uicon uicon-blue-next"></span>
+        </button>
+      </div>
+      <button class="button button-icon align-center" ng-click="statusTab='actual'"
+              ng-class="{'selected':statusTab=='actual'}">
+        <span class="uicon uicon-schlist"></span>
+      </button>
+      <button class="button button-icon align-center" ng-click="statusTab='plan'"
+              ng-class="{'selected':statusTab=='plan'}">
+        <span class="uicon uicon-add"></span>
+      </button>
+    </div>
+    <div class="flex-between width-100" ng-if="AE">
       <div class="flex-between">
         <button class="button button-icon align-center">
           <span class="uicon uicon-blue-prev"></span>
