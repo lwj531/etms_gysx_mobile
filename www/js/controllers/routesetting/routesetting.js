@@ -29,7 +29,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     };
     $scope.init();
 
-    //初始化完成后执行
+    //地图初始化完成后执行
     $scope.$on('amap', function (errorType, data) {
       if (data == "mapcompleted") {
         $scope.map.clearMap();
