@@ -15,7 +15,6 @@ body, .ionic-body {
 }
 .bar .title, .bar-positive .button.button-clear {
   font-size: 14px;
-  color: #419de7;
 }
 .button.button-positive.button-clear{
   color: #419de7;
@@ -368,7 +367,7 @@ ul {
   width: 100%;
   background-color: #e4e4e4;
   display: block;
-  z-index: 15;
+  /*z-index: 15;*/
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
 }
@@ -2563,4 +2562,41 @@ color: #fff;
 .footer-searchlist{
   height: calc(100% - 105px);
   overflow: scroll;
+}
+
+.plan-alert .popup-head{
+  height: 0;
+  padding: 0;
+}
+.plan-alert .popup-body{
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+}
+.plan-alert .child-list,
+.plan-alert .parent-list {
+  position: absolute;
+  height: 350px;
+  overflow: auto;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+  padding-top: 44px;
+}
+.plan-alert .parent-list{
+  margin-left: 0;
+}
+.plan-alert .parent-list ul{
+  height: 280px;
+}
+.plan-alert .child-list{
+  margin-left: 500px;
+}
+.plan-alert .child-list ul{
+  height: 280px;
+}
+.plan-alert .child-list.show{
+  margin-left: 0;
 }

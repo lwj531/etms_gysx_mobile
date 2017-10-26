@@ -51,43 +51,44 @@ angular.module('schedulemgt.ctrl', [])
       $scope.showMask=false;
     };
 
-    //
-    $scope.addSelected=function (idx) {
-      $scope.planIndex=idx;
+    //checkbox的选中事件
+    $scope.toggleSelected=function (item) {
+      item.selected=!item.selected;
     };
+    $scope.childListShow=false;
 
     $scope.showPlanPopup=function () {
 
       $scope.planStoreList = [
-        {name: 'xx大药房xx大药房xx大药房xx大',address:'xx区xx路xx号xx弄',city:'北京市',activities:2},
-        {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房',address:'xx区xx路xx号xx弄',city:'上海市',activities:3}
-      ]
+        {name: 'xx大药房xx大药房xx大药房xx大',address:'xx区xx路xx号xx弄',city:'北京市',activities:2,selected:false},
+        {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房',address:'xx区xx路xx号xx弄',city:'上海市',activities:3,selected:false}
+      ];
+      $scope.titletpl= '计划<span class="color-blue"> (' + $scope.planStoreList.length + ')</span>';
       var showPlanHalf = $ionicPopup.show({
         cssClass: 'plan-alert',
         templateUrl: 'templates/schedulemgt/planalert.html',
-        title: '计划<span class="color-blue"> (' + $scope.planStoreList.length + ')</span>',
-        scope: $scope,
-        buttons: [
-          {text: '关闭',
-            type: 'button-clear button-positive title-button-left',
-            onTap: function (e) {
+        title: '',
+        scope: $scope
 
-            }
-          },
-          {
-            text: '<b>保存</b>',
-            type: 'button-clear button-positive title-button-right',
-            onTap: function (e) {
-
-            }
-          },
-        ]
       });
       showPlanHalf.then(function (res) {
         console.log('Tapped!', res);
       });
-    };
 
+      $scope.closePlanList=function () {
+        showPlanHalf.close();
+      };
+      //点击连锁总部列表，切至计划项
+      $scope.slideToChild=function () {
+        $scope.childListShow=true;
+      };
+      //点击连返回，回到parent list
+      $scope.backToParent=function () {
+        $scope.childListShow=false;
+      };
+
+
+    };
 
 
     //日历的angular写法--------------/
