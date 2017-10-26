@@ -8,24 +8,28 @@ angular.module("client.srv", ["http.srv"])
     this.getcurrentstaff = function () {
       return httpsrv.service("/api/Staff/GetCurrentStaffInfo/", {}, "get");
     };
-    //获取门店人员信息
+    //获取机构人员信息
     this.getclients = function (insId) {
       return httpsrv.service("/api/Client/GetClients/" + insId, {}, "get");
     };
-    //保存新增的门店人员信息
+    //保存新增的机构人员信息
     this.saveclient = function (model) {
       return httpsrv.service("/api/Client/SaveClient/", model, "post");
     };
-    //获取门店的SKU
+    //获取机构的SKU
     this.getskus = function (insId) {
       return httpsrv.service("/api/Institution/GetInstitutionSkuSort/" + insId, {}, "get");
     };
-    //保存门店sku排序
+    //保存机构sku排序
     this.saveSkuSort = function (model) {
       return httpsrv.service("/api/Institution/SaveInstitutionSkuSort/", model, "post");
     };
-    //更新当前门店坐标
+    //更新当前机构坐标
     this.updateInsLngLat = function (insId,model) {
       return httpsrv.service("/api/Institution/UpdateInstitutionLngLat/"+insId, model, "put");
+    };
+    //获取门店列表
+    this.getStores = function (para) {
+      return httpsrv.service("/api/Institution/GetChainStore/", para, "post");
     };
   }]);

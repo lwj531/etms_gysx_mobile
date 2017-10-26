@@ -1,6 +1,16 @@
 angular.module('insdetail.ctrl', ['client.srv'])
   .controller('InsDetailCtrl', function ($scope, $ionicBackdrop,$ionicPopup, $ionicModal, $stateParams, $rootScope, clientsrv, $timeout) {
-    $scope.terminalList = [];
+    //tabs
+    $scope.tabs=[{Name:'基本信息',Code:'baseInfo'},{Name:'人员信息',Code:'personInfo'},{Name:'终端信息',Code:'clientInfo'}];
+    $scope.currentTab =$scope.tabs[0];
+    //切换tab
+    $scope.switchTab = function(tab){
+      $scope.currentTab =tab;
+      if($scope.currentTab.Code=='clientInfo'){
+        //搜索下游门店
+        $scope.getStores();
+      }
+    }
     //门店人员
     $scope.memberList = [];
     //是否显示终端信息
@@ -243,6 +253,25 @@ angular.module('insdetail.ctrl', ['client.srv'])
         });
       }
     };
+    //获取连锁门店列表
+    $scope.stores ={
+      Page:1,
+      RemainingCount:0,
+      TotalCount:0,
+      Institutions:[]
+    };
+    //搜索参数
+    $scope.storePara ={
+      InstitutionID:$stateParams.insId,
+      Key:"",
+      Page:1
+    };
+    $scope.getStores = function(){
+      clientsrv.getStores($scope.storePara).then(function (data) {
+        $scope.stores = data;
+      });
+    };
+
 
 
     /* $scope.showPopup = function () {
