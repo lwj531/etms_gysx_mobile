@@ -71,15 +71,17 @@ angular.module('insdetail.ctrl', ['client.srv'])
             panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
             zoomToAccuracy: true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
           });
-          $scope.map.addControl($scope.geolocation);
-          $scope.geolocation.getCurrentPosition();
+
           AMap.event.addListener($scope.geolocation, 'complete', $scope.getlocationComplete);//返回定位信息
           AMap.event.addListener($scope.geolocation, 'error', $scope.getlocationError);      //返回定位出错信息
+          $scope.map.addControl($scope.geolocation);
+          $scope.geolocation.getCurrentPosition();
         });
       }
     });
     //获取定位坐标成功
     $scope.getlocationComplete = function (data) {
+      $rootScope.toast("获取坐标成功。");
       $scope.lnglat = [data.position.getLng(), data.position.getLat()];
       $scope.setInsMarker();
     };
