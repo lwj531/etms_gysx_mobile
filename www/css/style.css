@@ -312,14 +312,6 @@ ul {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'm60%2061.5-38.25%2038.25-9.75-9.75%2029.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23dedede'%2F%3E%3C%2Fsvg%3E");
   background-size: 10px 20px;
 }
-.fake-link{
-  padding-right: 20px;
-  background: no-repeat right center;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2060%20120'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'm60%2061.5-38.25%2038.25-9.75-9.75%2029.25-28.5-29.25-28.5%209.75-9.75z'%20fill%3D'%23eaeaea'%2F%3E%3C%2Fsvg%3E");
-  background-size: 10px 20px;
-  height:20px;
-  width: 20px;
-}
 
 .list-item .item-content {
   box-sizing: border-box;
@@ -477,7 +469,7 @@ ul {
   margin-right: 5px;
 }
 
-.list-item .item-title.ellipsis, .ellipsis {
+.list-item .item-title.ellipsis {
   -webkit-flex-shrink: 1;
   -ms-flex: 0 1 auto;
   flex-shrink: 1;
@@ -554,21 +546,6 @@ ul {
   background-color: #419de7;
   display: block;
 }
-.stick-left{
-  position: relative;
-}
-.stick-left:after{
-  content: '';
-  position: absolute;
-  left: 0;
-  right: auto;
-  top: 0;
-  bottom: auto;
-  height: 100%;
-  width: 3px;
-  background-color: #419de7;
-  display: block;
-}
 
 .item-content.align-top {
   -webkit-box-align: start;
@@ -600,8 +577,7 @@ ul {
 /*margin-top: 10px;*/
 /*}*/
 .content-block {
-  margin-bottom: 5px;
-  font-size: 12px;
+  padding-bottom: 5px;
 }
 
 .dense-list .list-item .item-content {
@@ -1125,11 +1101,6 @@ select {
 .space-10 {
   display: inline-block;
   width: 10px;
-}
-
-.space-5 {
-  display: inline-block;
-  width: 5px;
 }
 
 .tj-ul {
@@ -2672,6 +2643,40 @@ color: #fff;
 .actual-alert ul{
   height: 265px;
   overflow: auto;
+}
+.insdetail-tabs{
+  height: calc(100% - 78px);
+}
+.insdetail-tabs .crl-tabs{
+  height: calc(100% - 50px);
+}
+.terminal-list{
+  height: calc(99% - 44px);
+  overflow: scroll;
+}
+.ellipsis {
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.insDetail-class{
+
+}
+.ins-subheader{
+  display: block;
+  height: 108px;
+  padding: 0;
+}
+.ins-subheader+ion-content{
+  top:154px;
+  height: calc(100% - 154px);
+}
+.toggle.modify-lnglat{
+  z-index: 99;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
 }
 .learning-index .text-center p{
   margin:0;
