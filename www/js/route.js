@@ -15,6 +15,7 @@ angular.module('route', [
   'schedulemgt.ctrl',
   'editroute.ctrl',
   'planreport.ctrl',
+  'storemodify.ctrl',
   //service
   'account.srv',
   'car.srv',

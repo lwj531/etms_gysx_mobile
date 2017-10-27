@@ -6,20 +6,20 @@
     </button>
     <div class="h1 title">机构详情</div>
   </div>
-
-  <ion-content class="has-header">
+  <div class="bar bar-subheader ins-subheader">
     <div class="bg-white">
       <div class="list-item multi-line no-line">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon {{inslevelflag}}"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">
-                {{currentIns.InstitutionName + (currentIns.InstitutionPriority!=''?('('+currentIns.InstitutionPriority+')'):'') }}
-                </div>
+              <div class="item-title ellipsis">
+                {{currentIns.InstitutionName +
+                (currentIns.InstitutionPriority!=''?('('+currentIns.InstitutionPriority+')'):'') }}
+              </div>
             </div>
             <div class="flex-row align-end padding-top">
-              <div class="col-70 color-gray">{{currentIns.Address}}</div>
+              <div class="col-70 color-gray ellipsis">{{currentIns.Address}}</div>
               <div class="col-30 flex-end">
                 <a class="button button-outline button-energized button-small"
                    ui-sref="main.skusort({insId:currentIns.InstitutionID})">SKU排序</a>
@@ -29,14 +29,19 @@
         </div>
       </div>
     </div>
-    <div class="bg-white" style="margin-top: 1px;">
-      <div class="flex-around tab-row" >
-        <div class="flex-center" ng-repeat="tab in tabs" ng-show="(tab.Code=='clientInfo'?showstore:true)">
-          <button class="button button-light button-clear tab-button" ng-class="{'active':currentTab==tab}" ng-click="switchTab(tab)" >
-            {{tab.Name}}
-          </button>
-        </div>
+    <!--tab head-->
+    <div class="flex-around tab-row">
+      <div class="flex-center" ng-repeat="tab in tabs" ng-show="(tab.Code=='clientInfo'?showstore:true)">
+        <button class="button button-light button-clear tab-button" ng-class="{'active':currentTab==tab}"
+                ng-click="switchTab(tab)">
+          {{tab.Name}}
+        </button>
       </div>
+    </div>
+  </div>
+  <ion-content class="has-header insDetail-class bg-white" >
+
+    <div class="bg-white insdetail-tabs" >
       <div class="crl-tabs">
         <div class="crl-tab" ng-show="currentTab.Code=='baseInfo'">
           <div class="map-block">
@@ -110,7 +115,7 @@
             </li>
           </ul>
         </div>
-        <div class="crl-tab" ng-show="currentTab.Code=='clientInfo'">
+        <div class="crl-tab height-100" ng-show="currentTab.Code=='clientInfo'">
           <div class="list-item inverse no-line">
             <div class="item-content">
               <div class="item-inner">
@@ -118,18 +123,26 @@
               </div>
             </div>
           </div>
-          <ul>
-            <li class="list-item multi-line" ng-repeat="item in stores.Institutions" ng-click="showPopup()">
+          <ul style="height: 200px">
+            <li class="list-item multi-line" ng-repeat="item in stores.Institutions" ng-click="showStoreInfoModal(item)">
               <div class="item-content align-top item-link">
-                <div class="item-media"><img src="img/marker{{item.InstitutionPriority==''?'A':item.InstitutionPriority}}_52.png" width="20"></div>
+                <div class="item-media"><img
+                  src="img/marker{{item.InstitutionPriority==''?'A':item.InstitutionPriority}}_52.png" width="20"></div>
                 <div class="item-inner">
                   <div class="item-title-row">
-                    <div class="item-title"><span>{{item.InstitutionPriority==''?item.InstitutionName:item.InstitutionName+'('+item.InstitutionPriority+')'}}</span></div>
+                    <div class="item-title"><span>{{item.InstitutionPriority==''?item.InstitutionName:item.InstitutionName+'('+item.InstitutionPriority+')'}}</span>
+                    </div>
                   </div>
                   <div class="item-text">{{item.Address}}</div>
                 </div>
               </div>
             </li>
+            <ion-infinite-scroll
+              on-infinite="loadMoreStore()"
+              distance="1%"
+              ng-if="moreDataCanBeLoaded()"
+              immediate-check=false>
+            </ion-infinite-scroll>
           </ul>
         </div>
       </div>

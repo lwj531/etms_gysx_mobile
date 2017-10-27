@@ -1565,13 +1565,6 @@ ul.ins-detail .list-item .item-input input {
   color: #ffffff;
   padding: 0 10px;
 }
-
-.coordinate-alert .button-green {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
-
 .plan-alert .popup-buttons,
 .coordinate-alert .popup-buttons {
   height: 0;
@@ -2536,4 +2529,38 @@ color: #fff;
 
 .plan-alert .popup{
 
+}
+.insdetail-tabs{
+  height: calc(100% - 78px);
+}
+.insdetail-tabs .crl-tabs{
+  height: calc(100% - 50px);
+}
+.terminal-list{
+  height: calc(99% - 44px);
+  overflow: scroll;
+}
+.ellipsis {
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.insDetail-class{
+
+}
+.ins-subheader{
+  display: block;
+  height: 108px;
+  padding: 0;
+}
+.ins-subheader+ion-content{
+  top:154px;
+  height: calc(100% - 154px);
+}
+.toggle.modify-lnglat{
+  z-index: 99;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
 }
