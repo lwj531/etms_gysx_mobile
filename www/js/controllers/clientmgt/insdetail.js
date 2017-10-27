@@ -33,16 +33,16 @@ angular.module('insdetail.ctrl', ['client.srv'])
         //机构左侧图标
         switch ($scope.currentIns.InstitutionPriority){
           case "A":
-            $scope.inslevelflag = "uicon-blankmarkerA";
+            $scope.inslevelflag = "uicon-markerA";
             break;
           case "B":
-            $scope.inslevelflag = "uicon-blankmarkerB";
+            $scope.inslevelflag = "uicon-markerB";
             break;
           case "C":
-            $scope.inslevelflag = "uicon-blankmarkerC";
+            $scope.inslevelflag = "uicon-markerC";
             break;
           default:
-            $scope.inslevelflag = "uicon-blankmarkerA";
+            $scope.inslevelflag = "uicon-markerA";
         }
         //通知地图数据已获取
         $scope.$broadcast("amap", "datacompleted");

@@ -2,19 +2,19 @@ angular.module('schedulemgt.ctrl', [])
   .controller('ScheduleMgtCtrl', function ($scope,$ionicPopup) {
 
     //切角色
-    $scope.CCR = false;
+    $scope.CCR = true;
     $scope.AE = !$scope.CCR;
-
-    //初始化半天事务框不显示
-    $scope.halfAffair=false;
 
     //日程管理初始化tab 打开日视图  (dayView | weekView)
     $scope.viewActive='weekView';
     //日视图里切列表和地图 dayInfoTab：(list | map )
     $scope.dayInfoTab='list';
     //周视图内的实际和计划tab初始化 (actual | plan)
-    $scope.statusTab='plan';
+    $scope.statusTab='actual';
 
+    //初始化半天事务框不显示
+    $scope.halfAffair=false;
+    //遮罩不显示
     $scope.showMask=false;
     //进度条百分比
     $scope.progressNum = 40+'%';
@@ -57,13 +57,13 @@ angular.module('schedulemgt.ctrl', [])
     };
     $scope.childListShow=false;
 
+    //CCR计划弹框
     $scope.showPlanPopup=function () {
 
       $scope.planStoreList = [
         {name: 'xx大药房xx大药房xx大药房xx大',address:'xx区xx路xx号xx弄',city:'北京市',activities:2,selected:false},
         {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房',address:'xx区xx路xx号xx弄',city:'上海市',activities:3,selected:false}
       ];
-      $scope.titletpl= '计划<span class="color-blue"> (' + $scope.planStoreList.length + ')</span>';
       var showPlanHalf = $ionicPopup.show({
         cssClass: 'plan-alert',
         templateUrl: 'templates/schedulemgt/planalert.html',
@@ -88,6 +88,51 @@ angular.module('schedulemgt.ctrl', [])
       };
 
 
+    };
+
+    //CCR实际弹框
+    $scope.showActualCCR=function () {
+
+      $scope.actualStoreList = [
+        {name: 'xx大药房xx大药房xx大药房xx大',address:'xx区xx路xx号xx弄',city:'北京市',activities:2,selected:false},
+        {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房',address:'xx区xx路xx号xx弄',city:'上海市',activities:3,selected:false}
+      ];
+      var showActual = $ionicPopup.show({
+        cssClass: 'actual-alert',
+        templateUrl: 'templates/schedulemgt/actualAlertCCR.html',
+        title: '',
+        scope: $scope
+
+      });
+      showActual.then(function (res) {
+        console.log('Tapped Actual!', res);
+      });
+
+      $scope.closeActualCCR=function () {
+        showActual.close();
+      };
+    };
+    //AE实际弹框
+    $scope.showActualAE=function () {
+
+      $scope.actualStoreList = [
+        {name: 'xx大药房xx大药房xx大药房xx大',address:'xx区xx路xx号xx弄',city:'北京市',activities:2,selected:false},
+        {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房',address:'xx区xx路xx号xx弄',city:'上海市',activities:3,selected:false}
+      ];
+      var showActual = $ionicPopup.show({
+        cssClass: 'actual-alert',
+        templateUrl: 'templates/schedulemgt/actualAlertAE.html',
+        title: '',
+        scope: $scope
+
+      });
+      showActual.then(function (res) {
+        console.log('Tapped Actual!', res);
+      });
+
+      $scope.closeActualAE=function () {
+        showActual.close();
+      };
     };
 
 

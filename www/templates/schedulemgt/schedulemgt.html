@@ -369,7 +369,8 @@
           <li>
             <div class="content-block-title">周一(11/22)</div>
             <div class="schedule-week-row">
-              <div class="col-40">
+              <!--点击出弹框看线路列表-->
+              <div class="col-40" ng-click="showActualCCR()">
                 <div class="flex-between">
                   <img src="img/route_green_44.png" width="18">
                   <div class="progress-block">
@@ -386,7 +387,7 @@
                   <div class="">首次签入 09:03:02</div>
                 </div>
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <div class="width-100">
                   <div class="flex-between affair-gray">
                     <div>无半天事务</div>
@@ -403,7 +404,7 @@
           <li>
             <div class="content-block-title">周二(10/23)</div>
             <div class="schedule-week-row">
-              <div class="col-40">
+              <div class="col-40" ng-click="showActualCCR()">
                 <div class="flex-between">
                   <img src="img/route_green_44.png" width="18">
                   <div class="progress-block">
@@ -420,7 +421,7 @@
                   <div class="">首次签入 09:03:02</div>
                 </div>
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <div class="width-100">
                   <div class="flex-between affair-red">
                     <div>不可抗不可抗不可抗</div>
@@ -440,7 +441,7 @@
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
-              <div class="col-40">
+              <div class="col-40" ng-click="showActualAE()">
                 <div class="flex-start">
                   <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
                   <div class="">AE实际(9)</div>
@@ -452,7 +453,7 @@
                   <div class="">首次签入 09:03:02</div>
                 </div>
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <div class="width-100">
                   <div class="flex-between affair-gray">
                     <div>无半天事务</div>
@@ -469,7 +470,7 @@
           <li>
             <div class="content-block-title">周二(10/23)</div>
             <div class="schedule-week-row">
-              <div class="col-40">
+              <div class="col-40" ng-click="showActualAE()">
                 <div class="flex-start">
                   <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
                   <div class="">城市名称啊(9)</div>
@@ -481,7 +482,7 @@
                   <div class="">首次签入 09:03:02</div>
                 </div>
               </div>
-              <div class="col-27 flex-center">
+              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
                 <div class="width-100">
                   <div class="flex-between affair-red">
                     <div>不可抗不可抗不可抗</div>

@@ -1,0 +1,38 @@
+<!--CCR点线路名称出弹框-->
+<div class="">
+  <div class="bar bar-header bar-light">
+    <button class="button button-clear button-positive" ng-click="closeActualCCR()">关闭</button>
+    <div class="h1 title">周一 (10/22)</div>
+  </div>
+  <div class="padding-top44">
+    <div class="flex-between margin-img padding">
+      <div class="align-center">
+        <img src="img/route_green_44.png" width="18"> 路线(5)
+      </div>
+      <div class="flex-between width-50">
+        <div class="insA align-center">
+          <span class="dot"></span><span class="count">2</span>
+        </div>
+        <div class="insB align-center">
+          <span class="dot"></span><span class="count">2</span>
+        </div>
+        <div class="insC align-center">
+          <span class="dot"></span><span class="count">2</span>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <li class="list-item multi-line" ng-repeat="item in actualStoreList">
+        <div class="item-content ">
+          <div class="item-media"><span class=""></span></div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">{{item.name}} parent</div>
+            </div>
+            <div class="item-text">{{item.city + item.address}}</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
