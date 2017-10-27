@@ -28,10 +28,59 @@
                             on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
       </ion-item>
     </ion-list>
-<div class="padding flex-center">
-  <div class="flex-center margin-img addins-btn">
-    <img src="img/add_gray_36.png" width="14"> 点击添加机构
-  </div>
-</div>
+    <div class="padding flex-center">
+      <div class="flex-center margin-img addins-btn" ng-click="showFooter()">
+        <img src="img/add_gray_36.png" width="14"> 点击添加机构
+      </div>
+    </div>
   </ion-content>
+  <!--遮罩层-->
+  <div class="mask" ng-if="showMask" ng-class="{'active':showMask,'visible':showMask}"></div>
+  <!-- 底部上滑框添加机构-->
+  <div class="footer-block" ng-class="{'visible':showAddIns}">
+    <div class="bar bar-header bar-stable">
+      <div class="h1 title">添加机构</div>
+      <button class="button button-clear back-button color-blue" ng-click="closeFooter()">关闭</button>
+    </div>
+    <div class="user-searchbar flex-center">
+      <div class="width-90 flex-between">
+        <input type="text" placeholder="输入关键字搜索机构">
+        <button class="button button-positive button-small">搜索</button>
+      </div>
+    </div>
+    <ul class="footer-searchlist">
+      <li class="list-item multi-line">
+        <div class="item-content align-top">
+          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">北京xxxxx分部(A)</div>
+            </div>
+            <div class="item-title-row">
+              <div class="item-text">北京xxxxx分部(A)</div>
+              <!--已加入路线显示已加入-->
+              <div class="item-after color-blue">已加入</div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="list-item multi-line">
+        <div class="item-content align-top">
+          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">北京xxxxx分部(A)</div>
+            </div>
+            <div class="item-title-row">
+              <div class="item-text">北京xxxxx分部(A)</div>
+              <!--点击加入路线-->
+              <div class="item-after color-green flex-start margin-img"><img src="img/route_green_44.png" width="18">
+                加入路线
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </ion-view>

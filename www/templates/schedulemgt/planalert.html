@@ -1,16 +1,47 @@
-<!--计划报告弹框-->
-<div class="list-title">连锁总部(5)</div>
-<div class="content-block">
+<!--点城市名称出弹框-->
+<div class="parent-list" ng-class="{'pr-hide':childListShow}">
+  <div class="bar bar-header bar-light">
+    <button class="button button-clear button-positive" ng-click="closePlanList()">关闭</button>
+    <div class="h1 title">计划 <span class="color-blue">({{planStoreList.length}})</span></div>
+    <button class="button button-clear button-positive" ng-click="closePlanList()">保存</button>
+  </div>
+  <div class="list-title">连锁总部(5)</div>
   <ul>
-    <li class="list-item multi-line schedule-plan">
-      <div class="item-content align-top">
+    <li class="list-item multi-line" ng-repeat="item in planStoreList">
+      <div class="item-content ">
+        <!--点item-media切换选中状态-->
+        <div class="item-media" ng-click="toggleSelected(item)" ng-class="{'checked':item.selected}"><span class="user-checkbox uicon"></span></div>
+        <!--点item-inner跳转到字列表-->
+        <div class="item-inner" ng-click="slideToChild()">
+          <div class="item-title-row">
+            <div class="item-title">{{item.name}} parent</div>
+            <div class="item-after color-blue">{{item.activities}}</div>
+          </div>
+          <div class="item-text">{{item.city}}<span class="space-10"></span>{{item.address}}</div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+<!--子列表block，子列表能显示的时候class=show-->
+<div class="child-list" ng-class="{'show':childListShow}">
+  <div class="bar bar-header bar-light">
+    <!--点返回回到前面列表-->
+    <button class="button button-clear button-positive" ng-click="backToParent()">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">选择项目</div>
+    <button class="button button-clear button-positive" ng-click="backToParent()">确认</button>
+  </div>
+  <div class="list-title">活动列表(5)</div>
+  <ul>
+    <li class="list-item" ng-repeat="item in planStoreList">
+      <!--点list切换check选中状态-->
+      <div class="item-content " ng-click="toggleSelected(item)" ng-class="{'checked':item.selected}">
         <div class="item-media"><span class="user-checkbox uicon"></span></div>
         <div class="item-inner">
-          <div class="item-title-row">
-            <div class="item-title">北京xxxxx分部(A)</div>
-            <div class="item-after color-blue">3</div>
-          </div>
-          <div class="item-text">上海市<span class="space-10"></span>xxxxxx路xxxxxxxxx号xxxxx弄</div>
+          <div class="item-title">{{item.name}} child</div>
         </div>
       </div>
     </li>
