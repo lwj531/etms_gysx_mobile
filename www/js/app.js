@@ -131,6 +131,30 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         controller: "RouteSettingCtrl",
         cache: false
       })
+      //知识资料库
+      .state('main.learningindex', {
+        url: '/learningindex',
+        templateUrl: "templates/learning/learningindex.html",
+        controller: "LearningIndexCtrl"
+      })
+      //按产品内容筛选
+      .state('main.materialexpand', {
+        url: '/materialexpand',
+        templateUrl: "templates/learning/materialexpand.html",
+        controller: "MaterialExpandCtrl"
+      })
+      //积分排行
+      .state('main.pointsrank', {
+        url: '/pointsrank',
+        templateUrl: "templates/learning/pointsrank.html",
+        controller: "PointsRankCtrl"
+      })
+      //积分排行
+      .state('main.exercisehistory', {
+        url: '/exercisehistory',
+        templateUrl: "templates/learning/exercisehistory.html",
+        controller: "ExerciseHistoryCtrl"
+      })
       .state('carinfo', {
         url: '/carinfo',
         templateUrl: "templates/carinfo.html",

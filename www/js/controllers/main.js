@@ -50,7 +50,7 @@ angular.module('main.ctrl', [])
       {
         name: " 学习资料库",
         iconName: "folder",
-        state: "main.xx"
+        state: "main.learningindex"
       }];
     $scope.currentstate = $state;
 

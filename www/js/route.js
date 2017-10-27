@@ -15,6 +15,10 @@ angular.module('route', [
   'schedulemgt.ctrl',
   'editroute.ctrl',
   'planreport.ctrl',
+  'learningindex.ctrl',
+  'materialexpand.ctrl',
+  'pointsrank.ctrl',
+  'exercisehistory.ctrl',
   //service
   'account.srv',
   'car.srv',
