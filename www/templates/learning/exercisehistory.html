@@ -24,41 +24,12 @@
           </div>
         </div>
       </div>
-      <ul class="flex-between exercise-week">
-        <li class="has-correct">
+      <ul class="flex-between exercise-week" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
+        <!--(has-correct | has-wrong) 绿点答对，红点答错，没点没答-->
+        <li class="{{examination[item.getDay()]}}" ng-repeat="item in weekChange">
           <div class="dot"></div>
-          <div class="title">周日</div>
-          <div class="day">09/22</div>
-        </li>
-        <li class="has-wrong">
-          <div class="dot"></div>
-          <div class="title">周一</div>
-          <div class="day">09/22</div>
-        </li>
-        <li class="has-correct">
-          <div class="dot"></div>
-          <div class="title">周一</div>
-          <div class="day">09/22</div>
-        </li>
-        <li class="">
-          <div class="dot"></div>
-          <div class="title">周一</div>
-          <div class="day">09/22</div>
-        </li>
-        <li class="has-correct">
-          <div class="dot"></div>
-          <div class="title">周一</div>
-          <div class="day">09/22</div>
-        </li>
-        <li class="">
-          <div class="dot"></div>
-          <div class="title">周一</div>
-          <div class="day">09/22</div>
-        </li>
-        <li class="has-correct">
-          <div class="dot"></div>
-          <div class="title">周一</div>
-          <div class="day">09/22</div>
+          <div class="title">{{ChineseWeek[item.getDay()]}}</div>
+          <div class="day">{{item.getMonth()+1}}/{{item.getDate()}}</div>
         </li>
       </ul>
     </div>
@@ -68,23 +39,52 @@
         答题记录
       </div>
       <ul class="history-list">
-        <li class="list-item">
-          <div class="flex-between">
-            <div>
-              <div class="flex-start margin-img">
-                <img src="img/calendar_active_44.png" width="18">
-                2017-02-12 <span class="space-10"></span>(今日)
-              </div>
-              <div class="flex-start margin-img">
-                <img src="img/pencil_gray_24.png" width="14">
-                题目
-              </div>
-            </div>
-            <div class="points">+1</div>
+        <li class="flex-between align-top wrong">
+          <div class="item-media">
+            <div class="dot"></div>
           </div>
-          <div class="question">
-            <p>请问糖尿病前期不会导致下列哪种情况？</p>
-            <p><span class="tag">正确</span>A、成为2型糖尿病患者的风险增加</p>
+          <div class="item-inner">
+            <div class="flex-between">
+              <div>
+                <div class="flex-start margin-img color-blue">
+                  <img src="img/calendar_active_44.png" width="20">
+                  2017-02-12 <span class="space-10"></span>(今日)
+                </div>
+                <div class="flex-start margin-img">
+                  <img src="img/pencil_gray_24.png" width="16">
+                  题目
+                </div>
+              </div>
+              <div class="points"><span>+0</span></div>
+            </div>
+            <div class="question">
+              <p>请问糖尿病前期不会导致下列哪种情况？</p>
+              <p><span class="tag">错误</span>A、成为2型糖尿病患者的风险增加</p>
+            </div>
+          </div>
+        </li>
+        <li class="flex-between align-top">
+          <div class="item-media">
+            <div class="dot"></div>
+          </div>
+          <div class="item-inner">
+            <div class="flex-between">
+              <div>
+                <div class="flex-start margin-img color-blue">
+                  <img src="img/calendar_active_44.png" width="20">
+                  2017-02-11 <span class="space-10"></span>
+                </div>
+                <div class="flex-start margin-img">
+                  <img src="img/pencil_gray_24.png" width="16">
+                  题目
+                </div>
+              </div>
+              <div class="points"><span>+1</span></div>
+            </div>
+            <div class="question">
+              <p>请问糖尿病前期不会导致下列哪种情况？</p>
+              <p><span class="tag">正确</span>A、成为2型糖尿病患者的风险增加</p>
+            </div>
           </div>
         </li>
       </ul>

@@ -6,14 +6,11 @@
     </button>
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <div class="h1 title">知识资料库</div>
-    <button class="button button-icon" ng-click="showsearchmodal()">
-      <img src="img/search-icon.png" width="25" style="padding-top: 6px;">
-    </button>
   </div>
 
   <ion-content class="has-header learning-index">
     <div class="flex-around content-block bg-white padding">
-      <div class="text-center">
+      <div class="text-center" ng-click="dailyExercise()">
         <img src="img/daily_exercise_56.png" width="30">
         <p>每日一题</p>
       </div>
@@ -29,6 +26,15 @@
     <div class="bg-white list-block">
       <div class="padding">
         <p class="stick-left padding-left">全部资料</p>
+      </div>
+      <div class="bar bar-subheader item-input-inset bar-light">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="输入关键字搜索资料">
+        </label>
+        <button class="button button-clear" ng-click="cannel()">
+          取消
+        </button>
       </div>
       <div class="schedule-btg padding-bottom">
         <div class="flex-center">
