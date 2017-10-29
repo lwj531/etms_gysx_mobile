@@ -1,0 +1,99 @@
+<ion-view title="疾病知识教育" view-title="疾病知识教育">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
+      <i class="icon ion-android-arrow-back"></i>
+      <span class="back-text" style=""></span>
+    </button>
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    <div class="h1 title">疾病知识教育</div>
+  </div>
+
+  <ion-content class="has-header learning-index">
+    <div class="flex-around content-block bg-white padding">
+      <div class="text-center" ng-click="dailyExercise()">
+        <img src="img/daily_exercise_56.png" width="30">
+        <p>每日一题</p>
+      </div>
+      <div class="text-center" ui-sref="main.exercisehistory">
+        <img src="img/exercise_history_56.png" width="30">
+        <p>答题历史</p>
+      </div>
+      <div class="text-center" ui-sref="main.pointsrank">
+        <img src="img/exercise_rank_56.png" width="30">
+        <p>积分排行</p>
+      </div>
+    </div>
+    <div class="bg-white list-block">
+      <div class="padding">
+        <p class="stick-left padding-left">全部资料</p>
+      </div>
+      <div class="bar bar-subheader item-input-inset bar-light">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios-search placeholder-icon"></i>
+          <input type="search" placeholder="输入关键字搜索资料">
+        </label>
+        <button class="button button-clear" ng-click="cannel()">
+          取消
+        </button>
+      </div>
+      <div class="schedule-btg padding-bottom">
+        <div class="flex-center">
+          <div class="width-90">
+            <ul class="button-group">
+              <li class="group-button button flex-center" ng-class="{'selected':true}">
+                按产品
+              </li>
+              <li class="group-button button flex-center" ng-class="{'selected':false}">
+                按用途
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--按产品-->
+      <ul class="" ng-show="true">
+        <li class="list-item item-link" ui-sref="main.materialexpand">
+          <div class="item-content">
+            <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
+            <div class="item-inner flex-between">
+              <div>
+                <div class="item-title-row">
+                  <div class="item-title">安康信</div>
+                </div>
+                <div class="item-text">60mg*5片(盒)</div>
+              </div>
+              <div class="align-center margin-img">
+                <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
+                <span class="space-10"></span>
+                <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
+                <span class="uicon fake-link"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <!--按用途-->
+      <ul class="" ng-show="false">
+        <li class="list-item item-link">
+          <div class="item-content">
+            <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
+            <div class="item-inner flex-between">
+              <div>
+                <div class="item-title-row">
+                  <div class="item-title">安康信</div>
+                </div>
+                <div class="item-text">60mg*5片(盒)</div>
+              </div>
+              <div class="align-center margin-img">
+                <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
+                <span class="space-10"></span>
+                <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
+                <span class="uicon fake-link"></span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ion-content>
+</ion-view>

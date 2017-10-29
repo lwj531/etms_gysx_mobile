@@ -149,11 +149,35 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/learning/pointsrank.html",
         controller: "PointsRankCtrl"
       })
-      //积分排行
+      //答题历史
       .state('main.exercisehistory', {
         url: '/exercisehistory',
         templateUrl: "templates/learning/exercisehistory.html",
         controller: "ExerciseHistoryCtrl"
+      })
+      //疾病知识教育
+      .state('main.diseaseknowledge', {
+        url: '/diseaseknowledge',
+        templateUrl: "templates/learning/diseaseknowledge.html",
+        controller: "DiseaseKnowledgeCtrl"
+      })
+      //生动化教育
+      .state('main.vitalityeducation', {
+        url: '/vitalityeducation',
+        templateUrl: "templates/learning/vitalityeducation.html",
+        controller: "VitalityEducationCtrl"
+      })
+      //辅导下属
+      .state('main.tutorialindex', {
+        url: '/tutorialindex',
+        templateUrl: "templates/tutorial/tutorialindex.html",
+        controller: "TutorialIndexCtrl"
+      })
+      //拜访流程
+      .state('main.callprocedure', {
+        url: '/callprocedure',
+        templateUrl: "templates/tutorial/callprocedure.html",
+        controller: "CallProcedureCtrl"
       })
       .state('carinfo', {
         url: '/carinfo',

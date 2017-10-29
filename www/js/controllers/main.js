@@ -20,7 +20,7 @@ angular.module('main.ctrl', [])
       {
         name: "辅导下属",
         iconName: "coaching",
-        state: "main.xx"
+        state: "main.tutorialindex"
       },
       {
         name: "拜访向导",

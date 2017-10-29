@@ -20,6 +20,10 @@ angular.module('route', [
   'materialexpand.ctrl',
   'pointsrank.ctrl',
   'exercisehistory.ctrl',
+  'diseaseknowledge.ctrl',
+  'vitalityeducation.ctrl',
+  'tutorialindex.ctrl',
+  'callprocedure.ctrl',
   //service
   'account.srv',
   'car.srv',

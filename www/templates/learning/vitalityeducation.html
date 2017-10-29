@@ -1,0 +1,36 @@
+<ion-view title="生动化教育" view-title="生动化教育">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">生动化教育</div>
+  </div>
+  <ion-content class="has-header education-vitality">
+
+<div class="drag-list flex-row">
+  <div class="width-50 left-list">
+    <ion-list show-reorder="false">
+      <ion-item ng-repeat="item in questionList" class="item-remove-animate" style="background-color: {{item.color}}">
+        <span>{{item.title}}</span>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="width-50 right-list">
+    <ion-list show-reorder="true">
+      <ion-item ng-repeat="item in answersList" class="item-remove-animate">
+        <span>{{item.content}}</span>
+        <ion-reorder-button class="ion-arrow-swap"
+                            on-reorder="moveAnswer(item,$fromIndex,$toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+    <div class="bottom-button">
+<div class="button" ng-click="vdResult()">确认提交</div>
+    </div>
+    <!--<div class="scroll-content has-header padding">-->
+      <!--<img src="img/route_green_44.png" on-touch="onTouch($event)" on-drag="onDrag($event)" ng-style="imgStyle">-->
+    <!--</div>-->
+  </ion-content>
+</ion-view>

@@ -27,6 +27,7 @@ angular.module('learningindex.ctrl', [])
             content: 'A、成为2型糖尿病患者的风险增加的风险增加'
           }]
       };
+      //每日一题选择radio
       $scope.radioSelected=function (itemIdx) {
         $scope.idx=itemIdx;
       }
