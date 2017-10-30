@@ -43,7 +43,7 @@
           <div class="inf-top-left txt" ng-show="isnewly || routeedit" ng-click="addinline()">
           </div>
           <div class="inf-top-right">
-            <span ng-click="closeInfoWindow()">X</span>
+            <span ng-click="closeInfoWindow()" class="uicon close-info"></span>
             <span ng-bind="currentins.InstitutionName"></span>
           </div>
         </div>
@@ -120,7 +120,7 @@
             </ion-item>
           </ion-list>
         </ion-scroll>
-        <div class="bg-white text-center" ng-show="searchresult.length>3">....</div>
+        <div class="bg-white text-center" ng-show="searchresult.length>0">搜索到{{searchresult.length}}家机构</div>
       </div>
     </div>
 

@@ -16,7 +16,7 @@
       <ion-list show-reorder="true">
         <ion-item ng-repeat="item in skuModels" class="item-remove-animate">
           <span>{{item.SKUName}}</span>
-          <ion-reorder-button class="ion-navicon"
+          <ion-reorder-button class="ion-arrow-swap"
                               on-reorder="moveRoute(skuModels,item,$fromIndex,$toIndex)"></ion-reorder-button>
         </ion-item>
       </ion-list>

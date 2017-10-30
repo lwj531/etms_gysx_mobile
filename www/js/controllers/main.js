@@ -20,7 +20,7 @@ angular.module('main.ctrl', [])
       {
         name: "辅导下属",
         iconName: "coaching",
-        state: "main.xx"
+        state: "main.tutorialindex"
       },
       {
         name: "拜访向导",
@@ -50,7 +50,7 @@ angular.module('main.ctrl', [])
       {
         name: " 学习资料库",
         iconName: "folder",
-        state: "main.xx"
+        state: "main.learningindex"
       }];
     $scope.currentstate = $state;
 
