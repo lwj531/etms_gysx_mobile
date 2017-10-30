@@ -29,7 +29,7 @@
       <li>六</li>
     </ul>
     <!--左右滑动切周-->
-    <ul class="flex-row week-day" id="weekDay" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
+    <ul class="flex-row week-day" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
       <!--repeat周的日期-->
       <li ng-repeat="item in weekChange" ng-click="clickDate(item)"
           ng-class="{true: 'today'}[item.toLocaleDateString()==today.toLocaleDateString()]">{{item.getDate()}}
@@ -39,12 +39,12 @@
   <div class="bar bar-subheader bar-stable week-tap" ng-show="viewActive=='weekView'">
     <div class="flex-between width-100" ng-if="CCR">
       <div class="flex-between">
-        <button class="button button-icon align-center">
+        <button class="button button-icon align-center"  ng-click="prevWeek()">
           <span class="uicon uicon-blue-prev"></span>
         </button>
-        <div>2017/09/23 ~ 2017/09/29</div>
-        <button class="button button-icon align-center">
-          <span class="uicon uicon-blue-next"></span>
+        <div>{{weekSatrtDate | date:'yyyy/MM/dd'}} ~ {{weekEndDate | date:'yyyy/MM/dd'}}</div>
+        <button class="button button-icon align-center" ng-click="nextWeek()">
+          <span class="uicon uicon-blue-next" ></span>
         </button>
       </div>
       <button class="button button-icon align-center" ng-click="changePA('actual')"
@@ -656,7 +656,7 @@
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
       <div class="h1 title">周一(9/21)</div>
-      <button class="button button-clear back-button color-blue" ng-click="confirmPlanFooter()">确定</button>
+      <button class="button button-clear back-button color-blue" ng-click="savePlan()">确定</button>
     </div>
     <div class="schedule-btg">
       <div class="flex-center">
@@ -679,13 +679,13 @@
       </div>
       <!--路线列表，单选-->
       <ul class="schedule-bottom-list" ng-if="CCR" ng-show="footerTab=='route'">
-        <li class="list-item">
+        <li class="list-item" ng-repeat="item in planStoreList" ng-click="selectRoute(item)">
           <div class="item-content">
             <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media checked"><span class="uicon radio-button"></span></div>
+            <div class="item-media"  ng-class="{true:'checked'}[item==currentRoute]"><span class="uicon radio-button"></span></div>
             <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18"> 路线名称啊</div>
-              <div class="item-after color-blue" ui-sref="main.editroute" ng-click="cancelPlanFooter()">编辑</div>
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{item.LineName}} </div>
+              <div class="item-after color-blue" ui-sref="main.editroute({lineId:item.LineID})" >编辑</div>
             </div>
           </div>
         </li>

@@ -17,7 +17,10 @@
               <div class="item-title">{{item.name}} parent</div>
             </div>
             <div class="item-text">{{item.city}} {{item.address}}</div>
-            <div class="item-text color-orange">{{item.city + item.address}}</div>
+            <div class="item-text color-orange">
+              <span ng-repeat="typename in ['项目一','项目二','项目叁']">{{typename}}</span>
+
+            </div>
           </div>
         </div>
       </li>

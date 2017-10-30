@@ -171,7 +171,7 @@ angular.module('main.ctrl', [])
         if(callback!=null){
           callback();
         }
-      }, 1000);
+      }, 1500);
     }
     //自定义弹窗
     $rootScope.popup = function(message,callback){
@@ -188,6 +188,6 @@ angular.module('main.ctrl', [])
         if(callback!=null){
           callback();
         }
-      }, 1000);
+      }, 1500);
     }
   });

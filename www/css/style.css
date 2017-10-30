@@ -1469,8 +1469,8 @@ ul.ins-detail .list-item .item-input input {
 /*--top toast style start--*/
 /*-------------------------*/
 .animated {
-  -webkit-animation-duration: 3s;
-  animation-duration: 3s;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
