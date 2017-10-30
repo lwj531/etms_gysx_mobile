@@ -45,7 +45,7 @@ angular.module('main.ctrl', [])
       {
         name: "辅导记录",
         iconName: "coaching",
-        state: "main.xx"
+        state: "main.tutorialmgt"
       },
       {
         name: " 学习资料库",

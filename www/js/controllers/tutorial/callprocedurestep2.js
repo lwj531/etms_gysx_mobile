@@ -1,21 +1,5 @@
-angular.module('callprocedure.ctrl', [])
-  .controller('CallProcedureCtrl', function ($scope,$ionicPopover) {
-    $scope.InstitutionPriority="A";
-    //机构左侧图标
-    switch ($scope.InstitutionPriority) {
-      case "A":
-        $scope.inslevelflag = "uicon-markerA";
-        break;
-      case "B":
-        $scope.inslevelflag = "uicon-markerB";
-        break;
-      case "C":
-        $scope.inslevelflag = "uicon-markerC";
-        break;
-      default:
-        $scope.inslevelflag = "uicon-markerA";
-    }
-
+angular.module('callprocedurestep2.ctrl', [])
+  .controller('CallProcedureStep2Ctrl', function ($scope,$ionicPopover) {
 
     // 辅导对象选择
     $ionicPopover.fromTemplateUrl('templates/tutorial/tutoriallist.html', {
@@ -23,7 +7,6 @@ angular.module('callprocedure.ctrl', [])
     }).then(function(popover) {
       $scope.popover = popover;
     });
-
 
     $scope.openPopover = function($event) {
       $scope.popover.show($event);

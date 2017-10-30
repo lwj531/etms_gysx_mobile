@@ -108,5 +108,10 @@ angular.module('account.ctrl', ['account.srv'])
         }
       });
     };
+    //清空缓存
+    $scope.clear=function(){
+      localStorage.clear();
+      alert("clear")
+    }
 
   });

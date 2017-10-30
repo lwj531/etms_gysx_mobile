@@ -1,0 +1,63 @@
+<ion-view title="拜访流程" view-title="拜访流程">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">拜访流程</div>
+
+  </div>
+  <ion-content class="has-header call-procedure">
+    <div class="bg-white flex-between color-blue padding-1015">
+      <div class="margin-img width-50 flex-between" ng-click="openPopover($event)">
+        <img src="img/peoples_blue_56.png" width="24">
+        <span>张凯</span>
+        <span>- 辅导对象</span>
+        <img src="img/arrow_down_16.png" width="12">
+      </div>
+      <div class="">
+        <span class="color-gray">辅导日期</span>
+        <span class="color-blue date">2017-02-22</span>
+      </div>
+    </div>
+    <div class="bg-white flex-around padding">
+      <div class="margin-img step-1 align-end">
+        <span class="uicon"></span>
+        <span>辅导签到</span>
+      </div>
+      <img src="img/arrow_thin_blue.png" width="6">
+      <div class="margin-img step-2 align-end complete-step2">
+        <span class="uicon"></span>
+        <span>访后总结</span>
+      </div>
+    </div>
+    <div class="bg-white list step2 padding-1015">
+      <div class="border-block">
+        <ul>
+          <li class="flex-between padding"><span>目标达成</span><span class="user-checkbox"></span></li>
+          <li class="flex-between padding"><span>问题解决</span><span class="user-checkbox"></span></li>
+          <li class="flex-between padding"><span>待改进分析</span><span class="user-checkbox"></span></li>
+          <li class="flex-between padding"><span>经验总结</span><span class="user-checkbox"></span></li>
+        </ul>
+        <div class="flex-start margin-img padding-1015"><img src="img/add_blue_round.png" width="24">添加问卷 <span class="space-5"></span><span class="color-red font-12">(未添加问卷，该次辅导无效)</span></div>
+        <div class="list-item multi-line">
+          <div class="item-content align-top">
+            <div class="item-media"><img src="img/paper_line_46.png" width="24"></div>
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title">辅导问卷名称xxx</div>
+              </div>
+              <div class="flex-between align-end font-13">
+                <div class="color-gray">2017-03-03&nbsp;10:21:21</div>
+                <div class="flex-end font-12">
+                  <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                    src="img/search_gray_30.png" width="18">查看</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-center"><a class="button button-positive">完成</a></div>
+    </div>
+  </ion-content>
+</ion-view>

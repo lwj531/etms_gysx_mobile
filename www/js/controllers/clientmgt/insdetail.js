@@ -13,7 +13,7 @@ angular.module('insdetail.ctrl', ['client.srv'])
         //搜索下游门店
         $scope.getStores();
       }
-    }
+    };
     //门店人员
     $scope.memberList = [];
     //是否显示终端信息

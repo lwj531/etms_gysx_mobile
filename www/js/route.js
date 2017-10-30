@@ -24,6 +24,10 @@ angular.module('route', [
   'vitalityeducation.ctrl',
   'tutorialindex.ctrl',
   'callprocedure.ctrl',
+  'coachingcall.ctrl',
+  'tutorialcheckin.ctrl',
+  'callprocedurestep2.ctrl',
+  'tutorialmgt.ctrl',
   //service
   'account.srv',
   'car.srv',

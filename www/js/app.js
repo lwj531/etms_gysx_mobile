@@ -179,6 +179,30 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/tutorial/callprocedure.html",
         controller: "CallProcedureCtrl"
       })
+      //拜访流程
+      .state('main.callprocedurestep2', {
+        url: '/callprocedurestep2',
+        templateUrl: "templates/tutorial/callprocedurestep2.html",
+        controller: "CallProcedureStep2Ctrl"
+      })
+      //辅导签到
+      .state('main.coachingcall', {
+        url: '/coachingcall',
+        templateUrl: "templates/tutorial/coachingcall.html",
+        controller: "CoachingCallCtrl"
+      })
+      //辅导签到签到
+      .state('main.tutorialcheckin', {
+        url: '/tutorialcheckin',
+        templateUrl: "templates/tutorial/tutorialcheckin.html",
+        controller: "TutorialCheckInCtrl"
+      })
+      //辅导记录
+      .state('main.tutorialmgt', {
+        url: '/tutorialmgt',
+        templateUrl: "templates/tutorialmgt/tutorialmgt.html",
+        controller: "TutorialMgtCtrl"
+      })
       .state('carinfo', {
         url: '/carinfo',
         templateUrl: "templates/carinfo.html",

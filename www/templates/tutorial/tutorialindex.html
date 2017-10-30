@@ -1,4 +1,4 @@
-<!--辅导管理列表-->
+<!--辅导下属列表-->
 <ion-view title="辅导管理" view-title="辅导管理">
   <div class="bar bar-header bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
@@ -13,8 +13,8 @@
   </div>
 
   <ion-content class="has-header tutorial-index">
-<div class="flex-start padding margin-img">
-  <img src="" alt="">
+<div class="flex-start margin-img padding-1015" ui-sref="main.callprocedure">
+  <img src="img/tutorial_add_50.png" width="25">
   <div class="color-blue">创建新的辅导</div>
 </div>
     <div class="tutorial-list">
@@ -29,7 +29,7 @@
         <div class="col-20">王小明</div>
         <div class="col-20">2</div>
         <div class="col-30">
-          <a class="button button-small coaching" ng-show="true" ui-sref="main.callprocedure">辅导中</a>
+          <a class="button button-small coaching" ng-show="true">辅导中</a>
           <a class="button button-small waiting" ng-show="false">待确认</a>
           <a class="button button-small completed" ng-show="false">已完成</a>
         </div>
