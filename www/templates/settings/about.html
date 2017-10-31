@@ -1,0 +1,48 @@
+<ion-view title="关于" view-title="关于">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">关于</div>
+  </div>
+
+  <ion-content class="has-header about">
+   <div class="card-container height-100 width-100 flex-center align-center">
+     <div class="about-card">
+       <div class="flex-center title">系统版本</div>
+       <!--ng-click点击检查是否最新版本，是则弹提示，否则下载-->
+       <div class="flex-between latest" ng-click="">
+         <div >版本号：02-20030V.03 <span class="tag">最新</span></div>
+         <img src="img/down_orange_54.png" width="25">
+       </div>
+       <ul class="version-list">
+         <li>
+           <div class="version-title current">版本号：02-20030V.03 <span class="tag">当前</span></div>
+           <div>
+             <div class="margin-img flex-start align-center">
+               <img src="img/list_gray_26.png" width="14">更新说明：
+             </div>
+             <ol>
+               <li>界面优化</li>
+               <li>bug修复</li>
+             </ol>
+           </div>
+         </li>
+         <li>
+           <div class="version-title">版本号：02-20030V.03</div>
+           <div>
+             <div class="margin-img flex-start align-center">
+               <img src="img/list_gray_26.png" width="14">更新说明：
+             </div>
+             <ul>
+               <li>界面优化</li>
+               <li>bug修复</li>
+             </ul>
+           </div>
+         </li>
+       </ul>
+     </div>
+   </div>
+  </ion-content>
+</ion-view>
