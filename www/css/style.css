@@ -3773,6 +3773,10 @@ input[type=month] {
 .sign-alert .sign-box{
   height: 230px;
   width: 100%;
+  background-image: url("../img/sign_area.png");
+background-size: 90% 90%;
+  background-position: center;
+background-repeat: no-repeat;
 }
 .sign-alert .submit .button{
   padding: 0 30px;
