@@ -1,5 +1,5 @@
-angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv'])
-  .controller('ScheduleMgtCtrl', function ($scope, $rootScope, $ionicPopup, routesettingsrv, dailysrv) {
+angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMoment'])
+  .controller('ScheduleMgtCtrl', function ($scope, $rootScope, $ionicPopup, routesettingsrv, dailysrv, amMoment) {
 
     //切角色
     $scope.CCR = true;
@@ -23,39 +23,61 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv'])
     //当前日期
     $scope.currentDate = new Date();
     //今天本周的第几天
-    $scope.nowDayOfWeek =$scope.currentDate.getDay() == 0 ? 6 : ($scope.currentDate.getDay() - 1);//今天本周的第几天
+    $scope.nowDayOfWeek = $scope.currentDate.getDay() == 0 ? 6 : ($scope.currentDate.getDay() - 1);//今天本周的第几天
     //当前周的开始日期
     $scope.weekSatrtDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - $scope.nowDayOfWeek);
     //当前周的结束日期
     $scope.weekEndDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + (6 - $scope.nowDayOfWeek));
-    /*//获取周日期数组
-    $scope.weekDays =[];
-    $scope.getWeekDays = function () {
-      $scope.weekDays = [];
-      var dateDiff = parseInt(Math.abs($scope.weekSatrtDate-$scope.weekEndDate)  /  1000  /  60  /  60  /24);//日期差天数
-      for(var i=0;i<dateDiff;i++){
-        $scope.weekDays.push($scope.weekSatrtDate.setDate($scope.weekSatrtDate.getDate()+ i));
-      };
+    //获取一周已填写的计划
+    $scope.getWeekPlanList = function (callback) {
+      dailysrv.getWeekPlanList(moment($scope.weekSatrtDate).format("YYYY-MM-DD"), moment($scope.weekEndDate).format("YYYY-MM-DD")).then(function (palnlist) {
+        $scope.weekPlanList = palnlist;
+        console.log(palnlist);
+        if (callback != null) {
+          callback();
+        }
+      });
     };
-    $scope.getWeekDays();*/
+    //获取本周的日期数组
+    $scope.$watch("weekSatrtDate", function (newValue, oldValue, scope) {
+      {
+        $scope.weekDays = [];
+        //获取一周计划
+        var dateDiff = parseInt(Math.abs($scope.weekSatrtDate - $scope.weekEndDate) / 1000 / 60 / 60 / 24);//日期差天数
+        for (var i = 0; i <= dateDiff; i++) {
+          $scope.weekDays.push(moment($scope.weekSatrtDate).add(i, 'days'));
+          if (i == dateDiff) {
+            $scope.getWeekPlanList(function () {
+              for (var j = 0; j < $scope.weekDays.length; j++) {
+                for (var k = 0; k < $scope.weekPlanList.PlanRoutelines.length; k++) {
+                  if (moment($scope.weekDays[j]).format("YYYY-MM-DD") == moment($scope.weekPlanList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
+                    $scope.weekDays[j].route = $scope.weekPlanList.PlanRoutelines[k];
+                  }
+                }
+              }
+            });
+          }
+        }
+        ;
+      }
+    });
     //下一周
-    $scope.nextWeek = function(){
-      $scope.currentDate.setDate($scope.currentDate.getDate()+ 7);
+    $scope.nextWeek = function () {
+      $scope.currentDate.setDate($scope.currentDate.getDate() + 7);
       $scope.weekSatrtDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - $scope.nowDayOfWeek);
       $scope.weekEndDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + (6 - $scope.nowDayOfWeek));
     };
     //上一周
-    $scope.prevWeek = function(){
-       $scope.currentDate.setDate($scope.currentDate.getDate()- 7);
+    $scope.prevWeek = function () {
+      $scope.currentDate.setDate($scope.currentDate.getDate() - 7);
       $scope.weekSatrtDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - $scope.nowDayOfWeek);
       $scope.weekEndDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + (6 - $scope.nowDayOfWeek));
     };
 
-
     //改计划实际tab
     $scope.changePA = function (pa) {
       $scope.statusTab = pa;
-    }
+    };
 
     //初始化半天事务tab
     $scope.footerTab = 'route';
@@ -65,8 +87,11 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv'])
       console.log(tabTitle);
     };
     //点半天事务弹出底部框
-    $scope.showHalfFooter = function (tabTitle) {
+    $scope.showHalfFooter = function (tabTitle, date) {
       $scope.getRoutes(function () {
+        $scope.selectedDate = date;//选中的日期
+        //console.log($scope.selectedDate);
+        console.log(date);
         $scope.showMask = true;
         $scope.footerTab = tabTitle;
         $scope.halfAffair = true;
@@ -92,6 +117,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv'])
           if ($scope.currentRoute.Institutions.length <= 0) {
             $rootScope.toast("请选择机构");
           } else {
+            $scope.currentRoute.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
             dailysrv.savePlan($scope.currentRoute).then(function (state) {
               if (state) {
                 $rootScope.toast("保存成功", function () {

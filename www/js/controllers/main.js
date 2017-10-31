@@ -53,6 +53,7 @@ angular.module('main.ctrl', [])
         iconName: "folder",
         state: "main.learningindex"
       }];
+    moment.locale('zh-cn');
     $scope.currentstate = $state;
 
     //清空缓存

@@ -15,7 +15,9 @@ angular.module('amap.dt', [])
               resizeEnable: true,
               //zoom: 10,
               draggable: true,
+              /*mapStyle: 'amap://styles/b8bc3f4188432ed34aa545312ddf20f9'//样式URL*/
             });
+          //$rootScope.map.setFeatures("road");//仅显示道路
           //通知初始化完成
           $rootScope.$broadcast("amap", "mapcompleted");
         }

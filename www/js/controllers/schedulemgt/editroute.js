@@ -111,6 +111,7 @@ angular.module('editroute.ctrl', ['routesetting.srv', 'daily.srv'])
       if ($scope.currentRoute.Institutions.length <= 0) {
         $rootScope.toast("请选择机构");
       } else {
+        $scope.currentRoute.ActivityDate = $stateParams.activityDate;
         dailysrv.savePlan($scope.currentRoute).then(function (state) {
           if (state) {
             $rootScope.toast("保存成功", function () {

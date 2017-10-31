@@ -17,7 +17,7 @@
 
     <div class="list">
       <label class="item">
-       <p>{{state}}</p>
+        <p>{{state}}</p>
       </label>
       <label class="item">
         <button class="button button-block button-positive" type="button" ng-click="start()">开始</button>
@@ -25,14 +25,19 @@
       <label class="item">
         <button class="button button-block button-positive" type="button" ng-click="end()">结束</button>
       </label>
+      <label class="item">
+        <div id="testmap" style="height:200px;width: 100%">
+
+        </div>
+      </label>
     </div>
-<div class="flex-row img-test">
-  <div class="col-33 flex-center">
-    <img src="img/avatar_f.png" width="50">
-  </div>
-  <div class="col-33 flex-center" ui-sref="main.vitalityeducation">
-    <span class="uicon testimg-4"></span>
-  </div>
-</div>
+    <div class="flex-row img-test">
+      <div class="col-33 flex-center">
+        <img src="img/avatar_f.png" width="50">
+      </div>
+      <div class="col-33 flex-center" ui-sref="main.vitalityeducation">
+        <span class="uicon testimg-4"></span>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

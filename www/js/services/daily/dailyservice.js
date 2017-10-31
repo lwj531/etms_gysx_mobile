@@ -5,5 +5,9 @@ angular.module("daily.srv", ["http.srv"])
       //test
       return httpsrv.service("/api/Daily/SaveActivityRouteline", model, "post");
     };
+    //获取一周的计划
+    this.getWeekPlanList = function (startDate,endDate) {
+      return httpsrv.service("/api/Weekly/GetDateRangePlans/"+ startDate + '/'+ endDate, {}, "get");
+    };
   }
   ]);

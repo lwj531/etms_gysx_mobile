@@ -89,7 +89,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //日程管理编辑路线
       .state('main.editroute', {
-        url: '/editroute/:lineId',
+        url: '/editroute/:lineId/:activityDate',
         templateUrl: "templates/schedulemgt/editroute.html",
         controller: "EditRouteCtrl"
       })
