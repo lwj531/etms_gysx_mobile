@@ -5,22 +5,20 @@
       <span class="back-text" style="">返回</span>
     </button>
     <div class="h1 title">编辑路线</div>
-    <button class="button button-clear back-button">
-      保存
+    <button class="button button-clear back-button" ng-click="savePlan()">
+      确定
     </button>
   </div>
 
   <ion-content class="has-header">
     <div class="content-block-title flex-between">
       <div class="align-center margin-img color-black"><img src="img/route_green_44.png" width="20">路线名称</div>
-      <div class="color-blue">7家机构</div>
+      <div class="color-blue">{{currentRoute.Institutions.length}}家机构</div>
     </div>
-    <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-      <ion-item class="item-remove-animate item item-avatar edit-route" ng-repeat="item in editList">
-        <!--{{$index}} {{item.title}} {{item.id}}-->
-        <img src="img/markerA_52.png" width="20">
-        <h2> {{$index}} {{item.title}}</h2>
-        <p> {{item.id}}</p>
+    <ion-list show-delete="true" show-reorder="true">
+      <ion-item class="item-remove-animate item item-avatar edit-route" ng-repeat="item in currentRoute.Institutions">
+        <img src="img/{{getIonic(item)}}" width="20">
+        <h2> {{item.InstitutionName}}</h2>
 
         <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)">
         </ion-delete-button>
@@ -44,37 +42,21 @@
     </div>
     <div class="user-searchbar flex-center">
       <div class="width-90 flex-between">
-        <input type="text" placeholder="输入关键字搜索机构">
-        <button class="button button-positive button-small">搜索</button>
+        <input type="text" placeholder="输入关键字搜索机构" ng-model="insKey">
+        <button class="button button-positive button-small" ng-click="resetSearchIns()">重置</button>
       </div>
     </div>
     <ul class="footer-searchlist">
-      <li class="list-item multi-line">
+      <li class="list-item multi-line" ng-repeat="item in localInsList">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+          <div class="item-media"><span class="uicon {{getCssClass(item)}}"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">北京xxxxx分部(A)</div>
-            </div>
-            <div class="item-title-row">
-              <div class="item-text">北京xxxxx分部(A)</div>
+              <div class="item-text">{{item.InstitutionName + (item.InstitutionPriority!=''?('('+item.InstitutionPriority+')'):'')}}</div>
               <!--已加入路线显示已加入-->
-              <div class="item-after color-blue">已加入</div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="list-item multi-line">
-        <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
-          <div class="item-inner">
-            <div class="item-title-row">
-              <div class="item-title">北京xxxxx分部(A)</div>
-            </div>
-            <div class="item-title-row">
-              <div class="item-text">北京xxxxx分部(A)</div>
+              <div class="item-after color-blue" ng-if="item.selected">已加入</div>
               <!--点击加入路线-->
-              <div class="item-after color-green flex-start margin-img"><img src="img/route_green_44.png" width="18">
+              <div class="item-after color-green flex-start margin-img" ng-if="!item.selected" ng-click="addToRouteIns(item)"><img src="img/route_green_44.png" width="18">
                 加入路线
               </div>
             </div>

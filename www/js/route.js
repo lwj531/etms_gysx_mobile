@@ -34,7 +34,8 @@ angular.module('route', [
   'http.srv',
   'routesetting.srv',
   'client.srv',
-  //directive
+  'daily.srv',
+  //directive 指令
   'amap.dt',
   'toast.dt'
 ]);
