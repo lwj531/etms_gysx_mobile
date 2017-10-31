@@ -1,5 +1,5 @@
-angular.module('home.ctrl', ['car.srv'])
-  .controller('HomeCtrl', function ($scope, $state, carsrv, $ionicModal,$ionicPopup,$ionicHistory) {
+angular.module('home.ctrl', [])
+  .controller('HomeCtrl', function ($scope, $state, $ionicModal,$ionicPopup,$ionicHistory) {
     //清除登陆页面的历史纪录
     $ionicHistory.clearHistory();
 

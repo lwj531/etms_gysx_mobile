@@ -1,6 +1,7 @@
 angular.module('main.ctrl', [])
   .controller('MainCtrl', function ($rootScope, $scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup, $timeout) {
-    //模拟菜单数据
+
+     //模拟菜单数据
     $scope.menus = [
       {
         name: " 首页",
