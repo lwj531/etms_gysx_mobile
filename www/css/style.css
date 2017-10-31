@@ -302,6 +302,7 @@ p {
   box-sizing: border-box;
   position: relative;
   background-color: #fff;
+  font-size: 12px;
 }
 
 ul {
@@ -1177,6 +1178,7 @@ select {
 
 .bg-white {
   background-color: white;
+font-size: 13px;
 }
 
 div.info-top {
@@ -3896,4 +3898,37 @@ font-size: 13px;
 
 .about .about-card .version-list>li li{
   padding-left:20px;
+}
+
+.change-password {
+
+}
+.change-password ul{
+padding: 10px 0;
+}
+.change-password .pass-input {
+  padding: 10px 0;
+}
+
+.change-password .pass-input .button {
+  width: 160px;
+  line-height: 29px;
+  border-radius: 0;
+  height: 40px;
+  min-height: 40px;
+}
+
+.change-password .pass-input input {
+  width: 100%;
+  border: 1px solid #eee;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #3e3e3e;
+  height: 40px;
+  line-height: 40px;
+}
+
+.change-password ul+ .flex-center .button{
+  width: 80%;
+  margin-top: 20px;
 }

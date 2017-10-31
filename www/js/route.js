@@ -2,9 +2,9 @@
 angular.module('route', [
   //控制器
   'account.ctrl',
-  "main.ctrl",
-  "home.ctrl",
-  "msgcenter.ctrl",
+  'main.ctrl',
+  'home.ctrl',
+  'msgcenter.ctrl',
   'car.ctrl',
   'routesetting.ctrl',
   'callguide.ctrl',
