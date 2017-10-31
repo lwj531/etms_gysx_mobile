@@ -14,12 +14,12 @@
         });
     } else if (typeof module === "object" && module.exports) {
         module.exports = global.document ?
-            factory(require("jquery"), global) :
+            factory(require("Jquery"), global) :
             function(w) {
                 if (!w.document) {
                     throw new Error("patternLock requires a window with a document");
                 }
-                return factory(require("jquery")(w), w);
+                return factory(require("Jquery")(w), w);
             };
     } else {
         global.PatternLock = factory(global.jQuery, global);

@@ -28,6 +28,9 @@ angular.module('route', [
   'tutorialcheckin.ctrl',
   'callprocedurestep2.ctrl',
   'tutorialmgt.ctrl',
+  'settings.ctrl',
+  'about.ctrl',
+  'changepassword.ctrl',
   //service
   'account.srv',
   'car.srv',

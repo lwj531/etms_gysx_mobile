@@ -15,11 +15,11 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-media": {},
       "cordova-plugin-camera": {},
       "com.zhaoying.GaoDeLocation": {
         "API_KEY": "ca2492e54192b39c32479aca89f9834f"
-      }
+      },
+      "cordova-plugin-media": {}
     },
     "platforms": [
       "android"

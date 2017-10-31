@@ -11840,7 +11840,7 @@ ionic.views.Slider = ionic.views.View.inherit({
           Keyboard Control
           ===========================*/
         function handleKeyboard(e) {
-            if (e.originalEvent) e = e.originalEvent; //jquery fix
+            if (e.originalEvent) e = e.originalEvent; //Jquery fix
             var kc = e.keyCode || e.charCode;
             // Directions locks
             if (!s.params.allowSwipeToNext && (isH() && kc === 39 || !isH() && kc === 40)) {
@@ -11935,7 +11935,7 @@ ionic.views.Slider = ionic.views.View.inherit({
             }
         }
         function handleMousewheel(e) {
-            if (e.originalEvent) e = e.originalEvent; //jquery fix
+            if (e.originalEvent) e = e.originalEvent; //Jquery fix
             var we = s.mousewheel.event;
             var delta = 0;
             var rtlFactor = s.rtl ? -1 : 1;

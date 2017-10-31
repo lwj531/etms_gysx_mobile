@@ -93,6 +93,10 @@ p {
   background-color: #419de7;
 }
 
+.button.button-assertive {
+  background-color: #f26b63;
+}
+
 .button.button-energized {
   background-color: #f5a623;
 }
@@ -298,6 +302,7 @@ p {
   box-sizing: border-box;
   position: relative;
   background-color: #fff;
+  font-size: 12px;
 }
 
 ul {
@@ -447,6 +452,7 @@ ul {
   display: -webkit-flex;
   display: flex;
   max-height: 28px;
+  font-size:12px;
 }
 
 .list-count {
@@ -1172,6 +1178,7 @@ select {
 
 .bg-white {
   background-color: white;
+font-size: 13px;
 }
 
 div.info-top {
@@ -3148,6 +3155,7 @@ ul.exercise-week .has-wrong .dot:after {
 .exercise-alert.popup-container .popup-body {
   height: 100%;
   padding: 0;
+  border-radius: 10px;
 }
 
 .exercise-alert.popup-container .body-inner {
@@ -3292,7 +3300,7 @@ ul.exercise-week .has-wrong .dot:after {
   content: '';
   position: absolute;
   display: block;
-  height: 35px;
+  height: 18px;
   width: 1px;
   border-radius: 9px;
   background-color: #fff;
@@ -3436,7 +3444,8 @@ ul.exercise-week .has-wrong .dot:after {
 
 .point-content {
   height: 100%;
-  background: url("../img/") no-repeat 100%;
+  background: url("../img/vdresult.png") center no-repeat;
+  background-size: cover;
 }
 
 .point-content .name {
@@ -3455,7 +3464,7 @@ ul.exercise-week .has-wrong .dot:after {
 }
 
 .point-content .point {
-  padding-top: 20px;
+  padding-top: 40px;
   height: 60%;
   text-align: center;
   color: #feba44;
@@ -3463,7 +3472,7 @@ ul.exercise-week .has-wrong .dot:after {
 }
 
 .point-content .point span {
-  font-size: 60px;
+  font-size: 66px;
   font-weight: 600;
 }
 
@@ -3791,4 +3800,135 @@ input[type=month] {
 
 .sign-alert .submit .button {
   padding: 0 30px;
+}
+
+.settings .points-top {
+  padding-top: 15px;
+  background-image: url("../img/settings_bg.png");
+}
+
+.settings .points-top .flex-start.margin-img {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.settings .points-top .item-inner {
+  padding-top: 15px;
+}
+
+.setting-list .item-inner {
+  padding: 15px 0;
+  color: #4e4e4e;
+}
+
+.setting-list + .flex-center button {
+  width: 80%;
+  margin-top: 30px;
+}
+
+.about .scroll{
+height: 100%;
+}
+
+.about .about-card {
+  height: calc(100% - 40px);
+  width: 90%;
+  box-shadow: 0 1px 6px 0px rgba(0, 0, 0, 0.13);
+  border-radius: 1px;
+  overflow: hidden;
+  background-color: #fff;
+}
+.about .about-card .title{
+  color: #419de7;
+background-color: #f6fbff;
+  padding: 15px;
+  font-size: 16px;
+}
+
+.about .about-card .latest{
+  color: #e98338;
+background-color: #fff;
+  padding: 15px;
+  font-size: 12px;
+  position: relative;
+}
+.about .about-card .latest:after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  bottom: 0;
+  right: auto;
+  top: auto;
+  height: 1px;
+  width: calc(100% - 30px);
+  background-color: #f6f6f6;
+  display: block;
+}
+.about .about-card .latest .tag{
+  padding: 0 5px 1px;
+  background-color: #e98338;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.about .about-card .version-list {
+  height: calc(100% - 110px);
+  overflow: auto;
+  font-size: 12px;
+  color: #98A6B7;
+}
+.about .about-card .version-list>li{
+  padding: 10px 15px 2px;
+}
+
+.about .about-card .version-list .version-title{
+font-size: 13px;
+  padding-bottom: 6px;
+}
+.about .about-card .version-list .version-title.current{
+  color:#419de7;
+}
+.about .about-card .version-list .version-title .tag{
+  padding: 0 5px 1px;
+  background-color: #419de7;
+  color: #fff;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.about .about-card .version-list>li li{
+  padding-left:20px;
+}
+
+.change-password {
+
+}
+.change-password ul{
+padding: 10px 0;
+}
+.change-password .pass-input {
+  padding: 10px 0;
+}
+
+.change-password .pass-input .button {
+  width: 160px;
+  line-height: 29px;
+  border-radius: 0;
+  height: 40px;
+  min-height: 40px;
+}
+
+.change-password .pass-input input {
+  width: 100%;
+  border: 1px solid #eee;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #3e3e3e;
+  height: 40px;
+  line-height: 40px;
+}
+
+.change-password ul+ .flex-center .button{
+  width: 80%;
+  margin-top: 20px;
 }

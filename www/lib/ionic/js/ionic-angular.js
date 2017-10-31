@@ -3594,7 +3594,7 @@ function($ionicTemplateLoader, $ionicBackdrop, $q, $timeout, $rootScope, $ionicB
       cssClass: options.cssClass,
       $buttonTapped: function(button, event) {
         var result = (button.onTap || noop).apply(self, [event]);
-        event = event.originalEvent || event; //jquery events
+        event = event.originalEvent || event; //Jquery events
 
         if (!event.defaultPrevented) {
           self.responseDeferred.resolve(result);
@@ -11466,7 +11466,7 @@ function($timeout) {
  * automatically close the currently opened menu.
  *
  * ```html
- * <a menu-close href="#/home" class="item">Home</a>
+ * <a menu-close href="#/home" class="item">home</a>
  * ```
  *
  * Note that if your destination state uses a resolve and that resolve asynchronously
@@ -11898,7 +11898,7 @@ IonicModule
  * @usage
  *
  * ```html
- * <a nav-direction="forward" href="#/home">Home</a>
+ * <a nav-direction="forward" href="#/home">home</a>
  * ```
  */
 IonicModule
@@ -12000,7 +12000,7 @@ IonicModule
  * @usage
  *
  * ```html
- * <a nav-transition="none" href="#/home">Home</a>
+ * <a nav-transition="none" href="#/home">home</a>
  * ```
  */
 IonicModule
@@ -12076,7 +12076,7 @@ IonicModule
  * ```html
  * <script id="home" type="text/ng-template">
  *   <!-- The title of the ion-view will be shown on the navbar -->
- *   <ion-view view-title="Home">
+ *   <ion-view view-title="home">
  *     <ion-content ng-controller="HomeCtrl">
  *       <!-- The content of the page -->
  *       <a href="#/music">Go to music page!</a>
@@ -14001,7 +14001,7 @@ IonicModule
  * ```html
  * <ion-tabs class="tabs-positive tabs-icon-top">
  *
- *   <ion-tab title="Home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
+ *   <ion-tab title="home" icon-on="ion-ios-filing" icon-off="ion-ios-filing-outline">
  *     <!-- Tab 1 content -->
  *   </ion-tab>
  *

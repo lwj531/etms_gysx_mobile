@@ -203,6 +203,24 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/tutorialmgt/tutorialmgt.html",
         controller: "TutorialMgtCtrl"
       })
+      //系统设置
+      .state('main.settings', {
+        url: '/settings',
+        templateUrl: "templates/settings/settings.html",
+        controller: "SettingsCtrl"
+      })
+      //关于
+      .state('main.about', {
+        url: '/about',
+        templateUrl: "templates/settings/about.html",
+        controller: "AboutCtrl"
+      })
+      //修改登录密码
+      .state('main.changepassword', {
+        url: '/changepassword',
+        templateUrl: "templates/settings/changepassword.html",
+        controller: "ChangePasswordCtrl"
+      })
       .state('carinfo', {
         url: '/carinfo',
         templateUrl: "templates/carinfo.html",
