@@ -2,15 +2,16 @@
 <ion-view>
   <ion-content class="bg-white">
     <div class="flex-end paddinglr-20 margintb-20">
-      <a class="button button-clear button-assertive">忘记密码</a>
+      <a class="button button-clear button-assertive" ng-click="clear()">忘记密码</a>
     </div>
     <div class="flex-center paddinglr-20 paddingtb-20">
       <img src="img/logo_blue_460.png" width="108">
     </div>
     <div class="flex-center paddinglr-20 margintb-20">
-      <a class="button button-small button-light" style="padding: 3px 15px 3px; margin:0 10px;">嘉兴1</a>
+      <a ng-repeat="item in roules" ng-click="selectroute(item)" class="button button-small button-light" style="padding: 3px 15px 3px; margin:0 10px;">{{item.Name}}</a>
     </div>
-    <form ng-submit="doLogin()" class="paddinglr-20 paddingtb-20">
+    <form class="paddinglr-20 paddingtb-20">
+
       <div class="list list-inset">
         <label class="item item-input">
           <i class="icon uicon-login-account placeholder-icon"></i>

@@ -1136,7 +1136,7 @@ var csp = function() {
  * @description
  * Use this directive to force the angular.element library.  This should be
  * used to force either jqLite by leaving ng-jq blank or setting the name of
- * the jquery variable under window (eg. jQuery).
+ * the Jquery variable under window (eg. jQuery).
  *
  * Since angular looks for this directive when it is loaded (doesn't wait for the
  * DOMContentLoaded event), it must be placed on an element that comes before the script
@@ -8134,7 +8134,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
     function compile($compileNodes, transcludeFn, maxPriority, ignoreDirective,
                         previousCompileContext) {
       if (!($compileNodes instanceof jqLite)) {
-        // jquery always rewraps, whereas we need to preserve the original selector so that we can
+        // Jquery always rewraps, whereas we need to preserve the original selector so that we can
         // modify it.
         $compileNodes = jqLite($compileNodes);
       }
@@ -30556,7 +30556,7 @@ if (window.angular.bootstrap) {
   return;
 }
 
-//try to bind to jquery now so that one can write jqLite(document).ready()
+//try to bind to Jquery now so that one can write jqLite(document).ready()
 //but we will rebind on bootstrap again.
 bindJQuery();
 

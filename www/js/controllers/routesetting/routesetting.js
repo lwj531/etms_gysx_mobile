@@ -1,562 +1,365 @@
-var type_1 = new Array();
-var type_2 = new Array();
-var type_3 = new Array();
-var type_4 = new Array();
-var type_5 = new Array();
-var type_6 = new Array();
-var all_marker = new Array();
-var map;
+angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
+  .controller('RouteSettingCtrl', function ($rootScope, $scope, $ionicPopup, $ionicListDelegate, $compile,$timeout, routesettingsrv) {
 
-angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
-  .controller('RouteSettingCtrl', function($scope,$ionicPopup,routesettingsrv) {
-    $scope.insdata ={};
-    $scope.linesdata = {};
-    //初次加载用户所有机构
-    routesettingsrv.getins().then(function (data) {
-      $scope.insdata = data;
-      var originalpoint  =  new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
-      //实例地图
-        map = new AMap.Map("routemap",
-        {
-          view:new AMap.View2D({
-            center:originalpoint,
-            resizeEnable: true,
-            zoom: 15
-          }),
-          lang:"zh_cn"
+    $scope.route = {
+      name: "",
+      //路线篮子
+      cart: []
+    }
+    //获取路线图
+    $scope.getroutes = function () {
+      routesettingsrv.getroutes().then(function (data) {
+        $scope.routes = data;
+      });
+    };
+    //获取用户所有机构
+    $scope.getins = function () {
+      routesettingsrv.getins().then(function (data) {
+        $scope.insdata = data;
+        //设置原点
+        $scope.center = new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
+        //通知数据已获取
+        $scope.$broadcast("amap", "datacompleted");
+      });
+    };
+    //初始化
+    $scope.init = function () {
+      $scope.getroutes();
+      $scope.getins();
+    };
+    $scope.init();
+
+    //地图初始化完成后执行
+    $scope.$on('amap', function (errorType, data) {
+      if (data == "mapcompleted") {
+        $scope.map.clearMap();
+        $scope.map.clearInfoWindow();
+        //点击地图关闭编辑窗口
+        $scope.map.on('click', function (e) {
+         /* //通知关闭详细
+          $scope.$broadcast("close", "detail");
+          $scope.$apply();*/
         });
-      //加载Marker
-      for (var i = 0; i < data.length; i++) {
-        var position = new AMap.LngLat(data[i].InstitutionLng, data[i].InstitutionLat);
-          marker = new AMap.Marker({
-            icon: new AMap.Icon({
-              image:data[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(data[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
-              size: new AMap.Size(26, 30)
-            }),
-            extData: { address: data[i].Address, name: data[i].InstitutionName },
-            position: position //图标定位
-          });
-          marker.setMap(map);
-          AMap.event.addListener(marker,'click',_onClick);
-
-
-
-        function _onClick(e) {
-
-        }
-
-        marker.on("click", function (e) {
-          //debugger;
-          //这里写了一个用来做已经存在于几个路线中的店铺的加入提示信息
-          if (e.target.G.extData.name == "长寿大药房") {
-            var title2 = '<div style="width:40px;background-color:#0076FF;text-align:center;height:45px;border-radius:5px 0 0 5px;"><img src="img/store-icon.png" style="display:inline-block;height:45px;color:white;position:absolute;left:-2px;"/></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-            $(".warnremind").show();
-          }
-          else {
-            var title2 = '<div style="width:40px;background-color:#0076FF;text-align:center;height:45px;border-radius:5px 0 0 5px;"><img src="img/store-icon.png" style="display:inline-block;height:45px;color:white;position:absolute;left:-2px;"/></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-          }
-
-          var hs = e.target.G.extData;
-          var marker_window = new AMap.InfoWindow({
-            isCustom: true,
-            content:createInfoWindow(title2,content2),
-            autoMove: true,
-            closeWhenClickMap: true,
-            offset: new AMap.Pixel(110, -24)
-          });
-          marker_window.open(map, e.target.getPosition());
+        $scope.style = [
+          {
+            url: "img/GradeA-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(26, 32)
+          },
+          {
+            url: "img/GradeB-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(26, 32)
+          },
+          {
+            url: "img/GradeC-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(26, 32)
+          },
+          //小图
+          {
+            url: "img/GradeA-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(26, 32)
+          },
+          {
+            url: "img/GradeB-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(26, 32)
+          },
+          {
+            url: "img/GradeC-icon.png",
+            anchor: new AMap.Pixel(6, 6),
+            size: new AMap.Size(26, 32)
+          },
+        ];
+        $scope.mass = new AMap.MassMarks($scope.insdata, {
+          zIndex: 111,
+          cursor: 'pointer',
+          style: $scope.style,
         });
+        $scope.mass.on('click', $scope.showInfoWindow);
+        $scope.mass.setMap($scope.map);
+
       }
     });
-
-    //加载用户的所有路线信息(linedata丢到前台去遍历)
-    routesettingsrv.getlines().then(function (data) {
-      console.log(data);
-      $scope.linesdata = data;
+    //接收关闭窗口命令
+    $scope.$on('close', function (errorType, data) {
+      if (data == "detail" && $scope.routeedit==false) {
+        $scope.closeroutedetail();
+      }
     });
-
-
-
-// 点击marker出现窗体信息函数
-    $scope.createInfoWindow=function(){
-
+    //当前点击的机构
+    $scope.currentins;
+    //加入路线图
+    $scope.addinline = function () {
+      //新增到路线篮子或者编辑的路线中
+      if ($scope.routeedit) {
+        if ($scope.currentRoute.Institutions.indexOf($scope.currentins) == -1) {
+          $scope.currentRoute.Institutions.push($scope.currentins);
+          $rootScope.toast("添加成功");
+        } else {
+          //提示
+          $rootScope.toast("已选择该机构");
+        }
+      } else {
+        if ($scope.route.cart.indexOf($scope.currentins) == -1) {
+          $scope.route.cart.push($scope.currentins);
+          $rootScope.toast("添加成功");
+        } else {
+          //提示
+          $rootScope.toast("已选择该机构");
+        }
+      }
     };
-    function createInfoWindow(title, content) {
-      var info = document.createElement("div");
-      info.className = "info";
+    //关闭信息窗体
+    $scope.closeInfoWindow=function(){
+      $scope.map.clearInfoWindow();
+    };
+    $scope.infoWindow = new AMap.InfoWindow({
+      offset: new AMap.Pixel(5, 0),
+      isCustom: true,
+      //closeWhenClickMap:true,
+      autoMove:true
+    });
+    //点击Marker
+    $scope.showInfoWindow = function (event) {
+      //点击的机构数据
+      /*$scope.currentins = event.data;
+      $scope.$apply();
+      $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
+      $scope.infoWindow.open($scope.map, event.data.lnglat);*/
+      $scope.currentins = event.data;
+      $scope.openinsinfo(event.data);
+    };
+    //是否为新增状态
+    $scope.isnewly = false;
+    //新增路线
+    $scope.addnewroute = function () {
+      $scope.isnewly = true;
+      $scope.routedetail = false;
+      $scope.routeedit = false;
+      //关闭搜索框
+      $scope.closesearchmodal();
+      //关闭无坐标机构窗体
+      $scope.closenolatlngmodal();
+    };
+    //拖动排序的回调函数
+    $scope.moveRoute = function (arr, item, fromIndex, toIndex) {
+      arr.splice(fromIndex, 1);
+      arr.splice(toIndex, 0, item);
+    };
+    //关闭新增路线
+    $scope.closeaddroute = function () {
+      $scope.isnewly = false;
+      $scope.route.cart = [];
+      $scope.route.name = "";
+    };
+    //保存路线到服务器
+    $scope.saveroute = function () {
+      if ($scope.route.name == "") {
+        $rootScope.toast("请输入路线名");
+      } else if ($scope.route.cart.length <= 0) {
+        $rootScope.toast("请选择机构");
+      } else {
+        var model = {
+          LineName: $scope.route.name,
+          Institutions: $scope.route.cart
+        };
+        routesettingsrv.saveroute(model).then(function (state) {
+          if (state) {
+            $rootScope.toast("保存成功");
+            $scope.closeaddroute();
+            $scope.getroutes();
 
-      //可以通过下面的方式修改自定义窗体的宽高
-      //info.style.width = "400px";
-      // 定义顶部标题
-      var top = document.createElement("div");
-      top.className = "info-top";
-      top.innerHTML = title;
-
-      info.appendChild(top);
-
-      // 定义底部内容
-      var bottom = document.createElement("div");
-      bottom.className = "info-bottom";
-      bottom.style.position = 'relative';
-      bottom.style.top = '0px';
-      bottom.style.margin = '0 auto';
-      var sharp = document.createElement("img");
-      sharp.src = "https://webapi.amap.com/images/sharp.png";
-      bottom.appendChild(sharp);
-      info.appendChild(bottom);
-      return info;
+          } else {
+            $rootScope.toast("保存失败");
+          }
+        });
+      }
     }
 
-
-
-    //路线顶部显示有几条路线区域
-    $scope.routName=[
-      {name:'路线01'},
-      {name:'路线02'},
-      {name:'路线03'},
-      {name:'路线04'},
-      {name:'路线05'},
-      {name:'路线06'},
-      {name:'路线07'},
-      {name:'路线08'},
-      {name:'路线09'},
-      {name:'路线10'}
-    ];
-
-
-   /* var data1 = [
-      { "InstitutionName": "国药控股大药房永新连锁店", "LocationAddress": "南京路221号", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921" ,"Priority":"A","Linename":"01"},
-      { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496","Priority":"B","Linename":"02" },
-      { "InstitutionName": "星巴克", "LocationAddress": "人民大道211号222铺", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","Priority":"B","Linename":"02" },
-      { "InstitutionName": "复星黄河大药房", "LocationAddress": "上海市黄浦区凤阳路250号", "InstitutionLat": "31.256307", "InstitutionLng": "121.417591" ,"Priority":"A","Linename":"02"},
-      { "InstitutionName": "百姓缘大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.25981", "InstitutionLng": "121.41875","Priority":"C" ,"Linename":"01"},
-      { "InstitutionName": "广善缘大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258875", "InstitutionLng": "121.417097" ,"Priority":"B","Linename":""},
-      { "InstitutionName": "国大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.257261", "InstitutionLng": "121.422676","Priority":"B" ,"Linename":"01"},
-      { "InstitutionName": "广济大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.254821", "InstitutionLng": "121.421174","Priority":"B","Linename":"03" },
-      { "InstitutionName": "国胜大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.255427", "InstitutionLng": "121.419994","Priority":"C","Linename":"03" },
-      { "InstitutionName": "为民大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258105", "InstitutionLng": "121.422912","Priority":"B" ,"Linename":""},
-      { "InstitutionName": "同济大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.257628", "InstitutionLng": "121.417033" ,"Priority":"A","Linename":"03"},
-      { "InstitutionName": "益安堂大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.255078", "InstitutionLng": "121.417484","Priority":"C" ,"Linename":"01"},
-      { "InstitutionName": "长寿大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258031", "InstitutionLng": "121.418557","Priority":"B" ,"Linename":"03"}
-    ];
-    var json1 = eval(data1);
-    var data2 = [
-      { "InstitutionName": "普陀区医院", "LocationAddress": "南京西路216号大光明电影院二楼", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921","Priority":"C","Linename":"02" },
-      { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496" ,"Priority":"B","Linename":"02"},
-      { "InstitutionName": "星巴克", "LocationAddress": "人民大道211号222铺", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","Priority":"B","Linename":"02" },
-      { "InstitutionName": "复星黄河大药房", "LocationAddress": "上海市黄浦区凤阳路250号", "InstitutionLat": "31.256307", "InstitutionLng": "121.417591","Priority":"A","Linename":"02" }
-    ];
-    var json2 = eval(data2);
-
-    position = new AMap.LngLat(json1[0].InstitutionLng, json1[0].InstitutionLat);*/
-
-
-
-
-   /* for (var i = 0; i < json2.length; i++) {
-      position = new AMap.LngLat(json2[i].InstitutionLng, json2[i].InstitutionLat);
-      marker = new AMap.Marker({
-        icon: "/img/mendianfeiquanzhong-icon.png",
-        size: new AMap.Size(15, 15),
-        extData: { address: json2[i].LocationAddress, name: json2[i].InstitutionName },
-        position: position //图标定位
-      });
-      marker.setMap(map);
-
-      polyline = new AMap.Polyline({
-        path: lineArr,            // 设置线覆盖物路径
-        strokeColor: "green",   // 线颜色
-        strokeOpacity: 1,         // 线透明度
-        strokeWeight: 2,          // 线宽
-        strokeStyle: 'dashed',     // 线样式
-        strokeDasharray: [10, 5], // 补充线样式
-        geodesic: true            // 绘制大地线
-      });
-
-      polyline.setMap(map);
-
-      marker.on("click", function (e) {
-
-        var title3 = '<div style="width:40px;background-color:#0076FF;text-align:center;height:45px;border-radius:5px 0 0 5px;"><img src="img/store-icon.png" style="display:inline-block;height:45px;color:white;position:absolute;left:-2px;"/></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content3 = [];
-
-        var hs = e.target.G.extData;
-        var marker_window = new AMap.InfoWindow({
-          isCustom: true,
-          content: createInfoWindow(title3, content3),
-          autoMove: true,
-          closeWhenClickMap: true,
-          offset: new AMap.Pixel(110, -24)
-        });
-        marker_window.open(map, e.target.getPosition());
-      });
-    }*/
-
-
-   //新增路线
-    $scope.addnewroute = function(){
-      $(".addnewroutediv").fadeIn(300);
-      $(".lineinfodiv").hide();
-      $(".searchstorediv").fadeOut(300);
-      $(".nolatlng-storediv").fadeOut(300);
-
-      map.clearMap();
-      data = $scope.insdata;
-      var data1 = [
-        { "InstitutionName": "国药控股大药房永新连锁店", "LocationAddress": "南京路221号", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921" ,"Priority":"A","Linename":"01"},
-        { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496","Priority":"B","Linename":"02" },
-        { "InstitutionName": "星巴克", "LocationAddress": "人民大道211号222铺", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","Priority":"B","Linename":"02" },
-        { "InstitutionName": "复星黄河大药房", "LocationAddress": "上海市黄浦区凤阳路250号", "InstitutionLat": "31.256307", "InstitutionLng": "121.417591" ,"Priority":"A","Linename":"02"},
-        { "InstitutionName": "百姓缘大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.25981", "InstitutionLng": "121.41875","Priority":"C" ,"Linename":"01"},
-        { "InstitutionName": "广善缘大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258875", "InstitutionLng": "121.417097" ,"Priority":"B","Linename":""},
-        { "InstitutionName": "国大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.257261", "InstitutionLng": "121.422676","Priority":"B" ,"Linename":"01"},
-        { "InstitutionName": "广济大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.254821", "InstitutionLng": "121.421174","Priority":"B","Linename":"03" },
-        { "InstitutionName": "国胜大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.255427", "InstitutionLng": "121.419994","Priority":"C","Linename":"03" },
-        { "InstitutionName": "为民大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258105", "InstitutionLng": "121.422912","Priority":"B" ,"Linename":""},
-        { "InstitutionName": "同济大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.257628", "InstitutionLng": "121.417033" ,"Priority":"A","Linename":"03"},
-        { "InstitutionName": "益安堂大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.255078", "InstitutionLng": "121.417484","Priority":"C" ,"Linename":"01"},
-        { "InstitutionName": "长寿大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258031", "InstitutionLng": "121.418557","Priority":"B" ,"Linename":"03"}
-      ];
-      var json1 = eval(data1);
-      var data2 = [
-        { "InstitutionName": "普陀区医院", "LocationAddress": "南京西路216号大光明电影院二楼", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921","Priority":"C","Linename":"02" },
-        { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496" ,"Priority":"B","Linename":"02"},
-        { "InstitutionName": "星巴克", "LocationAddress": "人民大道211号222铺", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","Priority":"B","Linename":"02" },
-        { "InstitutionName": "复星黄河大药房", "LocationAddress": "上海市黄浦区凤阳路250号", "InstitutionLat": "31.256307", "InstitutionLng": "121.417591","Priority":"A","Linename":"02" }
-      ];
-      var json2 = eval(data2);
-      //加载Marker
-      for (var i = 0; i < data.length; i++) {
-        var position = new AMap.LngLat(data[i].InstitutionLng, data[i].InstitutionLat);
-        marker = new AMap.Marker({
-          icon: new AMap.Icon({
-            image:data[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(data[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
-            size: new AMap.Size(26, 30)
-          }),
-          extData: { address: data[i].Address, name: data[i].InstitutionName },
-          position: position //图标定位
-        });
-        marker.setMap(map);
-      /*  AMap.event.addListener(marker,'click',_onClick);
-
-        function _onClick(e) {
-
-        }*/
-
-        marker.on("click", function (e) {
-          //debugger;
-          //这里写了一个用来做已经存在于几个路线中的店铺的加入提示信息
-         // if (e.target.G.extData.name == "长寿大药房") {
-            var title2 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span ng-click="Addinline()" style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:6px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-            $(".warnremind").show();
-       //   }
-        //  else {
-        //    var title2 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span ng-click='+"Addinline()"+' style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:6px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-         // }
-
-          var hs = e.target.G.extData;
-          var marker_window = new AMap.InfoWindow({
-            isCustom: true,
-            content:createInfoWindow(title2,content2),
-            autoMove: true,
-            closeWhenClickMap: true,
-            offset: new AMap.Pixel(110, -24)
-          });
-          marker_window.open(map, e.target.getPosition());
-        });
-      }
-    };
-    //marker的窗体信息里点击加入路线时的函数
-    Addinline = function(){
-      alert(1);
-    };
-
-    $scope.closeaddroute = function(){
-      $(".addnewroutediv").fadeOut(300);
-    };
-
-
-    //此处的items里面的数据是每条路线里的数据
-    $scope.items = [
-      {name:'国药控股大药房永新连锁店',address:'上海石泉路546号',grade:'A'},
-      {name:'吉林大药房卫星路连锁店',address:'上海石泉路546号',grade:'B'},
-      {name:'华氏大药房石泉二店',address:'上海石泉路546号',grade:'C'}
-    ];
-
-      var selected=$scope.selected;
-      //点击路线之后，出现路线的详情弹窗
-      $scope.selectLine=function (index) {
-        $scope.selected =index;
-       /* console.log(index);
-        console.log($scope.selected);*/
-        $(".lineinfodiv").fadeIn(300);
-        $(".addnewroutediv").fadeOut(300);
-        $(".searchstorediv").fadeOut(300);
-        $(".nolatlng-storediv").fadeOut(300);
-
-        map.clearMap();
-        var data1 = [
-          { "InstitutionName": "国药控股大药房永新连锁店", "LocationAddress": "南京路221号", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921" ,"Priority":"A","Linename":"01"},
-          { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496","Priority":"B","Linename":"02" },
-          { "InstitutionName": "星巴克", "LocationAddress": "人民大道211号222铺", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","Priority":"B","Linename":"02" },
-          { "InstitutionName": "复星黄河大药房", "LocationAddress": "上海市黄浦区凤阳路250号", "InstitutionLat": "31.256307", "InstitutionLng": "121.417591" ,"Priority":"A","Linename":"02"},
-          { "InstitutionName": "百姓缘大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.25981", "InstitutionLng": "121.41875","Priority":"C" ,"Linename":"01"},
-          { "InstitutionName": "广善缘大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258875", "InstitutionLng": "121.417097" ,"Priority":"B","Linename":""},
-          { "InstitutionName": "国大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.257261", "InstitutionLng": "121.422676","Priority":"B" ,"Linename":"01"},
-          { "InstitutionName": "广济大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.254821", "InstitutionLng": "121.421174","Priority":"B","Linename":"03" },
-          { "InstitutionName": "国胜大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.255427", "InstitutionLng": "121.419994","Priority":"C","Linename":"03" },
-          { "InstitutionName": "为民大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258105", "InstitutionLng": "121.422912","Priority":"B" ,"Linename":""},
-          { "InstitutionName": "同济大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.257628", "InstitutionLng": "121.417033" ,"Priority":"A","Linename":"03"},
-          { "InstitutionName": "益安堂大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.255078", "InstitutionLng": "121.417484","Priority":"C" ,"Linename":"01"},
-          { "InstitutionName": "长寿大药房", "LocationAddress": "普陀区凤阳路250号", "InstitutionLat": "31.258031", "InstitutionLng": "121.418557","Priority":"B" ,"Linename":"03"}
-        ];
-        var json1 = eval(data1);
-        var data2 = [
-          { "InstitutionName": "普陀区医院", "LocationAddress": "南京西路216号大光明电影院二楼", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921","Priority":"C","Linename":"02" },
-          { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496" ,"Priority":"B","Linename":"02"},
-          { "InstitutionName": "星巴克", "LocationAddress": "人民大道211号222铺", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","Priority":"B","Linename":"02" },
-          { "InstitutionName": "复星黄河大药房", "LocationAddress": "上海市黄浦区凤阳路250号", "InstitutionLat": "31.256307", "InstitutionLng": "121.417591","Priority":"A","Linename":"02" }
-        ];
-        var json2 = eval(data2);
-        lineArr = [
-          [121.418921, 31.258215], [121.421496, 31.258857], [121.41995, 31.256124], [121.417591, 31.256307]
-        ];
-        //加载Marker
-        for (var i = 0; i < json1.length; i++) {
-          position = new AMap.LngLat(json1[i].InstitutionLng, json1[i].InstitutionLat);
-          if(json1[i].Priority == "A"){
-            marker = new AMap.Marker({
-              icon: new AMap.Icon({
-                image: "/img/GradeA-icon.png",
-                size: new AMap.Size(26, 30)
-              }),
-              extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-              position: position //图标定位
-            });
-            marker.setMap(map);
-            AMap.event.addListener(marker,'click',_onClick);
-            type_1.push(marker);
+    //显示路线明细
+    $scope.routedetail = false;
+    $scope.currentRoute = {};
+    //显示路线明细
+    $scope.showroutedetail = function (model) {
+      routesettingsrv.getroutedetail(model.LineID).then(function (data) {
+        $scope.currentRoute = data;
+        $scope.isnewly = false;
+        $scope.routedetail = true;
+        $scope.routeedit = false;
+        //关闭搜索框
+        $scope.closesearchmodal();
+        //关闭无坐标机构窗体
+        $scope.closenolatlngmodal();
+        //绘制路线图
+        var lineArr = [];
+        var markers = $scope.mass.getData();
+        for (var k = 0; k < markers.length; k++) {
+          if(markers[k].style < 3 ){
+            markers[k].style=markers[k].style + 3;
           }
-          if(json1[i].Priority == "B"){
-            marker = new AMap.Marker({
-              icon: new AMap.Icon({
-                image: "/img/GradeB-icon.png",
-                size: new AMap.Size(26, 30)
-              }),
-              extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-              position: position //图标定位
-            });
-            marker.setMap(map);
-            AMap.event.addListener(marker,'click',_onClick);
-            type_2.push(marker);
-          }
-          if(json1[i].Priority == "C"){
-            marker = new AMap.Marker({
-              icon: new AMap.Icon({
-                image: "/img/GradeC-icon.png",
-                size: new AMap.Size(26, 30)
-              }),
-              extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-              position: position //图标定位
-            });
-            marker.setMap(map);
-            AMap.event.addListener(marker,'click',_onClick);
-            type_3.push(marker);
-          }
-          all_marker.push(marker);
-
-          marker.on("click", function (e) {
-
-            var title3 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content3 = [];
-
-            var hs = e.target.G.extData;
-            var marker_window = new AMap.InfoWindow({
-              isCustom: true,
-              content: createInfoWindow(title3, content3),
-              autoMove: true,
-              closeWhenClickMap: true,
-              offset: new AMap.Pixel(110, -24)
-            });
-            marker_window.open(map, e.target.getPosition());
-          });
-
         }
-         for (var i = 0; i < json2.length; i++) {
-              position = new AMap.LngLat(json2[i].InstitutionLng, json2[i].InstitutionLat);
-           if(json1[i].Priority == "A"){
-             marker = new AMap.Marker({
-               icon: new AMap.Icon({
-                 image: "/img/GradeA-inline-icon.png",
-                 size: new AMap.Size(26, 30)
-               }),
-               extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-               position: position //图标定位
-             });
-             marker.setMap(map);
-             AMap.event.addListener(marker,'click',_onClick);
-             type_1.push(marker);
-           }
-           if(json1[i].Priority == "B"){
-             marker = new AMap.Marker({
-               icon: new AMap.Icon({
-                 image: "/img/GradeB-inline-icon.png",
-                 size: new AMap.Size(26, 30)
-               }),
-               extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-               position: position //图标定位
-             });
-             marker.setMap(map);
-             AMap.event.addListener(marker,'click',_onClick);
-             type_2.push(marker);
-           }
-           if(json1[i].Priority == "C"){
-             marker = new AMap.Marker({
-               icon: new AMap.Icon({
-                 image: "/img/GardeC-inline-icon.png",
-                 size: new AMap.Size(26, 30)
-               }),
-               extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-               position: position //图标定位
-             });
-             marker.setMap(map);
-             AMap.event.addListener(marker,'click',_onClick);
-             type_3.push(marker);
-           }
-           all_marker.push(marker);
-           marker.setLabel({
-             offset:new AMap.Pixel(6,3),
-             content:parseInt( i+1 )
-           });
-
-              polyline = new AMap.Polyline({
-                path: lineArr,            // 设置线覆盖物路径
-                strokeColor: "green",   // 线颜色
-                strokeOpacity: 1,         // 线透明度
-                strokeWeight: 2,          // 线宽
-                strokeStyle: 'dashed',     // 线样式
-                strokeDasharray: [10, 5], // 补充线样式
-                geodesic: true            // 绘制大地线
-              });
-
-              polyline.setMap(map);
-
-              marker.on("click", function (e) {
-
-                var title3 = '<div style="width:40px;background-color:#0076FF;text-align:center;height:45px;border-radius:5px 0 0 5px;"><img src="img/store-icon.png" style="display:inline-block;height:45px;color:white;position:absolute;left:-2px;"/></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content3 = [];
-
-                var hs = e.target.G.extData;
-                var marker_window = new AMap.InfoWindow({
-                  isCustom: true,
-                  content: createInfoWindow(title3, content3),
-                  autoMove: true,
-                  closeWhenClickMap: true,
-                  offset: new AMap.Pixel(110, -24)
-                });
-                marker_window.open(map, e.target.getPosition());
-              });
-        }
-
-
-      };
-
-
-    //路线编辑状态中 删除某个店和上下移动顺序的方法函数
-    $scope.data = {showDelete:false};
-    $scope.moveItem = function(item,fromIndex,toIndex){
-      $scope.items.splice(fromIndex, 1);
-      $scope.items.splice(toIndex, 0, item);
-    };
-    $scope.onItemDelete = function(item) {
-      $scope.items.splice($scope.items.indexOf(item), 1);
-    };
-
-    $("#editlinebtn").click(function(){
-      $(".editlinediv").hide();
-      $("._editlinediv").show();
-    });
-
-    //编辑路线之后保存
-    $scope.saveeditlineinfo = function(){
-      alert(1);
-      routesettingsrv.keywordsearchstore().then(function (data) {
-        console.log(data);
-      });
-    };
-
-    //删除路线
-    $scope.deleteline = function(){
-    /* var confirmPopup = $ionicPopup.confirm({
-       title:'',
-       template:'确认删除路线?'
-     });
-     confirmPopup.then(function(res){
-       if(res){
-         console.log("1");
-       }else{
-         console.log("0");
-       }
-     });*/
-
-    //用了自定义弹窗
-      var warnPopup = $ionicPopup.show({
-        template:'',
-        title:'确认删除路线?',
-        scope:$scope,
-        buttons:[
-          {text:'取消'},
-          {
-            text:'删除',
-            type:'button-assertive',
-            onTap:function(e){
-              alert(1);
-              routesettingsrv.deleterouteline().then(function (data) {
-                console.log(data);
-              });
+        for (var i = 0; i < $scope.currentRoute.Institutions.length; i++) {
+          lineArr.push($scope.currentRoute.Institutions[i].lnglat);
+          if (i == $scope.currentRoute.Institutions.length - 1) {
+            //删除原来的折线
+            if ($scope.polyline != null) {
+              $scope.map.remove($scope.polyline);
+            }
+            $scope.polyline = new AMap.Polyline({
+              path: lineArr,          //设置线覆盖物路径
+              strokeColor: "#419de7", //线颜色
+              strokeOpacity: 1,       //线透明度
+              strokeWeight: 2,        //线宽
+              strokeStyle: "dashed",   //线样式
+              //strokeDasharray: [10, 5] //补充线样式
+            });
+            $scope.polyline.setMap($scope.map);
+            $scope.map.setFitView();
+          }
+          for (var k = 0; k < markers.length; k++) {
+            if (markers[k].InstitutionID == $scope.currentRoute.Institutions[i].InstitutionID) {
+              markers[k].style=markers[k].InstitutionPriority=="A"?0:(markers[k].InstitutionPriority=="B"?1:2);
             }
           }
-        ]
-      })
-    };
-
-
-    /////////////这些是打开/关闭一些弹窗的函数////////////
-    $scope.closeeditdiv = function(){
-      $("._editlinediv").fadeOut(300);
-      $(".editlinediv").show();
-    };
-
-    $scope.searchstore = function(){
-       $(".searchstorediv").fadeIn(300);
-      $(".lineinfodiv").fadeIn(300);
-      $(".addnewroutediv").fadeOut(300);
-      $(".nolatlng-storediv").fadeOut(300);
-    };
-
-     //关键字搜索机构函数
-    $scope.searchstorebykeyword = function(){
-     // debugger;
-      var namekeyword = $("#KeyWordOfStoreName").val();
-      routesettingsrv.keywordsearchstore().then(function (data) {
-        console.log(data);
+        }
       });
     };
-    //请求无坐标机构数据函数
-    $scope.search_nopositionstore = function(){
-      $(".nolatlng-storediv").fadeIn(300);
-      $(".lineinfodiv").fadeIn(300);
-      $(".addnewroutediv").fadeOut(300);
-      $(".searchstorediv").fadeOut(300);
-      routesettingsrv.nocoordinatestoreinfo().then(function (data) {
-        console.log(data);
+    //编辑线路模式
+    $scope.showrouteedit = function () {
+      $scope.routeedit = true;
+      $scope.isnewly = false;
+      $scope.routedetail = true;
+    };
+    //退出编辑线路模式
+    $scope.closerouteedit = function () {
+      $scope.routeedit = false;
+    };
+    //删除路线
+    $scope.deleteroute = function () {
+      $ionicPopup.confirm({
+        title: '提示',
+        template: '是否确认删除'
+      }).then(function (res) {
+        if (res) {
+          routesettingsrv.deteteroute($scope.currentRoute.LineID).then(function (state) {
+            if (state) {
+              $rootScope.toast("操作成功");
+              $scope.routeedit = false;
+              $scope.routedetail = false;
+              //刷新
+              $scope.getroutes();
+            } else {
+              $rootScope.toast("操作失败");
+            }
+          });
+        }
       });
+    }
+    //更新路线保存
+    $scope.updateroute = function () {
+      if ($scope.currentRoute.LineName == "") {
+        $rootScope.toast("请输入路线名");
+      } else if ($scope.currentRoute.Institutions.length <= 0) {
+        $rootScope.toast("请选择机构");
+      } else {
+        routesettingsrv.saveroute($scope.currentRoute).then(function (state) {
+          if (state) {
+            $rootScope.toast("保存成功");
+            $scope.routeedit = false;
+            $scope.routedetail = false;
+            //刷新
+            $scope.getroutes();
 
+          } else {
+            $rootScope.toast("保存失败");
+          }
+        });
+      }
+    }
+    //关闭明细框
+    $scope.closeroutedetail = function () {
+      $scope.routeedit = false;
+      $scope.routedetail = false;
+    };
+    //点击明细中的机构
+    $scope.insroutesinfo="";//点击机构提示所在线路
+    $scope.routetoast=false;
+    $scope.openinsinfo = function (model) {
+      $scope.map.clearInfoWindow();
+      $scope.currentins = model;
+      $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
+      $scope.map.setCenter( model.lnglat);
+      $scope.map.panBy(0,50);
+      $scope.infoWindow.open($scope.map, model.lnglat);
+      //机构提示存在线路
+      routesettingsrv.getRoutelinesByInstitution(model.InstitutionID).then(function (data) {
+        if(data.length>0){
+          $scope.routetoast=true;
+          var str =[];
+          for (var i= 0;i<data.length;i++){
+            str.push(data[i].LineName);
+            if(i==data.length-1){
+              $scope.insroutesinfo="此机构存在 "+str.join(",") +"中";
+              $timeout(function () {
+                $scope.insroutesinfo= "";
+                $scope.routetoast=false;
+              }, 2000);
+            }
+          }
 
-    };
-    $scope.close_nolatlngstorediv = function(){
-      $(".nolatlng-storediv").fadeOut(300);
-    };
-    $scope.closesearchstorediv = function(){
-      $(".searchstorediv").fadeOut(300);
-    };
-    //////////////////////////////////////////////////////////
+        }
 
+      });
+    }
+
+    //点击显示搜索窗体
+    $scope.searchmodal=false;
+    $scope.searchmodel={
+      Key:"InstitutionName",
+      Value:""
+    };
+    $scope.searchresult=[];
+    //打开搜索窗体
+    $scope.showsearchmodal=function(){
+      //关闭其他窗体
+      /*$scope.closeroutedetail();
+      $scope.closeaddroute();*/
+      $scope.closenolatlngmodal();
+      //清空当前搜索结果
+      $scope.searchmodal=true;
+      $scope.searchresult=[];
+    }
+    //关闭搜索窗体
+    $scope.closesearchmodal=function(){
+      $scope.searchmodal=false;
+      $scope.searchresult=[];
+    }
+    //搜索门店
+    $scope.searchstorebykeyword= function(){
+      var model =[$scope.searchmodel];
+      routesettingsrv.searchins(model).then(function (data) {
+        $scope.searchresult = data;
+      });
+    }
+    //无坐标机构
+    $scope.nolatlngmodal=false;
+    $scope.nolatlngresult=[];
+    $scope.shownolatlngmodal=function(){
+      //关闭其他窗体
+      /*$scope.closeroutedetail();
+      $scope.closeaddroute();*/
+      $scope.closesearchmodal();
+      routesettingsrv.getnolatlngins().then(function (data) {
+        $scope.nolatlngresult = data;
+        $scope.nolatlngmodal=true;
+      });
+    }
+    //关闭无坐标机构窗体
+    $scope.closenolatlngmodal=function(){
+      $scope.nolatlngmodal=false;
+      $scope.nolatlngresult = [];
+    }
   });

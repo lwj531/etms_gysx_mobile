@@ -1,17 +1,8 @@
 <ion-side-menus>
-  <ion-side-menu-content>
-    <!--<ion-header-bar class="bar-stable bar bar-header" align-title="left">
-      <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style=""><i
-        class="icon ion-android-arrow-back"></i>
-        <span class="back-text" style=""></span></button>
-      <div class="buttons buttons-left header-item" style=""><span class="left-buttons">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </span></div>
-      <div class="title title-left header-item" style="left: 50px;">Browse</div>
-    </ion-header-bar>-->
-    <ion-nav-view>
+  <ion-side-menu-content drag-content="false">
 
+    <ion-nav-view>
+      <toast></toast>
     </ion-nav-view>
 
   </ion-side-menu-content>
@@ -22,7 +13,7 @@
     <!--</header>-->
     <ion-content class="sidemenu-content">
       <div class="sidemenu-banner">
-        <img src="../img/menu_banner.png">
+        <img src="img/menu_banner.png">
       </div>
       <ul>
         <li class="list-item no-line" menu-close ng-repeat="item in menus" ui-sref="{{item.state}}" ng-class="{'stick-highlight':currentstate.current.name==item.state}">
@@ -37,7 +28,7 @@
         </li>
       </ul>
       <div class="bottom-item">
-        <div class="list-item no-line" menu-close>
+        <div class="list-item no-line" menu-close ui-sref="main.settings">
           <div class="item-content item-link">
             <div class="item-media">
               <i class="uicon uicon-setting"></i>
@@ -52,3 +43,7 @@
     </ion-content>
     <ion-side-menu>
 </ion-side-menus>
+
+
+
+

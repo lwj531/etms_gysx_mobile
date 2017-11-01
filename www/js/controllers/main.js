@@ -1,6 +1,7 @@
 angular.module('main.ctrl', [])
-  .controller('MainCtrl', function ($scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup, $timeout) {
-    //模拟菜单数据
+  .controller('MainCtrl', function ($rootScope, $scope, $state, $ionicModal, $ionicPlatform, $ionicHistory, $ionicPopup, $timeout) {
+
+     //模拟菜单数据
     $scope.menus = [
       {
         name: " 首页",
@@ -8,51 +9,58 @@ angular.module('main.ctrl', [])
         state: "main.home"
       },
       {
-        name: " 日程管理",
-        iconName: "dailymgt",
+        name: " 日程管理-录音",
+        iconName: "calendar",
         state: "main.dailymgt"
+      },
+      {
+        name: " 真 · 日程管理",
+        iconName: "calendar",
+        state: "main.schedulemgt"
       },
       {
         name: "辅导下属",
         iconName: "coaching",
-        state: "main.xx"
+        state: "main.tutorialindex"
       },
       {
         name: "拜访向导",
-        iconName: "callguide",
+        iconName: "guide",
         state: "main.callguide"
       },
       {
         name: "路线设定",
-        iconName: "routesetting",
+        iconName: "map",
         state: "main.routesetting"
       },
       {
         name: " 客户管理",
-        iconName: "clientmgt",
+        iconName: "building",
         state: "main.clientmgt"
       },
       {
         name: " 附近药店",
-        iconName: "dailymgt",
-        state: "main.storenearby"
+        iconName: "store",
+        state: "main.xx"
       },
       {
         name: "辅导记录",
-        iconName: "guidance",
-        state: "main.xx"
+        iconName: "coaching",
+        state: "main.tutorialmgt"
       },
       {
         name: " 学习资料库",
-        iconName: "db",
-        state: "main.xx"
+        iconName: "folder",
+        state: "main.learningindex"
       }];
+    moment.locale('zh-cn');
     $scope.currentstate = $state;
 
     //清空缓存
-    $scope.clear = function () {
+    $scope.clearCache = function () {
       localStorage.clear();
-      alert("localStorage.clear");
+      ionic.Platform.exitApp();
+
     };
     //手势密码Model
     $ionicModal.fromTemplateUrl('templates/modal/gesture.html', {
@@ -66,7 +74,7 @@ angular.module('main.ctrl', [])
     if (localStorage.cipher == null) {
       $scope.cipherinfo = "请设置手势密码";
     } else {
-      $scope.cipherinfo = "手势密码登陆";
+      $scope.cipherinfo = "手势密码登录";
     }
     //设置手势密码
     $scope.settingcipher = function (str) {
@@ -78,11 +86,11 @@ angular.module('main.ctrl', [])
           $scope.lock.reset();
         }, 1000);
       } else {
-        ////如果已经设置了密码判断是否可以正常登陆
+        ////如果已经设置了密码判断是否可以正常登录
         if (localStorage.cipher != null) {
           if (localStorage.cipher == str) {
             //通过验证关闭modal
-            $scope.cipherinfo = "手势密码登陆";
+            $scope.cipherinfo = "手势密码登录";
             $scope.modal.hide();
           } else {
             $scope.cipherinfo = "密码错误";
@@ -101,7 +109,7 @@ angular.module('main.ctrl', [])
             if (str == $scope.currentcipher) {
               localStorage.cipher = str;
               //通过验证关闭modal
-              $scope.cipherinfo = "手势密码登陆";
+              $scope.cipherinfo = "手势密码登录";
               $scope.modal.hide();
             } else {
               //两次密码不正确
@@ -115,7 +123,7 @@ angular.module('main.ctrl', [])
         }
       }
       $scope.$apply();
-    };
+    }
 
     //在被挂起的应用转到前台时触发(触发手势密码界面)
     $ionicPlatform.on("resume", function (event) {
@@ -154,7 +162,34 @@ angular.module('main.ctrl', [])
       });
     }
 
-    //Then when this scope is destroyed, remove the function
-    $scope.$on('$destroy', deregister)
+    $scope.$on('$destroy', deregister);
 
+    //提示信息
+    $rootScope.toast = function (message,callback) {
+      $scope.message = message;
+      $scope.showtoast = true;
+      $timeout(function () {
+        $scope.showtoast = false;
+        if(callback!=null){
+          callback();
+        }
+      }, 1500);
+    }
+    //自定义弹窗
+    $rootScope.popup = function(message,callback){
+      if(message==null){
+        message="操作成功";
+      }
+      var _popup = $ionicPopup.show({
+        template: '<p class="text-center">'+ message +"</p>",
+        title: '提示',
+        scope: $scope,
+      });
+      $timeout(function() {
+        _popup.close();
+        if(callback!=null){
+          callback();
+        }
+      }, 1500);
+    }
   });

@@ -12,6 +12,7 @@ angular.module("http.srv", [])
         $http({
           method: method,
           url: "http://dev.crmatmobile.com:9151/"+ url,
+          //url: "http://10.10.10.36:9151"+ url,
           data: data
         }).success(function (data) {
           deferred.resolve(data);

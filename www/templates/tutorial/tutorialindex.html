@@ -1,0 +1,59 @@
+<!--辅导下属列表-->
+<ion-view title="辅导管理" view-title="辅导管理">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
+      <i class="icon ion-android-arrow-back"></i>
+      <span class="back-text" style=""></span>
+    </button>
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    <div class="h1 title">辅导管理</div>
+    <div class="buttons">
+      <input type="month">
+    </div>
+  </div>
+
+  <ion-content class="has-header tutorial-index">
+<div class="flex-start margin-img padding-1015" ui-sref="main.callprocedure">
+  <img src="img/tutorial_add_50.png" width="25">
+  <div class="color-blue">创建新的辅导</div>
+</div>
+    <div class="tutorial-list">
+      <div class="flex-row title">
+        <div class="col-30">日期</div>
+        <div class="col-20">辅导对象</div>
+        <div class="col-20">机构数</div>
+        <div class="col-30"></div>
+      </div>
+      <div class="flex-row">
+        <div class="col-30">2017-03-02</div>
+        <div class="col-20">王小明</div>
+        <div class="col-20">2</div>
+        <div class="col-30">
+          <a class="button button-small coaching" ng-show="true">辅导中</a>
+          <a class="button button-small waiting" ng-show="false">待确认</a>
+          <a class="button button-small completed" ng-show="false">已完成</a>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="col-30">2017-03-02</div>
+        <div class="col-20">王小明</div>
+        <div class="col-20">2</div>
+        <div class="col-30">
+          <a class="button button-small coaching" ng-show="false">辅导中</a>
+          <a class="button button-small waiting" ng-show="true">待确认</a>
+          <a class="button button-small completed" ng-show="false">已完成</a>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="col-30">2017-03-02</div>
+        <div class="col-20">王小明</div>
+        <div class="col-20">2</div>
+        <div class="col-30">
+          <a class="button button-small coaching" ng-show="false">辅导中</a>
+          <a class="button button-small waiting" ng-show="false">待确认</a>
+          <a class="button button-small completed" ng-show="true">已完成</a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

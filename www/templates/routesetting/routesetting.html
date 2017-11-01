@@ -1,117 +1,164 @@
 <!--路线设定-->
 <ion-view>
-  <!--<div class="bar bar-header bar-positive">
-    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
+      <i class="icon ion-android-arrow-back"></i>
       <span class="back-text" style=""></span>
     </button>
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <div class="h1 title">路线设定</div>
-    <div class="buttons" style="padding-top: 3px;">
-      <button class="button button-icon ion-information-circled" ng-click="search_nopositionstore()"><img src="img/nolatlng-store-icon.png" style="width: 32px;">
+    <div class="buttons">
+      <button class="button button-icon" ng-click="shownolatlngmodal()">
+        <img src="img/nolatlng-store-icon.png" width="25" style="padding-top: 4px;">
       </button>
-      <button class="button button-icon ion-search" ng-click="searchstore()"><img src="img/search-icon.png" style="width: 32px;">
-      </button>
-    </div>
-  </div>-->
-  <ion-header-bar class="bar-positive">
-    <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
-      <i class="icon ion-android-arrow-back"></i>
-      <span class="back-text" style=""></span></button>
-    <div class="buttons buttons-left header-item" style=""><span class="left-buttons">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </span>
-    </div>
-    <div class="" style="position: absolute;text-align:center;left:0px;right:0px;font-size: 18px;top: 12px;">路线设定</div>
-    <div class="buttons" style="padding-top:3px;position: absolute;right: 5px;">
-      <button class="button button-icon" ng-click="search_nopositionstore()"><img src="img/nolatlng-store-icon.png" style="width: 32px;">
-      </button>
-      <button class="button button-icon" ng-click="searchstore()"><img src="img/search-icon.png" style="width: 32px;">
+      <button class="button button-icon" ng-click="showsearchmodal()">
+        <img src="img/search-icon.png" width="25" style="padding-top: 6px;">
       </button>
     </div>
-  </ion-header-bar>
-  <ion-content scroll="false">
-    <div class="" style="width: 100%;">
+  </div>
+  <ion-content scroll="false" class="has-header">
+    <div style="width: 100%;" ng-show="routes.length>0">
       <div class="box">
-        <ul class="tj-ul" style="padding:0;">
-          <li class="route-line" id="line{{$index}}" style="width:20%;font-size:14px;height: 40px;" ng-click="selectLine($index)" ng-class="{'selected-line':selected===$index}" ng-repeat="item in linesdata">{{item.name}}</li>
+        <ul class="tj-ul">
+          <li class="route-line"
+              ng-click="showroutedetail(item)" ng-class="{true:'selected-line'}[item.LineID==currentRoute.LineID]"
+              ng-repeat="item in routes">
+            {{item.LineName}}
+          </li>
         </ul>
       </div>
     </div>
 
-    <div class="bg-white" id="addnewline"  ng-click="addnewroute()" style="position:absolute;height:40px;width:40px;top:1px;z-index:999;text-align:center;right:0;box-shadow: -2px 0px 3px 2px lightgrey"><img src="/img/addroute-icon.png" style="width: 18px;height: 20px;position: absolute;top: 2px;left: 0;right: 0;margin: auto;" /><span style="display:inline-block;font-size: 12px;position: absolute;width: 40px;bottom: 0;left: 0;color: #419DE7;">新增</span></div>
+    <div class="bg-white route-addbtn" id="addnewline" ng-click="addnewroute()">
+      <img src="img/addroute-icon.png"/><span>新增</span>
+    </div>
     <!--地图div-->
-    <div id="routemap" style="width:100%;height:700px;position:absolute;z-index:0;"></div>
-    <!--点击新增路线出现的弹出框-->
-    <div class="addnewroutediv" style="position:absolute;z-index:800;width:88%;right:25px;top:60px;display: none">
-      <div class="bg-white" style="height:52px;line-height:68px;">
-        <div style="height:52px;width:52px;display:inline-block;position:relative;"><span ng-click="closeaddroute()" style="position:absolute;right:4px;top:-8px;font-size:16px;color:#419DE7;">取消</span></div>
-        <input type="text" id="linename_input" style="position:absolute;width:60%;height:32px;top:10px;left: 18%;border-radius:8px;outline:none;border:1px solid lightgrey;text-align:center;padding:0;" placeholder="请输入路线名称" />
-        <button id="savelinebtn" class="btn btn-success" style="width:48px;position:absolute;right:4%;top:10px;height:32px;border:none;background-color:#47d58d;color:white;border-radius:6px;">保存</button>
+    <amap></amap>
+    <!--自定义信息窗体-->
+    <div id="infowindow" ng-show="false">
+      <div class="info">
+        <div class="info-top">
+          <div class="inf-top-left pic" ng-show="!(isnewly || routeedit)">
+          </div>
+          <div class="inf-top-left txt" ng-show="isnewly || routeedit" ng-click="addinline()">
+          </div>
+          <div class="inf-top-right">
+            <span ng-click="closeInfoWindow()" class="uicon close-info"></span>
+            <span ng-bind="currentins.InstitutionName"></span>
+          </div>
+        </div>
+        <div class="info-bottom">
+          <span></span>
+        </div>
       </div>
-      <div class="addstorearea bg-white" style="height:200px;margin-top: 4px;">
+    </div>
 
+    <!--点击新增路线出现的弹出框-->
+    <div class="route-action-block">
+      <div class="route-action" ng-show="isnewly && nolatlngmodal==false && searchmodal==false">
+        <div class="route-action-bar">
+          <button ng-click="closeaddroute()" class="button button-clear button-positive button-thin">取消</button>
+          <input type="text" ng-model="route.name" placeholder="请输入路线名称" maxlength="5" class="route-name-input"/>
+          <button class="button button-positive button-thin" ng-click="saveroute()">保存</button>
+        </div>
+        <ion-scroll class="window-list" ng-show="route.cart.length>0">
+          <ion-list show-delete="true"
+                    show-reorder="true">
+            <ion-item ng-repeat="item in route.cart">
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
+              <ion-delete-button class="ion-minus-circled" ng-click="route.cart.splice($index, 1)"></ion-delete-button>
+              <ion-reorder-button class="ion-arrow-swap"
+                                  on-reorder="moveRoute(route.cart,item,$fromIndex,$toIndex)"></ion-reorder-button>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <div class="bg-white text-center" ng-show="route.cart.length>3" style="padding: 6px 0;color: #ff6868;">
+          已加入{{route.cart.length}}家
+        </div>
       </div>
     </div>
     <!--点击某一条路线出现的弹出框-->
-    <div class="lineinfodiv" style="position:absolute;z-index:800;width:88%;right:25px;top:60px;display: none">
-      <!--路线详情初始弹窗-->
-      <div class="bg-white editlinediv" style="height:52px;line-height:68px;">
-        <div style="height:52px;width:52px;display:inline-block;position:relative;"><span ng-click="deleteline()"  style="position:absolute;right:4px;top:-8px;font-size:16px;color:#419DE7;">删除</span></div>
-        <input type="text" id="linename" style="position:absolute;width:60%;height:32px;top:10px;left: 18%;border-radius:8px;outline:none;border:1px solid lightgrey;text-align:center;padding:0;" placeholder="路线02" />
-        <button id="editlinebtn" ng-click="data.showDelete = !data.showDelete; data.showReorder = !data.showReorder"  class="btn btn-success" style="width:48px;position:absolute;right:4%;top:10px;height:32px;border:none;background-color:#47d58d;color:white;border-radius:6px;">编辑</button>
-      </div>
-      <!--变成编辑状态之后的路线详情窗口-->
-      <div class="bg-white _editlinediv" style="height:52px;line-height:68px;display: none;">
-        <div style="height:52px;width:52px;display:inline-block;position:relative;"><span ng-click="closeeditdiv()"  style="position:absolute;right:4px;top:-8px;font-size:16px;color:#419DE7;">取消</span></div>
-        <input type="text" id="linename1" style="position:absolute;width:60%;height:32px;top:10px;left: 18%;border-radius:8px;outline:none;border:1px solid lightgrey;text-align:center;padding:0;" placeholder="路线02" />
-        <button id="saveeditlinebtn" ng-click="saveeditlineinfo()" class="btn btn-success" style="width:48px;position:absolute;right:4%;top:10px;height:32px;border:none;background-color:#47d58d;color:white;border-radius:6px;">保存</button>
-      </div>
-      <div class="linestorearea bg-white" style="height:200px;margin-top: 4px;overflow: auto;">
-        <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
-          <ion-item ng-repeat="item in items" item="item" class="item-remove-animate">
-            <span>{{item.name}}({{item.grade}})</span><br>
-            <span style="font-size: 13px;color: darkgray;">{{item.address}}</span>
-            <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)"></ion-delete-button>
-            <ion-reorder-button class="ion-navicon" on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
-          </ion-item>
-        </ion-list>
+    <div class="route-action-block" ng-show="routedetail && nolatlngmodal==false && searchmodal==false">
+      <div class="route-action">
+        <div class="route-action-bar">
+          <button ng-click="deleteroute()" class="button button-clear button-assertive button-thin">删除</button>
+          <input type="text" ng-model="currentRoute.LineName" placeholder="请输入路线名称" maxlength="5"
+                 class="route-name-input"/>
+          <button class="button button-stable button-thin" ng-show="!routeedit" ng-click="closeroutedetail()">关闭
+          </button>
+          <button class="button button-positive button-thin" ng-show="!routeedit" ng-click="showrouteedit()">编辑</button>
+          <button class="button button-stable button-thin" ng-show="routeedit" ng-click="closerouteedit()">取消</button>
+          <button class="button button-positive button-thin" ng-show="routeedit" ng-click="updateroute()">保存</button>
+        </div>
+        <ion-scroll class="window-list" ng-show="currentRoute.Institutions.length>0">
+          <ion-list show-delete="routeedit"
+                    show-reorder="routeedit">
+            <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
+              <ion-delete-button class="ion-minus-circled"
+                                 ng-click="currentRoute.Institutions.splice($index, 1)"></ion-delete-button>
+              <ion-reorder-button class="ion-arrow-swap"
+                                  on-reorder="moveRoute(currentRoute.Institutions,item,$fromIndex,$toIndex)"></ion-reorder-button>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <div class="bg-white text-center" ng-show="currentRoute.Institutions.length>3"
+             style="padding: 6px 0;color: #ff6868;">已加入{{currentRoute.Institutions.length}}家
+        </div>
       </div>
     </div>
+
     <!--搜索机构弹出框-->
-    <div class="searchstorediv" style="position:absolute;z-index:800;width:88%;right:25px;top:60px;display: none">
-      <div class="bg-white" style="height:52px;line-height:68px;">
-        <div style="height:52px;width:52px;display:inline-block;position:relative;"><span ng-click="closesearchstorediv()"  style="position:absolute;right:4px;top:-8px;font-size:16px;color:red;">取消</span></div>
-        <input type="text" id="KeyWordOfStoreName" style="position:absolute;width:60%;height:32px;top:10px;left: 18%;border-radius:8px;outline:none;border:1px solid lightgrey;text-align:center;padding:0;" placeholder="请输入店名称关键字" />
-        <button id="search-store-btn" ng-click="searchstorebykeyword()"  class="btn btn-success" style="width:48px;position:absolute;right:4%;top:10px;height:32px;border:none;background-color:white;color:#419DE7;border-radius:6px;">搜索</button>
-      </div>
-      <div class="linestorearea bg-white" style="height:200px;margin-top: 4px;overflow: auto;">
-        <ion-list>
-          <ion-item ng-repeat="item in items" item="item" class="item-remove-animate" style="position: relative;">
-            <span>{{item.name}}</span><br>
-            <span style="font-size: 13px;color: darkgray;">{{item.address}}</span>
-          </ion-item>
-        </ion-list>
+    <div class="route-action-block" ng-show="searchmodal">
+      <div class="route-action">
+        <div class="route-action-bar">
+          <button class="button button-clear button-positive button-thin" ng-click="closesearchmodal()">取消</button>
+          <input type="text" ng-model="searchmodel.Value" placeholder="请输入机构名称关键字" maxlength="20"
+                 class="route-name-input wide"/>
+          <button class="button button-clear button-positive button-thin" ng-click="searchstorebykeyword()">搜索</button>
+        </div>
+        <ion-scroll class="window-list" ng-show="searchresult.length>0">
+          <ion-list>
+            <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <div class="bg-white text-center" ng-show="searchresult.length>0">搜索到{{searchresult.length}}家机构</div>
       </div>
     </div>
+
     <!--无坐标机构弹出框-->
-    <div class="nolatlng-storediv" style="position:absolute;z-index:800;width:88%;right:25px;top:60px;display: none">
-      <div class="bg-white" style="height:52px;line-height:68px;">
-        <div style="height:52px;width:84%;display:inline-block;position:relative;"><img src="img/nolatlng-icon.png" style="display: inline-block;width: 28px;height: 30px;position:absolute;left: 15px;top: 12px;"><span  style="position:absolute;left:52px;top:-8px;font-size:16px;color:#419DE7;">无坐标机构(<span style="color: orange;">7</span>)</span></div>
-        <span ng-click="close_nolatlngstorediv()" style="width:48px;position:absolute;right:0%;top:-7px;height:32px;color:#419DE7;font-size: 15px">关闭</span>
-      </div>
-      <div class="linestorearea bg-white" style="height:200px;margin-top: 4px;overflow: auto;">
-        <ion-list>
-          <ion-item ng-repeat="item in items" item="item" class="item-remove-animate" style="position: relative;">
-            <span>{{item.name}}</span><br>
-            <span style="font-size: 13px;color: darkgray;">{{item.address}}</span>
-          </ion-item>
-        </ion-list>
+    <div class="route-action-block" ng-show="nolatlngmodal">
+      <div class="route-action">
+        <div class="route-action-bar">
+          <div class="align-center" style="color: #4587f7;"><img src="img/nolatlng-icon.png" width="20"
+                                                                 style="margin-right: 8px;">无机构坐标（<span
+            class="color-orange">{{nolatlngresult.length}}</span>）
+          </div>
+          <button class="button button-clear button-positive button-thin" ng-click="closenolatlngmodal()">关闭</button>
+        </div>
+        <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
+          <ion-list>
+            <ion-item ng-repeat="item in nolatlngresult" ng-click="openinsinfo(item)">
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <div class="bg-white text-center" ng-show="nolatlngresult.length>3">....</div>
       </div>
     </div>
+
     <!--点击机构，若机构已存在于某条路线中弹出的提示框-->
-    <div class="bg-white warnremind"  style="opacity:0.9;position:absolute;width:88%;height:45px;line-height:45px;left:0;right:0;margin:auto;bottom:60px;display:none;">
-      <img src="img/warn-icon.png" style="margin:0 10px;margin-top: 8px;"/><span style="color:#E65045;font-size:13px;position: absolute;">此机构存在 路线01、路线05中</span>
+    <div class="bg-white warnremind"
+         style="opacity:0.9;position:absolute;width:88%;height:45px;line-height:45px;left:0;right:0;margin:auto;bottom:60px;"
+         ng-show="routetoast">
+      <img src="img/warning_red_46.png" style="margin:0 10px;margin-top: 8px;" width="27"/><span
+      style="color:#E65045;font-size:13px;position: absolute;" ng-bind="insroutesinfo"></span>
     </div>
   </ion-content>
 </ion-view>

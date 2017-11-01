@@ -1,5 +1,10 @@
 angular.module('dailymgt.ctrl', [])
   .controller('DailyMgtCtrl', function ($scope) {
+    /*var map = new AMap.Map('testmap', {
+      mapStyle: 'amap://styles/32a5b7b6f1d01ee025207844301cacae'//样式URL
+    });*/
+
+
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
       $scope.state = "";
@@ -17,7 +22,8 @@ angular.module('dailymgt.ctrl', [])
         $scope.state="结束录音";
       };
 
-    }
+    };
+
     // 下拉刷新
     $scope.doRefresh= function(){
       console.log("doRefresh")

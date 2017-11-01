@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title></title>
-  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=204b5c6a6b98f75d928c4d47bc03cf62"></script>
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=ca2492e54192b39c32479aca89f9834f"></script>
   <link rel="manifest" href="manifest.json">
 
   <!-- un-comment this code to enable service worker
@@ -24,9 +24,6 @@
   -->
   <!-- 第三方css -->
   <link href="lib/patternLock/patternLock.css" rel="stylesheet">
-  <!-- 第三方包 -->
-  <script src="lib/jquery/dist/jquery.js"></script>
-  <script src="lib/patternLock/patternLock.js"></script>
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -68,13 +65,50 @@
   <script src="js/controllers/dailymgt.js"></script>
   <script src="js/controllers/home/msgcenter.js"></script>
   <script src="js/controllers/clientmgt/clientmgt.js"></script>
+  <script src="js/controllers/clientmgt/insdetail.js"></script>
+  <script src="js/controllers/clientmgt/skusort.js"></script>
+  <script src="js/controllers/clientmgt/storemodify.js"></script>
+  <script src="js/controllers/schedulemgt/schedulemgt.js"></script>
+  <script src="js/controllers/schedulemgt/editroute.js"></script>
+  <script src="js/controllers/schedulemgt/planreport.js"></script>
+  <script src="js/controllers/learning/learningindex.js"></script>
+  <script src="js/controllers/learning/materialexpand.js"></script>
+  <script src="js/controllers/learning/pointsrank.js"></script>
+  <script src="js/controllers/learning/exercisehistory.js"></script>
+  <script src="js/controllers/learning/diseaseknowledge.js"></script>
+  <script src="js/controllers/learning/vitalityeducation.js"></script>
+  <script src="js/controllers/tutorial/tutorialindex.js"></script>
+  <script src="js/controllers/tutorial/callprocedure.js"></script>
+  <script src="js/controllers/tutorial/coachingcall.js"></script>
+  <script src="js/controllers/tutorial/tutorialcheckin.js"></script>
+  <script src="js/controllers/tutorial/callprocedurestep2.js"></script>
+  <script src="js/controllers/tutorialmgt/tutorialmgt.js"></script>
+  <script src="js/controllers/settings/settings.js"></script>
+  <script src="js/controllers/settings/about.js"></script>
+  <script src="js/controllers/settings/changepassword.js"></script>
+
 
   <!-- service js -->
   <script src="js/services/account.js"></script>
   <script src="js/services/car.js"></script>
+  <script src="js/services/clientmgt/clientservice.js"></script>
   <script src="js/services/routesetting/routesettingservice.js"></script>
+  <script src="js/services/daily/dailyservice.js"></script>
   <script src="js/services/httpservice.js"></script>
   <script src="js/services/callguide/callguideservice.js"></script>
+
+  <!-- directive -->
+  <script src="js/directive/amap.js"></script>
+  <script src="js/directive/toast.js"></script>
+
+  <!-- 第三方包 -->
+  <script src="lib/Jquery/dist/jquery.js"></script>
+  <script src="lib/patternLock/patternLock.js"></script>
+
+  <script src="lib/moment/moment.js"></script>
+  <script src="lib/angular-moment/angular-moment.js"></script>
+  <script src="js/extend/moment-with-locales.min.js"></script>
+
 
 </head>
 <body ng-app="starter">

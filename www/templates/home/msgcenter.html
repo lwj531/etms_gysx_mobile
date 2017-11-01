@@ -1,0 +1,50 @@
+<ion-view title="消息通知" view-title="消息通知">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">消息通知</div>
+
+  </div>
+  <ion-content class="has-header">
+    <div class="bg-white padding">
+      <table class="table">
+        <thead>
+        <tr>
+          <th></th>
+          <th>标题</th>
+          <th>发布人</th>
+          <th>发布时间</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="item in msgList">
+        <tr>
+          <th style="">{{$index+1}}</th>
+          <td class="title-td">{{item.title}}</td>
+          <td >{{item.from}}</td>
+          <td >{{item.sendTime}}</td>
+          <td >
+            <a class="button button-outline button-small button-assertive flex-center">删除</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <div>
+          <ul>
+            <li><i class="icon ion-ios-arrow-back"></i></li>
+            <li class="curr-page">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>...</li>
+            <li>9</li>
+            <li>10</li>
+            <li><i class="icon ion-ios-arrow-forward"></i></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         if(data=="notLogin"){
           $ionicPopup.alert({
             title: '提示',
-            template: '尚未登陆'
+            template: '尚未登录'
           }).then(function(res) {
             $state.go("app");
           });
@@ -36,6 +36,13 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
             template: '用户名或密码错误'
           });
         }
+      });
+      //系统错误
+      $rootScope.$on('systemerror', function (errorType, data) {
+        $ionicPopup.alert({
+          title: '提示',
+          template: '系统故障'
+        });
       });
     });
   })
@@ -62,24 +69,54 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/home/home.html",
         controller: "HomeCtrl"
       })
-      //日程管理
       //消息通知
       .state('main.msgcenter', {
         url: '/msgcenter',
         templateUrl: "templates/home/msgcenter.html",
         controller: "MsgcenterCtrl"
       })
-      //日程管理
+      //日程管理(测试)
       .state('main.dailymgt', {
         url: '/dailymgt',
         templateUrl: "templates/dailymgt.html",
         controller: "DailyMgtCtrl"
+      })
+      //日程管理
+      .state('main.schedulemgt', {
+        url: '/schedulemgt',
+        templateUrl: "templates/schedulemgt/schedulemgt.html",
+        controller: "ScheduleMgtCtrl"
+      })
+      //日程管理编辑路线
+      .state('main.editroute', {
+        url: '/editroute/:lineId/:activityDate',
+        templateUrl: "templates/schedulemgt/editroute.html",
+        controller: "EditRouteCtrl"
+      })
+      //日程管理计划报告
+      .state('main.planreport', {
+        url: '/planreport',
+        templateUrl: "templates/schedulemgt/planreport.html",
+        controller: "PlanReportCtrl"
       })
       //客户管理
       .state('main.clientmgt', {
         url: '/clientmgt',
         templateUrl: "templates/clientmgt/clientmgt.html",
         controller: "ClientMgtCtrl"
+      })
+      //机构详情
+      .state('main.insdetail', {
+        url: '/insdetail/:insId',
+        templateUrl: "templates/clientmgt/insdetail.html",
+        controller: "InsDetailCtrl",
+        cache: false
+      })
+      //SKU排序
+      .state('main.skusort', {
+        url: '/skusort/:insId',
+        templateUrl: "templates/clientmgt/skusort.html",
+        controller: "SKUSortCtrl"
       })
       //拜访向导
       .state('main.callguide', {
@@ -91,7 +128,98 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       .state('main.routesetting', {
         url: '/routesetting',
         templateUrl: "templates/routesetting/routesetting.html",
-        controller: "RouteSettingCtrl"
+        controller: "RouteSettingCtrl",
+        cache: false
+      })
+      //知识资料库
+      .state('main.learningindex', {
+        url: '/learningindex',
+        templateUrl: "templates/learning/learningindex.html",
+        controller: "LearningIndexCtrl"
+      })
+      //按产品内容筛选
+      .state('main.materialexpand', {
+        url: '/materialexpand',
+        templateUrl: "templates/learning/materialexpand.html",
+        controller: "MaterialExpandCtrl"
+      })
+      //积分排行
+      .state('main.pointsrank', {
+        url: '/pointsrank',
+        templateUrl: "templates/learning/pointsrank.html",
+        controller: "PointsRankCtrl"
+      })
+      //答题历史
+      .state('main.exercisehistory', {
+        url: '/exercisehistory',
+        templateUrl: "templates/learning/exercisehistory.html",
+        controller: "ExerciseHistoryCtrl"
+      })
+      //疾病知识教育
+      .state('main.diseaseknowledge', {
+        url: '/diseaseknowledge',
+        templateUrl: "templates/learning/diseaseknowledge.html",
+        controller: "DiseaseKnowledgeCtrl"
+      })
+      //生动化教育
+      .state('main.vitalityeducation', {
+        url: '/vitalityeducation',
+        templateUrl: "templates/learning/vitalityeducation.html",
+        controller: "VitalityEducationCtrl"
+      })
+      //辅导下属
+      .state('main.tutorialindex', {
+        url: '/tutorialindex',
+        templateUrl: "templates/tutorial/tutorialindex.html",
+        controller: "TutorialIndexCtrl"
+      })
+      //拜访流程
+      .state('main.callprocedure', {
+        url: '/callprocedure',
+        templateUrl: "templates/tutorial/callprocedure.html",
+        controller: "CallProcedureCtrl"
+      })
+      //拜访流程
+      .state('main.callprocedurestep2', {
+        url: '/callprocedurestep2',
+        templateUrl: "templates/tutorial/callprocedurestep2.html",
+        controller: "CallProcedureStep2Ctrl"
+      })
+      //辅导签到
+      .state('main.coachingcall', {
+        url: '/coachingcall',
+        templateUrl: "templates/tutorial/coachingcall.html",
+        controller: "CoachingCallCtrl"
+      })
+      //辅导签到签到
+      .state('main.tutorialcheckin', {
+        url: '/tutorialcheckin',
+        templateUrl: "templates/tutorial/tutorialcheckin.html",
+        controller: "TutorialCheckInCtrl"
+      })
+      //辅导记录
+      .state('main.tutorialmgt', {
+        url: '/tutorialmgt',
+        templateUrl: "templates/tutorialmgt/tutorialmgt.html",
+        controller: "TutorialMgtCtrl"
+      })
+      //系统设置
+      .state('main.settings', {
+        url: '/settings',
+        templateUrl: "templates/settings/settings.html",
+        controller: "SettingsCtrl"
+      })
+      //关于
+      .state('main.about', {
+        url: '/about',
+        templateUrl: "templates/settings/about.html",
+        controller: "AboutCtrl"
+      })
+      //修改登录密码
+      .state('main.changepassword', {
+        url: '/changepassword',
+        templateUrl: "templates/settings/changepassword.html",
+        controller: "ChangePasswordCtrl"
       })
       .state('carinfo', {
         url: '/carinfo',
@@ -203,6 +331,10 @@ var interceptor = function ($q, $rootScope) {
       //登陆失败
       if (rejection.status == 401) {
         $rootScope.$broadcast("userIntercepted", "loginfailed", rejection);
+      }
+      //500
+      if (rejection.status == 500) {
+        $rootScope.$broadcast("systemerror", "systemerror", rejection);
       }
       return $q.reject(rejection);
     }

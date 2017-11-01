@@ -4,7 +4,7 @@ angular.module('account.ctrl', ['account.srv'])
     if (localStorage.cipher == null) {
       $scope.cipherinfo = "请设置手势密码";
     } else {
-      $scope.cipherinfo = "手势密码登陆";
+      $scope.cipherinfo = "手势密码登录";
     }
     //设置手势密码
     $scope.settingcipher = function (str) {
@@ -14,11 +14,11 @@ angular.module('account.ctrl', ['account.srv'])
         $scope.lock.error();
         $timeout(function(){  $scope.lock.reset();},1000);
       } else {
-        ////如果已经设置了密码判断是否可以正常登陆
+        ////如果已经设置了密码判断是否可以正常登录
         if (localStorage.cipher != null) {
           if (localStorage.cipher == str) {
             //通过验证关闭modal
-            $scope.cipherinfo = "手势密码登陆";
+            $scope.cipherinfo = "手势密码登录";
             $scope.modal.hide();
             $scope.modal.remove();
             $state.go("main.home");
@@ -37,7 +37,7 @@ angular.module('account.ctrl', ['account.srv'])
             if (str == $scope.currentcipher) {
               localStorage.cipher = str;
               //通过验证关闭modal
-              $scope.cipherinfo = "手势密码登陆";
+              $scope.cipherinfo = "手势密码登录";
               $scope.modal.hide();
               $scope.modal.remove();
               $state.go("main.home");
@@ -65,9 +65,18 @@ angular.module('account.ctrl', ['account.srv'])
         $scope.showcipher();
       }
     });
+    //测试登陆用
+    $scope.roules =[
+      {Name:'AE',UserId:18521734092,Password:123456},
+      {Name:'CCR',UserId:18521734007,Password:123456}
+      ];
+    //测试登陆用
+    $scope.selectroute =function(item){
+      $scope.loginData = item;
+    };
     $scope.loginData = {
-      UserId:18521734007,
-      Password:123456
+      UserId:"",
+      Password:""
     };
     //显示手势密码
     $scope.showcipher = function () {
@@ -99,5 +108,10 @@ angular.module('account.ctrl', ['account.srv'])
         }
       });
     };
+    //清空缓存
+    $scope.clear=function(){
+      localStorage.clear();
+      alert("clear")
+    }
 
   });

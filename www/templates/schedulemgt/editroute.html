@@ -1,0 +1,68 @@
+<ion-view title="编辑路线" view-title="编辑路线">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">编辑路线</div>
+    <button class="button button-clear back-button" ng-click="savePlan()">
+      确定
+    </button>
+  </div>
+
+  <ion-content class="has-header">
+    <div class="content-block-title flex-between">
+      <div class="align-center margin-img color-black"><img src="img/route_green_44.png" width="20">路线名称</div>
+      <div class="color-blue">{{currentRoute.Institutions.length}}家机构</div>
+    </div>
+    <ion-list show-delete="true" show-reorder="true">
+      <ion-item class="item-remove-animate item item-avatar edit-route" ng-repeat="item in currentRoute.Institutions">
+        <img src="img/{{getIonic(item)}}" width="20">
+        <h2> {{item.InstitutionName}}</h2>
+
+        <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(item)">
+        </ion-delete-button>
+        <ion-reorder-button class="ion-arrow-swap"
+                            on-reorder="moveItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+    </ion-list>
+    <div class="padding flex-center">
+      <div class="flex-center margin-img addins-btn" ng-click="showFooter()">
+        <img src="img/add_gray_36.png" width="14"> 点击添加机构
+      </div>
+    </div>
+  </ion-content>
+  <!--遮罩层-->
+  <div class="mask" ng-if="showMask" ng-class="{'active':showMask,'visible':showMask}"></div>
+  <!-- 底部上滑框添加机构-->
+  <div class="footer-block" ng-class="{'visible':showAddIns}">
+    <div class="bar bar-header bar-stable">
+      <div class="h1 title">添加机构</div>
+      <button class="button button-clear back-button color-blue" ng-click="closeFooter()">关闭</button>
+    </div>
+    <div class="user-searchbar flex-center">
+      <div class="width-90 flex-between">
+        <input type="text" placeholder="输入关键字搜索机构" ng-model="insKey">
+        <button class="button button-positive button-small" ng-click="resetSearchIns()">重置</button>
+      </div>
+    </div>
+    <ul class="footer-searchlist">
+      <li class="list-item multi-line" ng-repeat="item in localInsList">
+        <div class="item-content align-top">
+          <div class="item-media"><span class="uicon {{getCssClass(item)}}"></span></div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-text">{{item.InstitutionName + (item.InstitutionPriority!=''?('('+item.InstitutionPriority+')'):'')}}</div>
+              <!--已加入路线显示已加入-->
+              <div class="item-after color-blue" ng-if="item.selected">已加入</div>
+              <!--点击加入路线-->
+              <div class="item-after color-green flex-start margin-img" ng-if="!item.selected" ng-click="addToRouteIns(item)"><img src="img/route_green_44.png" width="18">
+                加入路线
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ion-view>

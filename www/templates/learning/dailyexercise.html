@@ -1,0 +1,48 @@
+<!--每日一题弹框-->
+<div class="close-exercise" ng-click="closeExercise()"></div>
+<div class="body-inner" ng-show="false">
+ <div class="exercise-content">
+   <div class="title">{{exercise.question}}</div>
+   <ul class="content">
+     <li class="flex-start" ng-repeat="item in exercise.answers" ng-click="radioSelected($index)" ng-class="{'checked':idx==$index,'has-selected':item.isSelected}">
+       <div class="item-media">
+         <span class="radio-button uicon"></span>
+       </div>
+       <div class="item-title">{{item.content}}</div>
+     </li>
+   </ul>
+ </div>
+  <div class="bottom-button">确认提交</div>
+</div>
+<!--答完只读-->
+<div class="body-inner" ng-show="true">
+ <div class="exercise-content">
+   <div class="title">{{exercise.question}}</div>
+   <ul class="content">
+     <li class="flex-start" ng-repeat="item in exercise.answers" ng-class="{'has-selected':item.isSelected,'right-answer':item.isCorrect}">
+       <div class="item-media">
+         <span class="radio-button uicon"></span>
+       </div>
+       <div class="item-title">{{item.content}}</div>
+     </li>
+   </ul>
+ </div>
+  <div class="bottom-button">明天继续努力~</div>
+</div>
+<!--当回答正确测试-->
+<div class="body-inner correct" ng-show="false">
+ <div class="exercise-content">
+   <p class="title">回答正确</p>
+   <p class="subtitle">获得积分：1分</p>
+ </div>
+<div class="bottom-button">明天继续努力~</div>
+</div>
+<!--回答错误测试-->
+<div class="body-inner wrong" ng-show="false">
+  <div class="exercise-content">
+    <p class="title">回答错误</p>
+    <p class="subtitle">正确答案</p>
+    <p class="content">正确答案正确答案正确答案正确答案正确答案正确答案正确答案正确答案正确答案正确答案正确答案正确答案正确答案</p>
+  </div>
+<div class="bottom-button">明天继续努力~</div>
+</div>

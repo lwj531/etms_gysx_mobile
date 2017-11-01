@@ -1,5 +1,5 @@
-angular.module('home.ctrl', ['car.srv'])
-  .controller('HomeCtrl', function ($scope, $state, carsrv, $ionicModal,$ionicPopup,$ionicHistory) {
+angular.module('home.ctrl', [])
+  .controller('HomeCtrl', function ($scope, $state, $ionicModal,$ionicPopup,$ionicHistory) {
     //清除登陆页面的历史纪录
     $ionicHistory.clearHistory();
 
@@ -37,6 +37,8 @@ angular.module('home.ctrl', ['car.srv'])
     //   // 执行动作
     // });
 
+    $scope.progressNum = 20+'%';
+    $scope.progress = {"width":$scope.progressNum};
     $scope.reciever=[];
     for(var i=0;i<100;i++){
       $scope.reciever.push({name:''});

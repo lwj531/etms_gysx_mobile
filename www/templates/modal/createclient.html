@@ -1,0 +1,61 @@
+<ion-view title="机构详情" view-title="机构详情">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="closeAddClientModal()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">新增客户</div>
+    <button class="button button-clear back-button" ng-click="saveCreateClient()">
+      保存
+    </button>
+  </div>
+
+  <ion-content class="has-header">
+    <div class="bg-white">
+      <ul class="ins-detail">
+        <li class="list-item">
+          <div class="item-content">
+            <div class="item-media"><span class="client-gender {{avatarClass}}"></span></div>
+            <div class="item-inner" style="padding-right: 0;padding-bottom: 0;">
+              <div class="" style="width: 100%;">
+                <div class="input-row">
+                  <input type="text" maxlength="10" placeholder="客户姓名" ng-model="client.ClientName">
+                </div>
+                <div class="flex-row gender-radio">
+                  <div class="col-50" ng-repeat="item in Genders" ng-click="changeGender(item)">
+                    <span class="gender-item {{item.Class}}"  ng-class="{selected:item.Code==client.Gender}"><span class="uicon uicon-gender"></span> {{item.Name}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item inverse">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title align-center label"><img src="img/job_gray_48.png" width="26" >职务</div>
+              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入职务" ng-model="client.Titile"></div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item inverse">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title align-center label"><img src="img/major_gray_48.png" width="26">专业背景</div>
+              <div class="item-input"><input type="text" maxlength="20" placeholder="请输入专业背景" ng-model="client.ProfessionInfo"></div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item inverse has-line">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title align-center label"><img src="img/cellphone_gray_48.png" width="26">手机号</div>
+              <div class="item-input"><input type="tel" maxlength="20" placeholder="请输入手机号" ng-model="client.Phone"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </ion-content>
+</ion-view>

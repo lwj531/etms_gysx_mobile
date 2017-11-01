@@ -1,0 +1,12 @@
+<!--修改坐标弹框-->
+<div ng-controller="StoreModifyCtrl">
+<div class="coordinate-title">{{currentStore.InstitutionName}}</div>
+<div id="coordinate-map">
+  <label class="toggle toggle-balanced modify-lnglat" ng-class="{'disabled':(lnglat==null || lnglat.length==0)}">
+    <input type="checkbox" ng-model="IsModifyStoreLngLat">
+    <div class="track">
+      <div class="handle"></div>
+    </div>
+  </label>
+</div>
+</div>
