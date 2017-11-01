@@ -26,7 +26,7 @@ angular.module('callguide.ctrl', [])
       bottom.className = "info-bottom";
       bottom.style.position = 'relative';
       bottom.style.top = '0px';
-      bottom.style.left = '50%';
+      bottom.style.left = '4%';
       bottom.style.margin = '0 auto';
       var sharp = document.createElement("img");
     //  sharp.src = "https://webapi.amap.com/images/sharp.png";
@@ -104,7 +104,7 @@ angular.module('callguide.ctrl', [])
               });
               marker.setMap(map);
               marker.on("click", function (e) {
-                var title = '<div style="width:40px;height:45px;background-color:#419DE7;text-align:center;border-radius:5px 0 0 5px;"><a ui-sref="main.checkin"  style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:5px;">进入拜访</a></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:5px;left:48px;width: 142px;">' + e.target.G.extData.name + '</span><img ng-click="getinsinfo()" src="img/store-moreinfo-icon.png" style="width: 50px;position: absolute;top: -2px;right: -2px;"></div>', content = [];
+                var title = '<div style="width:40px;height:54px;background-color:#419DE7;text-align:center;border-radius:5px 0 0 5px;"><a ui-sref="main.checkin"  ng-click="closeinfowindow()" style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:5px;">进入拜访</a></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:5px;left:48px;width: 152px;">' + e.target.G.extData.name + '</span><img ng-click="getinsinfo()" src="img/store-moreinfo-icon.png" style="width: 50px;position: absolute;top: -2px;right: -2px;"></div>', content = [];
                 var hs = e.target.G.extData;
                 var marker_window = new AMap.InfoWindow({
                   isCustom: true,
@@ -125,20 +125,26 @@ angular.module('callguide.ctrl', [])
           function (data) {
             switch (data.info) {
               case 'PERMISSION_DENIED':
-                myApp.alert('浏览器阻止了定位操作!', '错误');
+                alert('浏览器阻止了定位操作!', '错误');
                 break;
               case 'POSITION_UNAVAILBLE':
-                myApp.alert('无法获得当前位置!', '错误');
+                alert('无法获得当前位置!', '错误');
                 break;
               case 'TIMEOUT':
-                myApp.alert('定位超时!', '错误');
+                alert('定位超时!', '错误');
                 break;
               default:
-                myApp.alert('定位失败,请检查网络或系统设置!', '错误');
+                alert('定位失败,请检查网络或系统设置!', '错误');
                 break;
             }
           });
       });
+
+    //点击完infowindow上的进入拜访之后即关闭infowindow
+    $scope.closeinfowindow = function(){
+      $(".info").hide();
+     // $scope.map.clearInfoWindow();
+    };
 
     //查看机构信息(点击窗体信息里的小i图标)
       $scope.getinsinfo = function(){
@@ -189,22 +195,24 @@ angular.module('callguide.ctrl', [])
         $("#xd_tab_2").hide();
         $("#xd_tab_1").hide();
       };
+
+
       //点击右上角搜索机构图标
+      $scope.searchmodal = false;
       $scope.searchstore = function(){
-        $(".callguide-searchstorediv").fadeIn(300);
-        $(".callguide-nolatlng-storediv").fadeOut(300);
+        $scope.searchmodal=true;
       };
       //关闭搜索机构弹窗
       $scope.closesearchstorediv = function(){
-        $(".callguide-searchstorediv").fadeOut(300);
+        $scope.searchmodal = false;
       };
       //请求无坐标机构数据函数
+      $scope.nolatlngmodal = false;
       $scope.search_nopositionstore = function(){
-        $(".callguide-nolatlng-storediv").fadeIn(300);
-        $(".callguide-searchstorediv").fadeOut(300);
+        $scope.nolatlngmodal = true;
       };
       //关闭
       $scope.close_nolatlngstorediv = function(){
-        $(".callguide-nolatlng-storediv").fadeOut(300);
+        $scope.nolatlngmodal = false;
       }
   });
