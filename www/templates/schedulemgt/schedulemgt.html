@@ -20,19 +20,13 @@
   <!--日视图时显示周日历-->
   <div class="bar bar-subheader bar-stable week-slide" ng-show="viewActive=='dayView'">
     <ul class="flex-row week-title">
-      <li>日</li>
-      <li>一</li>
-      <li>二</li>
-      <li>三</li>
-      <li>四</li>
-      <li>五</li>
-      <li>六</li>
+      <li  ng-repeat="date in weekDays" ng-bind="date | amDateFormat:'dd'">日</li>
     </ul>
     <!--左右滑动切周-->
     <ul class="flex-row week-day" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
       <!--repeat周的日期-->
-      <li ng-repeat="item in weekChange" ng-click="clickDate(item)"
-          ng-class="{true: 'today'}[item.toLocaleDateString()==today.toLocaleDateString()]">{{item.getDate()}}
+      <li ng-repeat="item in weekDays" ng-click="clickDate(item)"
+          ng-class="{true: 'today'}[item.day()==selectedDate.day()]" ng-bind="item | amDateFormat:'DD'">
       </li>
     </ul>
   </div>
@@ -42,7 +36,7 @@
         <button class="button button-icon align-center" ng-click="prevWeek()">
           <span class="uicon uicon-blue-prev"></span>
         </button>
-        <div>{{weekSatrtDate | date:'yyyy/MM/dd'}} ~ {{weekEndDate | date:'yyyy/MM/dd'}}</div>
+        <div>{{weekSatrtDate | amDateFormat:'YYYY/MM/DD'}} ~ {{weekEndDate | amDateFormat:'YYYY/MM/DD'}}</div>
         <button class="button button-icon align-center" ng-click="nextWeek()">
           <span class="uicon uicon-blue-next"></span>
         </button>
