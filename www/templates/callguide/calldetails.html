@@ -7,69 +7,88 @@
     <div class="h1 title">拜访向导</div>
   </div>
   <ion-content class="has-header">
-    <div class="list-block calldetails-store-juti">
+
+    <div class="content-block">
       <ul>
-        <li>
-          <img class="calldetails-store-gradeimg" src="img/GradeA-icon.png"/>
-          <div class="qryd">
-            <div><span class="qryd-storename">复方药房</span></div>
-            <div style="padding-top: 5px;"><span class="qryd-storeaddress">岚皋路121号</span></div>
+        <li class="list-item multi-line ">
+          <div class="item-content align-top">
+            <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              </div>
+              <div class="item-text">上海市石泉路548号</div>
+            </div>
           </div>
-          <div class="qrztdiv"><img src="img/done-signin-icon.png" style="width: 20px;"><span class="qrsj">签入 09:32:30</span><a ui-sref="main.todolist" class="qr-nextstep">下一步</a></div>
+        </li>
+        <li class="list-item">
+          <div class="item-content">
+            <div class="item-media"><div class="fake-media"></div></div>
+            <div class="item-inner">
+              <div class="flex-start margin-img"><img src="img/done-signin-icon.png" width="20">签入 <span>09:32:30</span></div>
+              <div><button class="button button-positive button-clear button-thin" ui-sref="main.todolist">下一步</button></div>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
-    <div class="bg-white" style="margin-top: 15px;">
-      <ul class="list-block" id="xd-check" style="padding-left:5px;margin-top:0;">
-        <li class="qryd-li">
-          <a class="qryd-li-a" ui-sref="main.purchasesellstockcheck">
-            <img class="qryd-li-img" src="img/jian-2x.png"/>
-            <div class="qryd-todo-div">
-              <div><span class="qryd-todo-stitle">进销存检查</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+    <div class="content-block" >
+      <ul class="" ng-show="true">
+        <li class="list-item" ui-sref="main.purchasesellstockcheck">
+          <div class="item-content item-link">
+            <div class="item-media"><img src="img/jian-2x.png" width="26"/></div>
+            <div class="item-inner">
+              <div class="item-title">进销存检查</div>
+              <div class="item-after color-blue">3</div>
             </div>
-          </a>
+          </div>
         </li>
-        <li class="qryd-li">
-          <a class="qryd-li-a" ui-sref="main.businessreview">
-            <img class="qryd-li-img" src="img/sdh-2x.png"/>
-            <div class="qryd-todo-div">
-              <div><span class="qryd-todo-stitle">生意回顾</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+        <li class="list-item" ui-sref="main.diseaseknwoledgeeducate">
+          <div class="item-content item-link">
+            <div class="item-media"><img src="img/jiao-2x.png" width="26"/></div>
+            <div class="item-inner">
+              <div class="item-title">疾病知识教育</div>
+              <div class="item-after color-blue">3</div>
             </div>
-          </a>
+          </div>
         </li>
-        <li class="qryd-li">
-          <a class="qryd-li-a" ui-sref="main.checklist">
-            <img class="qryd-li-img" src="img/c-2x.png"/>
-            <div class="qryd-todo-div">
-              <div><span class="qryd-todo-stitle">CheckList</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+        <li class="list-item" ui-sref="main.trainingrecord">
+          <div class="item-content item-link">
+            <div class="item-media"><img src="img/jian-2x.png" width="26"/></div>
+            <div class="item-inner">
+              <div class="item-title">培训记录</div>
+              <div class="item-after color-blue">3</div>
             </div>
-          </a>
+          </div>
         </li>
       </ul>
-      <ul class="list-block"  style="padding-left:5px;margin-top:0;">
-        <li class="qryd-li">
-          <a class="qryd-li-a" ui-sref="main.purchasesellstockcheck">
-            <img class="qryd-li-img" src="img/jian-2x.png"/>
-            <div class="qryd-todo-div">
-              <div><span class="qryd-todo-stitle">进销存检查(CCR)</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+      <ul class="" ng-show="true">
+        <li class="list-item" ui-sref="main.purchasesellstockcheck">
+          <div class="item-content item-link">
+            <div class="item-media"><img src="img/jian-2x.png" width="26"/></div>
+            <div class="item-inner">
+              <div class="item-title">进销存检查</div>
+              <div class="item-after color-blue">3</div>
             </div>
-          </a>
+          </div>
         </li>
-        <li class="qryd-li">
-          <a class="qryd-li-a" ui-sref="main.diseaseknwoledgeeducate">
-            <img class="qryd-li-img" src="img/sdh-2x.png"/>
-            <div class="qryd-todo-div">
-              <div><span class="qryd-todo-stitle">疾病知识教育(CCR)</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+        <li class="list-item" ui-sref="main.businessreview">
+          <div class="item-content item-link">
+            <div class="item-media"><img src="img/sdh-2x.png" width="26"/></div>
+            <div class="item-inner">
+              <div class="item-title">生意回顾</div>
+              <div class="item-after color-blue">3</div>
             </div>
-          </a>
+          </div>
         </li>
-        <li class="qryd-li">
-          <a class="qryd-li-a" ui-sref="main.trainingrecord">
-            <img class="qryd-li-img" src="img/c-2x.png"/>
-            <div class="qryd-todo-div">
-              <div><span class="qryd-todo-stitle">培训记录(CCR)</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+        <li class="list-item" ui-sref="main.checklist">
+          <div class="item-content item-link">
+            <div class="item-media"><img src="img/c-2x.png" width="26"/></div>
+            <div class="item-inner">
+              <div class="item-title">CheckList</div>
+              <div class="item-after color-blue">3</div>
             </div>
-          </a>
+          </div>
         </li>
       </ul>
     </div>

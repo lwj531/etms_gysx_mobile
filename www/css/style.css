@@ -291,7 +291,7 @@ p {
   margin: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   line-height: 14px;
   color: #919192;
@@ -524,6 +524,7 @@ ul {
   display: -webkit-box;
   line-height: 18px;
   /*margin-top: 2px;*/
+  white-space: normal;
 }
 
 .list-item .item-media {
@@ -983,11 +984,11 @@ ul {
 
 .table tr {
   width: 100%;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #eee;
 }
 
 .table thead tr {
-  border-bottom: 2px solid #ccc;
+  border:none;
   line-height: 35px;
   font-weight: 700;
 }
@@ -1952,6 +1953,7 @@ input[type="text"].route-name-input.wide {
 }
 
 .route-action-block.daily {
+  font-size: 13px;
   top: 65px;
 }
 
@@ -2821,16 +2823,23 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .tiled-block {
-  overflow: hidden;
   background-color: #fff;
   font-size: 12px;
   height: calc(100% - 55px);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .tiled-block .width-33 {
   float: left;
   padding: 5px;
+}
+.tiled-block .width-25 {
+  float: left;
+  padding: 5px;
+}
+.tiled-block .width-25 img{
+  width: 70px;
+  height: 70px;
 }
 
 .tiled-block .width-33 img {
@@ -3938,6 +3947,7 @@ input[type=month] {
   color: #3e3e3e;
   height: 40px;
   line-height: 40px;
+  font-size: 13px;
 }
 
 .change-password ul + .flex-center .button {
@@ -3949,6 +3959,7 @@ input[type=month] {
   padding:0;
   height:35px;
   background-color:#f4f4f4;
+  font-size: 13px;
 }
 .xd_ul li{
   float:left;
@@ -3993,12 +4004,15 @@ input[type=month] {
   width:80px;
   bottom:0;left:0;right:0;margin:auto;
 }
-.xd-dragup-ul{
+.call-guide .dragup-ul{
   padding:0;
-  padding-left:10px;
   margin:0;
   height:280px;
   overflow:auto;
+}
+.call-guide .dragup-ul [class*=uicon-marker]{
+  width: 24px;
+  background-size: 23px;
 }
 .callguide-searchstorediv{
   position:absolute;
@@ -4045,7 +4059,8 @@ input[type=month] {
 .storeinfo-up{
   height: 60px;
   position: relative;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
 }
 .storeinfo-title-img-div{
   position: absolute;
@@ -4057,26 +4072,24 @@ input[type=month] {
   border-radius: 7px;
   border:1px solid lightgray;
   top: -25px;
-  left: 10px;
 }
 .storeinfo-title-img{
-  width: 52px;
-  height: 50px;
+  /*width: 52px;*/
+  /*height: 50px;*/
 }
 .storeinfo-title-inner{
   position: absolute;
-  width: 78%;
-  right: 0;
+  width: calc(100% - 75px);
+  left: 75px;
 }
 .storeinfo-title-inner-p{
   padding-top: 6px;
   margin-bottom: 6px;
-  font-size: 15px;
+  font-size: 13px;
 }
 .storeinfo-title-inner-span{
-  padding-top: 1px;
   margin-top: 5px;
-  font-size: 13px;
+  font-size: 12px;
   color: #c4c4c4;
 }
 .storeinfo-down{
@@ -4086,6 +4099,7 @@ input[type=month] {
 .storeinfo-tbody-tr{
   height: 30px;
   line-height: 30px;
+  color: #7694b3;
 }
 .caokao-orange{
   color: rgba(255, 166, 0, 0.66);
@@ -4170,6 +4184,7 @@ input[type=month] {
 .jxc-content-title{
   height: 45px;
   position: relative;
+  color:#747d88;
 }
 .jxc-content input{
   display: inline-block;
@@ -4184,10 +4199,11 @@ input[type=month] {
   text-align: center;
 }
 .jxc-content-bt{
+  font-size: 12px;
   height:30px;
   line-height: 30px;
   background-color: #f5fafc;
-  color: dimgray;
+  color: #afb8c2;
 }
 .jxc-content-sr{
   height: 45px;
@@ -4195,7 +4211,7 @@ input[type=month] {
 }
 .jxc-content-title-skuname{
   position: absolute;
-  font-size: 15px;
+  font-size: 13px;
   bottom: 6px;
   left: 15px;
 }
@@ -4356,17 +4372,21 @@ input[type=month] {
   display: block;
   margin-top: 15px;
 }
-.checkintodo-r{
-  width:100%;height: 42px;
-  font-size: 20px;
+.button.checkintodo-r{
+  width:100%;
+  height: 43px;
+  min-height: 43px;
   background-color: #e54b3e;
   color: white;
+  font-size: 14px;
 }
-.checkintodo-g{
-  width:100%;height: 42px;
-  font-size: 20px;
+.button.checkintodo-g{
+  width:100%;
+  height: 43px;
+  min-height: 43px;
   background-color: #adbab1;
   color: white;
+  font-size: 14px;
 }
 #not_gps{
   margin:10px 0;
@@ -5094,12 +5114,10 @@ input[type=month] {
   background-color: #f4f4f4;
   border-radius: 5px;
   font-size: 13px;
-  color: dimgray;
 }
 .callguide-cankao-td{
   text-align:center;
   font-size:13px;
-  color:dimgray
 }
 .zlk-all-zl-info{
   width: 100%;
@@ -5512,4 +5530,15 @@ input[type=month] {
   text-align: center;
   flex-shrink: 0;
   position: relative;
+}
+.top-50{
+  top:50px;
+}
+.callguide-checkin .checkin-content{
+  height: calc(100% - 180px);
+  overflow: auto;
+  padding-bottom: 30px;
+}
+.fake-media{
+  width: 32px;
 }

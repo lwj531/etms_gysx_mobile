@@ -20,7 +20,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.showMask = false;
     //进度条百分比
     $scope.progressNum = 40 + '%';
-    $scope.progress = {"width": $scope.progressNum};
+    //$scope.progress = {"width": $scope.progressNum};
 
     //当前日期
     $scope.currentDate = new Date();
@@ -79,6 +79,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
                 }
               }
             });
+            //获取周实际
             $scope.getWeekActualList(function () {
               $scope.checkinTimes = [];
               $scope.checkoutTimes = [];
@@ -86,23 +87,37 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
                 for (var k = 0; k < $scope.weekActualList.PlanRoutelines.length; k++) {
                   if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
                     $scope.actualWeekDays[j].route = $scope.weekActualList.PlanRoutelines[k];
+                    $scope.actualWeekDays[j].progress = {"width": $scope.weekActualList.Rates};
+                    $scope.actualWeekDays[j].halfday = $scope.weekActualList.HalfdayModels;
+
+                    for (var p=0;p<$scope.weekActualList.Checkins.length;p++){
+                      if($scope.weekActualList.Checkins[p].InOut=="IN" && $scope.actualWeekDays[j].route.CheckIn ==null && $scope.weekActualList.Checkins[p].CheckinDate == moment($scope.actualWeekDays[j].route.ActivityDate).format('YYYY-MM-DD')){
+                        $scope.actualWeekDays[j].route.CheckIn = $scope.weekActualList.Checkins[p];
+                      }
+                    }
+
+                    for (var p = $scope.weekActualList.Checkins.length-1;p>=0;p--){
+                      if($scope.weekActualList.Checkins[p].InOut=="OUT" && $scope.actualWeekDays[j].route.CheckOut ==null && $scope.weekActualList.Checkins[p].CheckinDate == moment($scope.actualWeekDays[j].route.ActivityDate).format('YYYY-MM-DD')){
+                        $scope.actualWeekDays[j].route.CheckOut = $scope.weekActualList.Checkins[p];
+                      }
+                    }
                   }
                 }
 
-                for (var l = 0; l < $scope.weekActualList.Checkins.length; l++) {
-                  if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
-                    $scope.actualWeekDays[j].CheckinTimes = $scope.weekActualList.Checkins[l];
-                    if ($scope.weekActualList.Checkins[l].InOut == 'In') {
-                      $scope.checkinTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
-                    }
-                    else if ($scope.weekActualList.Checkins[l].InOut == 'Out') {
-                      $scope.checkoutTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
-                    }
-                    else {
-                      alert('不是In Out');
-                    }
-                  }
-                }
+                // for (var l = 0; l < $scope.weekActualList.Checkins.length; l++) {
+                //   if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
+                //     $scope.actualWeekDays[j].CheckinTime = $scope.weekActualList.Checkins[l];
+                //     if ($scope.weekActualList.Checkins[l].InOut == 'In') {
+                //       $scope.checkinTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
+                //     }
+                //     else if ($scope.weekActualList.Checkins[l].InOut == 'Out') {
+                //       $scope.checkoutTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
+                //     }
+                //     else {
+                //       alert('不是In Out');
+                //     }
+                //   }
+                // }
 
               }
             });

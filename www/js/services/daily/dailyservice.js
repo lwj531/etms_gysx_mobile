@@ -12,7 +12,7 @@ angular.module("daily.srv", ["http.srv"])
 
     //获取一周的实际
     this.getWeekActualList = function (startDate,endDate) {
-      return httpsrv.service("/api/Weekly/GetDateRangePlans/"+ startDate + '/'+ endDate, {}, "get");
+      return httpsrv.service("/api/Weekly/GetDateRangeActuals/"+ startDate + '/'+ endDate, {}, "get");
     };
   }
   ]);

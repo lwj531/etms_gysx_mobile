@@ -6,75 +6,62 @@
     </button>
     <div class="h1 title">签入</div>
   </div>
-  <ion-content class="has-header">
+  <ion-content class="has-header callguide-checkin">
    <!-- <marquee id="marquee_" onmouseout="this.start()" onmouseover="this.stop()" style="color:#dc4e4e; width:100%; background-color:#F1D6D6; font-size: 13px;    line-height: 30px;  position: absolute;    z-index: 99;" bgcolor="#ccc" scrollamount="5">
       <img src="img/informationicon.png" style="height: 13px; margin-top: 7px; line-height: 20px; /* padding-top: 5px; */ margin-right: -13px; padding-right: -13px; margin-left: -15px; position: absolute;" />不在签到机构@(ViewBag.Distance)米范围内,不予以签入
     </marquee>-->
 
-    <div class="card" style="margin: 0">
-      <div class="card-content">
-        <div class="card-content-inner" style="padding: 0;">
-          <div id="checkinmapcontainer" class="amap-container">
-          </div>
+    <div id="checkinmapcontainer" class="amap-container">
+    </div>
+<div class="checkin-content">
+  <div class="list-item multi-line no-line" ui-sref="main.checkin">
+    <div class="item-content align-top">
+      <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+      <div class="item-inner">
+        <div class="item-title-row">
+          <div class="item-title">国药控股大药房永新连锁店(A)</div>
         </div>
-        <div class="card-content" style="height: 60px">
-          <div id="institution_icon">
-            <img id="CheckinInstitution" src="" />
-          </div>
-          <div class="card-content-inner content-store">
-            <img class="content-store-gradeimg" src="img/GradeA-icon.png"/>
-            <p id="lname">复方药店(A)</p>
-            <p id="laddress" class="color-gray">岚皋路121号</p>
-          </div>
-        </div>
+        <div class="item-text">上海市石泉路548号</div>
       </div>
     </div>
-    <div class="content-block-title qdxxbt">签到信息</div>
-    <div class="list-block check" style="margin-bottom: 15px">
-      <ul style="">
-        <li class="item-content checkin-swqr-li" style="padding-left: 18px;">
+  </div>
+  <div class="content-block-title">签到信息</div>
+  <div class="list-block check" style="margin-bottom: 15px">
+    <ul style="">
+      <li class="list-item">
+        <div class="item-content">
+          <div class="item-media"><img src="img/not-signin-icon.png" width="20"></div>
           <div class="item-inner">
-            <div class="item-title">
-              <p style="margin: 0.5em 0;">
-                <img class="qricon" src="img/not-signin-icon.png"><text>&nbsp;尚未签入</text>
-              </p>
-            </div>
+            <div class="item-title">尚未签入</div>
           </div>
-        </li>
-        <li class="item-content" style="padding-left: 18px;">
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="item-content">
+          <div class="item-media"><img src="img/not-signin-icon.png" width="20"></div>
           <div class="item-inner">
-            <div class="item-title">
-              <p style="margin: 0.5em 0;">
-                <img class="qricon" src="img/not-signin-icon.png"><text>&nbsp;尚未签出</text>
-              </p>
-            </div>
+            <div class="item-title">尚未签出</div>
           </div>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <div class="content-block-title qdxxbt">签到照片</div>
-      <div class="list-block" style="margin: 0;">
-        <ul>
-          <li>
-            <div class="checkinimg-div">
-              <img class="checkin_ImgAdd" src="img/upload-photo.png" style="width: 80px; height: 80px;" />
-            </div>
-            <div class="" id="not_gps">
-              <div id="img_list">
-
-              </div>
-            </div>
-          </li>
-        </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <div class="content-block-title">签到照片</div>
+    <div class="tiled-block padding-1015 bg-white">
+      <div class="width-25 align-center">
+        <img src="img/upload-photo.png">
       </div>
     </div>
+  </div>
 
-    <div id="btnCheck_GPS">
-      <a ui-sref="main.calldetails" class="button checkintodo-r">GPS签入</a>
-    </div>
-    <div id="btnCheck_Manual">
-      <a ui-sref="main.calldetails" class="button checkintodo-g">手动签入</a>
-    </div>
+  <div id="btnCheck_GPS">
+    <a ui-sref="main.calldetails" class="button checkintodo-r">GPS签入</a>
+  </div>
+  <div id="btnCheck_Manual">
+    <a ui-sref="main.calldetails" class="button checkintodo-g">手动签入</a>
+  </div>
+</div>
+
   </ion-content>
 </ion-view>
