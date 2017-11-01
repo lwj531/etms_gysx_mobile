@@ -9,5 +9,13 @@ angular.module("daily.srv", ["http.srv"])
     this.getWeekPlanList = function (startDate,endDate) {
       return httpsrv.service("/api/Weekly/GetDateRangePlans/"+ startDate + '/'+ endDate, {}, "get");
     };
+    //获取半天事务类型options
+    this.getHalfdayType = function () {
+      return httpsrv.service("/api/SystemType/GetHalfdays", {}, "get");
+    };
+    //保存半天事务
+    this.saveHalfdayPlan = function (model) {
+      return httpsrv.service("/api/Daily/SaveActivityHalfday", model, "post");
+    };
   }
   ]);
