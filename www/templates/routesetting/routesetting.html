@@ -120,14 +120,14 @@
           <button class="button button-clear button-positive button-thin" ng-click="searchstorebykeyword()">搜索</button>
         </div>
         <ion-scroll class="window-list" ng-show="searchresult.length>0">
-          <ion-list>
+          <ion-list class="no-latlng">
             <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
               <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
               <p class="item-text">{{item.Address}}</p>
             </ion-item>
           </ion-list>
         </ion-scroll>
-        <div class="bg-white text-center" ng-show="searchresult.length>0">搜索到{{searchresult.length}}家机构</div>
+        <div class="bg-white text-center color-blue" ng-show="searchresult.length>0" style="padding: 6px 0;">搜索到{{searchresult.length}}家机构</div>
       </div>
     </div>
 
@@ -135,21 +135,20 @@
     <div class="route-action-block" ng-show="nolatlngmodal">
       <div class="route-action">
         <div class="route-action-bar">
-          <div class="align-center" style="color: #4587f7;"><img src="img/nolatlng-icon.png" width="20"
-                                                                 style="margin-right: 8px;">无机构坐标（<span
+          <div class="align-center margin-img" style="color: #4587f7;"><img src="img/nolatlng-icon.png" width="17" >无机构坐标（<span
             class="color-orange">{{nolatlngresult.length}}</span>）
           </div>
           <button class="button button-clear button-positive button-thin" ng-click="closenolatlngmodal()">关闭</button>
         </div>
         <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
-          <ion-list>
+          <ion-list class="no-latlng">
             <ion-item ng-repeat="item in nolatlngresult" ng-click="openinsinfo(item)">
               <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
               <p class="item-text">{{item.Address}}</p>
             </ion-item>
           </ion-list>
         </ion-scroll>
-        <div class="bg-white text-center" ng-show="nolatlngresult.length>3">....</div>
+        <div class="bg-white text-center color-blue" ng-show="nolatlngresult.length>3" style="padding: 6px 0;">{{nolatlngresult.length}}家机构</div>
       </div>
     </div>
 

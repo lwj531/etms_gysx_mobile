@@ -452,7 +452,7 @@ ul {
   display: -webkit-flex;
   display: flex;
   max-height: 28px;
-  font-size:12px;
+  font-size: 12px;
 }
 
 .list-count {
@@ -1178,7 +1178,7 @@ select {
 
 .bg-white {
   background-color: white;
-font-size: 13px;
+  font-size: 13px;
 }
 
 div.info-top {
@@ -1756,6 +1756,7 @@ ul.ins-detail .list-item .item-input input {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+  font-size: 13px;
 }
 
 .route-action-bar .button {
@@ -1779,6 +1780,7 @@ input[type="text"].route-name-input {
   height: 37px;
   width: 100%;
   padding: 0 10px;
+  font-size: 13px;
 }
 
 input[type="text"].route-name-input.wide {
@@ -1792,11 +1794,12 @@ input[type="text"].route-name-input.wide {
   width: 92%;
 }
 
+.button.button-positive.button-thin,
 .button.button-thin {
-  height: 35px;
-  line-height: 33px;
-  min-height: 35px;
-  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  min-height: 31px;
+  font-size: 13px;
 }
 
 .window-list {
@@ -1813,19 +1816,19 @@ input[type="text"].route-name-input.wide {
   white-space: normal;
 }
 
+.no-latlng .item {
+  padding: 7px 16px;
+}
+
 .window-list .item-complex .item-content {
   background-color: transparent;
-  padding: 10px 19px 9px 16px;
+  padding: 7px 19px 7px 16px;
 }
 
+.window-list .list-right-editing .item-content,
 .window-list .item-complex .list-right-editing .item-content {
   background-color: transparent;
-  padding: 10px 109px 9px 16px;
-}
-
-.window-list .list-right-editing .item-content {
-  background-color: transparent;
-  padding: 10px 109px 9px 16px;
+  padding: 7px 109px 7px 16px;
 }
 
 .window-list .item-content {
@@ -1834,10 +1837,10 @@ input[type="text"].route-name-input.wide {
 }
 
 .window-list h1.item-title {
-  font-size: 14px;
+  font-size: 13px;
   color: #3e3e3e;
   white-space: normal;
-  margin-bottom: 3px;
+  margin-bottom: 1px;
   line-height: 18px;
 }
 
@@ -3363,6 +3366,10 @@ ul.exercise-week .has-wrong .dot:after {
   padding: 10px 10px 80px 10px;
 }
 
+.drag-list .item {
+  font-size: 12px;
+}
+
 .drag-list .width-50 {
   width: calc(50% - 4px);
 }
@@ -3387,7 +3394,7 @@ ul.exercise-week .has-wrong .dot:after {
 .drag-list .width-50 .item {
   margin: 4px 0;
   border: none;
-  padding: 10px 15px;
+  padding: 6px 12px;
   width: 100%;
 }
 
@@ -3397,9 +3404,9 @@ ul.exercise-week .has-wrong .dot:after {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  min-height: 80px;
-  height: 80px;
+  -webkit-line-clamp: 2;
+  min-height: 40px;
+  height: 40px;
   width: 100%;
 }
 
@@ -3826,8 +3833,8 @@ input[type=month] {
   margin-top: 30px;
 }
 
-.about .scroll{
-height: 100%;
+.about .scroll {
+  height: 100%;
 }
 
 .about .about-card {
@@ -3838,20 +3845,22 @@ height: 100%;
   overflow: hidden;
   background-color: #fff;
 }
-.about .about-card .title{
+
+.about .about-card .title {
   color: #419de7;
-background-color: #f6fbff;
+  background-color: #f6fbff;
   padding: 15px;
   font-size: 16px;
 }
 
-.about .about-card .latest{
+.about .about-card .latest {
   color: #e98338;
-background-color: #fff;
+  background-color: #fff;
   padding: 15px;
   font-size: 12px;
   position: relative;
 }
+
 .about .about-card .latest:after {
   content: '';
   position: absolute;
@@ -3864,7 +3873,8 @@ background-color: #fff;
   background-color: #f6f6f6;
   display: block;
 }
-.about .about-card .latest .tag{
+
+.about .about-card .latest .tag {
   padding: 0 5px 1px;
   background-color: #e98338;
   color: #fff;
@@ -3877,18 +3887,21 @@ background-color: #fff;
   font-size: 12px;
   color: #98A6B7;
 }
-.about .about-card .version-list>li{
+
+.about .about-card .version-list > li {
   padding: 10px 15px 2px;
 }
 
-.about .about-card .version-list .version-title{
-font-size: 13px;
+.about .about-card .version-list .version-title {
+  font-size: 13px;
   padding-bottom: 6px;
 }
-.about .about-card .version-list .version-title.current{
-  color:#419de7;
+
+.about .about-card .version-list .version-title.current {
+  color: #419de7;
 }
-.about .about-card .version-list .version-title .tag{
+
+.about .about-card .version-list .version-title .tag {
   padding: 0 5px 1px;
   background-color: #419de7;
   color: #fff;
@@ -3896,16 +3909,18 @@ font-size: 13px;
   font-size: 12px;
 }
 
-.about .about-card .version-list>li li{
-  padding-left:20px;
+.about .about-card .version-list > li li {
+  padding-left: 20px;
 }
 
 .change-password {
 
 }
-.change-password ul{
-padding: 10px 0;
+
+.change-password ul {
+  padding: 10px 0;
 }
+
 .change-password .pass-input {
   padding: 10px 0;
 }
@@ -3928,7 +3943,7 @@ padding: 10px 0;
   line-height: 40px;
 }
 
-.change-password ul+ .flex-center .button{
+.change-password ul + .flex-center .button {
   width: 80%;
   margin-top: 20px;
 }

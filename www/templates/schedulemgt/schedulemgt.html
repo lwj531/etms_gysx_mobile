@@ -613,7 +613,85 @@
     </div>
   </ion-content>
   <div class="mask" ng-if="showMask" ng-class="{'active':showMask,'visible':showMask}"></div>
-  <!-- 底部上滑框半天事务-->
+  <!-- 计划底部上滑框半天事务 -->
+  <div class="footer-block" ng-class="{'visible':halfAffair}">
+    <div class="bar bar-header bar-stable">
+      <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
+      <div class="h1 title" ng-bind="selectedDate | amDateFormat:'ddd'"></div>
+      <button class="button button-clear back-button color-blue" ng-click="savePlan()">确定</button>
+    </div>
+    <div class="schedule-btg">
+      <div class="flex-center">
+        <div class="width-90">
+          <ul class="button-group">
+            <li class="group-button button flex-center" ng-if="CCR" ng-class="{'selected':footerTab=='route'}"
+                ng-click="changeFooterTab('route')">
+              路线图
+            </li>
+            <li class="group-button button flex-center" ng-class="{'selected':footerTab=='morning'}"
+                ng-click="changeFooterTab('morning')">
+              半天事物(上午)
+            </li>
+            <li class="group-button button flex-center" ng-class="{'selected':footerTab=='afternoon'}"
+                ng-click="changeFooterTab('afternoon')">
+              半天事物(下午)
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--路线列表，单选-->
+      <ul class="schedule-bottom-list" ng-if="CCR" ng-show="footerTab=='route'">
+        <li class="list-item" ng-repeat="item in planStoreList" ng-click="selectRoute(item)">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media" ng-class="{true:'checked'}[item==currentRoute]"><span
+              class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{item.LineName}}
+              </div>
+              <div class="item-after color-blue"
+                   ui-sref="main.editroute({lineId:item.LineID,activityDate:selectedDate.format('YYYY-MM-DD')})">编辑
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <!--半天事务列表：上午，单选-->
+      <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
+        <li class="list-item checked">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务shang</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <!--半天事务列表：下午，单选-->
+      <ul class="schedule-bottom-list" ng-show="footerTab=='afternoon'">
+        <li class="list-item checked">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item">
+          <div class="item-content">
+            <!--点击选中，在选中的li的item-media上添加checked-->
+            <div class="item-media"><span class="uicon radio-button"></span></div>
+            <div class="item-inner">
+              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 实际底部上滑框 -->
   <div class="footer-block" ng-class="{'visible':halfAffair}">
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
