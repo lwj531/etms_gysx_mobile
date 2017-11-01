@@ -41,7 +41,7 @@ angular.module('main.ctrl', [])
       {
         name: " 附近药店",
         iconName: "store",
-        state: "main.xx"
+        state: "main.storenearby"
       },
       {
         name: "辅导记录",

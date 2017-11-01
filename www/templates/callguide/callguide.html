@@ -1,22 +1,21 @@
 <!--拜访向导-->
 <ion-view>
-  <ion-header-bar class="bar-positive">
+  <div class="bar bar-header bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
       <i class="icon ion-android-arrow-back"></i>
-      <span class="back-text" style=""></span></button>
-    <div class="buttons buttons-left header-item" style=""><span class="left-buttons">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </span>
-    </div>
-    <div class="" style="position: absolute;text-align:center;left:0px;right:0px;font-size: 18px;top: 12px;">拜访向导</div>
-    <div class="buttons" style="padding-top:3px;position: absolute;right: 5px;">
-      <button class="button button-icon" ng-click="search_nopositionstore()"><img src="img/nolatlng-store-icon.png" style="width: 32px;">
+      <span class="back-text" style=""></span>
+    </button>
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    <div class="h1 title">拜访向导</div>
+    <div class="buttons">
+      <button class="button button-icon" ng-click="search_nopositionstore()">
+        <img src="img/nolatlng-store-icon.png" width="25" style="padding-top: 4px;">
       </button>
-      <button class="button button-icon" ng-click="searchstore()"><img src="img/search-icon.png" style="width: 32px;">
+      <button class="button button-icon" ng-click="searchstore()">
+        <img src="img/search-icon.png" width="25" style="padding-top: 6px;">
       </button>
     </div>
-  </ion-header-bar>
+  </div>
   <ion-content>
     <!--地图-->
     <div id="callguidemap"></div>
@@ -81,7 +80,7 @@
               <div class="xd-tab2-li-storeinfo-content">
                 <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
             <li class="xd-tab2-li">
@@ -89,7 +88,7 @@
               <div class="xd-tab2-li-storeinfo-content">
                 <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
             <li class="xd-tab2-li">
@@ -97,7 +96,7 @@
               <div class="xd-tab2-li-storeinfo-content">
                 <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
             <li class="xd-tab2-li">
@@ -105,7 +104,7 @@
               <div class="xd-tab2-li-storeinfo-content">
                 <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
             <li class="xd-tab2-li">
@@ -113,7 +112,7 @@
               <div class="xd-tab2-li-storeinfo-content">
                 <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
           </ul>
@@ -125,7 +124,7 @@
               <div class="xd-tab3-li-storeinfo-content">
                 <div><span class="xd-tab3-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab3-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
             <li class="xd-tab3-li">
@@ -133,7 +132,7 @@
               <div class="xd-tab3-li-storeinfo-content">
                 <div><span class="xd-tab3-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab3-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
             <li class="xd-tab3-li">
@@ -141,7 +140,7 @@
               <div class="xd-tab3-li-storeinfo-content">
                 <div><span class="xd-tab3-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
                 <div style="padding-top: 10px;"><span class="xd-tab3-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a class="call-entrance-a" href="#">拜访</a></div>
+                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
               </div>
             </li>
           </ul>
@@ -253,7 +252,7 @@
        </div>
     </div>
     <!--搜索机构弹出框-->
-    <div class="callguide-searchstorediv">
+    <div class="callguide-searchstorediv" ng-show="searchmodal">
       <div class="bg-white callguide-searchstorediv-up">
         <div class="callguide-searchstorediv-closebtn-div"><span class="callguide-searchstorediv-closebtn" ng-click="closesearchstorediv()">取消</span></div>
         <input type="text" id="KeyWordOfStoreName"  placeholder="请输入店名称关键字" />
@@ -269,7 +268,7 @@
       </div>
     </div>
     <!--无坐标机构弹出框-->
-    <div class="callguide-nolatlng-storediv">
+    <div class="callguide-nolatlng-storediv" ng-show="nolatlngmodal">
       <div class="bg-white callguide-nolatlng-storediv-up">
         <div class="callguide-nolatlng-storediv-biaoti"><img class="callguide-nolatlng-storediv-biaoti-img" src="img/nolatlng-icon.png"><span class="callguide-nolatlng-storediv-biaoti-span">无坐标机构(<span style="color: orange;">7</span>)</span></div>
         <span class="callguide-nolatlng-storediv-closebtn" ng-click="close_nolatlngstorediv()">关闭</span>
