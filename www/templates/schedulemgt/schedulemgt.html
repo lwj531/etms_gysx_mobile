@@ -366,68 +366,46 @@
       <div ng-show="statusTab=='actual'">
         <!--角色为CCR 时显示下面列表-->
         <ul class="schedule-week-list" ng-if="CCR">
-          <li>
-            <div class="content-block-title">周一(11/22)</div>
+          <li ng-repeat="date in actualWeekDays">
+            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
             <div class="schedule-week-row">
               <!--点击出弹框看线路列表-->
-              <div class="col-40" ng-click="showActualCCR()">
-                <div class="flex-between">
+              <div class="col-40">
+                <div class="flex-between" ng-show="date.route!=null" ng-click="showActualCCR()">
                   <img src="img/route_green_44.png" width="18">
                   <div class="progress-block">
-                    <div class="">CCR实际(9)65%</div>
+                    <!--未加匹配率-->
+                    <div class="">
+                      <span
+                        ng-bind="date.route.LineName + (date.route.Institutions.length>0?( '('+date.route.Institutions.length+')'):'')"></span>
+                      <span>{{date.Rates}}</span>
+                    </div>
                     <div class="progress-track">
                       <div class="progress" ng-style="progress"></div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-33 flex-center">
-                <div>
-                  <div class="">首次签入 09:03:02</div>
-                  <div class="">首次签入 09:03:02</div>
+                <div ng-show="date.route==null" class="placeholder-div">
+
                 </div>
               </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
-                <div class="width-100">
+              <div class="col-33 flex-center">
+                <div ng-show="date.route!=null">
+                  <div class="">首次签入 </div>
+                  <div class="">末次签出 {{date.route.CheckinTimes}}</div>
+                </div>
+                <div ng-show="date.route==null" class="placeholder-div">
+
+                </div>
+              </div>
+              <div class="col-27 flex-center">
+                <div class="width-100" ng-click="showActualHalfFooter('morning',date)">
+                  <!-- affair-gray | affair-orange | affair-blue | affair-red -->
                   <div class="flex-between affair-gray">
                     <div>无半天事务</div>
                     <div class="affair-dot"></div>
                   </div>
                   <div class="flex-between affair-orange">
-                    <div>年假</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="content-block-title">周二(10/23)</div>
-            <div class="schedule-week-row">
-              <div class="col-40" ng-click="showActualCCR()">
-                <div class="flex-between">
-                  <img src="img/route_green_44.png" width="18">
-                  <div class="progress-block">
-                    <div class="">路线名称啊(9)65%</div>
-                    <div class="progress-track">
-                      <div class="progress" ng-style="progress"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-33 flex-center">
-                <div>
-                  <div class="">首次签入 09:03:02</div>
-                  <div class="">首次签入 09:03:02</div>
-                </div>
-              </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
-                <div class="width-100">
-                  <div class="flex-between affair-red">
-                    <div>不可抗不可抗不可抗</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                  <div class="flex-between affair-blue">
                     <div>年假</div>
                     <div class="affair-dot"></div>
                   </div>
@@ -441,20 +419,23 @@
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
-              <div class="col-40" ng-click="showActualAE()">
+              <div class="col-40" ng-click="showActualAE()" ng-show="date.route!=null">
                 <div class="flex-start">
                   <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
                   <div class="">AE实际(9)</div>
                 </div>
               </div>
               <div class="col-33 flex-center">
-                <div>
+                <div ng-show="date.route!=null">
                   <div class="">首次签入 09:03:02</div>
                   <div class="">首次签入 09:03:02</div>
                 </div>
+                <div ng-show="date.route==null">
+
+                </div>
               </div>
               <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
-                <div class="width-100">
+                <div class="width-100" ng-show="date.route!=null">
                   <div class="flex-between affair-gray">
                     <div>无半天事务</div>
                     <div class="affair-dot"></div>
@@ -463,6 +444,9 @@
                     <div>年假</div>
                     <div class="affair-dot"></div>
                   </div>
+                </div>
+                <div class="width-100 flex-center" ng-show="date.route==null">
+                  <img src="img/add_gray_64.png" width="36">
                 </div>
               </div>
             </div>
@@ -503,7 +487,7 @@
         <!--角色为CCR 时显示下面列表-->
         <ul class="schedule-week-list" ng-if="CCR">
           <li ng-repeat="date in weekDays">
-            <div class="content-block-title" ng-bind="date | amDateFormat:'ddd'"></div>
+            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
             <div class="schedule-week-row" ng-show="date.route!=null">
               <div class="col-73" ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
@@ -513,7 +497,7 @@
                          ng-bind="date.route.LineName + (date.route.Institutions.length>0?( '('+date.route.Institutions.length+')'):'')"></div>
                   </div>
                   <div class="width-50 flex-between">
-                    <div class="insA align-center" >
+                    <div class="insA align-center">
                       <span class="dot"></span><span class="count">{{(date.route.Institutions |  filter:{'InstitutionPriority':'A'}).length}}</span>
                     </div>
                     <div class="insB align-center">
@@ -613,7 +597,7 @@
     </div>
   </ion-content>
   <div class="mask" ng-if="showMask" ng-class="{'active':showMask,'visible':showMask}"></div>
-  <!-- 计划底部上滑框半天事务 -->
+  <!-- 计划底部上滑框路线和半天事务 -->
   <div class="footer-block" ng-class="{'visible':halfAffair}">
     <div class="bar bar-header bar-stable">
       <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
@@ -692,20 +676,16 @@
     </div>
   </div>
   <!-- 实际底部上滑框 -->
-  <div class="footer-block" ng-class="{'visible':halfAffair}">
+  <div class="footer-block" ng-class="{'visible':actualHalf}">
     <div class="bar bar-header bar-stable">
-      <button class="button back-button button-clear color-gray" ng-click="cancelPlanFooter()">取消</button>
+      <button class="button back-button button-clear color-gray" ng-click="cancelActualFooter()">取消</button>
       <div class="h1 title" ng-bind="selectedDate | amDateFormat:'ddd'"></div>
-      <button class="button button-clear back-button color-blue" ng-click="savePlan()">确定</button>
+      <button class="button button-clear back-button color-blue" ng-click="cancelActualFooter()">确定</button>
     </div>
     <div class="schedule-btg">
       <div class="flex-center">
         <div class="width-90">
           <ul class="button-group">
-            <li class="group-button button flex-center" ng-if="CCR" ng-class="{'selected':footerTab=='route'}"
-                ng-click="changeFooterTab('route')">
-              路线图
-            </li>
             <li class="group-button button flex-center" ng-class="{'selected':footerTab=='morning'}"
                 ng-click="changeFooterTab('morning')">
               半天事物(上午)
@@ -717,23 +697,6 @@
           </ul>
         </div>
       </div>
-      <!--路线列表，单选-->
-      <ul class="schedule-bottom-list" ng-if="CCR" ng-show="footerTab=='route'">
-        <li class="list-item" ng-repeat="item in planStoreList" ng-click="selectRoute(item)">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media" ng-class="{true:'checked'}[item==currentRoute]"><span
-              class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{item.LineName}}
-              </div>
-              <div class="item-after color-blue"
-                   ui-sref="main.editroute({lineId:item.LineID,activityDate:selectedDate.format('YYYY-MM-DD')})">编辑
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
       <!--半天事务列表：上午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
         <li class="list-item checked">

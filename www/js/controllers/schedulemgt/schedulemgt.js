@@ -10,10 +10,12 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     //日视图里切列表和地图 dayInfoTab：(list | map )
     $scope.dayInfoTab = 'list';
     //周视图内的实际和计划tab初始化 (actual | plan)
-    $scope.statusTab = 'plan';
+    $scope.statusTab = 'actual';
 
-    //初始化半天事务框不显示
+    //初始化计划半天事务框不显示
     $scope.halfAffair = false;
+    //初始化实际半天事务框不显示
+    $scope.actualHalf = false;
     //遮罩不显示
     $scope.showMask = false;
     //进度条百分比
@@ -28,6 +30,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.weekSatrtDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - $scope.nowDayOfWeek);
     //当前周的结束日期
     $scope.weekEndDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + (6 - $scope.nowDayOfWeek));
+
     //获取一周已填写的计划
     $scope.getWeekPlanList = function (callback) {
       dailysrv.getWeekPlanList(moment($scope.weekSatrtDate).format("YYYY-MM-DD"), moment($scope.weekEndDate).format("YYYY-MM-DD")).then(function (palnlist) {
@@ -38,14 +41,34 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         }
       });
     };
+
+    //当前周的开始日期实际用
+    $scope.actualSatrtDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() - $scope.nowDayOfWeek);
+    //当前周的结束日期实际用
+    $scope.actualEndDate = new Date($scope.currentDate.getFullYear(), $scope.currentDate.getMonth(), $scope.currentDate.getDate() + (6 - $scope.nowDayOfWeek));
+
+    //获取一周实际
+    $scope.getWeekActualList = function (callback) {
+      dailysrv.getWeekActualList(moment($scope.actualSatrtDate).format("YYYY-MM-DD"), moment($scope.actualEndDate).format("YYYY-MM-DD")).then(function (actuallist) {
+        $scope.weekActualList = actuallist;
+        console.log(actuallist);
+        if (callback != null) {
+          callback();
+        }
+      });
+    };
+    $scope.getWeekActualList();
+
     //获取本周的日期数组
     $scope.$watch("weekSatrtDate", function (newValue, oldValue, scope) {
       {
         $scope.weekDays = [];
+        $scope.actualWeekDays = [];
         //获取一周计划
         var dateDiff = parseInt(Math.abs($scope.weekSatrtDate - $scope.weekEndDate) / 1000 / 60 / 60 / 24);//日期差天数
         for (var i = 0; i <= dateDiff; i++) {
           $scope.weekDays.push(moment($scope.weekSatrtDate).add(i, 'days'));
+          $scope.actualWeekDays.push(moment($scope.weekSatrtDate).add(i, 'days'));
           if (i == dateDiff) {
             $scope.getWeekPlanList(function () {
               for (var j = 0; j < $scope.weekDays.length; j++) {
@@ -56,9 +79,38 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
                 }
               }
             });
+            $scope.getWeekActualList(function () {
+              $scope.checkinTimes = [];
+              $scope.checkoutTimes = [];
+              for (var j = 0; j < $scope.actualWeekDays.length; j++) {
+                for (var k = 0; k < $scope.weekActualList.PlanRoutelines.length; k++) {
+                  if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
+                    $scope.actualWeekDays[j].route = $scope.weekActualList.PlanRoutelines[k];
+                  }
+                }
+
+                for (var l = 0; l < $scope.weekActualList.Checkins.length; l++) {
+                  if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
+                    $scope.actualWeekDays[j].CheckinTimes = $scope.weekActualList.Checkins[l];
+                    if ($scope.weekActualList.Checkins[l].InOut == 'In') {
+                      $scope.checkinTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
+                    }
+                    else if ($scope.weekActualList.Checkins[l].InOut == 'Out') {
+                      $scope.checkoutTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
+                    }
+                    else {
+                      alert('不是In Out');
+                    }
+                  }
+                }
+
+              }
+            });
+
+
           }
         }
-        ;
+
       }
     });
     //下一周
@@ -86,7 +138,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.footerTab = tabTitle;
       console.log(tabTitle);
     };
-    //点半天事务弹出底部框
+    //计划点半天事务弹出底部框
     $scope.showHalfFooter = function (tabTitle, date) {
       $scope.getRoutes(function () {
         $scope.selectedDate = date;//选中的日期
@@ -95,6 +147,17 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         $scope.showMask = true;
         $scope.footerTab = tabTitle;
         $scope.halfAffair = true;
+      });
+    };
+    //实际点半天事务弹出底部框
+    $scope.showActualHalfFooter = function (tabTitle, date) {
+      $scope.getRoutes(function () {
+        $scope.selectedDate = date;//选中的日期
+        //console.log($scope.selectedDate);
+        console.log(date);
+        $scope.showMask = true;
+        $scope.footerTab = tabTitle;
+        $scope.actualHalf = true;
       });
     };
     //编辑页面中返回,如果状态是reload,关闭footer
@@ -131,9 +194,19 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         });
       }
     };
+
+
     //点取消关闭底部计划框
     $scope.cancelPlanFooter = function (callback) {
       $scope.halfAffair = false;
+      $scope.showMask = false;
+      if (callback != null) {
+        callback();
+      }
+    };
+    //实际点取消关闭底部计划框
+    $scope.cancelActualFooter = function (callback) {
+      $scope.actualHalf = false;
       $scope.showMask = false;
       if (callback != null) {
         callback();
@@ -261,5 +334,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.clickDate = function (date) {
       console.log(date);
     }
+
 
   });

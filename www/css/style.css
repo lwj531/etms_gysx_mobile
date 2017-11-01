@@ -2106,12 +2106,9 @@ input[type="text"].route-name-input.wide {
   background-image: url("../img/setting_active_44.png");
 }
 
-.schedule-week-list {
-
-}
-
 ul.schedule-week-list {
   background-color: transparent;
+  padding-bottom: 100px;
 }
 
 .schedule-week-list .content-block-title {
@@ -3840,7 +3837,7 @@ input[type=month] {
 .about .about-card {
   height: calc(100% - 40px);
   width: 90%;
-  box-shadow: 0 1px 6px 0px rgba(0, 0, 0, 0.13);
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.13);
   border-radius: 1px;
   overflow: hidden;
   background-color: #fff;
@@ -5486,4 +5483,8 @@ input[type=month] {
   border:1px solid lightgrey;
   text-align:center;
   padding:0;
+}
+.placeholder-div{
+  height: 36px;
+  width: 36px;
 }
