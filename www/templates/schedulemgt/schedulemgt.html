@@ -511,22 +511,22 @@
               </div>
               <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
                 <div class="width-100">
-                  <div class="flex-between affair-gray">
-                    <div>无半天事务</div>
+                  <div class="flex-between" ng-class="{'affair-gray':date.halfDayAM==null,'affair-blue':date.halfDayAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayAM.GroupCode=='INTERNAL','affair-red':date.halfDayAM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayAM == null?'无半天事务':date.halfDayAM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
-                  <div class="flex-between affair-orange">
-                    <div>年假</div>
+                  <div class="flex-between" ng-class="{'affair-gray':date.halfDayPM==null,'affair-blue':date.halfDayPM.GroupCode=='EXTERNAL','affair-orange':date.halfDayPM.GroupCode=='INTERNAL','affair-red':date.halfDayPM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayPM == null?'无半天事务':date.halfDayPM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="schedule-week-row" ng-show="date.route==null">
-              <div class="col-73 flex-center" ng-click="showHalfFooter('route',date )">
+            <div class="schedule-week-row" >
+              <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showHalfFooter('route',date )">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
+              <div class="col-27 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null" ng-click="showHalfFooter('morning',date)">
                 <img src="img/add_gray_64.png" width="36">
               </div>
             </div>
@@ -628,7 +628,7 @@
         <li class="list-item" ng-repeat="item in planStoreList" ng-click="selectRoute(item)">
           <div class="item-content">
             <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media" ng-class="{true:'checked'}[item==currentRoute]"><span
+            <div class="item-media" ng-class="{'checked':item.LineID==currentRoute.LineID}"><span
               class="uicon radio-button"></span></div>
             <div class="item-inner">
               <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{item.LineName}}
@@ -642,35 +642,36 @@
       </ul>
       <!--半天事务列表：上午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
-        <li class="list-item checked">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media"><span class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务shang</div>
-            </div>
-          </div>
+        <li  ng-repeat="item in halfdayTypeList">
+          <span ng-bind="item.TypeName"></span>
+          <ul>
+            <li class="list-item" ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='AM')}" ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('AM',type)">
+              <div class="item-content">
+                <!--点击选中，在选中的li的item-media上添加checked-->
+                <div class="item-media"><span class="uicon radio-button"></span></div>
+                <div class="item-inner">
+                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}</div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
       <!--半天事务列表：下午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='afternoon'">
-        <li class="list-item checked">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media"><span class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
-            </div>
-          </div>
-        </li>
-        <li class="list-item">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media"><span class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
-            </div>
-          </div>
+        <li  ng-repeat="item in halfdayTypeList">
+          <span ng-bind="item.TypeName"></span>
+          <ul>
+            <li class="list-item" ng-class="{'checked':(type.TypeID==selectedHalfType.type.TypeID && selectedHalfType.ampm=='PM')}" ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
+              <div class="item-content">
+                <!--点击选中，在选中的li的item-media上添加checked-->
+                <div class="item-media"><span class="uicon radio-button"></span></div>
+                <div class="item-inner">
+                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.TypeName}}</div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

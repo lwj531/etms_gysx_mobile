@@ -11,7 +11,7 @@ angular.module('clientmgt.ctrl', ['routesetting.srv'])
     };
     $scope.search = function () {
       var model = [$scope.searchmodel];
-      routesettingsrv.searchinsnoloading(model).then(function (data) {
+      routesettingsrv.searchins(model).then(function (data) {
         $scope.clientList = data;
         $scope.localClientList = data;
       });
