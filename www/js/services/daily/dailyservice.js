@@ -17,5 +17,10 @@ angular.module("daily.srv", ["http.srv"])
     this.saveHalfdayPlan = function (model) {
       return httpsrv.service("/api/Daily/SaveActivityHalfday", model, "post");
     };
+
+    //获取一周的实际
+    this.getWeekActualList = function (startDate,endDate) {
+      return httpsrv.service("/api/Weekly/GetDateRangeActuals/"+ startDate + '/'+ endDate, {}, "get");
+    };
   }
   ]);

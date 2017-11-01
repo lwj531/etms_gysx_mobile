@@ -8,6 +8,20 @@ angular.module('callguide.ctrl', [])
     };
     $scope.editor = {};
 
+
+
+    $scope.tabs = [
+      {name: 'todaysch', title: '今日行程'},
+      {name: 'plansch', title: '已计划行程'},
+      {name: 'myins', title: '我负责的机构'}
+    ];
+    $scope.currentTab = $scope.tabs[0];
+    //切换tab
+    $scope.switchTab = function (tab) {
+      $scope.currentTab = tab;
+
+    };
+
     //信息窗体函数
     function createInfoWindow(title, content){
       var info = document.createElement("div");
@@ -160,41 +174,41 @@ angular.module('callguide.ctrl', [])
       };
 
       $scope.toggledragup = function(){
-        $("#xccontent").slideToggle("slow");
+        $("#xccontent").slideToggle(300);
       };
-      $scope.showtodayroute = function(){
-        $(".xd-li-1").addClass("xd_ul-li-active");
-        $(".xd-li-2").removeClass("xd_ul-li-active");
-        $(".xd-li-3").removeClass("xd_ul-li-active");
-        $(".xd-span-1").addClass("xd_ul-span-active");
-        $(".xd-span-2").removeClass("xd_ul-span-active");
-        $(".xd-span-3").removeClass("xd_ul-span-active");
-        $("#xd_tab_1").show();
-        $("#xd_tab_2").hide();
-        $("#xd_tab_3").hide();
-      };
-      $scope.showplanroute = function(){
-        $(".xd-li-2").addClass("xd_ul-li-active");
-        $(".xd-li-1").removeClass("xd_ul-li-active");
-        $(".xd-li-3").removeClass("xd_ul-li-active");
-        $(".xd-span-2").addClass("xd_ul-span-active");
-        $(".xd-span-1").removeClass("xd_ul-span-active");
-        $(".xd-span-3").removeClass("xd_ul-span-active");
-        $("#xd_tab_2").show();
-        $("#xd_tab_1").hide();
-        $("#xd_tab_3").hide();
-      };
-      $scope.showmyins = function(){
-        $(".xd-li-3").addClass("xd_ul-li-active");
-        $(".xd-li-2").removeClass("xd_ul-li-active");
-        $(".xd-li-1").removeClass("xd_ul-li-active");
-        $(".xd-span-3").addClass("xd_ul-span-active");
-        $(".xd-span-2").removeClass("xd_ul-span-active");
-        $(".xd-span-1").removeClass("xd_ul-span-active");
-        $("#xd_tab_3").show();
-        $("#xd_tab_2").hide();
-        $("#xd_tab_1").hide();
-      };
+      // $scope.showtodayroute = function(){
+      //   $(".xd-li-1").addClass("xd_ul-li-active");
+      //   $(".xd-li-2").removeClass("xd_ul-li-active");
+      //   $(".xd-li-3").removeClass("xd_ul-li-active");
+      //   $(".xd-span-1").addClass("xd_ul-span-active");
+      //   $(".xd-span-2").removeClass("xd_ul-span-active");
+      //   $(".xd-span-3").removeClass("xd_ul-span-active");
+      //   $("#xd_tab_1").show();
+      //   $("#xd_tab_2").hide();
+      //   $("#xd_tab_3").hide();
+      // };
+      // $scope.showplanroute = function(){
+      //   $(".xd-li-2").addClass("xd_ul-li-active");
+      //   $(".xd-li-1").removeClass("xd_ul-li-active");
+      //   $(".xd-li-3").removeClass("xd_ul-li-active");
+      //   $(".xd-span-2").addClass("xd_ul-span-active");
+      //   $(".xd-span-1").removeClass("xd_ul-span-active");
+      //   $(".xd-span-3").removeClass("xd_ul-span-active");
+      //   $("#xd_tab_2").show();
+      //   $("#xd_tab_1").hide();
+      //   $("#xd_tab_3").hide();
+      // };
+      // $scope.showmyins = function(){
+      //   $(".xd-li-3").addClass("xd_ul-li-active");
+      //   $(".xd-li-2").removeClass("xd_ul-li-active");
+      //   $(".xd-li-1").removeClass("xd_ul-li-active");
+      //   $(".xd-span-3").addClass("xd_ul-span-active");
+      //   $(".xd-span-2").removeClass("xd_ul-span-active");
+      //   $(".xd-span-1").removeClass("xd_ul-span-active");
+      //   $("#xd_tab_3").show();
+      //   $("#xd_tab_2").hide();
+      //   $("#xd_tab_1").hide();
+      // };
 
 
       //点击右上角搜索机构图标

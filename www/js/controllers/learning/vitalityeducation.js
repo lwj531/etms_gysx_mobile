@@ -10,7 +10,7 @@ angular.module('vitalityeducation.ctrl', [])
       return 'rgb(' + $scope.randomColor() + ',' + $scope.randomColor() + ',' + $scope.randomColor() + ')'
     };
     $scope.questionList = [
-      {title: '请问糖尿病前期不会导致下列哪种情况？', color: $scope.generateColor()},
+      {title: '请问糖尿病前期不会导致下列哪种情况请问糖尿病前期不会导致下列哪种情况？', color: $scope.generateColor()},
       {title: '请问糖尿病前期不会导致下列哪种情况？', color: $scope.generateColor()},
       {title: '请问糖尿病前期不会导致下列哪种情况？', color: $scope.generateColor()},
       {title: '请问糖尿病前期不会导致下列哪种情况？', color: $scope.generateColor()},

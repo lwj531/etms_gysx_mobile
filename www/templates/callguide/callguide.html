@@ -16,131 +16,91 @@
       </button>
     </div>
   </div>
-  <ion-content>
+  <ion-content class="call-guide">
     <!--地图-->
     <div id="callguidemap"></div>
     <!--上拉菜单-->
     <div class="drag-up-div">
-      <div id="xd_ts_button" ng-click="toggledragup()"><img src="img/dragbtn-icon.png"/></div>
-      <ul class="xd_ul">
-        <li class="xd-li-1 xd_ul-li-active" ng-click="showtodayroute()">今日行程<span class="xd-span-1 xd_ul-span-active"></span></li>
-        <li class="xd-li-2" ng-click="showplanroute()">已计划行程<span class="xd-span-2"></span></li>
-        <li class="xd-li-3" ng-click="showmyins()">我负责的机构<span class="xd-span-3"></span></li>
-      </ul>
+      <div class="toggle-bar flex-center" id="xd_ts_button" ng-click="toggledragup()"><img src="img/arrow_down_16.png" alt="15"></div>
+      <div class="flex-around tab-title">
+        <div class="flex-center" ng-repeat="item in tabs">
+          <div class="tab-button" ng-class="{'active':currentTab==item}"
+               ng-click="switchTab(item)">
+            {{item.title}}
+          </div>
+        </div>
+      </div>
       <div id="xccontent" class="bg-white">
-        <div id="xd_tab_1" style="height:280px;">
-          <ul class="list-block xd-dragup-ul">
-            <!--第一个li元素上的css基本都写到css文件里去了，下面的li上的样式没有移，下面的li到时候都可以删掉，可以拿第一个做模板，循环遍历-->
-            <li class="xd-dragup-ul-li">
-              <img class="xd-dragup-ul-li-gradeimg" src="img/GradeA-icon.png"/>
-              <div class="xd-dragup-ul-li-checkininfo-div">
-                <div><span class="xd-dragup-ul-li-checkininfo-storename">国药控股大药房永新连锁店</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-address" style="padding-top: 5px;"><span>上海市石泉路548号</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-time"><span style="color:#3AC5A6;">签入时间: 09:12:13 &nbsp;&nbsp;签出时间: 10:12:13</span><span class="xd-dragup-ul-li-checkininfo-time-chakan"><img src="img/search_gray_30.png" style="width: 16px;"><span style="margin-left: 5px;">查看</span></span></div>
-              </div>
-            </li>
-            <li class="xd-dragup-ul-li">
-              <img class="xd-dragup-ul-li-gradeimg" src="img/GradeA-icon.png"/>
-              <div class="xd-dragup-ul-li-checkininfo-div">
-                <div><span class="xd-dragup-ul-li-checkininfo-storename">国药控股大药房永新连锁店</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-address" style="padding-top: 5px;"><span>上海市石泉路548号</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-time"><span style="color:#3AC5A6;">签入时间: 09:12:13 &nbsp;&nbsp;签出时间: 10:12:13</span><span class="xd-dragup-ul-li-checkininfo-time-chakan"><img src="img/search_gray_30.png" style="width: 16px;"><span style="margin-left: 5px;">查看</span></span></div>
-              </div>
-            </li>
-            <li class="xd-dragup-ul-li">
-              <img class="xd-dragup-ul-li-gradeimg" src="img/GradeA-icon.png"/>
-              <div class="xd-dragup-ul-li-checkininfo-div">
-                <div><span class="xd-dragup-ul-li-checkininfo-storename">国药控股大药房永新连锁店</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-address" style="padding-top: 5px;"><span>上海市石泉路548号</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-time"><span style="color:#3AC5A6;">签入时间: 09:12:13 &nbsp;&nbsp;签出时间: 10:12:13</span><span class="xd-dragup-ul-li-checkininfo-time-chakan"><img src="img/search_gray_30.png" style="width: 16px;"><span style="margin-left: 5px;">查看</span></span></div>
-              </div>
-            </li>
-            <li class="xd-dragup-ul-li">
-              <img class="xd-dragup-ul-li-gradeimg" src="img/GradeA-icon.png"/>
-              <div class="xd-dragup-ul-li-checkininfo-div">
-                <div><span class="xd-dragup-ul-li-checkininfo-storename">国药控股大药房永新连锁店</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-address" style="padding-top: 5px;"><span>上海市石泉路548号</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-time"><span style="color:#3AC5A6;">签入时间: 09:12:13 &nbsp;&nbsp;签出时间: 10:12:13</span><span class="xd-dragup-ul-li-checkininfo-time-chakan"><img src="img/search_gray_30.png" style="width: 16px;"><span style="margin-left: 5px;">查看</span></span></div>
-              </div>
-            </li>
-            <li class="xd-dragup-ul-li">
-              <img class="xd-dragup-ul-li-gradeimg" src="img/GradeA-icon.png"/>
-              <div class="xd-dragup-ul-li-checkininfo-div">
-                <div><span class="xd-dragup-ul-li-checkininfo-storename">国药控股大药房永新连锁店</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-address" style="padding-top: 5px;"><span>上海市石泉路548号</span></div>
-                <div class="xd-dragup-ul-li-checkininfo-time"><span style="color:#3AC5A6;">签入时间: 09:12:13 &nbsp;&nbsp;签出时间: 10:12:13</span><span class="xd-dragup-ul-li-checkininfo-time-chakan"><img src="img/search_gray_30.png" style="width: 16px;"><span style="margin-left: 5px;">查看</span></span></div>
+        <div ng-show="currentTab.name=='todaysch'">
+          <ul class="dragup-ul">
+            <li class="list-item multi-line ">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">国药控股大药房永新连锁店(A)</div>
+                  </div>
+                  <div class="item-text">上海市石泉路548号</div>
+                  <div class="flex-between align-end font-13">
+                    <div class="color-green">首次签入&nbsp;10:21:21</div>
+                    <div class="color-green">末次签出&nbsp;10:21:21</div>
+                    <div class="flex-end">
+                      <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img src="img/search_gray_30.png" width="18">查看</a></div>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
         </div>
-        <div id="xd_tab_2">
-          <ul class="list-block xd-dragup-ul">
-            <li class="xd-tab2-li">
-              <img class="xd-tab2-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab2-li-storeinfo-content">
-                <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
-              </div>
-            </li>
-            <li class="xd-tab2-li">
-              <img class="xd-tab2-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab2-li-storeinfo-content">
-                <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
-              </div>
-            </li>
-            <li class="xd-tab2-li">
-              <img class="xd-tab2-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab2-li-storeinfo-content">
-                <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
-              </div>
-            </li>
-            <li class="xd-tab2-li">
-              <img class="xd-tab2-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab2-li-storeinfo-content">
-                <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
-              </div>
-            </li>
-            <li class="xd-tab2-li">
-              <img class="xd-tab2-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab2-li-storeinfo-content">
-                <div><span class="xd-tab2-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab2-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
+        <div ng-show="currentTab.name=='plansch'">
+          <ul class="dragup-ul">
+            <li class="list-item multi-line" ui-sref="main.checkin">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">国药控股大药房永新连锁店(A)</div>
+                  </div>
+                  <div class="flex-row align-end">
+                    <div class="col-66 color-gray">上海市石泉路548号</div>
+                    <div class="col-33 flex-end">
+                      <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
         </div>
-        <div id="xd_tab_3">
-          <ul class="list-block xd-dragup-ul">
-            <li class="xd-tab3-li">
-              <img class="xd-tab3-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab3-li-storeinfo-content">
-                <div><span class="xd-tab3-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab3-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
+        <div ng-show="currentTab.name=='myins'">
+          <ul class="dragup-ul">
+            <li class="list-item multi-line" ui-sref="main.checkin">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">国药控股大药房永新连锁店(A)</div>
+                  </div>
+                  <div class="flex-row align-end">
+                    <div class="col-66 color-gray">上海市石泉路548号</div>
+                    <div class="col-33 flex-end">
+                      <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
+                  </div>
+                </div>
               </div>
             </li>
-            <li class="xd-tab3-li">
-              <img class="xd-tab3-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab3-li-storeinfo-content">
-                <div><span class="xd-tab3-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab3-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
-              </div>
-            </li>
-            <li class="xd-tab3-li">
-              <img class="xd-tab3-li-img" src="img/GradeA-icon.png"/>
-              <div class="xd-tab3-li-storeinfo-content">
-                <div><span class="xd-tab3-li-storeinfo-content-storename">国药控股大药房永新连锁店</span></div>
-                <div style="padding-top: 10px;"><span class="xd-tab3-li-storeinfo-content-storeaddress">上海市石泉路548号</span></div>
-                <div class="call-entrance-div"><img class="entrance-img" src="img/entrance_blue_30.png" /><a ui-sref="main.checkin" class="call-entrance-a">拜访</a></div>
+            <li class="list-item multi-line" ui-sref="main.checkin">
+              <div class="item-content align-top">
+                <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">国药控股大药房永新连锁店(A)</div>
+                  </div>
+                  <div class="flex-row align-end">
+                    <div class="col-66 color-gray">上海市石泉路548号</div>
+                    <div class="col-33 flex-end">
+                      <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
+                  </div>
+                </div>
               </div>
             </li>
           </ul>
@@ -152,7 +112,7 @@
     <!--点击窗体信息右边的图标查看机构详情上拉弹窗-->
     <div class="storeinfo-drag-up-div bg-white">
        <div class="storeinfo-up">
-         <div class="storeinfo-title-img-div"><img class="storeinfo-title-img" src="img/tc-bigstore-blue.png"></div>
+         <div class="storeinfo-title-img-div"><img class="storeinfo-title-img" src="img/tc-bigstore-blue.png" width="48"></div>
          <div class="storeinfo-title-inner">
            <p class="storeinfo-title-inner-p">复方药店</p>
            <span class="storeinfo-title-inner-span">岚皋路121号</span>
@@ -170,7 +130,7 @@
            </thead>
            <tbody id="InstitutionList">
            <tr class="storeinfo-tbody-tr">
-             <td class="callguide-cankao-td">YTD</td>
+             <td class="callguide-cankao-td color-blue">YTD</td>
              <td class="caokao-orange">100000</td>
              <td class="callguide-cankao-td">100000</td>
              <td class="callguide-cankao-td">100%</td>
@@ -252,34 +212,43 @@
        </div>
     </div>
     <!--搜索机构弹出框-->
-    <div class="callguide-searchstorediv" ng-show="searchmodal">
-      <div class="bg-white callguide-searchstorediv-up">
-        <div class="callguide-searchstorediv-closebtn-div"><span class="callguide-searchstorediv-closebtn" ng-click="closesearchstorediv()">取消</span></div>
-        <input type="text" id="KeyWordOfStoreName"  placeholder="请输入店名称关键字" />
-        <button class="callguide-searchstorediv-searchbtn btn btn-success" id="search-store-btn" ng-click="searchstorebykeyword()">搜索</button>
-      </div>
-      <div class="linestorearea bg-white">
-        <ion-list>
-          <ion-item ng-repeat="item in items" item="item" class="item-remove-animate" style="position: relative;">
-            <span>{{item.name}}</span><br>
-            <span style="font-size: 13px;color: darkgray;">{{item.address}}</span>
-          </ion-item>
-        </ion-list>
+    <div class="route-action-block top-50" ng-show="searchmodal">
+      <div class="route-action">
+        <div class="route-action-bar">
+          <button class="button button-clear button-positive button-thin" ng-click="closesearchstorediv()">取消</button>
+          <input type="text" ng-model="searchmodel.Value" placeholder="请输入店名称关键字" maxlength="20"
+                 class="route-name-input wide"/>
+          <button class="button button-clear button-positive button-thin" ng-click="searchstorebykeyword()">搜索</button>
+        </div>
+        <ion-scroll class="window-list" ng-show="searchresult.length>0">
+          <ion-list class="no-latlng">
+            <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <div class="bg-white text-center color-blue" ng-show="searchresult.length>0" style="padding: 6px 0;">搜索到{{searchresult.length}}家机构</div>
       </div>
     </div>
     <!--无坐标机构弹出框-->
-    <div class="callguide-nolatlng-storediv" ng-show="nolatlngmodal">
-      <div class="bg-white callguide-nolatlng-storediv-up">
-        <div class="callguide-nolatlng-storediv-biaoti"><img class="callguide-nolatlng-storediv-biaoti-img" src="img/nolatlng-icon.png"><span class="callguide-nolatlng-storediv-biaoti-span">无坐标机构(<span style="color: orange;">7</span>)</span></div>
-        <span class="callguide-nolatlng-storediv-closebtn" ng-click="close_nolatlngstorediv()">关闭</span>
-      </div>
-      <div class="linestorearea bg-white">
-        <ion-list>
-          <ion-item ng-repeat="item in items" item="item" class="item-remove-animate" style="position: relative;">
-            <span>{{item.name}}</span><br>
-            <span style="font-size: 13px;color: darkgray;">{{item.address}}</span>
-          </ion-item>
-        </ion-list>
+    <div class="route-action-block top-50" ng-show="nolatlngmodal">
+      <div class="route-action">
+        <div class="route-action-bar">
+          <div class="align-center margin-img" style="color: #4587f7;"><img src="img/nolatlng-icon.png" width="17" >无机构坐标（<span
+            class="color-orange">{{nolatlngresult.length}}</span>）
+          </div>
+          <button class="button button-clear button-positive button-thin" ng-click="close_nolatlngstorediv()">关闭</button>
+        </div>
+        <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
+          <ion-list class="no-latlng">
+            <ion-item ng-repeat="item in nolatlngresult" ng-click="openinsinfo(item)">
+              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
+              <p class="item-text">{{item.Address}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-scroll>
+        <div class="bg-white text-center color-blue" ng-show="nolatlngresult.length>3" style="padding: 6px 0;">{{nolatlngresult.length}}家机构</div>
       </div>
     </div>
   </ion-content>
