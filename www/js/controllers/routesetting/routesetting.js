@@ -1,4 +1,3 @@
-var editor;
 var type_1 = new Array();
 var type_2 = new Array();
 var type_3 = new Array();
@@ -6,17 +5,18 @@ var type_4 = new Array();
 var type_5 = new Array();
 var type_6 = new Array();
 var all_marker = new Array();
-var position;
+var map;
 
 angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
   .controller('RouteSettingCtrl', function($scope,$ionicPopup,routesettingsrv) {
     $scope.insdata ={};
+    $scope.linesdata = {};
     //初次加载用户所有机构
     routesettingsrv.getins().then(function (data) {
       $scope.insdata = data;
       var originalpoint  =  new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
       //实例地图
-      var map = new AMap.Map("routemap",
+        map = new AMap.Map("routemap",
         {
           view:new AMap.View2D({
             center:originalpoint,
@@ -68,6 +68,15 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
         });
       }
     });
+
+    //加载用户的所有路线信息(linedata丢到前台去遍历)
+    routesettingsrv.getlines().then(function (data) {
+      console.log(data);
+      $scope.linesdata = data;
+    });
+
+
+
 // 点击marker出现窗体信息函数
     $scope.createInfoWindow=function(){
 
@@ -182,6 +191,7 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
       });
     }*/
 
+
    //新增路线
     $scope.addnewroute = function(){
       $(".addnewroutediv").fadeIn(300);
@@ -190,6 +200,7 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
       $(".nolatlng-storediv").fadeOut(300);
 
       map.clearMap();
+      data = $scope.insdata;
       var data1 = [
         { "InstitutionName": "国药控股大药房永新连锁店", "LocationAddress": "南京路221号", "InstitutionLat": "31.258215", "InstitutionLng": "121.418921" ,"Priority":"A","Linename":"01"},
         { "InstitutionName": "老百姓大药房", "LocationAddress": "上海市静安区成都北路165号", "InstitutionLat": "31.258857", "InstitutionLng": "121.421496","Priority":"B","Linename":"02" },
@@ -214,63 +225,33 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
       ];
       var json2 = eval(data2);
       //加载Marker
-      for (var i = 0; i < json1.length; i++) {
-        position = new AMap.LngLat(json1[i].InstitutionLng, json1[i].InstitutionLat);
-        if(json1[i].Priority == "A"){
-          marker = new AMap.Marker({
-            icon: new AMap.Icon({
-              image: "/img/GradeA-icon.png",
-              size: new AMap.Size(26, 30)
-            }),
-            extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-            position: position //图标定位
-          });
-          marker.setMap(map);
-          AMap.event.addListener(marker,'click',_onClick);
-          type_1.push(marker);
-        }
-        if(json1[i].Priority == "B"){
-          marker = new AMap.Marker({
-            icon: new AMap.Icon({
-              image: "/img/GradeB-icon.png",
-              size: new AMap.Size(26, 30)
-            }),
-            extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-            position: position //图标定位
-          });
-          marker.setMap(map);
-          AMap.event.addListener(marker,'click',_onClick);
-          type_2.push(marker);
-        }
-        if(json1[i].Priority == "C"){
-          marker = new AMap.Marker({
-            icon: new AMap.Icon({
-              image: "/img/GradeC-icon.png",
-              size: new AMap.Size(26, 30)
-            }),
-            extData: { address: json1[i].LocationAddress, name: json1[i].InstitutionName },
-            position: position //图标定位
-          });
-          marker.setMap(map);
-          AMap.event.addListener(marker,'click',_onClick);
-          type_3.push(marker);
-        }
-        all_marker.push(marker);
+      for (var i = 0; i < data.length; i++) {
+        var position = new AMap.LngLat(data[i].InstitutionLng, data[i].InstitutionLat);
+        marker = new AMap.Marker({
+          icon: new AMap.Icon({
+            image:data[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(data[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
+            size: new AMap.Size(26, 30)
+          }),
+          extData: { address: data[i].Address, name: data[i].InstitutionName },
+          position: position //图标定位
+        });
+        marker.setMap(map);
+      /*  AMap.event.addListener(marker,'click',_onClick);
 
         function _onClick(e) {
 
-        }
+        }*/
 
         marker.on("click", function (e) {
           //debugger;
           //这里写了一个用来做已经存在于几个路线中的店铺的加入提示信息
-          if (e.target.G.extData.name == "长寿大药房") {
-            var title2 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
+         // if (e.target.G.extData.name == "长寿大药房") {
+            var title2 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span ng-click="Addinline()" style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:6px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
             $(".warnremind").show();
-          }
-          else {
-            var title2 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:10px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
-          }
+       //   }
+        //  else {
+        //    var title2 = '<div style="width:40px;background-color:#4DCC89;text-align:center;height:45px;border-radius:5px 0 0 5px;"><span ng-click='+"Addinline()"+' style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:6px;">加入路线</span></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:6px;left:48px;">' + e.target.G.extData.name + '</span></div>', content2 = [];
+         // }
 
           var hs = e.target.G.extData;
           var marker_window = new AMap.InfoWindow({
@@ -283,8 +264,12 @@ angular.module('routesetting.ctrl', ['ionic','routesetting.srv'])
           marker_window.open(map, e.target.getPosition());
         });
       }
-
     };
+    //marker的窗体信息里点击加入路线时的函数
+    Addinline = function(){
+      alert(1);
+    };
+
     $scope.closeaddroute = function(){
       $(".addnewroutediv").fadeOut(300);
     };

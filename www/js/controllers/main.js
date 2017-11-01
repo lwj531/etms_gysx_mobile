@@ -35,7 +35,7 @@ angular.module('main.ctrl', [])
       {
         name: " 附近药店",
         iconName: "dailymgt",
-        state: "main.xx"
+        state: "main.storenearby"
       },
       {
         name: "辅导记录",
@@ -115,7 +115,7 @@ angular.module('main.ctrl', [])
         }
       }
       $scope.$apply();
-    }
+    };
 
     //在被挂起的应用转到前台时触发(触发手势密码界面)
     $ionicPlatform.on("resume", function (event) {

@@ -84,7 +84,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       //拜访向导
       .state('main.callguide', {
         url: '/callguide',
-        templateUrl: "templates/callguide.html",
+        templateUrl: "templates/callguide/callguide.html",
         controller: "CallGuideCtrl"
       })
       //路线设定
@@ -97,6 +97,84 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/carinfo',
         templateUrl: "templates/carinfo.html",
         controller: "CarCtrl"
+      })
+      //(拜访)签入
+      .state('main.checkin', {
+          url: '/checkin',
+          templateUrl: "templates/callguide/checkin.html",
+          controller: "CheckinCtrl"
+        })
+      //(拜访)签入机构后的拜访向导
+      .state('main.calldetails', {
+          url: '/calldetails',
+          templateUrl: "templates/callguide/calldetails.html",
+          controller: "CalldetailsCtrl"
+        })
+      //进销存检查
+      .state('main.purchasesellstockcheck', {
+          url: '/purchasesellstockcheck',
+          templateUrl: "templates/callguide/purchasesellstockcheck.html",
+          controller: "PurchasesellstockcheckCtrl"
+        })
+      //生意回顾
+      .state('main.businessreview', {
+          url: '/businessreview',
+          templateUrl: "templates/callguide/businessreview.html",
+          controller: "BusinessreviewCtrl"
+        })
+      //checklist
+      .state('main.checklist', {
+          url: '/checklist',
+          templateUrl: "templates/callguide/checklist.html",
+          controller: "ChecklistCtrl"
+        })
+      //疾病知识教育
+      .state('main.diseaseknwoledgeeducate', {
+          url: '/diseaseknwoledgeeducate',
+          templateUrl: "templates/callguide/diseaseknwoledgeeducate.html",
+          controller: "DiseaseknwoledgeeducateCtrl"
+        })
+      //培训记录
+      .state('main.trainingrecord', {
+          url: '/trainingrecord',
+          templateUrl: "templates/callguide/trainingrecord.html",
+          controller: "TrainingrecordCtrl"
+        })
+      //待办事项
+      .state('main.todolist', {
+          url: '/todolist',
+          templateUrl: "templates/callguide/todolist.html",
+          controller: "TodolistCtrl"
+        })
+      //生动化教育(做题)
+      .state('main.vivideducate', {
+        url: '/vivideducate',
+        templateUrl: "templates/callguide/vivideducate.html",
+        controller: "VivideducateCtrl"
+      })
+      //拜访概览
+      .state('main.calloverview', {
+        url: '/calloverview',
+        templateUrl: "templates/callguide/calloverview.html",
+        controller: "CalloverviewCtrl"
+      })
+      //(拜访)签出
+      .state('main.checkout', {
+        url: '/checkout',
+        templateUrl: "templates/callguide/checkout.html",
+        controller: "CheckoutCtrl"
+      })
+      //查看某一个产品的所有资料
+      .state('main.allmaterialbysku', {
+        url: '/allmaterialbysku',
+        templateUrl: "templates/callguide/allmaterialbysku.html",
+        controller: "AllmaterialbyskuCtrl"
+      })
+      //附近药店
+      .state('main.storenearby', {
+        url: '/storenearby',
+        templateUrl: "templates/storenearby/storenearby.html",
+        controller: "StorenearbyCtrl"
       });
 
     // if none of the above states are matched, use this as the fallback
