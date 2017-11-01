@@ -1,0 +1,77 @@
+<ion-view title="拜访向导" view-title="拜访向导">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">拜访向导</div>
+  </div>
+  <ion-content class="has-header">
+    <div class="list-block calldetails-store-juti">
+      <ul>
+        <li>
+          <img class="calldetails-store-gradeimg" src="img/GradeA-icon.png"/>
+          <div class="qryd">
+            <div><span class="qryd-storename">复方药房</span></div>
+            <div style="padding-top: 5px;"><span class="qryd-storeaddress">岚皋路121号</span></div>
+          </div>
+          <div class="qrztdiv"><img src="img/done-signin-icon.png" style="width: 20px;"><span class="qrsj">签入 09:32:30</span><a ui-sref="main.todolist" class="qr-nextstep">下一步</a></div>
+        </li>
+      </ul>
+    </div>
+    <div class="bg-white" style="margin-top: 15px;">
+      <ul class="list-block" id="xd-check" style="padding-left:5px;margin-top:0;">
+        <li class="qryd-li">
+          <a class="qryd-li-a" ui-sref="main.purchasesellstockcheck">
+            <img class="qryd-li-img" src="img/jian-2x.png"/>
+            <div class="qryd-todo-div">
+              <div><span class="qryd-todo-stitle">进销存检查</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+            </div>
+          </a>
+        </li>
+        <li class="qryd-li">
+          <a class="qryd-li-a" ui-sref="main.businessreview">
+            <img class="qryd-li-img" src="img/sdh-2x.png"/>
+            <div class="qryd-todo-div">
+              <div><span class="qryd-todo-stitle">生意回顾</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+            </div>
+          </a>
+        </li>
+        <li class="qryd-li">
+          <a class="qryd-li-a" ui-sref="main.checklist">
+            <img class="qryd-li-img" src="img/c-2x.png"/>
+            <div class="qryd-todo-div">
+              <div><span class="qryd-todo-stitle">CheckList</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <ul class="list-block"  style="padding-left:5px;margin-top:0;">
+        <li class="qryd-li">
+          <a class="qryd-li-a" ui-sref="main.purchasesellstockcheck">
+            <img class="qryd-li-img" src="img/jian-2x.png"/>
+            <div class="qryd-todo-div">
+              <div><span class="qryd-todo-stitle">进销存检查(CCR)</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+            </div>
+          </a>
+        </li>
+        <li class="qryd-li">
+          <a class="qryd-li-a" ui-sref="main.diseaseknwoledgeeducate">
+            <img class="qryd-li-img" src="img/sdh-2x.png"/>
+            <div class="qryd-todo-div">
+              <div><span class="qryd-todo-stitle">疾病知识教育(CCR)</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+            </div>
+          </a>
+        </li>
+        <li class="qryd-li">
+          <a class="qryd-li-a" ui-sref="main.trainingrecord">
+            <img class="qryd-li-img" src="img/c-2x.png"/>
+            <div class="qryd-todo-div">
+              <div><span class="qryd-todo-stitle">培训记录(CCR)</span><span class="option-choosed">2</span><img class="qryd-todo-right-jt" src="img/right-jt.png"></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ion-content>
+</ion-view>

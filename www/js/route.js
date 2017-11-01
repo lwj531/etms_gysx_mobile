@@ -31,6 +31,19 @@ angular.module('route', [
   'settings.ctrl',
   'about.ctrl',
   'changepassword.ctrl',
+  'checkin.ctrl',
+  'calldetails.ctrl',
+  'purchasesellstockcheck.ctrl',
+  'checklist.ctrl',
+  'businessreview.ctrl',
+  'trainingrecord.ctrl',
+  'diseaseknwoledgeeducate.ctrl',
+  'todolist.ctrl',
+  'vivideducate.ctrl',
+  'calloverview.ctrl',
+  'checkout.ctrl',
+  'allmaterialbysku.ctrl',
+  'storenearby.ctrl',
   //service
   'account.srv',
   'car.srv',
@@ -38,6 +51,7 @@ angular.module('route', [
   'routesetting.srv',
   'client.srv',
   'daily.srv',
+  'trainingrecord.srv',
   //directive 指令
   'amap.dt',
   'toast.dt'

@@ -1,0 +1,79 @@
+<ion-view title="CheckList" view-title="CheckList">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">CheckList</div>
+    <!--<div class="buttons" style="position: absolute;right: 5px;">
+      <button class="button button-icon">保存
+      </button>
+    </div>-->
+  </div>
+  <ion-content class="has-header">
+    <div class="content-block-title" style="margin: 12px 15px 8px 15px;color: dimgrey;">计划提醒</div>
+    <div class="list-block planremind-content" style="margin-bottom: 15px">
+      <ul class="planremind-ul">
+        <li>协议签取</li>
+        <li>达成跟进</li>
+        <li>产品配送</li>
+        <li>产品购进</li>
+        <li>阶段活动</li>
+        <li>疾病教育</li>
+      </ul>
+    </div>
+    <div>
+      <div class="content-block-title" style="margin: 12px 15px 8px 15px;color: dimgrey;">请选择</div>
+      <div class="list-block" style="margin: 0;">
+        <ul class="checklist-choose-content-ul">
+          <li>
+              <img ng-click="selectxyqq()" class="checklist-select-quan" id="xyqq" src="img/blankquan.png" />
+              <div class="checklist-choose-content-li-stitle-content">
+                <div><span class="checklist-choose-content-li-stitle">协议签取</span></div>
+              </div>
+          </li>
+          <li>
+            <img ng-click="selectdcgj()" class="checklist-select-quan" id="dcgj" src="img/blankquan.png" />
+            <div class="checklist-choose-content-li-stitle-content">
+              <div><span class="checklist-choose-content-li-stitle">达成跟进</span></div>
+            </div>
+          </li>
+          <li>
+            <img ng-click="selectcpgj()" class="checklist-select-quan" id="cpgj" src="img/blankquan.png" />
+            <div class="checklist-choose-content-li-stitle-content">
+              <div><span class="checklist-choose-content-li-stitle">产品购进</span></div>
+            </div>
+          </li>
+          <li>
+            <img ng-click="selectcpps()" class="checklist-select-quan" id="cpps" src="img/blankquan.png" />
+            <div class="checklist-choose-content-li-stitle-content">
+              <div><span class="checklist-choose-content-li-stitle">产品配送</span></div>
+            </div>
+          </li>
+          <li>
+            <img ng-click="selectmdfx()" class="checklist-select-quan" id="mdfx" src="img/blankquan.png" />
+            <div class="checklist-choose-content-li-stitle-content">
+              <div><span class="checklist-choose-content-li-stitle">门店分销</span></div>
+            </div>
+          </li>
+          <li>
+            <img ng-click="selectjdhd()" class="checklist-select-quan" id="jdhd" src="img/blankquan.png" />
+            <div class="checklist-choose-content-li-stitle-content">
+              <div><span class="checklist-choose-content-li-stitle">阶段活动</span></div>
+            </div>
+          </li>
+          <li>
+            <img ng-click="selectjbjy()" class="checklist-select-quan" id="jbjy" src="img/blankquan.png" />
+            <div class="checklist-choose-content-li-stitle-content">
+              <div><span class="checklist-choose-content-li-stitle">疾病教育</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="checklist-savediv">
+        <button class="button checklist-savebtn">保存</button>
+    </div>
+  </ion-content>
+</ion-view>
+

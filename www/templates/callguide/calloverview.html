@@ -1,0 +1,96 @@
+<ion-view title="拜访向导" view-title="拜访向导">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">拜访向导</div>
+    <!--<div class="buttons" style="position: absolute;right: 5px;">
+      <button class="button button-icon">保存
+      </button>
+    </div>-->
+  </div>
+  <ion-content class="has-header">
+    <div class="list-block calldetails-store-juti">
+      <ul>
+        <li>
+          <img class="calldetails-store-gradeimg" src="img/GradeA-icon.png"/>
+          <div class="qryd">
+            <div><span class="qryd-storename">复方药房(A)</span></div>
+            <div style="padding-top: 5px;"><span class="qryd-storeaddress">岚皋路121号</span></div>
+          </div>
+          <div class="qrztdiv"><img src="img/done-signin-icon.png" style="width: 20px;"><span class="qrsj">签入 09:32:30</span><a ui-sref="main.checkout" style="display:inline-block;width:70px;height:28px;line-height:28px;border:1px solid orange;border-radius:8px;color:orange;text-align:center;position:absolute;right:20px;bottom:6px;">签出</a></div>
+        </li>
+      </ul>
+    </div>
+    <div class="calloverview-content bg-white">
+      <div class="dbsx-title-head"><span class="lantiao"></span><span class="dbsx-title">拜访概览</span></div>
+      <div class="instore-info">
+        <div class="instore-info-inner">
+          <div class="instore-info-inner-up"><img class="instore-info-inner-up-sjimg" src="img/clock-icon.png"><span class="instore-info-inner-up-zdsc">在店时长:</span><span class="instore-info-inner-up-zdsc-sj">30分5秒</span></div>
+          <div class="instore-info-inner-down"><span><img class="instore-info-inner-down-qrimg" src="img/done-signin-icon.png"><span class="instore-info-inner-down-qrsj">签入 09:32:30</span></span><span class="instore-info-inner-down-qczt">尚未签出</span></div>
+        </div>
+      </div>
+      <div class="callstore-job-content">
+        <div class="callstore-job-content-jxcjc">
+          <div class="callstore-job-content-jxcjc-title">进销存检查 (3)</div>
+          <ul>
+            <li class="callstore-job-content-jxcjc-li">
+              <div class="js-sku-name">安康信 60mg*5片(盒)</div>
+              <div class="kucun-content"><span>购进: 20</span>&nbsp;|&nbsp;<span>库存: 20</span>&nbsp;|&nbsp;<span>订单: 5</span>&nbsp;|&nbsp;<span>价格: 23</span>&nbsp;|&nbsp;<span>排位面: 5</span>&nbsp;|&nbsp;<span>上次库存: 412</span></div>
+            </li>
+            <li class="callstore-job-content-jxcjc-li">
+              <div class="js-sku-name">科索亚 100mg*14片(盒)</div>
+              <div class="kucun-content"><span>购进: 20</span>&nbsp;|&nbsp;<span>库存: 20</span>&nbsp;|&nbsp;<span>订单: 5</span>&nbsp;|&nbsp;<span>价格: 23</span>&nbsp;|&nbsp;<span>排位面: 5</span>&nbsp;|&nbsp;<span>上次库存: 412</span></div>
+            </li>
+            <li class="callstore-job-content-jxcjc-li">
+              <div class="js-sku-name">安康信 60mg*5片(盒)</div>
+              <div class="kucun-content"><span>购进: 20</span>&nbsp;|&nbsp;<span>库存: 20</span>&nbsp;|&nbsp;<span>订单: 5</span>&nbsp;|&nbsp;<span>价格: 23</span>&nbsp;|&nbsp;<span>排位面: 5</span>&nbsp;|&nbsp;<span>上次库存: 412</span></div>
+            </li>
+          </ul>
+        </div>
+        <div class="callstore-job-content-syhg">
+          <div class="callstore-job-content-syhg-title">生意回顾</div>
+          <div class="callstore-job-content-syhg-content">
+            <img class="callstore-job-content-syhg-zimg" src="img/team.png">
+            <div class="callstore-job-content-syhg-content-info">
+              <div>回顾对象 5人</div>
+              <div class="callstore-job-content-syhg-hgdx"><span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span></div>
+              <div class="callstore-job-content-syhg-otherinfo"><div class="callstore-job-content-syhg-otherinfo-div"><img src="img/zhaopian-icon.png"><span class="syhg-otherinfo-inner-span">照片 3张</span></div><div class="callstore-job-content-syhg-otherinfo-div"><img src="img/huipdf-icon.png"><span class="syhg-otherinfo-inner-span">包含PPT</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="callstore-job-content-checklist">
+          <div class="callstore-job-content-checklist-title">CheckList</div>
+          <div class="callstore-job-content-checklist-content">
+            <img class="callstore-job-content-checklist-zimg" src="img/select-list-icon.png">
+            <div class="callstore-job-content-checklist-content-info">
+              <div>已选择 4项</div>
+              <div class="callstore-job-content-checklist-xzx"><span>协议签取</span>&nbsp;|&nbsp;<span>达成跟进</span>&nbsp;|&nbsp;<span>产品跟进</span>&nbsp;|&nbsp;<span>产品配送</span>&nbsp;|&nbsp;<span>门店分销</span></div>
+              <div class="callstore-job-content-checklist-otherinfo"><div class="callstore-job-content-checklist-otherinfo-div"><img src="img/beizhu-icon.png"><span class="checklist-otherinfo-inner-span">备注信息内容显示</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="callstore-job-content-jbjy">
+          <div class="callstore-job-content-jbjy-title">疾病知识教育 (2)</div>
+          <div class="callstore-job-content-jbjy-content">
+            <ul>
+              <li class="callstore-job-content-jbjy-content-li">
+                <img class="gailan-jbjy-img" src="img/zl-fm.png" />
+                <span class="gailan-jbjy-biaoti">推荐资料X</span>
+                <span class="gailan-jbjy-sku">产品:安康信</span>
+                <span class="gailan-jbjy-aboutinfo">生动化教育对象: 忙文杰  得分: 98分</span>
+              </li>
+              <li class="callstore-job-content-jbjy-content-li">
+                <img class="gailan-jbjy-img" src="img/zl-fm.png" />
+                <span class="gailan-jbjy-biaoti">推荐资料X</span>
+                <span class="gailan-jbjy-sku">产品:安康信</span>
+                <span class="gailan-jbjy-aboutinfo">生动化教育对象: 忙文杰  得分: 98分</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

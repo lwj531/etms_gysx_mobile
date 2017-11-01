@@ -1,0 +1,68 @@
+<ion-view title="培训记录" view-title="培训记录">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">培训记录</div>
+    <div class="buttons" style="position: absolute;right: 5px;">
+      <!--<button class="button button-icon">保存</button>-->2017/9
+      <ion-datetime displayFormat="YYYY/MM" [(ngModel)]="myDate"></ion-datetime>
+    </div>
+  </div>
+  <ion-content class="has-header">
+    <div class="" style="width: 100%;">
+      <div class="box">
+        <ul class="pxdx-ul" style="padding:0;">
+          <!--<li class="route-line" id="line{{$index}}" style="width:20%;font-size:14px;height: 40px;" ng-click="selectLine($index)" ng-class="{'selected-line':selected===$index}" ng-repeat="item in linesdata">{{item.name}}</li>-->
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+          <li class="route-line pxdx-ys"><img class="pxdx-img" src="img/team.png"><span class="pxdx-name">王医师</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pxjl-content bg-white">
+      <table class="table table-hover table-condensed" style="margin-top:0px;padding:5px 15px;width:100%;">
+        <thead>
+        <tr class="pxjl-title-blue">
+          <th class="pxjl-content-th">日期</th>
+          <th class="pxjl-content-th">教育资料</th>
+          <th class="pxjl-content-th">时长</th>
+          <th class="pxjl-content-th">得分</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="storeinfo-tbody-tr">
+          <td class="pxjl-content-td" >2017-09-01</td>
+          <td class="pxjl-content-td" >安康信产品资料</td>
+          <td class="pxjl-content-td" >240s</td>
+          <td class="pxjl-content-td" >80</td>
+        </tr>
+        <tr class="storeinfo-tbody-tr">
+          <td class="pxjl-content-td" >2017-09-01</td>
+          <td class="pxjl-content-td" >安康信产品资料</td>
+          <td class="pxjl-content-td" >240s</td>
+          <td class="pxjl-content-td" >80</td>
+        </tr>
+        <tr class="storeinfo-tbody-tr">
+          <td class="pxjl-content-td">2017-09-01</td>
+          <td class="pxjl-content-td">安康信产品资料</td>
+          <td class="pxjl-content-td">240s</td>
+          <td class="pxjl-content-td">80</td>
+        </tr>
+        <tr class="storeinfo-tbody-tr">
+          <td class="pxjl-content-td">2017-09-01</td>
+          <td class="pxjl-content-td">安康信产品资料</td>
+          <td class="pxjl-content-td">240s</td>
+          <td class="pxjl-content-td">80</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-content>
+</ion-view>
+
