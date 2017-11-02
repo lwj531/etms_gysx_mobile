@@ -2,7 +2,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
   .controller('ScheduleMgtCtrl', function ($scope, $rootScope, $ionicPopup, routesettingsrv, dailysrv, amMoment) {
 
     //切角色
-    $scope.CCR = true;
+    $scope.CCR = false;
     $scope.AE = !$scope.CCR;
 
     //日程管理初始化tab 打开日视图  (dayView | weekView)

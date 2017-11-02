@@ -274,12 +274,6 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
           templateUrl: "templates/callguide/todolist.html",
           controller: "TodolistCtrl"
         })
-      //生动化教育(做题)
-      .state('main.vivideducate', {
-        url: '/vivideducate',
-        templateUrl: "templates/callguide/vivideducate.html",
-        controller: "VivideducateCtrl"
-      })
       //拜访概览
       .state('main.calloverview', {
         url: '/calloverview',
