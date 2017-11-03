@@ -9,6 +9,7 @@ angular.module('storenearby.ctrl', [])
       //初始化tab
       $scope.tabs = [
         {name: 'todaysch', title: '今日行程'},
+        {name: 'nearbystore', title: '附近药店'},
         {name: 'chainstore', title: '下游门店'}
       ];
       $scope.currentTab = $scope.tabs[0];
