@@ -13,14 +13,21 @@ angular.module("daily.srv", ["http.srv"])
     this.getHalfdayType = function () {
       return httpsrv.service("/api/SystemType/GetHalfdays", {}, "get");
     };
+    //获取AE类型选项options
+    this.getCheckList = function () {
+      return httpsrv.service("/api/SystemType/GetKaItems", {}, "get");
+    };
     //保存半天事务
     this.saveHalfdayPlan = function (model) {
       return httpsrv.service("/api/Daily/SaveActivityHalfday", model, "post");
     };
-
     //获取一周的实际
     this.getWeekActualList = function (startDate,endDate) {
       return httpsrv.service("/api/Weekly/GetDateRangeActuals/"+ startDate + '/'+ endDate, {}, "get");
+    };
+    //保存AE计划
+    this.savePlanKaInstitution = function (activityDate,model) {
+      return httpsrv.service("/api/Daily/SavePlanKaInstitution/"+ activityDate, model, "post");
     };
   }
   ]);

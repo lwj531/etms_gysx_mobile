@@ -1,9 +1,17 @@
-angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMoment'])
-  .controller('ScheduleMgtCtrl', function ($scope, $rootScope, $ionicPopup, routesettingsrv, dailysrv, amMoment) {
+angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMoment', 'client.srv'])
+  .controller('ScheduleMgtCtrl', function ($scope, $rootScope, $ionicPopup, $ionicModal, routesettingsrv, dailysrv, amMoment, clientsrv) {
 
     //切角色
-    $scope.CCR = false;
-    $scope.AE = !$scope.CCR;
+    /* $scope.CCR = true;
+     $scope.AE = !$scope.CCR;*/
+    //判断当前角色
+    clientsrv.getcurrentstaff().then(function (staff) {
+      $scope.staff = staff;
+      $scope.staff.IsAE = staff.Roles.indexOf('AE_REP') != -1;
+      $scope.staff.IsCCR = !$scope.staff.IsAE;
+      console.log($scope.staff);
+    });
+
 
     //日程管理初始化tab 打开日视图  (dayView | weekView)
     $scope.viewActive = 'weekView';
@@ -48,7 +56,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
           //赋值半天事务
           for (var k = 0; k < $scope.weekPlanList.HalfdayModels.length; k++) {
             //上午半天事务
-            if (moment($scope.weekDays[j]).date()== moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'AM') {
+            if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'AM') {
               $scope.weekDays[j].halfDayAM = $scope.weekPlanList.HalfdayModels[k];
               console.log($scope.weekDays[j].halfDayAM);
             }
@@ -78,13 +86,13 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     });
     //下一周
     $scope.nextWeek = function () {
-      $scope.weekSatrtDate = moment($scope.weekSatrtDate).add(1,'w');
-      $scope.weekEndDate = moment($scope.weekEndDate).add(1,'w');
+      $scope.weekSatrtDate = moment($scope.weekSatrtDate).add(1, 'w');
+      $scope.weekEndDate = moment($scope.weekEndDate).add(1, 'w');
     };
     //上一周
     $scope.prevWeek = function () {
-      $scope.weekSatrtDate = moment($scope.weekSatrtDate).add(-1,'w');
-      $scope.weekEndDate = moment($scope.weekEndDate).add(-1,'w');
+      $scope.weekSatrtDate = moment($scope.weekSatrtDate).add(-1, 'w');
+      $scope.weekEndDate = moment($scope.weekEndDate).add(-1, 'w');
     };
 
     //改计划实际tab
@@ -99,7 +107,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.footerTab = tabTitle;
       console.log(tabTitle);
     };
-    //点半天事务弹出底部框
+    //点半天事务弹出底部框//CCR的
     $scope.showHalfFooter = function (tabtype, date) {
       $scope.currentRoute = null;
       $scope.selectedHalfType = {};
@@ -194,12 +202,25 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         callback();
       }
     };
-
-    //checkbox的选中事件
-    $scope.toggleSelected = function (item) {
+    //总部选中
+    $scope.headQuarterSelected = function (item) {
+      $scope.selectedHeadQuarter = item;
       item.selected = !item.selected;
+      item.checkList = [];
+      angular.forEach($scope.AECheckList, function (value, key) {
+        value.selected = false;
+      });
+      $scope.childListShow = item.selected;
     };
-    $scope.childListShow = false;
+    //checklist选中
+    $scope.checkListSelected = function (item) {
+      item.selected = !item.selected;
+      if (item.selected) {
+        $scope.selectedHeadQuarter.checkList.push(item);
+      } else {
+        $scope.selectedHeadQuarter.checkList.splice($scope.selectedHeadQuarter.checkList.indexOf(item), 1);
+      }
+    };
     //获取线路
     $scope.getRoutes = function (callback) {
       routesettingsrv.getroutes().then(function (data) {
@@ -209,36 +230,44 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         }
       });
     };
-    //计划窗体
-    $scope.showPlanHalf = {
-      cssClass: 'plan-alert',
-      templateUrl: 'templates/schedulemgt/planalert.html',
-      title: '',
-      scope: $scope,
-      close: function () {
-        $scope.showPlanHalf.close();
-      }
+    //获取AE的总部列表
+    $scope.getHeadQuarters = function (callback) {
+      routesettingsrv.getins().then(function (data) {
+        $scope.headQuarters = data;
+        if (callback != null) {
+          callback();
+        }
+      })
+    };
+    //获取AE CheckList选项
+    $scope.getCheckList = function (callback) {
+      dailysrv.getCheckList().then(function (data) {
+        $scope.AECheckList = data;
+        if (callback != null) {
+          callback();
+        }
+      })
     };
     //关闭计划窗体
     $scope.closePlanList = function () {
-      showPlanHalf.close();
-    };
-    //点击连锁总部列表，切至计划项
-    $scope.slideToChild = function () {
-      $scope.childListShow = true;
+      $scope.planModal.close();
     };
     //点击连返回，回到parent list
     $scope.backToParent = function () {
       $scope.childListShow = false;
     };
-
-    //CCR计划弹框
+    //计划弹框
     $scope.showPlanPopup = function () {
-      $scope.getRoutes(function () {
-        $ionicPopup.show($scope.showPlanHalf);
+      $scope.getHeadQuarters(function () {
+        $scope.getCheckList(function () {
+          $scope.planModal = $ionicPopup.show({
+            cssClass: 'plan-alert',
+            templateUrl: 'templates/schedulemgt/planalert.html',
+            scope: $scope
+          });
+        });
       });
     };
-
     //CCR实际弹框
     $scope.showActualCCR = function () {
 
@@ -283,6 +312,32 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         showActual.close();
       };
     };
+    //保存AE计划
+    $scope.saveAEPlan = function () {
+      //连锁总部
+      var headQuarterModels = [];
+      for (var i = 0; i < $scope.headQuarters.length; i++) {
+        if ($scope.headQuarters[i].selected) {
+          headQuarterModels.push({
+            InstitutionID: $scope.headQuarters[i].InstitutionID,
+            InstitutionName: $scope.headQuarters[i].InstitutionName,
+            Kaitems: $scope.headQuarters[i].checkList
+          });
+        }
+        if (i == $scope.headQuarters.length - 1) {
+          if(headQuarterModels.length>0){
+            //保存总部到数据库
+            dailysrv.savePlanKaInstitution($scope.selectedDate.format('YYYY-MM-DD'), headQuarterModels).then(function () {
+              $scope.closePlanList();
+              $scope.toast("保存成功");
+            });
+          }else{
+            $scope.toast("请选择连锁总部");
+          }
+
+        }
+      }
+    };
 
 
     //日历的angular写法--------------/
@@ -312,7 +367,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     };
     //点击日期时触发
     $scope.clickDate = function (date) {
-     $scope.selectedDate=date;
+      $scope.selectedDate = date;
     }
 
   });

@@ -31,7 +31,7 @@
     </ul>
   </div>
   <div class="bar bar-subheader bar-stable week-tap" ng-show="viewActive=='weekView'">
-    <div class="flex-between width-100" ng-if="CCR">
+    <div class="flex-between width-100">
       <div class="flex-between">
         <button class="button button-icon align-center" ng-click="prevWeek()">
           <span class="uicon uicon-blue-prev"></span>
@@ -50,25 +50,7 @@
         <span class="uicon uicon-add"></span>
       </button>
     </div>
-    <div class="flex-between width-100" ng-if="AE">
-      <div class="flex-between">
-        <button class="button button-icon align-center">
-          <span class="uicon uicon-blue-prev"></span>
-        </button>
-        <div>2017/09/23 ~ 2017/09/29</div>
-        <button class="button button-icon align-center">
-          <span class="uicon uicon-blue-next"></span>
-        </button>
-      </div>
-      <button class="button button-icon align-center" ng-click="changePA('actual')"
-              ng-class="{'selected':statusTab=='actual'}">
-        <span class="uicon uicon-schlist"></span>
-      </button>
-      <button class="button button-icon align-center" ng-click="changePA('plan')"
-              ng-class="{'selected':statusTab=='plan'}">
-        <span class="uicon uicon-add"></span>
-      </button>
-    </div>
+
   </div>
   <ion-content class="has-header has-subheader" ng-class="{'top-135':viewActive=='dayView'}">
     <!--日视图的tab-->
@@ -79,7 +61,7 @@
             <div class="item-media"><img src="img/calendar_active_44.png" width="24"></div>
             <div class="item-inner">
               <div class="item-title color-blue">2017/03/03</div>
-              <div class="item-after" ng-show="CCR">
+              <div class="item-after" ng-show="staff.IsCCR">
                 <a class="button button-clear button-stable button-small flex-center" ng-click="dayInfoTab='list'"
                    ng-class="{'selected':dayInfoTab=='list'}"><span class="uicon list-view"></span></a>
                 <span class="space-stick" style="font-size: 17px;color: #d5d5d5;">|</span>
@@ -90,7 +72,7 @@
           </div>
         </div>
         <!--当角色为CCR时显示-->
-        <div class="crl-tabs" ng-if="CCR">
+        <div class="crl-tabs" ng-if="staff.IsCCR">
           <!--日视图里的列表-->
           <div class="crl-tab height-100" ng-show="dayInfoTab=='list'">
             <div class="bg-white home-schedule height-100">
@@ -240,7 +222,7 @@
           </div>
         </div>
         <!--当角色为AE时显示-->
-        <div class="crl-tabs" ng-show="AE">
+        <div class="crl-tabs" ng-show="staff.IsAE">
           <!--日视图里的列表-->
           <div class="crl-tab height-100">
             <div class="bg-white home-schedule height-100">
@@ -359,7 +341,7 @@
       <!--statusTab：actual | plan 周视图里切实际-->
       <div ng-show="statusTab=='actual'">
         <!--角色为CCR 时显示下面列表-->
-        <ul class="schedule-week-list" ng-if="CCR">
+        <ul class="schedule-week-list" ng-if="staff.IsCCR">
           <li ng-repeat="date in actualWeekDays">
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
             <div class="schedule-week-row">
@@ -409,7 +391,7 @@
           </li>
         </ul>
         <!--角色为AE时显示下面列表-->
-        <ul class="schedule-week-list" ng-if="AE">
+        <ul class="schedule-week-list" ng-if="staff.IsAE">
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
@@ -479,7 +461,7 @@
       <!--statusTab：actual | plan 周视图里切计划-->
       <div ng-show="statusTab=='plan'">
         <!--角色为CCR 时显示下面列表-->
-        <ul class="schedule-week-list" ng-if="CCR">
+        <ul class="schedule-week-list" ng-if="staff.IsCCR">
           <li ng-repeat="date in weekDays">
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
             <div class="schedule-week-row" ng-show="date.route!=null">
@@ -527,7 +509,7 @@
           </li>
         </ul>
         <!--角色为AE时显示下面列表-->
-        <ul class="schedule-week-list" ng-if="AE">
+        <ul class="schedule-week-list" ng-if="staff.IsAE">
           <li>
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
@@ -602,7 +584,7 @@
       <div class="flex-center">
         <div class="width-90">
           <ul class="button-group">
-            <li class="group-button button flex-center" ng-if="CCR" ng-class="{'selected':footerTab=='route'}"
+            <li class="group-button button flex-center" ng-if="staff.IsCCR" ng-class="{'selected':footerTab=='route'}"
                 ng-click="changeFooterTab('route')">
               路线图
             </li>
@@ -618,7 +600,7 @@
         </div>
       </div>
       <!--路线列表，单选-->
-      <ul class="schedule-bottom-list" ng-if="CCR" ng-show="footerTab=='route'">
+      <ul class="schedule-bottom-list" ng-if="staff.IsCCR" ng-show="footerTab=='route'">
         <li class="list-item" ng-repeat="item in planStoreList" ng-click="selectRoute(item)">
           <div class="item-content">
             <!--点击选中，在选中的li的item-media上添加checked-->
@@ -730,7 +712,7 @@
   <!--计划的FAB-->
   <div ng-show="statusTab=='plan'&&viewActive=='weekView'">
     <!--CCR显示计划报告-->
-    <div class="fab-week align-center" ng-show="CCR">
+    <div class="fab-week align-center" ng-show="staff.IsCCR">
       <div>
         <div class="flex-center">
           <img src="img/seal_blue_124.png" width="80">
@@ -739,7 +721,7 @@
       </div>
     </div>
     <!--AE显示计划报告-->
-    <div class="fab-week align-center" ng-show="AE">
+    <div class="fab-week align-center" ng-show="staff.IsAE">
       <div>
         <div class="flex-center">
           <img src="img/doc_blue_126.png" width="80">
@@ -751,7 +733,7 @@
   <!--实际的FAB-->
   <div ng-show="statusTab=='actual'&&viewActive=='weekView'">
     <!--CCR显示计划报告-->
-    <div class="fab-week align-center" ng-show="CCR">
+    <div class="fab-week align-center" ng-show="staff.IsCCR">
       <div>
         <div class="flex-center">
           <img src="img/seal_blue_124.png" width="80">
@@ -760,7 +742,7 @@
       </div>
     </div>
     <!--AE显示计划报告-->
-    <div class="fab-week align-center" ng-show="AE">
+    <div class="fab-week align-center" ng-show="staff.IsAE">
       <div>
         <div class="flex-center">
           <img src="img/doc_blue_126.png" width="80">
