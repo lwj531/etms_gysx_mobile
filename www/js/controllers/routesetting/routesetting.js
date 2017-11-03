@@ -44,33 +44,33 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
           {
             url: "img/GradeA-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 32)
+            size: new AMap.Size(21, 24)
           },
           {
             url: "img/GradeB-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 32)
+            size: new AMap.Size(21, 24)
           },
           {
             url: "img/GradeC-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 32)
+            size: new AMap.Size(21, 24)
           },
           //小图
           {
             url: "img/GradeA-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 32)
+            size: new AMap.Size(21, 24)
           },
           {
             url: "img/GradeB-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 32)
+            size: new AMap.Size(21, 24)
           },
           {
             url: "img/GradeC-icon.png",
             anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(26, 32)
+            size: new AMap.Size(21, 24)
           },
         ];
         $scope.mass = new AMap.MassMarks($scope.insdata, {
