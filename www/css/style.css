@@ -1,14 +1,17 @@
 /* Empty. Add your own CSS if you like */
 body, .ionic-body {
   color: #4e4e4e;
+  font-size: 14px;
 }
-
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{
+  font-size: 0.9em;
+}
 .platform-android .bar .title {
-  font-size: 15px;
+  font-size: 1em;
 }
 
 .bar .button.button-clear {
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .bg-light {
@@ -21,7 +24,7 @@ body, .ionic-body {
 }
 
 .bar .title, .bar-positive .button.button-clear {
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .button.button-positive.button-clear .icon:before {
@@ -30,7 +33,27 @@ body, .ionic-body {
 
 .button.button-positive.button-clear {
   color: #419de7;
-  font-size: 15px;
+  font-size: 1em;
+}
+
+.item-left-edit{
+  width: 34px;
+}
+.button{
+  line-height: 36px;
+  min-height: 36px;
+  font-size: 1.1em;
+}
+.button-small{
+  line-height: 26px;
+  min-height: 26px;
+  /*font-size: 0.8em*/
+}
+.item-right-edit{
+  width: 60px;
+}
+input{
+  /*font-size: 0.8em*/
 }
 
 .margin-top5 {
@@ -76,7 +99,7 @@ p {
 .list-item .button-small {
   line-height: 19px;
   min-height: 21px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .button-small.round {
@@ -291,7 +314,7 @@ p {
   margin: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 13px;
+  font-size: 0.9em;
   text-transform: uppercase;
   line-height: 14px;
   color: #919192;
@@ -302,7 +325,7 @@ p {
   box-sizing: border-box;
   position: relative;
   background-color: #fff;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 ul {
@@ -349,7 +372,7 @@ ul {
 .list-item .item-content {
   box-sizing: border-box;
   padding-left: 15px;
-  min-height: 44px;
+  min-height: 38px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -372,9 +395,9 @@ ul {
   padding-right: 15px;
   position: relative;
   width: 100%;
-  padding-top: 8px;
-  padding-bottom: 7px;
-  min-height: 44px;
+  padding-top: 6px;
+  padding-bottom: 5px;
+  min-height: 38px;
   box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -450,7 +473,7 @@ ul {
   display: -webkit-flex;
   display: flex;
   max-height: 28px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .list-count {
@@ -468,8 +491,8 @@ ul {
   position: relative;
   max-width: 100%;
   white-space: normal;
-  font-size: 13px;
-  line-height: 18px;
+  line-height: 16px;
+  font-size: 0.9em;
 }
 
 .list-item .item-title.label {
@@ -514,15 +537,15 @@ ul {
 }
 
 .list-item .item-text {
-  font-size: 12px;
   color: #b5b5b5;
   position: relative;
   min-height: 17px;
   -webkit-box-orient: vertical;
   display: -webkit-box;
-  line-height: 18px;
+  line-height: 15px;
   /*margin-top: 2px;*/
   white-space: normal;
+  font-size: 0.8em;
 }
 
 .list-item .item-media {
@@ -661,7 +684,7 @@ ul {
 
 .img-block + .img-block {
   color: #d3ba93;
-  font-size: 14px;
+  font-size: 0.9em;
   font-weight: 700;
 }
 
@@ -820,7 +843,7 @@ ul {
 }
 
 .dense-list .item-title {
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .home-schedule .button-row {
@@ -997,7 +1020,7 @@ ul {
 .table .button {
   padding: 0 8px;
   min-height: 26px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   line-height: 22px;
 }
 
@@ -1040,7 +1063,7 @@ ul {
 
 .pagination ul li:first-child,
 .pagination ul li:last-child {
-  font-size: 16px;
+  font-size: 12px;
   color: #419de7;
 }
 
@@ -1060,7 +1083,7 @@ textarea {
 }
 
 .input-label {
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 select {
@@ -1081,7 +1104,7 @@ select {
   float: left;
   padding: 5px 0;
   margin: 2px 0 0;
-  font-size: 14px;
+  font-size: 0.9em;
   text-align: left;
   list-style: none;
   background-color: #fff;
@@ -1180,7 +1203,7 @@ select {
 
 .bg-white {
   background-color: white;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 div.info-top {
@@ -1196,7 +1219,7 @@ div.info-top {
 div.info-top div {
   display: inline-block;
   color: #333333;
-  font-size: 12px;
+  font-size: 0.8em
 }
 
 a {
@@ -1211,7 +1234,7 @@ a {
 .route-line {
   color: dimgray;
   width: 25%;
-  font-size: 13px;
+  font-size: 0.8em;
   height: 47px;
 }
 
@@ -1233,7 +1256,7 @@ a {
   border-radius: 5px 0 0 5px;
   position: absolute;
   color: #fff;
-  font-size: 12px;
+  font-size: 0.8em
   left: 0;
   top: 0;
 }
@@ -1257,7 +1280,7 @@ a {
   top: 8px;
   left: 11px;
   color: #ffffff;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .info-top .txt.inf-top-left:after {
@@ -1267,7 +1290,7 @@ a {
   bottom: 8px;
   left: 11px;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 0.8em
 }
 
 .info-top .inf-top-right {
@@ -1283,7 +1306,7 @@ a {
 }
 
 .info-top .inf-top-right span {
-  font-size: 12px;
+  font-size: 0.8em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -1327,7 +1350,7 @@ position: absolute;
   height: 25px;
   background-repeat: no-repeat;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 1em;
   text-align: center;
   padding-top: 5px;
   padding-right: 4px;
@@ -1348,7 +1371,7 @@ position: absolute;
 .button.button-clear.tab-button {
   padding: 0 13px;
   color: #5e5e5e;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .button.tab-button.active {
@@ -1419,7 +1442,7 @@ position: absolute;
 ul.ins-detail .list-item .item-inner {
   padding-top: 14px;
   padding-bottom: 14px;
-  font-size: 15px;
+  font-size: 1em;
 }
 
 ul.ins-detail input[readonly]:not(.cloned-text-input) {
@@ -1438,7 +1461,7 @@ ul.ins-detail input[readonly]:not(.cloned-text-input) {
 .input-row input {
   width: 100%;
   color: #419de7;
-  font-size: 15px;
+  font-size: 1em;
   padding-right: 15px;
 }
 
@@ -1472,7 +1495,7 @@ ul.ins-detail input[readonly]:not(.cloned-text-input) {
 }
 
 .gender-radio {
-  font-size: 15px;
+  font-size: 1em;
   min-height: 44px;
 }
 
@@ -1494,7 +1517,7 @@ ul.ins-detail input[readonly]:not(.cloned-text-input) {
 
 ul.ins-detail .list-item .item-input input {
   color: #419de7;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
 .male .uicon-gender {
@@ -1677,7 +1700,7 @@ ul.ins-detail .list-item .item-input input {
 .bar.week-slide .week-title {
   background-color: #f5f7fa;
   padding: 5px 15px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .bar.week-slide .week-title li {
@@ -1688,7 +1711,7 @@ ul.ins-detail .list-item .item-input input {
 .bar.week-slide .week-day {
   background-color: #ffffff;
   padding: 10px 15px;
-  font-size: 15px;
+  font-size: 1em;
   color: #000;
 }
 
@@ -1714,15 +1737,15 @@ ul.ins-detail .list-item .item-input input {
   right: 0;
   padding: 8px;
   box-shadow: -1px 2px 20px 0px rgba(0, 0, 0, 0.20);
+  font-size: 0.8em;
 }
 
 .route-addbtn img {
   width: 18px;
-
 }
 
 .route-addbtn span {
-  font-size: 12px;
+  font-size: 0.8em;
   color: #419DE7;
   height: 12px;
   display: block;
@@ -1759,7 +1782,7 @@ ul.ins-detail .list-item .item-input input {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .route-action-bar .button {
@@ -1779,11 +1802,11 @@ input[type="text"].route-name-input {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  line-height: 37px;
-  height: 37px;
+  line-height: 32px;
+  height: 32px;
   width: 100%;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 input[type="text"].route-name-input.wide {
@@ -1799,10 +1822,10 @@ input[type="text"].route-name-input.wide {
 
 .button.button-positive.button-thin,
 .button.button-thin {
-  height: 30px;
-  line-height: 30px;
-  min-height: 31px;
-  font-size: 13px;
+  height: 28px;
+  line-height: 27px;
+  min-height: 28px;
+  font-size: 0.9em;
 }
 
 .window-list {
@@ -1817,6 +1840,8 @@ input[type="text"].route-name-input.wide {
 
 .window-list .item p {
   white-space: normal;
+  line-height: 15px;
+  font-size: 0.8em;
 }
 
 .no-latlng .item {
@@ -1831,24 +1856,24 @@ input[type="text"].route-name-input.wide {
 .window-list .list-right-editing .item-content,
 .window-list .item-complex .list-right-editing .item-content {
   background-color: transparent;
-  padding: 7px 109px 7px 16px;
+  padding: 7px 79px 7px 0;
 }
 
 .window-list .item-content {
-  font-size: 14px;
+  font-size: 0.9em;
   color: #3e3e3e;
 }
 
 .window-list h1.item-title {
-  font-size: 13px;
+  font-size: 0.8em;
   color: #3e3e3e;
   white-space: normal;
   margin-bottom: 1px;
-  line-height: 18px;
+  line-height: 16px;
 }
 
 .window-list .item-text {
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #b5b5b5;
 }
 
@@ -1955,7 +1980,7 @@ input[type="text"].route-name-input.wide {
 }
 
 .route-action-block.daily {
-  font-size: 13px;
+  font-size: 0.9em;
   top: 65px;
 }
 
@@ -2117,11 +2142,11 @@ ul.schedule-week-list {
 
 .schedule-week-list .content-block-title {
   margin: 8px 15px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .schedule-week-row {
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .schedule-week-row .col-33 {
@@ -2223,7 +2248,7 @@ ul.schedule-week-list {
 }
 
 .icon-button {
-  font-size: 14px;
+  font-size: 0.9em;
   line-height: 19px;
   min-height: 21px;
 }
@@ -2350,7 +2375,7 @@ ul.schedule-week-list {
 
 .learning-index .button-group .button.group-button,
 .schedule-btg .button-group .button.group-button {
-  font-size: 12px;
+  /*font-size: 0.8em*/
   min-height: 30px;
   height: 30px;
   background-color: #fff;
@@ -2463,7 +2488,7 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .edit-route.item h2 {
-  font-size: 14px;
+  font-size: 0.9em;
   white-space: normal;
   color: #3e3e3e;
 
@@ -2475,7 +2500,7 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .edit-route.item p {
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #b5b5b5;
 }
 
@@ -2483,7 +2508,7 @@ ion-delete-button.button-icon.icon:before {
   border: 1px solid #dedede;
   width: 60%;
   padding: 10px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #adb6bc;
   margin: 15px 0;
 }
@@ -2549,14 +2574,14 @@ ion-delete-button.button-icon.icon:before {
 /*}*/
 
 .plan-alert .flex-between .button-positive {
-  font-size: 14px;
+  font-size: 0.9em;
   font-weight: 500;
   color: #419de7;
 }
 
 .plan-alert .list-title {
   background-color: #eff5f6;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #b5b5b5;
   padding: 3px 15px;
 }
@@ -2619,21 +2644,24 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .font-14 {
-  font-size: 14px !important;
+  font-size: 0.9em !important;
 }
 
 .font-13 {
-  font-size: 13px !important;
+  font-size: 0.9em !important;
 }
 
 .font-12 {
-  font-size: 12px !important;
+  font-size: 0.8em !important;
+}
+.font-7 {
+  font-size: 0.8em !important;
 }
 
 .symbol-row {
   padding: 10px 8px;
   background-color: #f5f7fa;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .symbol-row .affair-dot {
@@ -2648,8 +2676,7 @@ ion-delete-button.button-icon.icon:before {
   border-right: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   min-height: 100px;
-  font-size: 12px;
-  font-size: 8px;
+  /*font-size: 0.8em*/
   padding: 2px;
 }
 
@@ -2696,7 +2723,7 @@ ion-delete-button.button-icon.icon:before {
   width: 100%;
   border: 1px solid #419de7;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: 0.9em;
   color: #3e3e3e;
 }
 
@@ -2837,7 +2864,7 @@ ion-delete-button.button-icon.icon:before {
 
 .tiled-block {
   background-color: #fff;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   height: calc(100% - 55px);
   overflow: hidden;
 }
@@ -2896,7 +2923,7 @@ ion-delete-button.button-icon.icon:before {
 
 .points-top .flex-center {
   margin-top: 12px;
-  font-size: 13px;
+  font-size: 0.9em;
   color: #fff;
   line-height: 40px;
   align-items: baseline;
@@ -2954,13 +2981,13 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .exercise-history .points-top .tag {
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 ul.exercise-week {
   background-color: transparent;
   color: #fff;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   padding: 5px 15px 0;
   position: relative;
 }
@@ -3389,7 +3416,7 @@ p.stick-left{
 }
 
 .drag-list .item {
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .drag-list .width-50 {
@@ -3582,7 +3609,7 @@ input[type=month] {
   font-family: inherit;
   text-align: right;
   height: 33px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #fff;
   line-height: 31px;
 }
@@ -3630,7 +3657,7 @@ input[type=month] {
 }
 
 .call-procedure .bg-white {
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .call-procedure .list {
@@ -3684,7 +3711,7 @@ input[type=month] {
 
 .tab-title {
   background-color: #fcfcfc;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .tab-title .tab-button {
@@ -3728,15 +3755,15 @@ input[type=month] {
 }
 
 .coaching-call .route-action-block input {
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .coaching-call .route-action-block .button {
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .platform-android .popover.tutorial-pop .bar h1 {
-  font-size: 13px;
+  font-size: 0.9em;
   color: #4e4e4e;
 }
 
@@ -3748,7 +3775,7 @@ input[type=month] {
 .platform-android .popover.tutorial-pop li {
   padding: 10px 15px;
   position: relative;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .platform-android .popover.tutorial-pop li.selected {
@@ -3784,7 +3811,7 @@ input[type=month] {
 }
 
 .tutorial-mgt {
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .tutorial-mgt .tutorial-list {
@@ -3816,7 +3843,7 @@ input[type=month] {
 }
 
 .sign-alert .subtitle {
-  font-size: 13px;
+  font-size: 0.9em;
   padding-top: 20px;
   color: #f5a623;
 }
@@ -3845,7 +3872,7 @@ input[type=month] {
 
 .settings .points-top .flex-start.margin-img {
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .settings .points-top .item-inner {
@@ -3886,7 +3913,7 @@ input[type=month] {
   color: #e98338;
   background-color: #fff;
   padding: 15px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   position: relative;
 }
 
@@ -3913,7 +3940,7 @@ input[type=month] {
 .about .about-card .version-list {
   height: calc(100% - 110px);
   overflow: auto;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #98A6B7;
 }
 
@@ -3922,7 +3949,7 @@ input[type=month] {
 }
 
 .about .about-card .version-list .version-title {
-  font-size: 13px;
+  font-size: 0.9em;
   padding-bottom: 6px;
 }
 
@@ -3935,7 +3962,7 @@ input[type=month] {
   background-color: #419de7;
   color: #fff;
   margin-left: 10px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
 }
 
 .about .about-card .version-list > li li {
@@ -3966,11 +3993,11 @@ input[type=month] {
   width: 100%;
   border: 1px solid #eee;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: 0.9em;
   color: #3e3e3e;
   height: 40px;
   line-height: 40px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 .change-password ul + .flex-center .button {
@@ -3982,7 +4009,7 @@ input[type=month] {
   padding:0;
   height:35px;
   background-color:#f4f4f4;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 .xd_ul li{
   float:left;
@@ -4109,11 +4136,11 @@ input[type=month] {
 .storeinfo-title-inner-p{
   padding-top: 6px;
   margin-bottom: 6px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 .storeinfo-title-inner-span{
   margin-top: 5px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #c4c4c4;
 }
 .storeinfo-down{
@@ -4128,7 +4155,7 @@ input[type=month] {
 .caokao-orange{
   color: rgba(255, 166, 0, 0.66);
   text-align:center;
-  font-size:13px;
+  font-size: 0.9em;
 }
 .black-shadow-understoreinfo{
   width: 100%;
@@ -4176,7 +4203,7 @@ input[type=month] {
   border: 1px solid #e4e4e4;
   height: 35px;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 .zengjiaduixiang-btn {
   height: 34px;
@@ -4184,7 +4211,7 @@ input[type=month] {
   border: none;
   background-color: #419de7;
   color:white;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 .baohanppt{
   position: relative;
@@ -4214,7 +4241,7 @@ input[type=month] {
   text-align: center;
 }
 .jxc-content-bt{
-  font-size: 12px;
+  /*font-size: 0.8em*/
   height:30px;
   line-height: 30px;
   background-color: #f5fafc;
@@ -4226,13 +4253,13 @@ input[type=month] {
 }
 .jxc-content-title-skuname{
   position: absolute;
-  font-size: 13px;
+  font-size: 0.9em;
   bottom: 6px;
   left: 15px;
 }
 .jxc-content-title-kc{
   position: absolute;
-  font-size: 13px;
+  font-size: 0.9em;
   bottom: 6px;
   right: 15px;
 }
@@ -4265,7 +4292,7 @@ input[type=month] {
   width: calc(100% - 96px);
   height: 32px;
   padding: 0 10px;
-  font-size: 13px;
+  font-size: 0.9em;
 
 }
 .sr-yuyin{
@@ -4312,7 +4339,7 @@ input[type=month] {
   padding-left:20px;
 }
 #laddress{
-  font-size: 14px;
+  font-size: 0.9em;
   margin-top: 3px;
   width: 100%;
   overflow: hidden;
@@ -4346,7 +4373,7 @@ input[type=month] {
   min-height: 43px;
   background-color: #e54b3e;
   color: white;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 .button.checkintodo-g{
   width:100%;
@@ -4354,7 +4381,7 @@ input[type=month] {
   min-height: 43px;
   background-color: #adbab1;
   color: white;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 #not_gps{
   margin:10px 0;
@@ -4393,7 +4420,7 @@ input[type=month] {
 }
 .qrsj{
   color:#3AC5A6;
-  font-size:12px;
+  /*font-size: 0.8em*/
   position:absolute;
   left:30px;bottom:2px;
 }
@@ -4523,13 +4550,13 @@ input[type=month] {
 }
 .zl-aboutinfo{
   color:darkgrey;
-  font-size:14px;
+  font-size: 0.9em;
   position:absolute;
   left:110px;top:22px;
 }
 .about-sku{
   color:darkgrey;
-  font-size:13px;
+  font-size: 0.9em;
   position:absolute;
   left:110px;top:45px;
 }
@@ -4601,16 +4628,16 @@ input[type=month] {
   width: 20px;
 }
 .sku-spec{
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #c4c4c4;
 }
 .pdf-file{
-  font-size: 13px;
+  font-size: 0.9em;
   color: black;
   position: absolute;
 }
 .vedio-file{
-  font-size: 13px;
+  font-size: 0.9em;
   color: black;
   position: absolute;
 }
@@ -4691,11 +4718,11 @@ input[type=month] {
   right:15px;
 }
 .xuanzeyishi{
-  font-size: 15px;
+  font-size: 1em;
   color: #419de7;
 }
 .doct-list{
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color:#c3c3c3;
 }
 .slt-doc-blackshadow{
@@ -4709,7 +4736,7 @@ input[type=month] {
   opacity: 0.4;
 }
 .zl-name{
-  font-size: 15px;
+  font-size: 1em;
   position: absolute;
   left:36%;
 }
@@ -4730,7 +4757,7 @@ input[type=month] {
   display: none;
 }
 .sdhdx-name{
-  font-size: 15px;
+  font-size: 1em;
   position: absolute;
   left:31%;
 }
@@ -4742,7 +4769,7 @@ input[type=month] {
 .slt-sdhdx-xbt{
   height: 24px;
   background-color: #f4f4f4;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   padding:5px 0 0 10px;
 }
 .sdhdx-content-sltdoc{
@@ -4797,7 +4824,7 @@ input[type=month] {
 .callstore-job-content-jxcjc-title{
   height: 30px;
   line-height: 30px;
-  font-size: 15px;
+  font-size: 1em;
   padding-left: 9px;
   color: #9eb1c1;
 }
@@ -4811,7 +4838,7 @@ input[type=month] {
   line-height: 25px;
 }
 .kucun-content{
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #A9ACAF;
 }
 #checkoutmapcontainer{
@@ -4834,7 +4861,7 @@ input[type=month] {
   word-wrap:break-word;
   padding: 6px 10px;
   position: relative;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   color: #4e4e4e;
 }
 .xiaosanjiao{
@@ -4864,7 +4891,7 @@ input[type=month] {
   padding-right: 10px;
   background-color: #f4f4f4;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 0.9em;
   text-align: right;
   color:#4e4e4e;
   background-image: url("../img/sound_gray_28.png");
@@ -4874,7 +4901,7 @@ input[type=month] {
 }
 .callguide-cankao-td{
   text-align:center;
-  font-size:13px;
+  font-size: 0.9em;
 }
 .zlk-all-zl-info{
   width: 100%;
@@ -4959,7 +4986,7 @@ input[type=month] {
   right:0%;top:-7px;
   height:32px;
   color:#419DE7;
-  font-size: 15px
+  font-size: 1em
 }
 /*#xccontent{*/
   /*height:280px;*/
@@ -4986,7 +5013,7 @@ input[type=month] {
 /*}*/
 /*.xd-dragup-ul-li-checkininfo-address span{*/
   /*color:darkgrey;*/
-  /*font-size:13px;*/
+  /*font-size: 0.9em;*/
 /*}*/
 /*.xd-dragup-ul-li-checkininfo-time {*/
   /*padding-top: 5px;*/
@@ -4994,7 +5021,7 @@ input[type=month] {
 /*}*/
 .xd-dragup-ul-li-checkininfo-time-chakan{
   color:#c9c9c9;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   position: absolute;
   right: 18px;
 }
@@ -5053,12 +5080,12 @@ input[type=month] {
 }
 .pxjl-content-th{
   text-align:center;
-  font-size:13px;
+  font-size: 0.9em;
   font-weight:normal;
 }
 .pxjl-content-td {
   text-align:center;
-  font-size:13px;
+  font-size: 0.9em;
   color:#b4b4b4;
 }
 .checkout-qr-li {
@@ -5109,12 +5136,12 @@ input[type=month] {
   border-bottom: 1px solid lightgrey;
 }
 .xd-tab2-li-storeinfo-content-storename{
-  font-size:15px;
+  font-size: 1em;
   color:black;
 }
 .xd-tab2-li-storeinfo-content-storeaddress{
   color:darkgrey;
-  font-size:13px;
+  font-size: 0.9em;
 }
 .call-entrance-div{
   position:absolute;
@@ -5126,7 +5153,7 @@ input[type=month] {
   margin-left: 5px;
 }
 /*.xd-dragup-ul-li-checkininfo-storename{*/
-  /*font-size:15px;*/
+  /*font-size: 1em;*/
   /*color:black;*/
 /*}*/
 /*#xd_tab_3{*/
@@ -5154,12 +5181,12 @@ input[type=month] {
   border-bottom: 1px solid lightgrey;
 }
 .xd-tab3-li-storeinfo-content-storename{
-  font-size:15px;
+  font-size: 1em;
   color:black;
 }
 .xd-tab3-li-storeinfo-content-storeaddress{
   color:darkgrey;
-  font-size:13px;
+  font-size: 0.9em;
 }
 #callguidemap{
   width:100%;
@@ -5168,12 +5195,12 @@ input[type=month] {
   z-index:0;
 }
 .qryd-storename{
-  font-size:15px;
+  font-size: 1em;
   color:black;
 }
 .qryd-storeaddress{
   color:darkgrey;
-  font-size:13px;
+  font-size: 0.9em;
 }
 .qryd-li-a{
   display: inline-block;
@@ -5181,7 +5208,7 @@ input[type=month] {
   height: 100%;
 }
 .qryd-todo-stitle{
-  font-size:15px;
+  font-size: 1em;
   color:black;
 }
 .checklist-choose-content-ul{
@@ -5200,7 +5227,7 @@ input[type=month] {
   border-bottom: 1px solid #e4e4e4;
 }
 .checklist-choose-content-li-stitle{
-  font-size:15px;
+  font-size: 1em;
   color:dimgray;
 }
 .checklist-savediv{
@@ -5293,7 +5320,7 @@ input[type=month] {
   background-image: linear-gradient(90deg, #41a0e7, #41bbe7 100%, transparent 50%);
   padding: 0 10px;
   color: #fff;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   z-index: 23;
   min-width: 28px;
   min-height: 28px;
@@ -5380,7 +5407,7 @@ height: 28px;
   line-height: 28px;
   min-height: 28px;
   border-radius: 19px;
-  font-size: 12px;
+  /*font-size: 0.8em*/
   background: #fffbf7;
   padding: 0 30px;
 }
