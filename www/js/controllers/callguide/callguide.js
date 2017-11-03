@@ -9,7 +9,7 @@ angular.module('callguide.ctrl', [])
     $scope.editor = {};
 
 
-
+    //初始化tab
     $scope.tabs = [
       {name: 'todaysch', title: '今日行程'},
       {name: 'plansch', title: '已计划行程'},
@@ -20,6 +20,13 @@ angular.module('callguide.ctrl', [])
     $scope.switchTab = function (tab) {
       $scope.currentTab = tab;
 
+    };
+    //展开底部footer
+    $scope.isExpand=false;
+    $scope.ToggleFooter = function () {
+      $scope.isExpand = !$scope.isExpand;
+      $scope.searchmodal = false;
+      $scope.nolatlngmodal = false;
     };
 
     //信息窗体函数
@@ -172,10 +179,9 @@ angular.module('callguide.ctrl', [])
         $(".storeinfo-drag-up-div").fadeOut(300);
         $(".black-shadow-understoreinfo").hide();
       };
-
-      $scope.toggledragup = function(){
-        $("#xccontent").slideToggle(300);
-      };
+      // $scope.toggledragup = function(){
+      //   $("#xccontent").slideToggle(300);
+      // };
       // $scope.showtodayroute = function(){
       //   $(".xd-li-1").addClass("xd_ul-li-active");
       //   $(".xd-li-2").removeClass("xd_ul-li-active");
@@ -215,6 +221,8 @@ angular.module('callguide.ctrl', [])
       $scope.searchmodal = false;
       $scope.searchstore = function(){
         $scope.searchmodal=true;
+        $scope.isExpand = false;
+        $scope.nolatlngmodal = false;
       };
       //关闭搜索机构弹窗
       $scope.closesearchstorediv = function(){
@@ -224,6 +232,8 @@ angular.module('callguide.ctrl', [])
       $scope.nolatlngmodal = false;
       $scope.search_nopositionstore = function(){
         $scope.nolatlngmodal = true;
+        $scope.searchmodal=false;
+        $scope.isExpand = false;
       };
       //关闭
       $scope.close_nolatlngstorediv = function(){
