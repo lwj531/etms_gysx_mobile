@@ -1,7 +1,7 @@
 
-angular.module('callguide.ctrl', [])
+angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
 
-  .controller('CallGuideCtrl', function($scope,$compile) {
+  .controller('CallGuideCtrl', function($scope,$compile,guidesrv) {
     $scope.local={
       longitude:0,
       latitude:0
@@ -29,6 +29,76 @@ angular.module('callguide.ctrl', [])
       $scope.nolatlngmodal = false;
     };
 
+    //获取用户所有机构
+    $scope.getmyins = function () {
+      guidesrv.getMyInstitutionList().then(function (data) {
+        $scope.insdata = data;
+        //设置原点
+        $scope.center = new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
+        //通知数据已获取
+        $scope.$broadcast("amap", "datacompleted");
+      });
+    };
+    //初始化
+    $scope.init = function () {
+      $scope.getmyins();
+    };
+    $scope.init();
+
+    //点击右上角搜索机构图标
+    $scope.searchmodal = false;
+    $scope.searchstore = function(){
+      $scope.searchmodal=true;
+      $scope.isExpand = false;
+      $scope.nolatlngmodal = false;
+    };
+    //关闭搜索机构弹窗
+    $scope.closesearchstorediv = function(){
+      $scope.searchmodal = false;
+    };
+    //请求无坐标机构数据函数
+    $scope.nolatlngmodal = false;
+    $scope.search_nopositionstore = function(){
+      $scope.nolatlngmodal = true;
+      $scope.searchmodal=false;
+      $scope.isExpand = false;
+    };
+    //关闭
+    $scope.close_nolatlngstorediv = function(){
+      $scope.nolatlngmodal = false;
+    }
+
+    //
+    // //获取用户所有机构
+    // $scope.getmyins = function () {
+    //   guidesrv.getMyInstitutionList().then(function (data) {
+    //     $scope.insdata = data;
+    //     //设置原点
+    //     $scope.center = new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
+    //     //通知数据已获取
+    //     $scope.$broadcast("amap", "datacompleted");
+    //   });
+    // };
+    // //初始化
+    // $scope.init = function () {
+    //   $scope.getmyins();
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //信息窗体函数
     function createInfoWindow(title, content){
       var info = document.createElement("div");
@@ -50,8 +120,8 @@ angular.module('callguide.ctrl', [])
       bottom.style.left = '4%';
       bottom.style.margin = '0 auto';
       var sharp = document.createElement("img");
-    //  sharp.src = "https://webapi.amap.com/images/sharp.png";
-      sharp.src = "img/d-triangle.png";
+      //  sharp.src = "https://webapi.amap.com/images/sharp.png";
+      sharp.src = "img/infowindow_triange.png";
       bottom.appendChild(sharp);
       info.appendChild(bottom);
       return info;
@@ -63,7 +133,7 @@ angular.module('callguide.ctrl', [])
           resizeEnable: true,
           zoom: 15
         }),
-       lang:"zh_cn"
+        lang:"zh_cn"
       });
     map.plugin(["AMap.Geolocation", "AMap.PlaceSearch"],
       function () {
@@ -85,7 +155,7 @@ angular.module('callguide.ctrl', [])
         $(".amap-controls").find(".amap-geo").css("background", "url(img/position-icon.png) 50% 50% no-repeat #fff");
         $(".amap-controls").find(".amap-geo").css({"width":"33px","height":"33px"});
         $(".amap-controls").find(".amap-geo").css("background-size", "65% 65%");
-      //  $(".amap-controls").find(".amap-geo").css("visibility", "hidden");
+        //  $(".amap-controls").find(".amap-geo").css("visibility", "hidden");
         window.setTimeout(function () { $(".amap-controls").find(".amap-geo").click(); }, 300);
 
         //完成定位 返回定位信息
@@ -164,79 +234,28 @@ angular.module('callguide.ctrl', [])
     //点击完infowindow上的进入拜访之后即关闭infowindow
     $scope.closeinfowindow = function(){
       $(".info").hide();
-     // $scope.map.clearInfoWindow();
+      // $scope.map.clearInfoWindow();
     };
 
     //查看机构信息(点击窗体信息里的小i图标)
-      $scope.getinsinfo = function(){
-       // alert(1);
-        $(".storeinfo-drag-up-div").fadeIn(300);
-        $(".black-shadow-understoreinfo").show();
-      };
+    $scope.getinsinfo = function(){
+      // alert(1);
+      $(".storeinfo-drag-up-div").fadeIn(300);
+      $(".black-shadow-understoreinfo").show();
+    };
 
-      //关闭查看机构详情的弹窗
-      $scope.closestoreinfowindow = function(){
-        $(".storeinfo-drag-up-div").fadeOut(300);
-        $(".black-shadow-understoreinfo").hide();
-      };
-      // $scope.toggledragup = function(){
-      //   $("#xccontent").slideToggle(300);
-      // };
-      // $scope.showtodayroute = function(){
-      //   $(".xd-li-1").addClass("xd_ul-li-active");
-      //   $(".xd-li-2").removeClass("xd_ul-li-active");
-      //   $(".xd-li-3").removeClass("xd_ul-li-active");
-      //   $(".xd-span-1").addClass("xd_ul-span-active");
-      //   $(".xd-span-2").removeClass("xd_ul-span-active");
-      //   $(".xd-span-3").removeClass("xd_ul-span-active");
-      //   $("#xd_tab_1").show();
-      //   $("#xd_tab_2").hide();
-      //   $("#xd_tab_3").hide();
-      // };
-      // $scope.showplanroute = function(){
-      //   $(".xd-li-2").addClass("xd_ul-li-active");
-      //   $(".xd-li-1").removeClass("xd_ul-li-active");
-      //   $(".xd-li-3").removeClass("xd_ul-li-active");
-      //   $(".xd-span-2").addClass("xd_ul-span-active");
-      //   $(".xd-span-1").removeClass("xd_ul-span-active");
-      //   $(".xd-span-3").removeClass("xd_ul-span-active");
-      //   $("#xd_tab_2").show();
-      //   $("#xd_tab_1").hide();
-      //   $("#xd_tab_3").hide();
-      // };
-      // $scope.showmyins = function(){
-      //   $(".xd-li-3").addClass("xd_ul-li-active");
-      //   $(".xd-li-2").removeClass("xd_ul-li-active");
-      //   $(".xd-li-1").removeClass("xd_ul-li-active");
-      //   $(".xd-span-3").addClass("xd_ul-span-active");
-      //   $(".xd-span-2").removeClass("xd_ul-span-active");
-      //   $(".xd-span-1").removeClass("xd_ul-span-active");
-      //   $("#xd_tab_3").show();
-      //   $("#xd_tab_2").hide();
-      //   $("#xd_tab_1").hide();
-      // };
+    //关闭查看机构详情的弹窗
+    $scope.closestoreinfowindow = function(){
+      $(".storeinfo-drag-up-div").fadeOut(300);
+      $(".black-shadow-understoreinfo").hide();
+    };
 
 
-      //点击右上角搜索机构图标
-      $scope.searchmodal = false;
-      $scope.searchstore = function(){
-        $scope.searchmodal=true;
-        $scope.isExpand = false;
-        $scope.nolatlngmodal = false;
-      };
-      //关闭搜索机构弹窗
-      $scope.closesearchstorediv = function(){
-        $scope.searchmodal = false;
-      };
-      //请求无坐标机构数据函数
-      $scope.nolatlngmodal = false;
-      $scope.search_nopositionstore = function(){
-        $scope.nolatlngmodal = true;
-        $scope.searchmodal=false;
-        $scope.isExpand = false;
-      };
-      //关闭
-      $scope.close_nolatlngstorediv = function(){
-        $scope.nolatlngmodal = false;
-      }
+
+
+
+
+
+
+
   });

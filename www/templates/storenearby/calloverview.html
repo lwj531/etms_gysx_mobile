@@ -1,0 +1,147 @@
+<ion-view title="拜访向导" view-title="拜访向导">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">拜访向导</div>
+
+  </div>
+  <ion-content class="has-header">
+    <div class="content-block">
+      <ul>
+        <li class="list-item multi-line ">
+          <div class="item-content align-top">
+            <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title ellipsis">国药控股大药房永新连锁店(A)</div>
+              </div>
+              <div class="item-text ellipsis">上海市石泉路548号</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item flex-between" style="padding: 4px 15px;">
+          <div>
+            <button class="button button-positive button-clear button-thin" ng-click="$ionicGoBack()">上一步</button>
+          </div>
+          <div>
+            <button class="button button-energized button-outline button-checkout" ui-sref="main.aecheckout">签出</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="call-overview">
+      <div class="width-100 bg-white">
+        <div class="padding" style="padding-bottom: 0;">
+          <p class="stick-left padding-left color-blue">拜访概览</p>
+        </div>
+        <div class="padding">
+          <div class="instore-info-inner">
+            <div class="flex-start margin-img"><img src="img/during_blue_51.png" width="18"><span
+              class="color-blue">在店时长：</span><span class="color-brightorange">30分5秒</span></div>
+            <div class="flex-between">
+              <div class="width-50 flex-start color-green margin-img">
+                <img src="img/done-signin-icon.png" width="15">签入
+                <span>09:32:30</span></div>
+              <div class="width-50 flex-start color-green" ng-if="hasCheckout">
+                <img src="img/done-signin-icon.png" width="18">签出 <span>09:32:30</span>
+              </div>
+              <div class="width-50 flex-start color-darkgray">尚未签出</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="content-block-title color-darkgray">进销存检查 (3)</div>
+          <ul class="psi-list">
+            <li class="list-item multi-line">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">安康信 60mg*5片(盒)</div>
+                  <div class="item-text">
+                    <span>购进: 20</span>&nbsp;|&nbsp;<span>库存: 20</span>&nbsp;|&nbsp;<span>订单: 5</span>&nbsp;|&nbsp;<span>价格: 23</span>&nbsp;|&nbsp;<span>排位面: 5</span>&nbsp;|&nbsp;<span>上次库存: 412</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item multi-line">
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">安康信 60mg*5片(盒)</div>
+                  <div class="item-text">
+                    <span>购进: 20</span>&nbsp;|&nbsp;<span>库存: 20</span>&nbsp;|&nbsp;<span>订单: 5</span>&nbsp;|&nbsp;<span>价格: 23</span>&nbsp;|&nbsp;<span>排位面: 5</span>&nbsp;|&nbsp;<span>上次库存: 412</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--CCR显示的list 疾病知识教育-->
+        <div ng-show="true">
+          <div class="content-block-title color-darkgray">疾病知识教育 (3)</div>
+          <ul class="material-list">
+            <li class="list-item multi-line">
+              <div class="item-content">
+                <div class="item-media"><img src="img/zl-fm.png"></div>
+                <div class="item-inner">
+                  <div class="item-title">推荐资料X</div>
+                  <div class="item-text">产品：安康信</div>
+                  <div class="item-text">生动化教育对象: 忙文杰  得分: 98分</div>
+                </div>
+              </div>
+            </li>
+            <li class="list-item multi-line">
+              <div class="item-content">
+                <div class="item-media"><img src="img/zl-fm.png"></div>
+                <div class="item-inner">
+                  <div class="item-title">推荐资料X</div>
+                  <div class="item-text">产品：安康信</div>
+                  <div class="item-text">生动化教育对象: 忙文杰  得分: 98分</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--AE显示的list生意回顾-->
+        <div ng-show="true">
+          <div class="content-block-title color-darkgray">生意回顾</div>
+          <ul class="">
+            <li class="list-item multi-line">
+              <div class="item-content align-top">
+                <div class="item-media"><img src="img/peoples_blue_56.png" width="25"></div>
+                <div class="item-inner">
+                  <div class="item-title">回顾对象 5人</div>
+                  <div class="item-text"><span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span></div>
+                  <div class="color-gray margin-img flex-start align-center">
+                    <img src="img/img_gray_48.png" width="16">照片 3张 <span class="space-10"></span>
+                    <img src="img/pdf_gray_45.png" width="15" height="15">包含PPT
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--AE显示的list CheckList-->
+        <div ng-show="true">
+          <div class="content-block-title color-darkgray">CheckList</div>
+          <ul class="">
+            <li class="list-item multi-line">
+              <div class="item-content align-top">
+                <div class="item-media"><img src="img/list_blue_72.png" width="25"></div>
+                <div class="item-inner">
+                  <div class="item-title">已选择 4项</div>
+                  <div class="item-text"><span>协议签取</span>&nbsp;|&nbsp;<span>达成跟进</span>&nbsp;|&nbsp;<span>产品跟进</span>&nbsp;|&nbsp;<span>产品配送</span>&nbsp;|&nbsp;<span>门店分销</span></div>
+                  <div class="color-gray margin-img flex-start align-center">
+                    <img src="img/remark_gray_39.png" width="14" height="14">备注信息内容显示
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

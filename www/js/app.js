@@ -297,6 +297,72 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/storenearby',
         templateUrl: "templates/storenearby/storenearby.html",
         controller: "StorenearbyCtrl"
+      })
+      //(拜访)签入
+      .state('main.aecheckin', {
+        url: '/aecheckin',
+        templateUrl: "templates/storenearby/checkin.html",
+        controller: "aeCheckinCtrl"
+      })
+      //(拜访)签入机构后的拜访向导
+      .state('main.aecalldetails', {
+        url: '/aecalldetails',
+        templateUrl: "templates/storenearby/calldetails.html",
+        controller: "aeCalldetailsCtrl"
+      })
+      //进销存检查
+      .state('main.aepurchasesellstockcheck', {
+        url: '/aepurchasesellstockcheck',
+        templateUrl: "templates/storenearby/purchasesellstockcheck.html",
+        controller: "aePurchasesellstockcheckCtrl"
+      })
+      //生意回顾
+      .state('main.aebusinessreview', {
+        url: '/aebusinessreview',
+        templateUrl: "templates/storenearby/businessreview.html",
+        controller: "aeBusinessreviewCtrl"
+      })
+      //checklist
+      .state('main.aechecklist', {
+        url: '/aechecklist',
+        templateUrl: "templates/storenearby/checklist.html",
+        controller: "aeChecklistCtrl"
+      })
+      //疾病知识教育
+      .state('main.aediseaseknwoledgeeducate', {
+        url: '/aediseaseknwoledgeeducate',
+        templateUrl: "templates/storenearby/diseaseknwoledgeeducate.html",
+        controller: "aeDiseaseknwoledgeeducateCtrl"
+      })
+      //培训记录
+      .state('main.aetrainingrecord', {
+        url: '/aetrainingrecord',
+        templateUrl: "templates/storenearby/trainingrecord.html",
+        controller: "aeTrainingrecordCtrl"
+      })
+      //待办事项
+      .state('main.aetodolist', {
+        url: '/aetodolist',
+        templateUrl: "templates/storenearby/todolist.html",
+        controller: "aeTodolistCtrl"
+      })
+      //拜访概览
+      .state('main.aecalloverview', {
+        url: '/aecalloverview',
+        templateUrl: "templates/storenearby/calloverview.html",
+        controller: "aeCalloverviewCtrl"
+      })
+      //(拜访)签出
+      .state('main.aecheckout', {
+        url: '/aecheckout',
+        templateUrl: "templates/storenearby/checkout.html",
+        controller: "aeCheckoutCtrl"
+      })
+      //查看某一个产品的所有资料
+      .state('main.aeallmaterialbysku', {
+        url: '/aeallmaterialbysku',
+        templateUrl: "templates/storenearby/allmaterialbysku.html",
+        controller: "aeAllmaterialbyskuCtrl"
       });
 
     // if none of the above states are matched, use this as the fallback

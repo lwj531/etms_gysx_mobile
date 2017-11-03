@@ -1,0 +1,190 @@
+<ion-view title="疾病知识教育" view-title="疾病知识教育">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">疾病知识教育</div>
+  </div>
+  <div class="bar bar-subheader item-input-inset bar-light">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="输入关键字搜索资料">
+    </label>
+    <button class="button button-clear" ng-click="cannel()">
+      取消
+    </button>
+  </div>
+  <ion-content class="has-header has-subheader disease-knowledge">
+    <div class="recommend-content ">
+      <div class="height-100 bg-white">
+        <div class="padding" style="padding-bottom: 0;">
+          <p class="stick-left padding-left">推荐教育资料</p>
+        </div>
+        <div class="recommend-list">
+          <ul>
+            <li class="list-item multi-line">
+              <div class="item-content align-top">
+                <div class="item-media"><img src="img/tjzl-1.png"></div>
+                <div class="item-inner">
+                  <!--点标题直接播放，是给自己看的-->
+                  <div class="item-title-row">
+                    <div class="item-title">文案标题</div>
+                  </div>
+                  <div class="item-text">发布时间：2017-03-30 <span class="space-10"></span>格式：PPT</div>
+                  <div class="item-text">产品：安康信</div>
+                  <!--生动化教育连连看给别人看，先弹选择医师列表-->
+                  <div class="item-text margin-top5"><button class="button" ng-click="showVitality()">生动化教育</button></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="all-zl-info ">
+      <div class="height-100 bg-white">
+        <div class="padding" style="padding-bottom: 0;">
+          <p class="stick-left padding-left">全部资料</p>
+        </div>
+        <div class="info-classify">
+          <ul>
+            <li class="info-classify-li classify-by-sku info-classify-li-active" ng-click="chooesinfobysku()">按产品</li>
+            <li class="info-classify-li classify-by-use" ng-click="chooesinfobyuse()">按用途</li>
+          </ul>
+        </div>
+        <div class="all-list all-zl-content-bysku">
+          <ul>
+            <!--是给别人看的，要选医师-->
+            <li class="list-item item-link" ng-click="showMaterial()">
+              <div class="item-content">
+                <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
+                <div class="item-inner flex-between">
+                  <div>
+                    <div class="item-title-row">
+                      <div class="item-title">安康信</div>
+                    </div>
+                    <div class="item-text">60mg*5片(盒)</div>
+                  </div>
+                  <div class="align-center margin-img">
+                    <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
+                    <span class="space-10"></span>
+                    <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
+                    <span class="uicon fake-link"></span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="all-list all-zl-content-byuse">
+          <ul>
+            <li class="list-item item-link" ui-sref="main.aematerialexpand">
+              <div class="item-content">
+                <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
+                <div class="item-inner flex-between">
+                  <div>
+                    <div class="item-title-row">
+                      <div class="item-title">科索亚</div>
+                    </div>
+                    <div class="item-text">60mg*5片(盒)</div>
+                  </div>
+                  <div class="align-center margin-img">
+                    <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
+                    <span class="space-10"></span>
+                    <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
+                    <span class="uicon fake-link"></span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slt-doc-tc-div ">
+      <div class="slt-doc-tc-div-head">
+        <span ng-click="closesltdoc()" class="close-slt-doc-tc-div-btn">取消</span>
+        <span class="zl-name">资料名称XXX</span>
+      </div>
+      <div>
+        <img class="zl-fm-img" src="img/zl-fm.png">
+      </div>
+      <div class="slt-doc-tc-title">
+        <span>普通教育资料-安康信 60mg*5片(盒)</span>
+      </div>
+      <div class="slt-doc-entrance">
+        <img class="slt-doc-entrance-docimg" src="img/slt-doct.png">
+        <div class="slt-doc-entrance-content">
+          <span class="xuanzeyishi">选择医师</span><br>
+          <span class="doct-list">机构内的医师列表</span>
+        </div>
+        <img class="slt-doc-entrance-content-jiantou" src="img/right-jt.png">
+      </div>
+    </div>
+    <div class="slt-sdhdx-tc-div bg-white">
+      <div class="slt-doc-tc-div-head">
+        <span ng-click="closesltdx()" class="close-slt-doc-tc-div-btn">取消</span>
+        <span class="sdhdx-name">生动化教育-对象</span>
+        <span class="done-slt-doc-tc-div-btn"><a ui-sref="main.aevivideducate">确定</a></span>
+      </div>
+      <div class="slt-sdhdx-xbt">
+        <span>机构内的医师(8)</span>
+      </div>
+      <div class="sdhdx-content-sltdoc">
+        <ul class="list-block"  style="padding-left:5px;margin-top:0;">
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+          <li class="sdhdx-content-sltdoc-li">
+            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
+            <div class="sdhdx-content-sltdx-div">
+              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="slt-doc-blackshadow"></div>
+  </ion-content>
+</ion-view>
+

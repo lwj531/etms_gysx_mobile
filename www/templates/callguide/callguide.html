@@ -31,13 +31,13 @@
          </div>
        </div>
        <div class="storeinfo-down">
-         <table class="table table-hover table-condensed" style="margin-top:0px;padding:5px 15px;width:100%;">
+         <table class="table table-hover table-condensed" style="margin-top:0;padding:5px 15px;width:100%;">
            <thead>
            <tr style="background-color:rgba(255,165,0,0.11)">
-             <th style="text-align:center;font-size:13px;color:dimgray;font-weight:normal;"></th>
-             <th class="caokao-orange" style="font-weight:normal;">参考目标</th>
-             <th class="caokao-orange" style="font-weight:normal;">购进量</th>
-             <th class="caokao-orange" style="font-weight:normal;">百分比</th>
+             <th></th>
+             <th class="caokao-orange">参考目标</th>
+             <th class="caokao-orange">购进量</th>
+             <th class="caokao-orange">百分比</th>
            </tr>
            </thead>
            <tbody id="InstitutionList">
@@ -232,15 +232,15 @@
     </ul>
     <!--我负责的机构tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='myins'">
-      <li class="list-item multi-line" ui-sref="main.checkin">
+      <li class="list-item multi-line" ui-sref="main.checkin" ng-repeat="item in insdata">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon uicon-markerA"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
             </div>
             <div class="flex-row align-end">
-              <div class="col-66 color-gray">上海市石泉路548号</div>
+              <div class="col-66 color-gray">{{item.Address}}</div>
               <div class="col-33 flex-end">
                 <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
             </div>

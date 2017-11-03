@@ -1,0 +1,115 @@
+<ion-view title="拜访向导" view-title="拜访向导">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">拜访向导</div>
+    <!--<div class="buttons" style="position: absolute;right: 5px;">
+      <button class="button button-icon">保存
+      </button>
+    </div>-->
+  </div>
+  <ion-content class="has-header">
+    <div class="content-block">
+      <ul>
+        <li class="list-item multi-line ">
+          <div class="item-content align-top">
+            <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title ellipsis">国药控股大药房永新连锁店(A)</div>
+              </div>
+              <div class="item-text ellipsis">上海市石泉路548号</div>
+            </div>
+          </div>
+        </li>
+        <li class="list-item flex-between" style="padding: 4px 15px;">
+          <div><button class="button button-positive button-clear button-thin" ng-click="$ionicGoBack()">上一步</button></div>
+          <div><button class="button button-positive button-clear button-thin" ui-sref="main.aecalloverview">下一步</button></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-block bg-white todo-content">
+      <div class="padding-1015 color-blue">
+        <p class="stick-left padding-left">待办事项</p>
+      </div>
+      <div class="home-schedule todo-list">
+        <ul>
+          <li class="list-item multi-line schedule-plan">
+            <div class="item-content align-top">
+              <div class="item-media"><span class="list-dot"></span></div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title color-blue margin-img align-center"><img src="img/fundation-date.png" width="15"><span class="cj-date">创建 2017-08-21</span></div>
+                  <div class="item-after color-orange margin-img align-center"><img src="img/deadline.png" width="15"><span style="color: #f5a623;">到期时间 2017-08-28</span></div>
+                </div>
+                <div class="item-text text-area-wz">
+                  <div class="dbsx-wz-content">
+                    待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项
+                    <div class="xiaosanjiao"></div>
+                  </div>
+                </div>
+                <div class="item-text">
+                  <div class="dbsx-yy-content">
+                    35秒
+                    <div class="xiaosanjiao-yy"></div>
+                  </div>
+                </div>
+                <div class="flex-row align-end">
+                  <div class="col-30 color-green"></div>
+                  <div class="col-30 color-green"></div>
+                  <div class="col-40">
+                    <a class="button button-clear button-small flex-end margin-img color-red">
+                      <img src="img/red-dlt.png" width="12"> <span>删除记录</span>
+                    </a>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-item multi-line schedule-plan">
+            <div class="item-content align-top">
+              <div class="item-media"><span class="list-dot"></span></div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title color-blue margin-img align-center"><img src="img/fundation-date.png" width="15"><span class="cj-date">创建 2017-08-21</span></div>
+                  <div class="item-after color-orange margin-img align-center"><img src="img/deadline.png" width="15"><span style="color: #f5a623;">到期时间 </span><input
+                    type="date" class="deadline-input"></div>
+                </div>
+                <div class="item-text text-area-wz">
+                  <div class="dbsx-wz-content">
+                    待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事事项待办事项待办事项待办事项待办事项待办事项
+                    <div class="xiaosanjiao"></div>
+                  </div>
+                </div>
+                <div class="item-text">
+                  <div class="dbsx-yy-content">
+                    35秒
+                    <div class="xiaosanjiao-yy"></div>
+                  </div>
+                </div>
+                <div class="flex-row align-end">
+                  <div class="col-30 color-green"></div>
+                  <div class="col-30 color-green"></div>
+                  <div class="col-40">
+                    <a class="button button-clear button-small flex-end margin-img color-red">
+                      <img src="img/red-dlt.png" width="11"> <span>删除记录</span>
+                    </a>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="sr-area flex-between">
+      <img src="img/sound_blue_45.png" width="15">
+      <input id="inputarea" type="text" placeholder="请输入待办事项或语音">
+      <button class="button-thin button button-positive">保存</button>
+    </div>
+  </ion-content>
+</ion-view>
+

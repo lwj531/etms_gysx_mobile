@@ -117,7 +117,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.map.clearInfoWindow();
     };
     $scope.infoWindow = new AMap.InfoWindow({
-      offset: new AMap.Pixel(5, 0),
+      offset: new AMap.Pixel(-5, 0),
       isCustom: true,
       //closeWhenClickMap:true,
       autoMove:true
