@@ -1,14 +1,11 @@
+angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'angularMoment'])
 
-angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
-
-  .controller('CallGuideCtrl', function($scope,$compile,guidesrv) {
-    $scope.local={
-      longitude:0,
-      latitude:0
+  .controller('CallGuideCtrl', function ($scope, $compile, routesettingsrv, guidesrv, amMoment) {
+    $scope.local = {
+      longitude: 0,
+      latitude: 0
     };
     $scope.editor = {};
-
-
     //初始化tab
     $scope.tabs = [
       {name: 'todaysch', title: '今日行程'},
@@ -22,7 +19,7 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
 
     };
     //展开底部footer
-    $scope.isExpand=false;
+    $scope.isExpand = false;
     $scope.ToggleFooter = function () {
       $scope.isExpand = !$scope.isExpand;
       $scope.searchmodal = false;
@@ -31,42 +28,70 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
 
     //获取用户所有机构
     $scope.getmyins = function () {
-      guidesrv.getMyInstitutionList().then(function (data) {
+      routesettingsrv.getins().then(function (data) {
         $scope.insdata = data;
-        //设置原点
-        $scope.center = new AMap.LngLat(data[0].InstitutionLng, data[0].InstitutionLat);
-        //通知数据已获取
-        $scope.$broadcast("amap", "datacompleted");
+
       });
     };
+
+    $scope.dateToday = moment();
+    //获取今日行程
+    $scope.dailySchs = [];
+    $scope.getTodaySch = function () {
+      guidesrv.getTodayScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
+        $scope.todaysch = data;
+        for (var i = 0; i < $scope.todaysch.PlanInstitutions.length; i++) {
+          $scope.dailySchs[i].insName.push($scope.todaysch.PlanInstitutions[i].InstitutionName);
+          $scope.dailySchs[i].insAddress.push($scope.todaysch.PlanInstitutions[i].Address);
+          $scope.dailySchs[i].insPriority.push($scope.todaysch.PlanInstitutions[i].InstitutionPriority);
+        }
+        console.log($scope.todaysch);
+      });
+    };
+    //获取已计划行程
+    $scope.planSchs = [];
+    $scope.getPlanSch = function () {
+      guidesrv.getPlanScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
+        $scope.plansch = data;
+        console.log($scope.plansch);
+        for (var i = 0; i < $scope.plansch.PlanInstitutions.length; i++) {
+          $scope.planSchs[i].insName.push($scope.plansch.PlanInstitutions[i].InstitutionName);
+          $scope.planSchs[i].insAddress.push($scope.plansch.PlanInstitutions[i].Address);
+          $scope.planSchs[i].insPriority.push($scope.plansch.PlanInstitutions[i].InstitutionPriority);
+        }
+      });
+    };
+
     //初始化
     $scope.init = function () {
       $scope.getmyins();
+      // $scope.getTodaySch();
+      $scope.getPlanSch();
     };
     $scope.init();
 
     //点击右上角搜索机构图标
     $scope.searchmodal = false;
-    $scope.searchstore = function(){
-      $scope.searchmodal=true;
+    $scope.searchstore = function () {
+      $scope.searchmodal = true;
       $scope.isExpand = false;
       $scope.nolatlngmodal = false;
     };
     //关闭搜索机构弹窗
-    $scope.closesearchstorediv = function(){
+    $scope.closesearchstorediv = function () {
       $scope.searchmodal = false;
     };
     //请求无坐标机构数据函数
     $scope.nolatlngmodal = false;
-    $scope.search_nopositionstore = function(){
+    $scope.search_nopositionstore = function () {
       $scope.nolatlngmodal = true;
-      $scope.searchmodal=false;
+      $scope.searchmodal = false;
       $scope.isExpand = false;
     };
     //关闭
-    $scope.close_nolatlngstorediv = function(){
+    $scope.close_nolatlngstorediv = function () {
       $scope.nolatlngmodal = false;
-    }
+    };
 
     //
     // //获取用户所有机构
@@ -85,22 +110,8 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
     // };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //信息窗体函数
-    function createInfoWindow(title, content){
+    function createInfoWindow(title, content) {
       var info = document.createElement("div");
       info.className = "info";
 
@@ -126,14 +137,15 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
       info.appendChild(bottom);
       return info;
     }
+
     //定位地图
     var map = new AMap.Map("callguidemap",
       {
-        view:new AMap.View2D({
+        view: new AMap.View2D({
           resizeEnable: true,
           zoom: 15
         }),
-        lang:"zh_cn"
+        lang: "zh_cn"
       });
     map.plugin(["AMap.Geolocation", "AMap.PlaceSearch"],
       function () {
@@ -153,10 +165,12 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
 
         //点击重新定位
         $(".amap-controls").find(".amap-geo").css("background", "url(img/position-icon.png) 50% 50% no-repeat #fff");
-        $(".amap-controls").find(".amap-geo").css({"width":"33px","height":"33px"});
+        $(".amap-controls").find(".amap-geo").css({"width": "33px", "height": "33px"});
         $(".amap-controls").find(".amap-geo").css("background-size", "65% 65%");
         //  $(".amap-controls").find(".amap-geo").css("visibility", "hidden");
-        window.setTimeout(function () { $(".amap-controls").find(".amap-geo").click(); }, 300);
+        window.setTimeout(function () {
+          $(".amap-controls").find(".amap-geo").click();
+        }, 300);
 
         //完成定位 返回定位信息
         AMap.event.addListener(geolocation,
@@ -168,7 +182,7 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
             $scope.$apply();
             var circle = new AMap.Circle({
               //center: [data.position.getLng(), data.position.getLat()],// 圆心位置
-              center:currPosition,
+              center: currPosition,
               radius: 500, //半径
               strokeColor: "#73b5f5", //线颜色
               strokeOpacity: 0.2, //线透明度
@@ -179,23 +193,40 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
             circle.setMap(map);
             //这里的storedata 到时候实际用用户所负责的机构
             var storedata = [
-              {"InstitutionName": "复方药店", "Address": "岚皋路121号", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","InstitutionPriority":"A"},
-              {"InstitutionName": "人民大药房", "Address": "新村路211号", "InstitutionLat": "31.265674", "InstitutionLng": "121.422093","InstitutionPriority":"A"}
+              {
+                "InstitutionName": "复方药店",
+                "Address": "岚皋路121号",
+                "InstitutionLat": "31.256124",
+                "InstitutionLng": "121.41995",
+                "InstitutionPriority": "A"
+              },
+              {
+                "InstitutionName": "人民大药房",
+                "Address": "新村路211号",
+                "InstitutionLat": "31.265674",
+                "InstitutionLng": "121.422093",
+                "InstitutionPriority": "A"
+              }
             ];
             //加载marker
             for (var i = 0; i < storedata.length; i++) {
               var position = new AMap.LngLat(storedata[i].InstitutionLng, storedata[i].InstitutionLat);
               marker = new AMap.Marker({
                 icon: new AMap.Icon({
-                  image:storedata[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(storedata[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
+                  image: storedata[i].InstitutionPriority == "A" ? "/img/GradeA-icon.png" : (storedata[i].InstitutionPriority == "B" ? "/img/GradeB-icon.png" : "/img/GradeC-icon.png"),
                   size: new AMap.Size(26, 30)
                 }),
-                extData: { address: storedata[i].Address, name: storedata[i].InstitutionName,priority: storedata[i].InstitutionPriority },
+                extData: {
+                  address: storedata[i].Address,
+                  name: storedata[i].InstitutionName,
+                  priority: storedata[i].InstitutionPriority
+                },
                 position: position //图标定位
               });
               marker.setMap(map);
               marker.on("click", function (e) {
-                var title = '<div style="width:40px;height:54px;background-color:#419DE7;text-align:center;border-radius:5px 0 0 5px;"><a ui-sref="main.checkin"  ng-click="closeinfowindow()" style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:5px;">进入拜访</a></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:5px;left:48px;width: 152px;">' + e.target.G.extData.name + '</span><img ng-click="getinsinfo()" src="img/store-moreinfo-icon.png" style="width: 50px;position: absolute;top: -2px;right: -2px;"></div>', content = [];
+                var title = '<div style="width:40px;height:54px;background-color:#419DE7;text-align:center;border-radius:5px 0 0 5px;"><a ui-sref="main.checkin"  ng-click="closeinfowindow()" style="display:inline-block;width:30px;height:45px;color:white;position:absolute;top:5px;left:5px;">进入拜访</a></div><div style="display:inline-block;width:190px;height:45px;"><span style="position:absolute;top:5px;left:48px;width: 152px;">' + e.target.G.extData.name + '</span><img ng-click="getinsinfo()" src="img/store-moreinfo-icon.png" style="width: 50px;position: absolute;top: -2px;right: -2px;"></div>',
+                  content = [];
                 var hs = e.target.G.extData;
                 var marker_window = new AMap.InfoWindow({
                   isCustom: true,
@@ -225,37 +256,30 @@ angular.module('callguide.ctrl', ['ionic', 'guide.srv'])
                 alert('定位超时!', '错误');
                 break;
               default:
-                alert('定位失败,请检查网络或系统设置!', '错误');
+                console.log('定位失败,请检查网络或系统设置!', '错误');
                 break;
             }
           });
       });
 
     //点击完infowindow上的进入拜访之后即关闭infowindow
-    $scope.closeinfowindow = function(){
+    $scope.closeinfowindow = function () {
       $(".info").hide();
       // $scope.map.clearInfoWindow();
     };
 
     //查看机构信息(点击窗体信息里的小i图标)
-    $scope.getinsinfo = function(){
+    $scope.getinsinfo = function () {
       // alert(1);
       $(".storeinfo-drag-up-div").fadeIn(300);
       $(".black-shadow-understoreinfo").show();
     };
 
     //关闭查看机构详情的弹窗
-    $scope.closestoreinfowindow = function(){
+    $scope.closestoreinfowindow = function () {
       $(".storeinfo-drag-up-div").fadeOut(300);
       $(".black-shadow-understoreinfo").hide();
     };
-
-
-
-
-
-
-
 
 
   });

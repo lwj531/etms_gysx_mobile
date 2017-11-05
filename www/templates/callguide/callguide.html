@@ -177,15 +177,15 @@
     </div>
     <!--今日行程tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='todaysch'">
-      <li class="list-item multi-line ">
+      <li class="list-item multi-line" ng-repeat="item in planSchs">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon uicon-markerA"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              <div class="item-title">{{item.insName}} ({{item.insPriority}})</div>
             </div>
-            <div class="item-text">上海市石泉路548号</div>
-            <div class="flex-between align-end font-13">
+            <div class="item-text">{{item.insAddress}}</div>
+            <div class="flex-between align-end font-8">
               <div class="color-green">首次签入&nbsp;10:21:21</div>
               <div class="color-green">末次签出&nbsp;10:21:21</div>
               <div class="flex-end">
@@ -202,7 +202,7 @@
               <div class="item-title">国药控股大药房永新连锁店(A)</div>
             </div>
             <div class="item-text">上海市石泉路548号</div>
-            <div class="flex-between align-end font-13">
+            <div class="flex-between align-end font-8">
               <div class="color-green">首次签入&nbsp;10:21:21</div>
               <div class="color-red">尚未签出</div>
               <div class="flex-end">
@@ -214,15 +214,15 @@
     </ul>
     <!--已计划行程tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='plansch'">
-      <li class="list-item multi-line" ui-sref="main.checkin">
+      <li class="list-item multi-line" ui-sref="main.checkin" ng-repeat="item in planSchs">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon uicon-markerA"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              <div class="item-title">{{item.insName}} ({{item.insPriority}})</div>
             </div>
-            <div class="flex-row align-end">
-              <div class="col-66 color-gray">上海市石泉路548号</div>
+            <div class="flex-row align-end font-8">
+              <div class="col-66 color-gray">{{item.insAddress}}</div>
               <div class="col-33 flex-end">
                 <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
             </div>
@@ -239,23 +239,8 @@
             <div class="item-title-row">
               <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
             </div>
-            <div class="flex-row align-end">
+            <div class="flex-row align-end font-8">
               <div class="col-66 color-gray">{{item.Address}}</div>
-              <div class="col-33 flex-end">
-                <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="list-item multi-line" ui-sref="main.checkin">
-        <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
-          <div class="item-inner">
-            <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
-            </div>
-            <div class="flex-row align-end">
-              <div class="col-66 color-gray">上海市石泉路548号</div>
               <div class="col-33 flex-end">
                 <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
             </div>

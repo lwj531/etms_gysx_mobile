@@ -11,9 +11,9 @@ angular.module("guide.srv", ["http.srv"])
       return httpsrv.service("api/Daily/GetDailyPlan/" + activityDate , {}, "get");
     };
 
-    //CCR获取我负责的机构总店
-    this.getMyInstitutionList = function () {
-      return httpsrv.service("/api/Institution/GetInstitutions", {}, "get");
-    };
+    // //CCR获取我负责的机构总店
+    // this.getMyInstitutionList = function () {
+    //   return httpsrv.service("/api/Institution/GetInstitutions", {}, "get");
+    // };
   }
   ]);

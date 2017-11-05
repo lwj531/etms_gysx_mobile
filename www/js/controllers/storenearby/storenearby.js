@@ -173,7 +173,7 @@ angular.module('storenearby.ctrl', [])
                 alert('定位超时!', '错误');
                 break;
               default:
-                alert('定位失败,请检查网络或系统设置!', '错误');
+                console.log('定位失败,请检查网络或系统设置!', '错误');
                 break;
             }
           });

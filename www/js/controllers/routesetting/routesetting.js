@@ -177,7 +177,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
           }
         });
       }
-    }
+    };
 
     //显示路线明细
     $scope.routedetail = false;

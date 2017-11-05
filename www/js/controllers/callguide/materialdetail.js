@@ -1,7 +1,6 @@
-angular.module('diseaseknwoledgeeducate.ctrl', [])
-  .controller('DiseaseknwoledgeeducateCtrl', function($scope,$ionicPopup) {
-
-    //生动化教育弹出框
+angular.module('materialdetail.ctrl', [])
+  .controller('MaterialDetailCtrl', function($scope,$ionicPopup) {
+//生动化教育弹出框
     $scope.showVitality = function () {
       $scope.vitalityList = [
         {name: '额我就', selected: false},
@@ -23,7 +22,7 @@ angular.module('diseaseknwoledgeeducate.ctrl', [])
       };
     };
     //弹框中切换到选择医师列表
-   $scope.childListShow=false;
+    $scope.childListShow=false;
     $scope.slideToChild=function () {
       $scope.childListShow=true;
 
@@ -33,10 +32,10 @@ angular.module('diseaseknwoledgeeducate.ctrl', [])
       $scope.childListShow = false;
     };
     //下方资料tab
-  $scope.tabs=[
-    {name:'按产品',code:'byprod'},
-    {name:'按用途',code:'byuse'}
-  ];
+    $scope.tabs=[
+      {name:'按产品',code:'byprod'},
+      {name:'按用途',code:'byuse'}
+    ];
     $scope.currTab=$scope.tabs[0];
     $scope.SwitchTab=function (tab) {
       $scope.currTab=tab;
@@ -50,4 +49,5 @@ angular.module('diseaseknwoledgeeducate.ctrl', [])
     $scope.selectedDr=function (idx) {
       $scope.currDr=idx;
     }
+
   });

@@ -262,6 +262,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
           templateUrl: "templates/callguide/diseaseknwoledgeeducate.html",
           controller: "DiseaseknwoledgeeducateCtrl"
         })
+      //资料详情
+      .state('main.materialdetail', {
+        url: '/materialdetail',
+        templateUrl: "templates/callguide/materialdetail.html",
+        controller: "MaterialDetailCtrl"
+      })
       //培训记录
       .state('main.trainingrecord', {
           url: '/trainingrecord',
@@ -285,12 +291,6 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/checkout',
         templateUrl: "templates/callguide/checkout.html",
         controller: "CheckoutCtrl"
-      })
-      //查看某一个产品的所有资料
-      .state('main.allmaterialbysku', {
-        url: '/allmaterialbysku',
-        templateUrl: "templates/callguide/allmaterialbysku.html",
-        controller: "AllmaterialbyskuCtrl"
       })
       //附近药店
       .state('main.storenearby', {
@@ -334,6 +334,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/storenearby/diseaseknwoledgeeducate.html",
         controller: "aeDiseaseknwoledgeeducateCtrl"
       })
+      //资料详情
+      .state('main.aematerialdetail', {
+        url: '/aematerialdetail',
+        templateUrl: "templates/storenearby/materialdetail.html",
+        controller: "aeMaterialDetailCtrl"
+      })
       //培训记录
       .state('main.aetrainingrecord', {
         url: '/aetrainingrecord',
@@ -357,12 +363,6 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         url: '/aecheckout',
         templateUrl: "templates/storenearby/checkout.html",
         controller: "aeCheckoutCtrl"
-      })
-      //查看某一个产品的所有资料
-      .state('main.aeallmaterialbysku', {
-        url: '/aeallmaterialbysku',
-        templateUrl: "templates/storenearby/allmaterialbysku.html",
-        controller: "aeAllmaterialbyskuCtrl"
       });
 
     // if none of the above states are matched, use this as the fallback

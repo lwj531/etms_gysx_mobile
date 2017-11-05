@@ -74,16 +74,16 @@ angular.module('aecheckout.ctrl', [])
           function (data) {
             switch (data.info) {
               case 'PERMISSION_DENIED':
-                myApp.alert('浏览器阻止了定位操作!', '错误');
+                console.log('浏览器阻止了定位操作!', '错误');
                 break;
               case 'POSITION_UNAVAILBLE':
-                myApp.alert('无法获得当前位置!', '错误');
+                console.log('无法获得当前位置!', '错误');
                 break;
               case 'TIMEOUT':
-                myApp.alert('定位超时!', '错误');
+                console.log('定位超时!', '错误');
                 break;
               default:
-                myApp.alert('定位失败,请检查网络或系统设置!', '错误');
+                console.log('定位失败,请检查网络或系统设置!', '错误');
                 break;
             }
           });

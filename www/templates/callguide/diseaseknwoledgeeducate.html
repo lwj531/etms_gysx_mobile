@@ -49,14 +49,13 @@
         </div>
         <div class="info-classify">
           <ul>
-            <li class="info-classify-li classify-by-sku info-classify-li-active" ng-click="chooesinfobysku()">按产品</li>
-            <li class="info-classify-li classify-by-use" ng-click="chooesinfobyuse()">按用途</li>
+            <li ng-repeat="item in tabs" ng-click="SwitchTab(item)" ng-class="{'active':currTab==item}" ng-bind="item.name"></li>
           </ul>
         </div>
-        <div class="all-list all-zl-content-bysku">
+        <div class="all-list" ng-show="currTab.code=='byprod'">
           <ul>
             <!--是给别人看的，要选医师-->
-            <li class="list-item item-link" ng-click="showMaterial()">
+            <li class="list-item item-link" ui-sref="main.materialdetail">
               <div class="item-content">
                 <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
                 <div class="item-inner flex-between">
@@ -66,7 +65,7 @@
                     </div>
                     <div class="item-text">60mg*5片(盒)</div>
                   </div>
-                  <div class="align-center margin-img">
+                  <div class="align-center margin-img font-8">
                     <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
                     <span class="space-10"></span>
                     <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
@@ -77,9 +76,9 @@
             </li>
           </ul>
         </div>
-        <div class="all-list all-zl-content-byuse">
+        <div class="all-list" ng-show="currTab.code=='byuse'">
           <ul>
-            <li class="list-item item-link" ui-sref="main.materialexpand">
+            <li class="list-item item-link" ui-sref="main.materialdetail">
               <div class="item-content">
                 <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
                 <div class="item-inner flex-between">
@@ -89,7 +88,7 @@
                     </div>
                     <div class="item-text">60mg*5片(盒)</div>
                   </div>
-                  <div class="align-center margin-img">
+                  <div class="align-center margin-img font-8">
                     <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
                     <span class="space-10"></span>
                     <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
@@ -102,89 +101,6 @@
         </div>
       </div>
     </div>
-    <div class="slt-doc-tc-div ">
-      <div class="slt-doc-tc-div-head">
-        <span ng-click="closesltdoc()" class="close-slt-doc-tc-div-btn">取消</span>
-        <span class="zl-name">资料名称XXX</span>
-      </div>
-      <div>
-        <img class="zl-fm-img" src="img/zl-fm.png">
-      </div>
-      <div class="slt-doc-tc-title">
-        <span>普通教育资料-安康信 60mg*5片(盒)</span>
-      </div>
-      <div class="slt-doc-entrance">
-        <img class="slt-doc-entrance-docimg" src="img/slt-doct.png">
-        <div class="slt-doc-entrance-content">
-          <span class="xuanzeyishi">选择医师</span><br>
-          <span class="doct-list">机构内的医师列表</span>
-        </div>
-        <img class="slt-doc-entrance-content-jiantou" src="img/right-jt.png">
-      </div>
-    </div>
-    <div class="slt-sdhdx-tc-div bg-white">
-      <div class="slt-doc-tc-div-head">
-        <span ng-click="closesltdx()" class="close-slt-doc-tc-div-btn">取消</span>
-        <span class="sdhdx-name">生动化教育-对象</span>
-        <span class="done-slt-doc-tc-div-btn"><a ui-sref="main.vivideducate">确定</a></span>
-      </div>
-      <div class="slt-sdhdx-xbt">
-        <span>机构内的医师(8)</span>
-      </div>
-      <div class="sdhdx-content-sltdoc">
-        <ul class="list-block"  style="padding-left:5px;margin-top:0;">
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-          <li class="sdhdx-content-sltdoc-li">
-            <div class="sdhdx-content-sltdoc-li-imgdiv"><img class="sdhdx-content-sltdoc-li-img" src="img/slt-doct.png"/></div>
-            <div class="sdhdx-content-sltdx-div">
-              <div><span style="font-size:15px;color:black;">张惠妹</span></div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="slt-doc-blackshadow"></div>
   </ion-content>
 </ion-view>
 
