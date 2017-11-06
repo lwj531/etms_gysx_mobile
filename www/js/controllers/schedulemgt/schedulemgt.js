@@ -5,7 +5,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.staff = staff;
       $scope.staff.IsAE = staff.Roles.indexOf('AE_REP') != -1;
       $scope.staff.IsCCR = !$scope.staff.IsAE;
-      //console.log($scope.staff);
+      console.log($scope.staff);
     });
     //日程管理初始化tab 打开日视图  (dayView | weekView)
     $scope.viewActive = 'weekView';
@@ -36,44 +36,46 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     };
     //绑定已填写计划与本周数组的关系
     $scope.bindPlanList = function () {
-      $scope.getWeekPlanList(function () {
-        for (var j = 0; j < $scope.weekDays.length; j++) {
-          //如果角色是ccr的话
-          if ($scope.staff.IsCCR) {
-            //赋值路线
-            for (var k = 0; k < $scope.weekPlanList.PlanRoutelines.length; k++) {
-              if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.PlanRoutelines[k].ActivityDate).date()) {
-                $scope.weekDays[j].route = $scope.weekPlanList.PlanRoutelines[k];
+      if($scope.staff!=null){
+        $scope.getWeekPlanList(function () {
+          for (var j = 0; j < $scope.weekDays.length; j++) {
+            //如果角色是ccr的话
+            if ($scope.staff.IsCCR) {
+              //赋值路线
+              for (var k = 0; k < $scope.weekPlanList.PlanRoutelines.length; k++) {
+                if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.PlanRoutelines[k].ActivityDate).date()) {
+                  $scope.weekDays[j].route = $scope.weekPlanList.PlanRoutelines[k];
+                }
+              }
+            } else {
+              //赋值城市
+              for (var k = 0; k < $scope.weekPlanList.Citys.length; k++) {
+                if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.Citys[k].ActivityDate).date()) {
+                  $scope.weekDays[j].route = $scope.weekPlanList.Citys[k];
+                }
               }
             }
-          } else {
-            //赋值城市
-            for (var k = 0; k < $scope.weekPlanList.Citys.length; k++) {
-              if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.Citys[k].ActivityDate).date()) {
-                $scope.weekDays[j].route = $scope.weekPlanList.Citys[k];
-              }
-            }
-          }
 
-          //赋值半天事务
-          for (var k = 0; k < $scope.weekPlanList.HalfdayModels.length; k++) {
-            //上午半天事务
-            if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'AM') {
-              $scope.weekDays[j].halfDayAM = $scope.weekPlanList.HalfdayModels[k];
-              //console.log($scope.weekDays[j].halfDayAM);
-            }
-            //下午半天事务
-            if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'PM') {
-              $scope.weekDays[j].halfDayPM = $scope.weekPlanList.HalfdayModels[k];
-              //console.log($scope.weekDays[j].halfDayPM);
+            //赋值半天事务
+            for (var k = 0; k < $scope.weekPlanList.HalfdayModels.length; k++) {
+              //上午半天事务
+              if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'AM') {
+                $scope.weekDays[j].halfDayAM = $scope.weekPlanList.HalfdayModels[k];
+                //console.log($scope.weekDays[j].halfDayAM);
+              }
+              //下午半天事务
+              if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'PM') {
+                $scope.weekDays[j].halfDayPM = $scope.weekPlanList.HalfdayModels[k];
+                //console.log($scope.weekDays[j].halfDayPM);
+              }
             }
           }
-        }
-      });
+        });
+      }
     };
 
     //获取本周的日期数组
-    $scope.$watch("weekSatrtDate", function (newValue, oldValue, scope) {
+    $scope.$watch("weekSatrtDate + staff", function (newValue, oldValue, scope) {
       {
         $scope.weekDays = [];
         //获取一周计划
@@ -112,48 +114,81 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
           guidesrv.getPlanScheduleList($scope.selectedDate.format('YYYY-MM-DD')).then(function (data) {
             $scope.currentDaily = data;
             console.log(data);
-            //添加计划外的签到
-            for (var i = 0; i < $scope.currentDaily.Checkins.length; i++) {
-              var inCheckin =false;//是否在签到内的机构
-              //数组为空时
+            if($scope.staff.IsCCR){
               if($scope.currentDaily.PlanRouteline.Institutions.length==0){
                 $scope.currentDaily.PlanRouteline.Institutions =[];
-                $scope.currentDaily.PlanRouteline.Institutions.push({
-                  InstitutionID:$scope.currentDaily.Checkins[i].InstitutionID,
-                  InstitutionName:$scope.currentDaily.Checkins[i].InstitutionName,
-                  Address:$scope.currentDaily.Checkins[i].InstitutionAddress,
-                  InstitutionPriority:$scope.currentDaily.Checkins[i].InstitutionPriority,
-                  CheckModel : $scope.currentDaily.Checkins[i]
-                });
-              }else{
-                for (var j = 0; j < $scope.currentDaily.PlanRouteline.Institutions.length; j++) {
-                  if ($scope.currentDaily.PlanRouteline.Institutions[j].InstitutionID == $scope.currentDaily.Checkins[i].InstitutionID) {
-                    $scope.currentDaily.PlanRouteline.Institutions[j].CheckModel =  $scope.currentDaily.Checkins[i];
-                    inCheckin=true;
-                    $scope.TotalNumberOfPlans++;
-                    if($scope.currentDaily.Checkins[i].InOut=="OUT"){
-                      $scope.TotalNumberOfPlansHasCheckOut++;
+              }
+              //添加计划外的签到
+              for (var i = 0; i < $scope.currentDaily.Checkins.length; i++) {
+                var inCheckin =false;//是否在签到内的机构
+                //数组为空时
+                if($scope.currentDaily.PlanRouteline.Institutions.length==0){
+                  $scope.currentDaily.PlanRouteline.Institutions.push({
+                    InstitutionID:$scope.currentDaily.Checkins[i].InstitutionID,
+                    InstitutionName:$scope.currentDaily.Checkins[i].InstitutionName,
+                    Address:$scope.currentDaily.Checkins[i].InstitutionAddress,
+                    InstitutionPriority:$scope.currentDaily.Checkins[i].InstitutionPriority,
+                    CheckModel : $scope.currentDaily.Checkins[i]
+                  });
+                }else{
+                  for (var j = 0; j < $scope.currentDaily.PlanRouteline.Institutions.length; j++) {
+                    if ($scope.currentDaily.PlanRouteline.Institutions[j].InstitutionID == $scope.currentDaily.Checkins[i].InstitutionID) {
+                      $scope.currentDaily.PlanRouteline.Institutions[j].CheckModel =  $scope.currentDaily.Checkins[i];
+                      inCheckin=true;
+                      $scope.TotalNumberOfPlans++;
+                      if($scope.currentDaily.Checkins[i].InOut=="OUT"){
+                        $scope.TotalNumberOfPlansHasCheckOut++;
+                      }
+                    }
+                    if(j==$scope.currentDaily.PlanRouteline.Institutions.length-1 && inCheckin==false){
+                      $scope.currentDaily.PlanRouteline.Institutions.push({
+                        InstitutionID:$scope.currentDaily.Checkins[i].InstitutionID,
+                        InstitutionName:$scope.currentDaily.Checkins[i].InstitutionName,
+                        Address:$scope.currentDaily.Checkins[i].InstitutionAddress,
+                        InstitutionPriority:$scope.currentDaily.Checkins[i].InstitutionPriority,
+                        CheckModel : $scope.currentDaily.Checkins[i]
+                      })
                     }
                   }
-                  if(j==$scope.currentDaily.PlanRouteline.Institutions.length-1 && inCheckin==false){
-                    $scope.currentDaily.PlanRouteline.Institutions.push({
-                      InstitutionID:$scope.currentDaily.Checkins[i].InstitutionID,
-                      InstitutionName:$scope.currentDaily.Checkins[i].InstitutionName,
-                      Address:$scope.currentDaily.Checkins[i].InstitutionAddress,
-                      InstitutionPriority:$scope.currentDaily.Checkins[i].InstitutionPriority,
-                      CheckModel : $scope.currentDaily.Checkins[i]
-                    })
+                }
+              }
+            }else if($scope.staff.IsAE){
+              if($scope.currentDaily.Citys.length==0){
+                $scope.currentDaily.Citys=[{Institutions:[]}];
+              }
+              for (var i = 0; i < $scope.currentDaily.Checkins.length; i++) {
+                var inCheckin =false;//是否在签到内的机构
+                if($scope.currentDaily.Citys.length==0){
+                  $scope.currentDaily.Citys=[];
+                  $scope.currentDaily.Citys[0].Institutions=[];
+                  $scope.currentDaily.Citys[0].Institutions.push({
+                    InstitutionID:$scope.currentDaily.Checkins[i].InstitutionID,
+                    InstitutionName:$scope.currentDaily.Checkins[i].InstitutionName,
+                    Address:$scope.currentDaily.Checkins[i].InstitutionAddress,
+                    InstitutionPriority:$scope.currentDaily.Checkins[i].InstitutionPriority,
+                    CheckModel : $scope.currentDaily.Checkins[i]
+                  })
+                }
+                for(var j=0;j<$scope.currentDaily.Citys.length;j++){
+                  for (var k=0;k<$scope.currentDaily.Citys[j].Institutions.length;k++){
+                    if ($scope.currentDaily.Citys[j].Institutions[k].InstitutionID == $scope.currentDaily.Checkins[i].InstitutionID) {
+                      $scope.currentDaily.Citys[j].Institutions[k].CheckModel =  $scope.currentDaily.Checkins[i];
+                      inCheckin=true;
+                    };
+                    //遍历结束
+                    if(k==$scope.currentDaily.Citys[j].Institutions.length-1 && inCheckin==false){
+                      $scope.currentDaily.Citys[j].Institutions.push({
+                        InstitutionID:$scope.currentDaily.Checkins[i].InstitutionID,
+                        InstitutionName:$scope.currentDaily.Checkins[i].InstitutionName,
+                        Address:$scope.currentDaily.Checkins[i].InstitutionAddress,
+                        InstitutionPriority:$scope.currentDaily.Checkins[i].InstitutionPriority,
+                        CheckModel : $scope.currentDaily.Checkins[i]
+                      })
+                    }
                   }
                 }
               }
             }
-            /*for (var i = 0; i < $scope.currentDaily.Checkins.length; i++) {
-              for (var j = 0; j < $scope.currentDaily.PlanRouteline.Institutions.length; j++) {
-                if ($scope.currentDaily.PlanRouteline.Institutions[j].InstitutionID == $scope.currentDaily.Checkins[i].InstitutionID) {
-                  $scope.currentDaily.PlanRouteline.Institutions[j].CheckModel =  $scope.currentDaily.Checkins[i];
-                }
-              }
-            }*/
           });
         }
       }
@@ -314,7 +349,9 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.childListShow = false;
     };
     //计划弹框
-    $scope.showPlanPopup = function () {
+    $scope.showPlanPopup = function (date) {
+      console.log(date);
+      $scope.selectedDate = date;//选中的日期
       $scope.getHeadQuarters(function () {
         $scope.getCheckList(function () {
           $scope.planModal = $ionicPopup.show({
@@ -387,6 +424,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
             dailysrv.savePlanKaInstitution($scope.selectedDate.format('YYYY-MM-DD'), headQuarterModels).then(function () {
               $scope.closePlanList();
               $scope.toast("保存成功");
+              $scope.bindPlanList();
             });
           } else {
             $scope.toast("请选择连锁总部");
