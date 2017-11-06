@@ -20,7 +20,7 @@
   <!--日视图时显示周日历-->
   <div class="bar bar-subheader bar-stable week-slide" ng-show="viewActive=='dayView'">
     <ul class="flex-row week-title">
-      <li  ng-repeat="date in weekDays" ng-bind="date | amDateFormat:'dd'">日</li>
+      <li ng-repeat="date in weekDays" ng-bind="date | amDateFormat:'dd'">日</li>
     </ul>
     <!--左右滑动切周-->
     <ul class="flex-row week-day" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
@@ -60,7 +60,7 @@
           <div class="item-content">
             <div class="item-media"><img src="img/calendar_active_44.png" width="24"></div>
             <div class="item-inner">
-              <div class="item-title color-blue">2017/03/03</div>
+              <div class="item-title color-blue" ng-bind="selectedDate | amDateFormat:'YYYY/MM/DD'"></div>
               <div class="item-after" ng-show="staff.IsCCR">
                 <a class="button button-clear button-stable button-small flex-center" ng-click="dayInfoTab='list'"
                    ng-class="{'selected':dayInfoTab=='list'}"><span class="uicon list-view"></span></a>
@@ -74,22 +74,26 @@
         <!--当角色为CCR时显示-->
         <div class="crl-tabs" ng-if="staff.IsCCR">
           <!--日视图里的列表-->
-          <div class="crl-tab height-100" ng-show="dayInfoTab=='list'">
+          <div class="crl-tab height-100" ng-show="dayInfoTab=='list'&& currentDaily.PlanRouteline.Institutions.length>0">
             <div class="bg-white home-schedule height-100">
               <div class="list-item multi-line no-line">
                 <div class="item-content">
                   <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
                   <div class="item-inner">
                     <div class="item-title-row">
-                      <div class="item-title">路线名称11</div>
+                      <div class="item-title">
+                        {{currentDaily.PlanRouteline.LineName==null?'无':currentDaily.PlanRouteline.LineName}}
+                      </div>
                     </div>
                     <div class="item-title-row">
                       <div class="item-title" style="width: 100%;">
                         <div class="progress-track">
-                          <div class="progress" ng-style="progress"></div>
+                          <div class="progress"
+                               ng-style="{width:(TotalNumberOfPlans==0?('0%'):(TotalNumberOfPlansHasCheckOut/ TotalNumberOfPlans).toFixed(2)*100 + '%')}"></div>
                         </div>
                       </div>
-                      <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;{{progressNum}}</div>
+                      <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;{{TotalNumberOfPlans==0?('0%'):(TotalNumberOfPlansHasCheckOut/ TotalNumberOfPlans).toFixed(2)*100 + '%'}}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -99,17 +103,23 @@
                 <!--schedule-called :	实心绿色圈：已实际拜访的计划内机构-->
                 <!--schedule-calledout : 实心橙色圈：已实际拜访的计划外机构-->
                 <!--schedule-plan : 空心蓝色圈：未拜访的计划内机构-->
-                <li class="list-item multi-line schedule-called">
+                <li class="list-item multi-line"
+                    ng-class="{'schedule-called':(item.CheckModel!=null&& item.CheckModel.IsPlan),'schedule-calledout':(item.CheckModel!=null&& item.CheckModel.IsPlan==false),'schedule-plan':item.CheckModel==null}"
+                    ng-repeat="item in currentDaily.PlanRouteline.Institutions">
                   <div class="item-content align-top">
                     <div class="item-media"><span class="list-dot"></span></div>
                     <div class="item-inner">
                       <div class="item-title-row">
-                        <div class="item-title">北京xxxxx分部(A)</div>
+                        <div class="item-title">{{item.InstitutionName}}({{item.InstitutionPriority}})</div>
                       </div>
-                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="item-text">{{item.Address}}</div>
                       <div class="flex-row align-end">
-                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
-                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                        <div class="col-33 color-green"><span
+                          ng-if="item.CheckModel!=null && item.CheckModel.InOut=='IN'">签入<span
+                          ng-bind="item.CheckModel.CheckinTime | amDateFormat:'H:mm:ss'"></span></span></div>
+                        <div class="col-33 color-green"><span
+                          ng-if="item.CheckModel!=null && item.CheckModel.InOut=='OUT'">签出<span
+                          ng-bind="item.CheckModel.CheckinTime | amDateFormat:'H:mm:ss'"></span></span></div>
                         <!--跳到拜访向导模块/拜访概览-->
                         <div class="col-33 flex-end">
                           <a
@@ -119,84 +129,84 @@
                     </div>
                   </div>
                 </li>
-                <li class="list-item multi-line schedule-plan">
-                  <div class="item-content align-top">
-                    <div class="item-media"><span class="list-dot"></span></div>
-                    <div class="item-inner">
-                      <div class="item-title-row">
-                        <div class="item-title">北京xxxxx分部(A)</div>
-                      </div>
-                      <div class="flex-row align-end">
-                        <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
-                        <!--跳到拜访向导模块/签到页面-->
-                        <div class="col-33 flex-end">
-                          <a
-                            class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
-                            src="img/entrance_blue_30.png" width="18">拜访</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-item multi-line schedule-calledout">
-                  <div class="item-content align-top">
-                    <div class="item-media"><span class="list-dot"></span></div>
-                    <div class="item-inner">
-                      <div class="item-title-row">
-                        <div class="item-title">北京xxxxx分部(A)</div>
-                      </div>
-                      <div class="item-text">北京市朝阳区xxxx院</div>
-                      <div class="flex-row align-end">
-                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
-                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
-                        <!--跳到拜访向导模块/拜访概览-->
-                        <div class="col-33 flex-end">
-                          <a
-                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
-                            src="img/search_gray_30.png" width="18">查看</a></div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-item multi-line schedule-called">
-                  <div class="item-content align-top">
-                    <div class="item-media"><span class="list-dot"></span></div>
-                    <div class="item-inner">
-                      <div class="item-title-row">
-                        <div class="item-title">北京xxxxx分部(A)</div>
-                      </div>
-                      <div class="item-text">北京市朝阳区xxxx院</div>
-                      <div class="flex-row align-end">
-                        <div class="col-33 color-green">签入&nbsp;10:21:21</div>
-                        <div class="col-33 color-green">签出&nbsp;10:21:21</div>
-                        <!--跳到拜访向导模块/拜访概览-->
-                        <div class="col-33 flex-end">
-                          <a
-                            class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
-                            src="img/search_gray_30.png" width="18">查看</a></div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-item multi-line schedule-plan">
-                  <div class="item-content align-top">
-                    <div class="item-media"><span class="list-dot"></span></div>
-                    <div class="item-inner">
-                      <div class="item-title-row">
-                        <div class="item-title">北京xxxxx分部(A)</div>
-                      </div>
-                      <div class="flex-row align-end">
-                        <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
-                        <!--跳到拜访向导模块/签到页面-->
-                        <div class="col-33 flex-end">
-                          <a
-                            class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
-                            src="img/entrance_blue_30.png" width="18">拜访</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                <!-- <li class="list-item multi-line schedule-plan">
+                   <div class="item-content align-top">
+                     <div class="item-media"><span class="list-dot"></span></div>
+                     <div class="item-inner">
+                       <div class="item-title-row">
+                         <div class="item-title">北京xxxxx分部(A)</div>
+                       </div>
+                       <div class="flex-row align-end">
+                         <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
+                         &lt;!&ndash;跳到拜访向导模块/签到页面&ndash;&gt;
+                         <div class="col-33 flex-end">
+                           <a
+                             class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
+                             src="img/entrance_blue_30.png" width="18">拜访</a>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </li>
+                 <li class="list-item multi-line schedule-calledout">
+                   <div class="item-content align-top">
+                     <div class="item-media"><span class="list-dot"></span></div>
+                     <div class="item-inner">
+                       <div class="item-title-row">
+                         <div class="item-title">北京xxxxx分部(A)</div>
+                       </div>
+                       <div class="item-text">北京市朝阳区xxxx院</div>
+                       <div class="flex-row align-end">
+                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                         &lt;!&ndash;跳到拜访向导模块/拜访概览&ndash;&gt;
+                         <div class="col-33 flex-end">
+                           <a
+                             class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                             src="img/search_gray_30.png" width="18">查看</a></div>
+                       </div>
+                     </div>
+                   </div>
+                 </li>
+                 <li class="list-item multi-line schedule-called">
+                   <div class="item-content align-top">
+                     <div class="item-media"><span class="list-dot"></span></div>
+                     <div class="item-inner">
+                       <div class="item-title-row">
+                         <div class="item-title">北京xxxxx分部(A)</div>
+                       </div>
+                       <div class="item-text">北京市朝阳区xxxx院</div>
+                       <div class="flex-row align-end">
+                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
+                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
+                         &lt;!&ndash;跳到拜访向导模块/拜访概览&ndash;&gt;
+                         <div class="col-33 flex-end">
+                           <a
+                             class="button button-clear button-stable button-small flex-center icon-button margin-img"><img
+                             src="img/search_gray_30.png" width="18">查看</a></div>
+                       </div>
+                     </div>
+                   </div>
+                 </li>
+                 <li class="list-item multi-line schedule-plan">
+                   <div class="item-content align-top">
+                     <div class="item-media"><span class="list-dot"></span></div>
+                     <div class="item-inner">
+                       <div class="item-title-row">
+                         <div class="item-title">北京xxxxx分部(A)</div>
+                       </div>
+                       <div class="flex-row align-end">
+                         <div class="col-66 color-gray">北京市朝阳区xxxx院</div>
+                         &lt;!&ndash;跳到拜访向导模块/签到页面&ndash;&gt;
+                         <div class="col-33 flex-end">
+                           <a
+                             class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img
+                             src="img/entrance_blue_30.png" width="18">拜访</a>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </li>-->
               </ul>
             </div>
           </div>
@@ -222,7 +232,7 @@
           </div>
         </div>
         <!--当角色为AE时显示-->
-        <div class="crl-tabs" ng-show="staff.IsAE">
+        <div class="crl-tabs" ng-if="staff.IsAE">
           <!--日视图里的列表-->
           <div class="crl-tab height-100">
             <div class="bg-white home-schedule height-100">
@@ -231,20 +241,20 @@
                   <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
                   <div class="item-inner">
                     <div class="item-title-row">
-                      <div class="item-title">城市名称11</div>
+                      <div class="item-title">{{currentDaily.City.Name}}</div>
                     </div>
                   </div>
                 </div>
               </div>
               <ul>
-                <li class="list-item multi-line schedule-called">
+                <li class="list-item multi-line schedule-called" ng-repeat="item in currentDaily.City.Institutions">
                   <div class="item-content align-top">
                     <div class="item-media"><span class="list-dot"></span></div>
                     <div class="item-inner">
                       <div class="item-title-row">
-                        <div class="item-title">北京xxxxx分部(A)</div>
+                        <div class="item-title">{{item.InstitutionName}}({{item.InstitutionPriority}})</div>
                       </div>
-                      <div class="item-text">北京市朝阳区xxxx院</div>
+                      <div class="item-text">{{item.Address}}</div>
                       <div class="flex-row align-end">
                         <div class="col-33 color-green">签入&nbsp;10:21:21</div>
                         <div class="col-33 color-green">签出&nbsp;10:21:21</div>
@@ -256,7 +266,7 @@
                     </div>
                   </div>
                 </li>
-                <li class="list-item multi-line schedule-calledout">
+                <!--<li class="list-item multi-line schedule-calledout">
                   <div class="item-content align-top">
                     <div class="item-media"><span class="list-dot"></span></div>
                     <div class="item-inner">
@@ -329,7 +339,7 @@
                       </div>
                     </div>
                   </div>
-                </li>
+                </li>-->
               </ul>
             </div>
           </div>
@@ -343,7 +353,9 @@
         <!--角色为CCR 时显示下面列表-->
         <ul class="schedule-week-list" ng-if="staff.IsCCR">
           <li ng-repeat="date in actualWeekDays">
-            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
+            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
+              ng-bind="date | amDateFormat: 'DD/MM'"></span>)
+            </div>
             <div class="schedule-week-row">
               <!--点击出弹框看线路列表-->
               <div class="col-40">
@@ -367,7 +379,7 @@
               </div>
               <div class="col-33 flex-center">
                 <div ng-show="date.route!=null">
-                  <div class="">首次签入 </div>
+                  <div class="">首次签入</div>
                   <div class="">末次签出 {{date.route.CheckinTimes}}</div>
                 </div>
                 <div ng-show="date.route==null" class="placeholder-div">
@@ -463,7 +475,9 @@
         <!--角色为CCR 时显示下面列表-->
         <ul class="schedule-week-list" ng-if="staff.IsCCR">
           <li ng-repeat="date in weekDays">
-            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
+            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
+              ng-bind="date | amDateFormat: 'MM/DD'"></span>)
+            </div>
             <div class="schedule-week-row" ng-show="date.route!=null">
               <div class="col-73" ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
@@ -487,22 +501,25 @@
               </div>
               <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
                 <div class="width-100">
-                  <div class="flex-between" ng-class="{'affair-gray':date.halfDayAM==null,'affair-blue':date.halfDayAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayAM.GroupCode=='INTERNAL','affair-red':date.halfDayAM.GroupCode=='PERSONAL'}">
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayAM==null,'affair-blue':date.halfDayAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayAM.GroupCode=='INTERNAL','affair-red':date.halfDayAM.GroupCode=='PERSONAL'}">
                     <div>{{date.halfDayAM == null?'无半天事务':date.halfDayAM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
-                  <div class="flex-between" ng-class="{'affair-gray':date.halfDayPM==null,'affair-blue':date.halfDayPM.GroupCode=='EXTERNAL','affair-orange':date.halfDayPM.GroupCode=='INTERNAL','affair-red':date.halfDayPM.GroupCode=='PERSONAL'}">
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayPM==null,'affair-blue':date.halfDayPM.GroupCode=='EXTERNAL','affair-orange':date.halfDayPM.GroupCode=='INTERNAL','affair-red':date.halfDayPM.GroupCode=='PERSONAL'}">
                     <div>{{date.halfDayPM == null?'无半天事务':date.halfDayPM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="schedule-week-row" >
+            <div class="schedule-week-row">
               <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showHalfFooter('route',date )">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-27 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null" ng-click="showHalfFooter('morning',date)">
+              <div class="col-27 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null"
+                   ng-click="showHalfFooter('morning',date)">
                 <img src="img/add_gray_64.png" width="36">
               </div>
             </div>
@@ -510,60 +527,38 @@
         </ul>
         <!--角色为AE时显示下面列表-->
         <ul class="schedule-week-list" ng-if="staff.IsAE">
-          <li>
-            <div class="content-block-title">周一(10/22)</div>
-            <div class="schedule-week-row">
+          <li ng-repeat="date in weekDays">
+            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
+              ng-bind="date | amDateFormat: 'MM/DD'"></span>)
+            </div>
+            <div class="schedule-week-row" ng-show="date.route!=null">
               <div class="col-73" ng-click="showPlanPopup()">
                 <div class="flex-start width-100 margin-img">
                   <img src="img/route_green_44.png" width="18">
-                  <div class="align-center">城市名称(9)</div>
+                  <div class="align-center">{{date.route.Name}}({{date.route.Institutions.length}})</div>
                 </div>
-              </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
-                <div class="width-100">
-                  <div class="flex-between affair-gray">
-                    <div>无半天事务</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                  <div class="flex-between affair-orange">
-                    <div>年假</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="content-block-title">周一(10/22)</div>
-            <div class="schedule-week-row">
-              <div class="col-73" ng-click="showPlanPopup()">
-                <div class="flex-start width-100 margin-img">
-                  <img src="img/route_green_44.png" width="18">
-                  <div class="align-center">城市名称(9)</div>
-                </div>
-              </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
-                <div class="width-100">
-                  <div class="flex-between affair-red">
-                    <div>不可抗不可抗不可抗</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                  <div class="flex-between affair-blue">
-                    <div>年假</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!--为空显示添加图标-->
-          <li>
-            <div class="content-block-title">周三(10/22)</div>
-            <div class="schedule-week-row">
-              <div class="col-73 flex-center" ng-click="showPlanPopup()">
-                <img src="img/add_gray_64.png" width="36">
               </div>
               <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
+                <div class="width-100">
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayAM==null,'affair-blue':date.halfDayAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayAM.GroupCode=='INTERNAL','affair-red':date.halfDayAM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayAM == null?'无半天事务':date.halfDayAM.HalfdayTypeName}}</div>
+                    <div class="affair-dot"></div>
+                  </div>
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayPM==null,'affair-blue':date.halfDayPM.GroupCode=='EXTERNAL','affair-orange':date.halfDayPM.GroupCode=='INTERNAL','affair-red':date.halfDayPM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayPM == null?'无半天事务':date.halfDayPM.HalfdayTypeName}}</div>
+                    <div class="affair-dot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="schedule-week-row">
+              <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showPlanPopup()">
+                <img src="img/add_gray_64.png" width="36">
+              </div>
+              <div class="col-27 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null"
+                   ng-click="showHalfFooter('morning',date)">
                 <img src="img/add_gray_64.png" width="36">
               </div>
             </div>
@@ -618,15 +613,18 @@
       </ul>
       <!--半天事务列表：上午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
-        <li  ng-repeat="item in halfdayTypeList">
-          <span ng-bind="item.TypeName"></span>
+        <li ng-repeat="item in halfdayTypeList">
+          <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
-            <li class="list-item" ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='AM')}" ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('AM',type)">
+            <li class="list-item"
+                ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='AM')}"
+                ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('AM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
                 <div class="item-media"><span class="uicon radio-button"></span></div>
                 <div class="item-inner">
-                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}</div>
+                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}
+                  </div>
                 </div>
               </div>
             </li>
@@ -635,15 +633,18 @@
       </ul>
       <!--半天事务列表：下午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='afternoon'">
-        <li  ng-repeat="item in halfdayTypeList">
-          <span ng-bind="item.TypeName"></span>
+        <li ng-repeat="item in halfdayTypeList">
+          <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
-            <li class="list-item" ng-class="{'checked':(type.TypeID==selectedHalfType.type.TypeID && selectedHalfType.ampm=='PM')}" ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
+            <li class="list-item"
+                ng-class="{'checked':(type.TypeID==selectedHalfType.type.TypeID && selectedHalfType.ampm=='PM')}"
+                ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
                 <div class="item-media"><span class="uicon radio-button"></span></div>
                 <div class="item-inner">
-                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.TypeName}}</div>
+                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}
+                  </div>
                 </div>
               </div>
             </li>
@@ -674,39 +675,6 @@
           </ul>
         </div>
       </div>
-      <!--半天事务列表：上午，单选-->
-      <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
-        <li class="list-item checked">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media"><span class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务shang</div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <!--半天事务列表：下午，单选-->
-      <ul class="schedule-bottom-list" ng-show="footerTab=='afternoon'">
-        <li class="list-item checked">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media"><span class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
-            </div>
-          </div>
-        </li>
-        <li class="list-item">
-          <div class="item-content">
-            <!--点击选中，在选中的li的item-media上添加checked-->
-            <div class="item-media"><span class="uicon radio-button"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">半天事务xia</div>
-            </div>
-          </div>
-        </li>
-      </ul>
     </div>
   </div>
   <!--计划的FAB-->
