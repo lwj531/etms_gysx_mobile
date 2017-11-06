@@ -78,7 +78,7 @@
             <div class="bg-white home-schedule height-100">
               <div class="list-item multi-line no-line">
                 <div class="item-content">
-                  <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
+                  <div class="item-media"><img src="img/route_green_44.png" width="24"></div>
                   <div class="item-inner">
                     <div class="item-title-row">
                       <div class="item-title">
@@ -236,12 +236,15 @@
           <!--日视图里的列表-->
           <div class="crl-tab height-100">
             <div class="bg-white home-schedule height-100">
-              <div class="list-item no-line">
+              <div class="width-100 flex-center color-darkgray" ng-show="currentDaily.Citys.length==0">
+                暂无数据
+              </div>
+              <div class="list-item no-line" ng-show="currentDaily.Citys.length>0">
                 <div class="item-content">
-                  <div class="item-media"><img src="img/route_green_44.png" width="28"></div>
+                  <div class="item-media"><img src="img/route_green_44.png" width="24"></div>
                   <div class="item-inner">
                     <div class="item-title-row">
-                      <div class="item-title" ng-repeat="city in currentDaily.Citys"><span>{{city.Name}}</span></div>
+                      <div class="item-title" ng-repeat="city in currentDaily.Citys"><span>{{city.Name}}</span>{{currentDaily.Citys.length}}</div>
                     </div>
                   </div>
                 </div>
@@ -416,8 +419,8 @@
             <div class="content-block-title">周一(10/22)</div>
             <div class="schedule-week-row">
               <div class="col-40" ng-click="showActualAE()" ng-show="date.route!=null">
-                <div class="flex-start">
-                  <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
+                <div class="flex-start margin-img">
+                  <img src="img/route_green_44.png" width="18">
                   <div class="">AE实际(9)</div>
                 </div>
               </div>
@@ -451,8 +454,8 @@
             <div class="content-block-title">周二(10/23)</div>
             <div class="schedule-week-row">
               <div class="col-40" ng-click="showActualAE()">
-                <div class="flex-start">
-                  <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
+                <div class="flex-start margin-img">
+                  <img src="img/route_green_44.png" width="18">
                   <div class="">城市名称啊(9)</div>
                 </div>
               </div>
@@ -486,8 +489,11 @@
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
               ng-bind="date | amDateFormat: 'MM/DD'"></span>)
             </div>
-            <div class="schedule-week-row" ng-show="date.route!=null">
-              <div class="col-73" ng-click="showHalfFooter('route',date)">
+            <div class="schedule-week-row">
+              <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showHalfFooter('route',date )">
+                <img src="img/add_gray_64.png" width="36">
+              </div>
+              <div class="col-73" ng-show="date.route!=null" ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
                     <img src="img/route_green_44.png" width="18">
@@ -508,7 +514,10 @@
                 </div>
               </div>
               <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
-                <div class="width-100">
+                <div class="width-100 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null">
+                  <img src="img/add_gray_64.png" width="36">
+                </div>
+                <div class="width-100" ng-show="date.halfDayPM!=null || date.halfDayAM!=null">
                   <div class="flex-between"
                        ng-class="{'affair-gray':date.halfDayAM==null,'affair-blue':date.halfDayAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayAM.GroupCode=='INTERNAL','affair-red':date.halfDayAM.GroupCode=='PERSONAL'}">
                     <div>{{date.halfDayAM == null?'无半天事务':date.halfDayAM.HalfdayTypeName}}</div>
@@ -520,15 +529,6 @@
                     <div class="affair-dot"></div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="schedule-week-row">
-              <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showHalfFooter('route',date )">
-                <img src="img/add_gray_64.png" width="36">
-              </div>
-              <div class="col-27 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null"
-                   ng-click="showHalfFooter('morning',date)">
-                <img src="img/add_gray_64.png" width="36">
               </div>
             </div>
           </li>
@@ -539,15 +539,18 @@
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
               ng-bind="date | amDateFormat: 'MM/DD'"></span>)
             </div>
-            <div class="schedule-week-row" ng-show="date.route!=null">
+            <div class="schedule-week-row">
               <div class="col-73" ng-click="showPlanPopup(date)">
-                <div class="flex-start width-100 margin-img">
+                <div class="flex-start width-100 margin-img" ng-show="date.route!=null">
                   <img src="img/route_green_44.png" width="18">
                   <div class="align-center">{{date.route.Name}}({{date.route.Institutions.length}})</div>
                 </div>
+                <div class="width-100 flex-center" ng-show="date.route==null">
+                  <img src="img/add_gray_64.png" width="36">
+                </div>
               </div>
               <div class="col-27 flex-center" ng-click="showHalfFooter('morning',date)">
-                <div class="width-100">
+                <div class="width-100" ng-show="date.halfDayPM!=null || date.halfDayAM!=null">
                   <div class="flex-between"
                        ng-class="{'affair-gray':date.halfDayAM==null,'affair-blue':date.halfDayAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayAM.GroupCode=='INTERNAL','affair-red':date.halfDayAM.GroupCode=='PERSONAL'}">
                     <div>{{date.halfDayAM == null?'无半天事务':date.halfDayAM.HalfdayTypeName}}</div>
@@ -559,15 +562,9 @@
                     <div class="affair-dot"></div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="schedule-week-row">
-              <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showPlanPopup(date)">
-                <img src="img/add_gray_64.png" width="36">
-              </div>
-              <div class="col-27 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null"
-                   ng-click="showHalfFooter('morning',date)">
-                <img src="img/add_gray_64.png" width="36">
+                <div class="width-100 flex-center" ng-show="date.halfDayPM==null && date.halfDayAM==null">
+                  <img src="img/add_gray_64.png" width="36">
+                </div>
               </div>
             </div>
           </li>
@@ -631,7 +628,7 @@
                 <!--点击选中，在选中的li的item-media上添加checked-->
                 <div class="item-media"><span class="uicon radio-button"></span></div>
                 <div class="item-inner">
-                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}
+                  <div class="item-title align-center ellipsis">{{type.HalfdayTypeName}}
                   </div>
                 </div>
               </div>
@@ -645,13 +642,13 @@
           <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
-                ng-class="{'checked':(type.TypeID==selectedHalfType.type.TypeID && selectedHalfType.ampm=='PM')}"
+                ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='PM')}"
                 ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
                 <div class="item-media"><span class="uicon radio-button"></span></div>
                 <div class="item-inner">
-                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}
+                  <div class="item-title align-center ellipsis">{{type.HalfdayTypeName}}
                   </div>
                 </div>
               </div>

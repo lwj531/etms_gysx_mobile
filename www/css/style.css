@@ -1944,7 +1944,8 @@ input[type="text"].route-name-input.wide {
 .button-group .group-button {
   width: 50%;
   height: 29px;
-  line-height: 30px;
+  min-height: 27px;
+  line-height: 26px;
   border-left: none;
   border-top-color: #fff;
   border-bottom-color: #fff;
@@ -2147,7 +2148,7 @@ ul.schedule-week-list {
 }
 
 .schedule-week-row {
-  /*font-size: 0.8em*/
+  font-size: 0.8em;
 }
 
 .schedule-week-row .col-33 {
@@ -2372,16 +2373,19 @@ ul.schedule-week-list {
   position: relative;
   top: 53px;
   height: calc(100% - 63px);
+  font-size: 0.8em;
 }
 
 .learning-index .button-group .button.group-button,
 .schedule-btg .button-group .button.group-button {
   /*font-size: 0.8em*/
-  min-height: 30px;
-  height: 30px;
+  min-height: 29px;
+  height: 29px;
   background-color: #fff;
   color: #4190e7;
   border-color: #419de7;
+  border-top: 1px solid #419de7;
+  border-bottom: 1px solid #419de7;
 }
 
 .schedule-btg .button-group .button.group-button.selected {
