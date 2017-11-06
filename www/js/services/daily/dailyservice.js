@@ -2,7 +2,6 @@ angular.module("daily.srv", ["http.srv"])
   .service("dailysrv", ["httpsrv", function (httpsrv) {
     //保存计划
     this.savePlan = function (model) {
-      //test
       return httpsrv.service("/api/Daily/SaveActivityRouteline", model, "post");
     };
     //获取一周的计划
@@ -28,6 +27,10 @@ angular.module("daily.srv", ["http.srv"])
     //保存AE计划
     this.savePlanKaInstitution = function (activityDate,model) {
       return httpsrv.service("/api/Daily/SavePlanKaInstitution/"+ activityDate, model, "post");
+    };
+    //获取AE日计划详细
+    this.getAEPlan = function (activityDate) {
+      return httpsrv.service("/api/Daily/GetKaInstitutionModels/"+ activityDate, "get");
     };
   }
   ]);

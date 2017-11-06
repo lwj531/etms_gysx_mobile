@@ -5,7 +5,10 @@ angular.module("guide.srv", ["http.srv"])
     this.getTodayScheduleList = function (activityDate) {
       return httpsrv.service("/api/Daily/GetCheckinInstitutions/" + activityDate , {}, "get");
     };
-
+    //获取AE日计划行程
+    this.getAEDailyPlan = function (activityDate) {
+      return httpsrv.service("/api/Daily/GetKaInstitutionModels/" + activityDate , {}, "get");
+    };
     //获取已计划行程
     this.getPlanScheduleList = function (activityDate) {
       return httpsrv.service("/api/Daily/GetDailyPlan/" + activityDate , {}, "get");
