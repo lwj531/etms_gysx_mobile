@@ -539,10 +539,10 @@ ul {
 .list-item .item-text {
   color: #b5b5b5;
   position: relative;
-  min-height: 17px;
+  min-height: 1.2em;
   -webkit-box-orient: vertical;
   display: -webkit-box;
-  line-height: 15px;
+  line-height: 1.2em;
   /*margin-top: 2px;*/
   white-space: normal;
   font-size: 0.8em;
@@ -567,12 +567,12 @@ ul {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  padding-top: 7px;
+  padding-top: 10px;
   padding-bottom: 8px;
 }
 
 .list-item.multi-line .item-media {
-  padding-top: 9px;
+  padding-top: 8px;
   padding-bottom: 10px;
 }
 
@@ -581,7 +581,7 @@ ul {
 }
 
 .list-item.multi-line .align-top .item-media {
-  padding-top: 13px;
+  padding-top: 8px;
 }
 
 .stick-highlight {
@@ -2655,6 +2655,9 @@ ion-delete-button.button-icon.icon:before {
 .font-12 {
   font-size: 0.8em !important;
 }
+.font-9 {
+  font-size: 0.9em !important;
+}
 .font-8 {
   font-size: 0.8em !important;
 }
@@ -2892,6 +2895,7 @@ ion-delete-button.button-icon.icon:before {
   float: left;
   padding: 5px;
   width: 25%;
+  position: relative;
 }
 .tiled-block .width-25 img{
   width: 70px;
@@ -3752,7 +3756,7 @@ input[type=month] {
 
 .call-guide + .footer-block ul,
 .coaching-call + .footer-block ul {
-  height: calc(100% - 40px);
+  height: calc(100% - 60px);
   overflow: auto;
   background-color: #fff;
 }
@@ -4078,7 +4082,7 @@ input[type=month] {
 }
 .dragup-ul [class*=uicon-marker]{
   width: 24px;
-  background-size: 23px;
+  background-size: 22px;
 }
 /*.callguide-searchstorediv{*/
   /*position:absolute;*/
@@ -5398,7 +5402,7 @@ input[type=date].deadline-input{
   top: 0;
 }
 .call-overview{
-  height: calc(100% - 99px);
+  height: calc(100% - 86px);
   overflow: auto;
 }
 .home-schedule.todo-list li[class*=schedule-]:first-child .item-media + .item-inner:before {
@@ -5409,7 +5413,7 @@ height: 28px;
   line-height: 28px;
   min-height: 28px;
   border-radius: 19px;
-  /*font-size: 0.8em*/
+  font-size: 0.8em;
   background: #fffbf7;
   padding: 0 30px;
 }
@@ -5446,4 +5450,10 @@ height: 28px;
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2013%2010'%3E%3Cpolygon%20fill%3D'%23419de7'%20points%3D'11.6%2C0%204.4%2C7.2%201.4%2C4.2%200%2C5.6%204.4%2C10%204.4%2C10%204.4%2C10%2013%2C1.4%20'%2F%3E%3C%2Fsvg%3E");
 background-position: right 20px center;
   color: #419DE7;
+}
+.upload-img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  opacity: 0;
 }

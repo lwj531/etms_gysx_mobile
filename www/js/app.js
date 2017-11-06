@@ -228,7 +228,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //(拜访)签入
       .state('main.checkin', {
-          url: '/checkin',
+          url: '/checkin/:insId',
           templateUrl: "templates/callguide/checkin.html",
           controller: "CheckinCtrl"
         })
@@ -288,7 +288,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //(拜访)签出
       .state('main.checkout', {
-        url: '/checkout',
+        url: '/checkout/:insId',
         templateUrl: "templates/callguide/checkout.html",
         controller: "CheckoutCtrl"
       })

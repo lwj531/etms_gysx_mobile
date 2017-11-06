@@ -1,18 +1,92 @@
-angular.module('checkin.ctrl', [])
+angular.module('checkin.ctrl', ['guide.srv','client.srv'])
 
-  .controller('CheckinCtrl', function($scope,$compile) {
-    $scope.local={
-      longitude:0,
-      latitude:0
+  .controller('CheckinCtrl', function ($scope, $compile, $stateParams, guidesrv,clientsrv) {
+    $scope.local = {
+      longitude: 0,
+      latitude: 0
     };
+
+    $scope.insID = $stateParams.insId;
+    clientsrv.getins($stateParams.insId).then(function (data) {
+      $scope.currentIns = data;
+
+      console.log($scope.currentIns.InstitutionName + $scope.currentIns.InstitutionPriority + $scope.currentIns.Address);
+      //机构左侧图标
+      switch ($scope.currentIns.InstitutionPriority) {
+        case "A":
+          $scope.inslevelflag = "uicon-markerA";
+          break;
+        case "B":
+          $scope.inslevelflag = "uicon-markerB";
+          break;
+        case "C":
+          $scope.inslevelflag = "uicon-markerC";
+          break;
+        default:
+          $scope.inslevelflag = "uicon-markerA";
+      }
+
+    });
+
+
+
+    $scope.checkinGPS = function () {
+      //判断required是否有
+      var model ={
+        "InstitutionID": $scope.insID,
+        "InstitutionName": $scope.currentIns.InstitutionName,
+        "Priority": $scope.currentIns.InstitutionPriority,
+        "CheckinType": "G",
+        "InOut": "IN",
+        "InstitutionLocation": {
+          "Lng": $scope.currentIns.InstitutionLng,
+          "Lat": $scope.currentIns.InstitutionLat
+        },
+        "CheckinLocation": {
+          "Lng": 116.40,
+          "Lat": 39.91
+        }
+        // "PhotosList": [
+        //   "sample string 1",
+        //   "sample string 2"
+        // ]
+      };
+      $scope.save(model);
+    };
+    $scope.checkinManual = function () {
+      //判断required是否有
+      var model ={
+        "InstitutionID": $scope.insID,
+        "InstitutionName": $scope.currentIns.InstitutionName,
+        "Priority": $scope.currentIns.InstitutionPriority,
+        "CheckinType": "M",
+        "InOut": "IN",
+        "InstitutionLocation": {
+          "Lng": $scope.currentIns.InstitutionLng,
+          "Lat": $scope.currentIns.InstitutionLat
+        },
+        "CheckinLocation": {
+          "Lng": 116.40,
+          "Lat": 39.91
+        }
+      };
+      $scope.save(model);
+    };
+    $scope.save=function (model) {
+
+      guidesrv.saveCheckin(model).then(function () {
+        $scope.popup("操作成功");
+      });
+    };
+
     //定位地图
     var map = new AMap.Map("checkinmapcontainer",
       {
-        view:new AMap.View2D({
+        view: new AMap.View2D({
           resizeEnable: true,
           zoom: 15
         }),
-        lang:"zh_cn"
+        lang: "zh_cn"
       });
     map.plugin(["AMap.Geolocation", "AMap.PlaceSearch"],
       function () {
@@ -40,7 +114,7 @@ angular.module('checkin.ctrl', [])
             $scope.$apply();
             var circle = new AMap.Circle({
               //center: [data.position.getLng(), data.position.getLat()],// 圆心位置
-              center:currPosition,
+              center: currPosition,
               radius: 500, //半径
               strokeColor: "#73b5f5", //线颜色
               strokeOpacity: 0.2, //线透明度
@@ -51,17 +125,27 @@ angular.module('checkin.ctrl', [])
             circle.setMap(map);
             //这里的storedata 到时候实际用用户所负责的机构
             var storedata = [
-              {"InstitutionName": "复方药店", "Address": "岚皋路121号", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","InstitutionPriority":"A"}
+              {
+                "InstitutionName": "复方药店",
+                "Address": "岚皋路121号",
+                "InstitutionLat": "31.256124",
+                "InstitutionLng": "121.41995",
+                "InstitutionPriority": "A"
+              }
             ];
             //加载marker
             for (var i = 0; i < storedata.length; i++) {
               var position = new AMap.LngLat(storedata[i].InstitutionLng, storedata[i].InstitutionLat);
               marker = new AMap.Marker({
                 icon: new AMap.Icon({
-                  image:storedata[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(storedata[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
+                  image: storedata[i].InstitutionPriority == "A" ? "/img/GradeA-icon.png" : (storedata[i].InstitutionPriority == "B" ? "/img/GradeB-icon.png" : "/img/GradeC-icon.png"),
                   size: new AMap.Size(26, 30)
                 }),
-                extData: { address: storedata[i].Address, name: storedata[i].InstitutionName,priority: storedata[i].InstitutionPriority },
+                extData: {
+                  address: storedata[i].Address,
+                  name: storedata[i].InstitutionName,
+                  priority: storedata[i].InstitutionPriority
+                },
                 position: position //图标定位
               });
               marker.setMap(map);

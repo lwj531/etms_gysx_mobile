@@ -21,21 +21,25 @@
   <ion-content class="has-header has-subheader">
     <div class="bg-white">
 
-<div>
-  <ul>
-    <li class="list-item multi-line" ng-repeat="item in localClientList" ui-sref="main.insdetail({insId:item.InstitutionID})">
-      <div class="item-content align-top">
-        <div class="item-media"><img src="img/marker{{item.InstitutionPriority==''?'A':item.InstitutionPriority}}_52.png" width="20"></div>
-        <div class="item-inner">
-          <div class="item-title-row">
-            <div class="item-title">{{item.InstitutionPriority==''?item.InstitutionName:item.InstitutionName+'('+item.InstitutionPriority+')'}} </div>
-          </div>
-          <div class="item-text">{{item.Address}}</div>
-        </div>
+      <div>
+        <ul>
+          <li class="list-item multi-line" ng-repeat="item in localClientList"
+              ui-sref="main.insdetail({insId:item.InstitutionID})">
+            <div class="item-content align-top">
+              <div class="item-media"><img
+                src="img/marker{{item.InstitutionPriority==''?'A':item.InstitutionPriority}}_52.png" width="20"></div>
+              <div class="item-inner">
+                <div class="item-title-row">
+                  <div class="item-title">
+                    {{item.InstitutionPriority==''?item.InstitutionName:item.InstitutionName+'('+item.InstitutionPriority+')'}}
+                  </div>
+                </div>
+                <div class="item-text">{{item.Address}}</div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-    </li>
-  </ul>
-</div>
     </div>
   </ion-content>
 </ion-view>

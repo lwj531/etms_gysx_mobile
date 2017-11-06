@@ -13,11 +13,6 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
       {name: 'myins', title: '我负责的机构'}
     ];
     $scope.currentTab = $scope.tabs[0];
-    //切换tab
-    $scope.switchTab = function (tab) {
-      $scope.currentTab = tab;
-
-    };
     //展开底部footer
     $scope.isExpand = false;
     $scope.ToggleFooter = function () {
@@ -25,39 +20,109 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
       $scope.searchmodal = false;
       $scope.nolatlngmodal = false;
     };
+    //切换tab
+    $scope.switchTab = function (tab) {
+      $scope.currentTab = tab;
+      $scope.isExpand = true;
 
+    };
+
+
+    $scope.dateToday = moment();
+    var todayModel = [
+      {
+        InsID:'',
+        InsName:'',
+        InsPriority:'',
+        InsAddress:'',
+        CheckinTime:'',
+        CheckoutTime:''
+      }
+    ];
+    //获取今日行程
+    $scope.getTodaySch = function () {
+      guidesrv.getTodayScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
+        $scope.todaysch = data;
+        console.log($scope.todaysch);
+        // var j=0;
+        // for (var m = 0; m < $scope.todaysch.length; m++) {
+        //   if ($scope.todaysch[m].InOut == 'IN') {
+        //     console.log(todayModel);
+        //     todayModel[j].InsName = $scope.todaysch[m].InstitutionName;
+        //     todayModel[j].InsID = $scope.todaysch[m].InstitutionID;
+        //     todayModel[j].InsPriority = $scope.todaysch[m].InstitutionPriority;
+        //     todayModel[j].InsAddress = $scope.todaysch[m].InstitutionAddress;
+        //     todayModel[j].CheckinTime = $scope.todaysch[m].CheckinTime;
+        //     for (var n = 1; n < $scope.todaysch.length; n++) {
+        //       if (todayModel[m].InsID == $scope.todaysch[n].InstitutionID) {
+        //         if ($scope.todaysch[n].InOut == 'OUT') {
+        //           todayModel[j].CheckoutTime = $scope.todaysch[n].CheckinTime;
+        //         }
+        //       }
+        //     }
+        //     j++;
+        //   }
+        // }
+        //机构左侧图标
+        for (i = 0; i < $scope.todaysch.length; i++) {
+          switch ($scope.todaysch[i].InstitutionPriority) {
+            case "A":
+              $scope.todaysch[i].icon = "uicon-markerA";
+              break;
+            case "B":
+              $scope.todaysch[i].icon = "uicon-markerB";
+              break;
+            case "C":
+              $scope.todaysch[i].icon = "uicon-markerC";
+              break;
+            default:
+              $scope.todaysch[i].icon = "uicon-markerA";
+          }
+        }
+      });
+    };
+    //获取已计划行程
+    $scope.getPlanSch = function () {
+      guidesrv.getPlanScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
+        $scope.plansch = data;
+        //机构左侧图标
+        for (i = 0; i < $scope.plansch.PlanRouteline.Institutions.length; i++) {
+          console.log($scope.plansch.PlanRouteline.Institutions);
+          switch ($scope.plansch.PlanRouteline.Institutions[i].InstitutionPriority) {
+            case "A":
+              $scope.plansch.PlanRouteline.Institutions[i].icon = "uicon-markerA";
+              break;
+            case "B":
+              $scope.plansch.PlanRouteline.Institutions[i].icon = "uicon-markerB";
+              break;
+            case "C":
+              $scope.plansch.PlanRouteline.Institutions[i].icon = "uicon-markerC";
+              break;
+            default:
+              $scope.plansch.PlanRouteline.Institutions[i].icon = "uicon-markerA";
+          }
+        }
+      });
+    };
     //获取用户所有机构
     $scope.getmyins = function () {
       routesettingsrv.getins().then(function (data) {
         $scope.insdata = data;
-
-      });
-    };
-
-    $scope.dateToday = moment();
-    //获取今日行程
-    $scope.dailySchs = [];
-    $scope.getTodaySch = function () {
-      guidesrv.getTodayScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
-        $scope.todaysch = data;
-        for (var i = 0; i < $scope.todaysch.PlanInstitutions.length; i++) {
-          $scope.dailySchs[i].insName.push($scope.todaysch.PlanInstitutions[i].InstitutionName);
-          $scope.dailySchs[i].insAddress.push($scope.todaysch.PlanInstitutions[i].Address);
-          $scope.dailySchs[i].insPriority.push($scope.todaysch.PlanInstitutions[i].InstitutionPriority);
-        }
-        console.log($scope.todaysch);
-      });
-    };
-    //获取已计划行程
-    $scope.planSchs = [];
-    $scope.getPlanSch = function () {
-      guidesrv.getPlanScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
-        $scope.plansch = data;
-        console.log($scope.plansch);
-        for (var i = 0; i < $scope.plansch.PlanInstitutions.length; i++) {
-          $scope.planSchs[i].insName.push($scope.plansch.PlanInstitutions[i].InstitutionName);
-          $scope.planSchs[i].insAddress.push($scope.plansch.PlanInstitutions[i].Address);
-          $scope.planSchs[i].insPriority.push($scope.plansch.PlanInstitutions[i].InstitutionPriority);
+        //机构左侧图标
+        for (i = 0; i < $scope.insdata.length; i++) {
+          switch ($scope.insdata[i].InstitutionPriority) {
+            case "A":
+              $scope.insdata[i].icon = "uicon-markerA";
+              break;
+            case "B":
+              $scope.insdata[i].icon = "uicon-markerB";
+              break;
+            case "C":
+              $scope.insdata[i].icon = "uicon-markerC";
+              break;
+            default:
+              $scope.insdata[i].icon = "uicon-markerA";
+          }
         }
       });
     };
@@ -65,7 +130,7 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
     //初始化
     $scope.init = function () {
       $scope.getmyins();
-      // $scope.getTodaySch();
+      $scope.getTodaySch();
       $scope.getPlanSch();
     };
     $scope.init();

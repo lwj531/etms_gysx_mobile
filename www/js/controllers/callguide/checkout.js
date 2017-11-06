@@ -1,6 +1,96 @@
-angular.module('checkout.ctrl', [])
+angular.module('checkout.ctrl', ['guide.srv','client.srv'])
 
-  .controller('CheckoutCtrl', function($scope,$compile) {
+  .controller('CheckoutCtrl', function($scope,$compile, $stateParams, guidesrv,clientsrv,amMoment) {
+
+
+    $scope.insID = $stateParams.insId;
+    clientsrv.getins($stateParams.insId).then(function (data) {
+      $scope.currentIns = data;
+
+      console.log($scope.currentIns.InstitutionName + $scope.currentIns.InstitutionPriority + $scope.currentIns.Address);
+      //机构左侧图标
+      switch ($scope.currentIns.InstitutionPriority) {
+        case "A":
+          $scope.inslevelflag = "uicon-markerA";
+          break;
+        case "B":
+          $scope.inslevelflag = "uicon-markerB";
+          break;
+        case "C":
+          $scope.inslevelflag = "uicon-markerC";
+          break;
+        default:
+          $scope.inslevelflag = "uicon-markerA";
+      }
+
+    });
+    $scope.dateToday=moment();
+    //获取用户所有机构
+    $scope.getCheckin = function () {
+      guidesrv.getCheckinInfo($scope.dateToday.format('YYYY-MM-DD'),$scope.insID).then(function (data) {
+        $scope.insinfo = data[0];
+console.log(data)
+      });
+    };
+
+    //初始化
+    $scope.init = function () {
+      $scope.getCheckin();
+    };
+    $scope.init();
+
+    $scope.checkinGPS = function () {
+      //判断required是否有
+      var model ={
+        "InstitutionID": $scope.insID,
+        "InstitutionName": $scope.currentIns.InstitutionName,
+        "Priority": $scope.currentIns.InstitutionPriority,
+        "CheckinType": "G",
+        "InOut": "OUT",
+        "InstitutionLocation": {
+          "Lng": $scope.currentIns.InstitutionLng,
+          "Lat": $scope.currentIns.InstitutionLat
+        },
+        "CheckinLocation": {
+          "Lng": 116.40,
+          "Lat": 41.91
+        }
+        // "PhotosList": [
+        //   "sample string 1",
+        //   "sample string 2"
+        // ]
+      };
+      $scope.save(model);
+    };
+    $scope.checkinManual = function () {
+      //判断required是否有
+      var model ={
+        "InstitutionID": $scope.insID,
+        "InstitutionName": $scope.currentIns.InstitutionName,
+        "Priority": $scope.currentIns.InstitutionPriority,
+        "CheckinType": "M",
+        "InOut": "OUT",
+        "InstitutionLocation": {
+          "Lng": $scope.currentIns.InstitutionLng,
+          "Lat": $scope.currentIns.InstitutionLat
+        },
+        "CheckinLocation": {
+          "Lng": 120.40,
+          "Lat": 39.91
+        }
+      };
+      $scope.save(model);
+    };
+    $scope.save=function (model) {
+
+      guidesrv.saveCheckin(model).then(function () {
+        $scope.popup("操作成功");
+      });
+    };
+
+
+
+
     $scope.local={
       longitude:0,
       latitude:0

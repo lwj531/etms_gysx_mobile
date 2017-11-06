@@ -38,7 +38,7 @@ angular.module("routesetting.srv", ["http.srv"])
           Key: "InstitutionLng",
           Value: 0
         }
-      ]
+      ];
       return httpsrv.service("/api/Institution/GetInstitutionsByKey/", model, "post");
     };
 

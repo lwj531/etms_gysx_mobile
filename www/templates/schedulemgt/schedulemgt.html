@@ -344,7 +344,7 @@
         <ul class="schedule-week-list" ng-if="staff.IsCCR">
           <li ng-repeat="date in actualWeekDays">
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
-            <div class="schedule-week-row">
+            <div class="schedule-week-row font-8">
               <!--点击出弹框看线路列表-->
               <div class="col-40">
                 <div class="flex-between" ng-show="date.route!=null" ng-click="showActualCCR()">
@@ -394,7 +394,7 @@
         <ul class="schedule-week-list" ng-if="staff.IsAE">
           <li>
             <div class="content-block-title">周一(10/22)</div>
-            <div class="schedule-week-row">
+            <div class="schedule-week-row font-8">
               <div class="col-40" ng-click="showActualAE()" ng-show="date.route!=null">
                 <div class="flex-start">
                   <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
@@ -429,7 +429,7 @@
           </li>
           <li>
             <div class="content-block-title">周二(10/23)</div>
-            <div class="schedule-week-row">
+            <div class="schedule-week-row font-8">
               <div class="col-40" ng-click="showActualAE()">
                 <div class="flex-start">
                   <img src="img/route_green_44.png" width="18" style="margin-right: 8px;">
@@ -464,7 +464,7 @@
         <ul class="schedule-week-list" ng-if="staff.IsCCR">
           <li ng-repeat="date in weekDays">
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span ng-bind="date | amDateFormat: 'DD/MM'"></span>)</div>
-            <div class="schedule-week-row" ng-show="date.route!=null">
+            <div class="schedule-week-row font-8" ng-show="date.route!=null">
               <div class="col-73" ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
@@ -498,7 +498,7 @@
                 </div>
               </div>
             </div>
-            <div class="schedule-week-row" >
+            <div class="schedule-week-row font-8" >
               <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showHalfFooter('route',date )">
                 <img src="img/add_gray_64.png" width="36">
               </div>
@@ -512,7 +512,7 @@
         <ul class="schedule-week-list" ng-if="staff.IsAE">
           <li>
             <div class="content-block-title">周一(10/22)</div>
-            <div class="schedule-week-row">
+            <div class="schedule-week-row font-8">
               <div class="col-73" ng-click="showPlanPopup()">
                 <div class="flex-start width-100 margin-img">
                   <img src="img/route_green_44.png" width="18">
@@ -535,7 +535,7 @@
           </li>
           <li>
             <div class="content-block-title">周一(10/22)</div>
-            <div class="schedule-week-row">
+            <div class="schedule-week-row font-8">
               <div class="col-73" ng-click="showPlanPopup()">
                 <div class="flex-start width-100 margin-img">
                   <img src="img/route_green_44.png" width="18">
@@ -559,7 +559,7 @@
           <!--为空显示添加图标-->
           <li>
             <div class="content-block-title">周三(10/22)</div>
-            <div class="schedule-week-row">
+            <div class="schedule-week-row font-8">
               <div class="col-73 flex-center" ng-click="showPlanPopup()">
                 <img src="img/add_gray_64.png" width="36">
               </div>
@@ -638,12 +638,12 @@
         <li  ng-repeat="item in halfdayTypeList">
           <span ng-bind="item.TypeName"></span>
           <ul>
-            <li class="list-item" ng-class="{'checked':(type.TypeID==selectedHalfType.type.TypeID && selectedHalfType.ampm=='PM')}" ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
+            <li class="list-item" ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='PM')}" ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
                 <div class="item-media"><span class="uicon radio-button"></span></div>
                 <div class="item-inner">
-                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.TypeName}}</div>
+                  <div class="item-title align-center ellipsis"><img src="img/route_green_44.png" width="18">{{type.HalfdayTypeName}}</div>
                 </div>
               </div>
             </li>

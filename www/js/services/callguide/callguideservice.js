@@ -3,17 +3,23 @@ angular.module("guide.srv", ["http.srv"])
 
     //获取今日行程
     this.getTodayScheduleList = function (activityDate) {
-      return httpsrv.service("api/Daily/GetCheckinInstitutions/" + activityDate , {}, "get");
+      return httpsrv.service("/api/Daily/GetCheckinInstitutions/" + activityDate , {}, "get");
     };
 
     //获取已计划行程
     this.getPlanScheduleList = function (activityDate) {
-      return httpsrv.service("api/Daily/GetDailyPlan/" + activityDate , {}, "get");
+      return httpsrv.service("/api/Daily/GetDailyPlan/" + activityDate , {}, "get");
     };
 
-    // //CCR获取我负责的机构总店
-    // this.getMyInstitutionList = function () {
-    //   return httpsrv.service("/api/Institution/GetInstitutions", {}, "get");
-    // };
+    //保存签到
+    this.saveCheckin = function (model) {
+      return httpsrv.service("/api/Checkin/SaveCheckin", model, "post");
+    };
+
+    //获取签到信息
+    this.getCheckinInfo = function (activityDate,institutionId) {
+      return httpsrv.service("/api/Checkin/GetCheckin/"+ activityDate + '/'+ institutionId, {}, "get");
+    };
+
   }
   ]);
