@@ -2,34 +2,34 @@
 <div class="">
   <div class="bar bar-header bar-light">
     <button class="button button-clear button-positive" ng-click="closeActualCCR()">关闭</button>
-    <div class="h1 title">周一 (10/22)</div>
+    <div class="h1 title" ng-bind="currentActualRoute | amDateFormat:'ddd'"></div>
   </div>
   <div class="padding-top44">
     <div class="flex-between margin-img padding">
       <div class="align-center">
-        <img src="img/route_green_44.png" width="18"> 路线(5)
+        <img src="img/route_green_44.png" width="18"> {{currentActualRoute.routeActual.LineName + (currentActualRoute.routeActual.Institutions.length>0?( '('+currentActualRoute.routeActual.Institutions.length+')'):'')}}
       </div>
-      <div class="flex-between width-50">
+      <div class="width-50 flex-between">
         <div class="insA align-center">
-          <span class="dot"></span><span class="count">2</span>
+          <span class="dot"></span><span class="count">{{(currentActualRoute.routeActual.Institutions |  filter:{'InstitutionPriority':'A'}).length}}</span>
         </div>
         <div class="insB align-center">
-          <span class="dot"></span><span class="count">2</span>
+          <span class="dot"></span><span class="count">{{(currentActualRoute.routeActual.Institutions |  filter:{'InstitutionPriority':'B'}).length}}</span>
         </div>
         <div class="insC align-center">
-          <span class="dot"></span><span class="count">2</span>
+          <span class="dot"></span><span class="count">{{(currentActualRoute.routeActual.Institutions |  filter:{'InstitutionPriority':'C'}).length}}</span>
         </div>
       </div>
     </div>
     <ul>
-      <li class="list-item multi-line" ng-repeat="item in actualStoreList">
+      <li class="list-item multi-line" ng-repeat="item in currentActualRoute.routeActual.Institutions">
         <div class="item-content ">
           <div class="item-media"><span class=""></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">{{item.name}} parent</div>
+              <div class="item-title">{{item.InstitutionName}}</div>
             </div>
-            <div class="item-text">{{item.city + item.address}}</div>
+            <div class="item-text">{{item.City.Name + item.Address}}</div>
           </div>
         </div>
       </li>

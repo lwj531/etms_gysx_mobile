@@ -28,6 +28,8 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekPlanList = function (callback) {
       dailysrv.getWeekPlanList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (palnlist) {
         $scope.weekPlanList = palnlist;
+        console.log("周计划:");
+        console.log(palnlist);
         if (callback != null) {
           callback();
         }
@@ -37,12 +39,15 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekActualList = function (callback) {
       dailysrv.getWeekActualList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (actuallist) {
         $scope.weekActualList = actuallist;
+
+        console.log("周实际:");
+        console.log(actuallist);
         if (callback != null) {
           callback();
         }
       });
     };
-    //绑定已填写计划与本周数组的关系
+    //绑定已填写计划、已填写实际与本周数组的关系
     $scope.bindPlanList = function () {
       if($scope.staff!=null){
         $scope.getWeekPlanList(function () {
@@ -57,72 +62,59 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
               }
             } else {
               //赋值城市
-              for (var k = 0; k < $scope.weekPlanList.Citys.length; k++) {
-                if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.Citys[k].ActivityDate).date()) {
-                  $scope.weekDays[j].route = $scope.weekPlanList.Citys[k];
+              if( $scope.weekPlanList._Citys!=null){
+                for (var k = 0; k < $scope.weekPlanList._Citys.length; k++) {
+                  if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList._Citys[k].ActivityDate).date()) {
+                    $scope.weekDays[j].route = $scope.weekPlanList._Citys[k];
+                  }
                 }
               }
             }
-
             //赋值半天事务
             for (var k = 0; k < $scope.weekPlanList.HalfdayModels.length; k++) {
               //上午半天事务
               if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'AM') {
                 $scope.weekDays[j].halfDayAM = $scope.weekPlanList.HalfdayModels[k];
-                //console.log($scope.weekDays[j].halfDayAM);
               }
               //下午半天事务
               if (moment($scope.weekDays[j]).date() == moment($scope.weekPlanList.HalfdayModels[k].ActivityDate).date() && $scope.weekPlanList.HalfdayModels[k].AMPM == 'PM') {
                 $scope.weekDays[j].halfDayPM = $scope.weekPlanList.HalfdayModels[k];
-                //console.log($scope.weekDays[j].halfDayPM);
               }
             }
           }
         });
         $scope.getWeekActualList(function () {
-          // //获取周实际
-          // $scope.getWeekActualList(function () {
-          //   $scope.checkinTimes = [];
-          //   $scope.checkoutTimes = [];
-          //   for (var j = 0; j < $scope.actualWeekDays.length; j++) {
-          //     for (var k = 0; k < $scope.weekActualList.PlanRoutelines.length; k++) {
-          //       if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
-          //         $scope.actualWeekDays[j].route = $scope.weekActualList.PlanRoutelines[k];
-          //         $scope.actualWeekDays[j].progress = {"width": $scope.weekActualList.Rates};
-          //         $scope.actualWeekDays[j].halfday = $scope.weekActualList.HalfdayModels;
-          //
-          //         for (var p=0;p<$scope.weekActualList.Checkins.length;p++){
-          //           if($scope.weekActualList.Checkins[p].InOut=="IN" && $scope.actualWeekDays[j].route.CheckIn ==null && $scope.weekActualList.Checkins[p].CheckinDate == moment($scope.actualWeekDays[j].route.ActivityDate).format('YYYY-MM-DD')){
-          //             $scope.actualWeekDays[j].route.CheckIn = $scope.weekActualList.Checkins[p];
-          //           }
-          //         }
-          //
-          //         for (var p = $scope.weekActualList.Checkins.length-1;p>=0;p--){
-          //           if($scope.weekActualList.Checkins[p].InOut=="OUT" && $scope.actualWeekDays[j].route.CheckOut ==null && $scope.weekActualList.Checkins[p].CheckinDate == moment($scope.actualWeekDays[j].route.ActivityDate).format('YYYY-MM-DD')){
-          //             $scope.actualWeekDays[j].route.CheckOut = $scope.weekActualList.Checkins[p];
-          //           }
-          //         }
-          //       }
-          //     }
-          //
-          //     // for (var l = 0; l < $scope.weekActualList.Checkins.length; l++) {
-          //     //   if (moment($scope.actualWeekDays[j]).format("YYYY-MM-DD") == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).format("YYYY-MM-DD")) {
-          //     //     $scope.actualWeekDays[j].CheckinTime = $scope.weekActualList.Checkins[l];
-          //     //     if ($scope.weekActualList.Checkins[l].InOut == 'In') {
-          //     //       $scope.checkinTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
-          //     //     }
-          //     //     else if ($scope.weekActualList.Checkins[l].InOut == 'Out') {
-          //     //       $scope.checkoutTimes.push($scope.weekActualList.Checkins[l].CheckinTime);
-          //     //     }
-          //     //     else {
-          //     //       alert('不是In Out');
-          //     //     }
-          //     //   }
-          //     // }
-          //
-          //   }
-          // });
-          console.log('adudhas-----============-=-=-=-=u');
+          for (var j = 0; j < $scope.weekDays.length; j++) {
+            //如果角色是ccr的话
+            if ($scope.staff.IsCCR) {
+              //赋值路线
+              for (var k = 0; k < $scope.weekActualList.PlanRoutelines.length; k++) {
+                if (moment($scope.weekDays[j]).date() == moment($scope.weekActualList.PlanRoutelines[k].ActivityDate).date()) {
+                  $scope.weekDays[j].routeActual = $scope.weekActualList.PlanRoutelines[k];
+                }
+              }
+            } else {
+              //赋值城市
+              if($scope.weekActualList._Citys!=null){
+                for (var k = 0; k < $scope.weekActualList._Citys.length; k++) {
+                  if (moment($scope.weekDays[j]).date() == moment($scope.weekActualList._Citys[k].ActivityDate).date()) {
+                    $scope.weekDays[j].routeActual = $scope.weekActualList._Citys[k];
+                  }
+                }
+              }
+            }
+            //赋值半天事务
+            for (var k = 0; k < $scope.weekActualList.HalfdayModels.length; k++) {
+              //上午半天事务
+              if (moment($scope.weekDays[j]).date() == moment($scope.weekActualList.HalfdayModels[k].ActivityDate).date() && $scope.weekActualList.HalfdayModels[k].AMPM == 'AM') {
+                $scope.weekDays[j].halfDayActualAM = $scope.weekActualList.HalfdayModels[k];
+              }
+              //下午半天事务
+              if (moment($scope.weekDays[j]).date() == moment($scope.weekActualList.HalfdayModels[k].ActivityDate).date() && $scope.weekActualList.HalfdayModels[k].AMPM == 'PM') {
+                $scope.weekDays[j].halfDayActualPM = $scope.weekActualList.HalfdayModels[k];
+              }
+            }
+          }
         });
       }
     };
@@ -166,7 +158,8 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         if ($scope.staff != null) {
           guidesrv.getPlanScheduleList($scope.selectedDate.format('YYYY-MM-DD')).then(function (data) {
             $scope.currentDaily = data;
-            console.log(data);
+            $scope.currentDaily.Citys = data._Citys;
+            //console.log(data);
             if($scope.staff.IsCCR){
               if($scope.currentDaily.PlanRouteline.Institutions.length==0 && $scope.currentDaily.Checkins.length>0){
                 $scope.currentDaily.PlanRouteline.Institutions =[];
@@ -426,45 +419,32 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       });
     };
     //CCR实际弹框
-    $scope.showActualCCR = function () {
-
-      $scope.actualStoreList = [
-        {name: 'xx大药房xx大药房xx大药房xx大', address: 'xx区xx路xx号xx弄', city: '北京市', activities: 2, selected: false},
-        {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房', address: 'xx区xx路xx号xx弄', city: '上海市', activities: 3, selected: false}
-      ];
+    $scope.showActualCCR = function (data) {
+      $scope.currentActualRoute = data;
       var showActual = $ionicPopup.show({
         cssClass: 'actual-alert',
         templateUrl: 'templates/schedulemgt/actualAlertCCR.html',
-        title: '',
         scope: $scope
-
       });
       showActual.then(function (res) {
         //console.log('Tapped Actual!', res);
       });
-
       $scope.closeActualCCR = function () {
         showActual.close();
       };
     };
     //AE实际弹框
-    $scope.showActualAE = function () {
-
-      $scope.actualStoreList = [
-        {name: 'xx大药房xx大药房xx大药房xx大', address: 'xx区xx路xx号xx弄', city: '北京市', activities: 2, selected: false},
-        {name: 'xx大药房xx大药房xx大药房xx大药房xx大药房xx大药房', address: 'xx区xx路xx号xx弄', city: '上海市', activities: 3, selected: false}
-      ];
+    $scope.showActualAE = function (data) {
+      $scope.currentActualRoute = data;
       var showActual = $ionicPopup.show({
         cssClass: 'actual-alert',
         templateUrl: 'templates/schedulemgt/actualAlertAE.html',
         title: '',
         scope: $scope
-
       });
       showActual.then(function (res) {
         //console.log('Tapped Actual!', res);
       });
-
       $scope.closeActualAE = function () {
         showActual.close();
       };
@@ -496,22 +476,17 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         }
       }
     };
-
-
-    //日历的angular写法--------------/
-    $scope.week = [];
-    $scope.weekChange = [];
-    $scope.today = new Date();
-    $scope.changeDay = new Date();
-    $scope.weekStartDay = new Date($scope.changeDay.setDate($scope.today.getDate() - $scope.today.getDay()));
-    $scope.weekEndDay = new Date($scope.changeDay.setDate($scope.today.getDate() + 7 - $scope.today.getDay()));
-
-    for (var i = 0; i < 7; i++) {
-      $scope.week.push(i == 0 ? new Date($scope.weekStartDay.setDate($scope.weekStartDay.getDate() + 0)) : new Date($scope.weekStartDay.setDate($scope.weekStartDay.getDate() + 1)));
-      $scope.weekChange[i] = $scope.week[i];
-    }
     //点击日期时触发
     $scope.clickDate = function (date) {
       $scope.selectedDate = date;
-    }
+    };
+    $scope.$broadcast("amap", "datacompleted");
+    //地图初始化完成后执行
+    $scope.$on('amap', function (errorType, data) {
+      if (data == "mapcompleted") {
+        $scope.map.clearMap();
+        $scope.map.clearInfoWindow();
+
+      }
+    });
   });

@@ -228,7 +228,9 @@
                 </div>
               </div>
             </div>
-            <div class="height-100" id="dailyMap"></div>
+            <div class="height-100">
+              <amap></amap>
+            </div>
           </div>
         </div>
         <!--当角色为AE时显示-->
@@ -244,7 +246,7 @@
                   <div class="item-media"><img src="img/route_green_44.png" width="24"></div>
                   <div class="item-inner">
                     <div class="item-title-row">
-                      <div class="item-title" ng-repeat="city in currentDaily.Citys"><span>{{city.Name}}</span>{{currentDaily.Citys.length}}</div>
+                      <div class="item-title"><span>{{currentDaily.Citys[0].CityNames}}</span>({{currentDaily.Citys[0].Institutions.length}})</div>
                     </div>
                   </div>
                 </div>
@@ -363,24 +365,23 @@
       <div ng-show="statusTab=='actual'">
         <!--角色为CCR 时显示下面列表-->
         <ul class="schedule-week-list" ng-if="staff.IsCCR">
-          <li >
+          <li ng-repeat="date in weekDays">
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
-              ng-bind="date | amDateFormat: 'DD/MM'"></span>)
+              ng-bind="date | amDateFormat: 'MM/DD'"></span>)
             </div>
             <div class="schedule-week-row">
               <!--点击出弹框看线路列表-->
               <div class="col-40">
-                <div class="flex-between" ng-show="date.route!=null" ng-click="showActualCCR()">
+                <div class="flex-between" ng-show="date.routeActual!=null" ng-click="showActualCCR(date)">
                   <img src="img/route_green_44.png" width="18">
                   <div class="progress-block">
                     <!--未加匹配率-->
                     <div class="">
                       <span
-                        ng-bind="date.route.LineName + (date.route.Institutions.length>0?( '('+date.route.Institutions.length+')'):'')"></span>
-                      <span>{{date.Rates}}</span>
+                        ng-bind="date.routeActual.LineName + (date.routeActual.Institutions.length>0?( '('+date.routeActual.Institutions.length+')'):'') + (date.routeActual.MatchRate.toFixed(2)*100 + '%')"></span>
                     </div>
                     <div class="progress-track">
-                      <div class="progress" ng-style="date.progress"></div>
+                      <div class="progress"  ng-style="{width:(date.routeActual.MatchRate.toFixed(2)*100 + '%')}"></div>
                     </div>
                   </div>
                 </div>
@@ -389,23 +390,24 @@
                 </div>
               </div>
               <div class="col-33 flex-center">
-                <div ng-show="date.route!=null">
-                  <div class="">首次签入</div>
-                  <div class="">末次签出 {{date.route.CheckinTimes}}</div>
+                <div ng-show="date.routeActual!=null">
+                  <div class="">首次签入<span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
+                  <div class="">末次签出 <span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
                 </div>
-                <div ng-show="date.route==null" class="placeholder-div">
+                <div ng-show="date.routeActual==null" class="placeholder-div">
 
                 </div>
               </div>
               <div class="col-27 flex-center">
-                <div class="width-100" ng-click="showActualHalfFooter('morning',date)">
-                  <!-- affair-gray | affair-orange | affair-blue | affair-red -->
-                  <div class="flex-between affair-gray">
-                    <div>无半天事务</div>
+                <div class="width-100"  ng-if="date.routeActual!=null">
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayActualAM==null,'affair-blue':date.halfDayActualAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayActualAM.GroupCode=='INTERNAL','affair-red':date.halfDayActualAM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayActualAM == null?'无半天事务':date.halfDayActualAM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
-                  <div class="flex-between affair-orange">
-                    <div>年假</div>
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayActualPM==null,'affair-blue':date.halfDayActualPM.GroupCode=='EXTERNAL','affair-orange':date.halfDayActualPM.GroupCode=='INTERNAL','affair-red':date.halfDayActualPM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayActualPM == null?'无半天事务':date.halfDayActualPM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
                 </div>
@@ -415,64 +417,38 @@
         </ul>
         <!--角色为AE时显示下面列表-->
         <ul class="schedule-week-list" ng-if="staff.IsAE">
-          <li>
-            <div class="content-block-title">周一(10/22)</div>
+          <li ng-repeat="date in weekDays">
+            <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
+              ng-bind="date | amDateFormat: 'MM/DD'"></span>)
+            </div>
             <div class="schedule-week-row">
-              <div class="col-40" ng-click="showActualAE()" ng-show="date.route!=null">
-                <div class="flex-start margin-img">
+              <!--点击出弹框看线路列表-->
+              <div class="col-40" ng-click="showActualAE(date)">
+                <div class="flex-start margin-img" ng-show="date.routeActual!=null">
                   <img src="img/route_green_44.png" width="18">
-                  <div class="">AE实际(9)</div>
+                  <div class=""><span
+                    ng-bind="date.routeActual.CityNames + (date.routeActual.Institutions.length>0?( '('+date.routeActual.Institutions.length+')'):'')"></span></div>
                 </div>
               </div>
               <div class="col-33 flex-center">
-                <div ng-show="date.route!=null">
-                  <div class="">首次签入 09:03:02</div>
-                  <div class="">首次签入 09:03:02</div>
+                <div ng-show="date.routeActual!=null">
+                  <div class="">首次签入<span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
+                  <div class="">末次签出 <span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
                 </div>
-                <div ng-show="date.route==null">
+                <div ng-show="date.routeActual==null" class="placeholder-div">
 
                 </div>
               </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
-                <div class="width-100" ng-show="date.route!=null">
-                  <div class="flex-between affair-gray">
-                    <div>无半天事务</div>
+              <div class="col-27 flex-center">
+                <div class="width-100"  ng-if="date.routeActual!=null">
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayActualAM==null,'affair-blue':date.halfDayActualAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayActualAM.GroupCode=='INTERNAL','affair-red':date.halfDayActualAM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayActualAM == null?'无半天事务':date.halfDayActualAM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
-                  <div class="flex-between affair-orange">
-                    <div>年假</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                </div>
-                <div class="width-100 flex-center" ng-show="date.route==null">
-                  <img src="img/add_gray_64.png" width="36">
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="content-block-title">周二(10/23)</div>
-            <div class="schedule-week-row">
-              <div class="col-40" ng-click="showActualAE()">
-                <div class="flex-start margin-img">
-                  <img src="img/route_green_44.png" width="18">
-                  <div class="">城市名称啊(9)</div>
-                </div>
-              </div>
-              <div class="col-33 flex-center">
-                <div>
-                  <div class="">首次签入 09:03:02</div>
-                  <div class="">首次签入 09:03:02</div>
-                </div>
-              </div>
-              <div class="col-27 flex-center" ng-click="showHalfFooter('morning')">
-                <div class="width-100">
-                  <div class="flex-between affair-red">
-                    <div>不可抗不可抗不可抗</div>
-                    <div class="affair-dot"></div>
-                  </div>
-                  <div class="flex-between affair-blue">
-                    <div>年假</div>
+                  <div class="flex-between"
+                       ng-class="{'affair-gray':date.halfDayActualPM==null,'affair-blue':date.halfDayActualPM.GroupCode=='EXTERNAL','affair-orange':date.halfDayActualPM.GroupCode=='INTERNAL','affair-red':date.halfDayActualPM.GroupCode=='PERSONAL'}">
+                    <div>{{date.halfDayActualPM == null?'无半天事务':date.halfDayActualPM.HalfdayTypeName}}</div>
                     <div class="affair-dot"></div>
                   </div>
                 </div>
@@ -543,7 +519,7 @@
               <div class="col-73" ng-click="showPlanPopup(date)">
                 <div class="flex-start width-100 margin-img" ng-show="date.route!=null">
                   <img src="img/route_green_44.png" width="18">
-                  <div class="align-center">{{date.route.Name}}({{date.route.Institutions.length}})</div>
+                  <div class="align-center">{{date.route.CityNames}}({{date.route.Institutions.length}})</div>
                 </div>
                 <div class="width-100 flex-center" ng-show="date.route==null">
                   <img src="img/add_gray_64.png" width="36">
