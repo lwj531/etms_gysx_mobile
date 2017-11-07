@@ -258,7 +258,8 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     //点半天事务弹出底部框//CCR的
     $scope.showHalfFooter = function (tabtype, date) {
       $scope.currentRoute = null;
-      $scope.selectedHalfType = {};
+      $scope.selectedMorningHalfType = {};
+      $scope.selectedAfternoonHalfType = {};
       $scope.selectedDate = date;//选中的日期
       $scope.getRoutes(function () {
         dailysrv.getHalfdayType().then(function (data) {
@@ -271,10 +272,10 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     };
     //选择事务类型
     $scope.chooseHalfType = function (ampm, item) {
-      //选中的类型
-      $scope.selectedHalfType = {
-        ampm: ampm,
-        type: item
+      if(ampm=="AM"){
+        $scope.selectedMorningHalfType.type = item;
+      }else{
+        $scope.selectedAfternoonHalfType.type = item;
       }
     };
     //编辑页面中返回,如果状态是reload,关闭footer
@@ -312,15 +313,24 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     };
     //保存计划的半天事务
     $scope.saveHalfPlan = function (callback) {
-      if ($scope.selectedHalfType.type != null) {
-        $scope.selectedHalfType.type.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
-        $scope.selectedHalfType.type.AMPM = $scope.selectedHalfType.ampm;
-        dailysrv.saveHalfdayPlan($scope.selectedHalfType.type).then(function () {
+      var models=[];
+      if($scope.selectedAfternoonHalfType.type!=null){
+        $scope.selectedAfternoonHalfType.type.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
+        $scope.selectedAfternoonHalfType.type.AMPM = "PM";
+        models.push($scope.selectedAfternoonHalfType.type);
+      }
+      if($scope.selectedMorningHalfType.type!=null){
+        $scope.selectedMorningHalfType.type.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
+        $scope.selectedMorningHalfType.type.AMPM = "AM";
+        models.push($scope.selectedMorningHalfType.type);
+      }
+      if(models.length>0){
+        dailysrv.saveHalfdayPlans(models).then(function () {
           if (callback != null) {
             callback();
           }
         });
-      } else {
+      }else{
         if (callback != null) {
           callback();
         }
@@ -328,7 +338,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     }
     //保存计划
     $scope.savePlan = function () {
-      if ($scope.selectedHalfType.type == null && $scope.currentRoute == null) {
+      if ($scope.selectedAfternoonHalfType.type==null && $scope.selectedMorningHalfType.type==null && $scope.currentRoute == null) {
         $rootScope.toast("请选择路线或者半天事务");
       } else {
         $scope.saveRoutePlan(function () {

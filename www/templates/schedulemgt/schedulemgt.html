@@ -622,7 +622,7 @@
           <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
-                ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='AM')}"
+                ng-class="{'checked':(type.HalfdayTypeID==selectedMorningHalfType.type.HalfdayTypeID)}"
                 ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('AM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
@@ -642,7 +642,7 @@
           <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
-                ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='PM')}"
+                ng-class="{'checked':(type.HalfdayTypeID==selectedAfternoonHalfType.type.HalfdayTypeID)}"
                 ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
