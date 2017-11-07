@@ -23,7 +23,7 @@
       <li ng-repeat="date in weekDays" ng-bind="date | amDateFormat:'dd'">日</li>
     </ul>
     <!--左右滑动切周-->
-    <ul class="flex-row week-day" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
+    <ul class="flex-row week-day" on-swipe-right="prevWeek()" on-swipe-left="nextWeek()">
       <!--repeat周的日期-->
       <li ng-repeat="item in weekDays" ng-click="clickDate(item)"
           ng-class="{true: 'today'}[item.day()==selectedDate.day()]" ng-bind="item | amDateFormat:'DD'">
