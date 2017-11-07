@@ -4296,14 +4296,7 @@ input[type=month] {
   font-size: 16px;
 }
 
-.zengjiaduixiang-div {
-  height: 36px;
-  line-height: 36px;
-  padding-left: 19px;
-  margin-top: 20px;
-}
-
-#zengjiaduixiang-sr {
+.adding-manual input {
   width: calc(100% - 100px);
   border: 1px solid #e4e4e4;
   height: 35px;
@@ -4311,7 +4304,7 @@ input[type=month] {
   font-size: 1rem;
 }
 
-.zengjiaduixiang-btn {
+.adding-manual button {
   height: 34px;
   width: 90px;
   border: none;
@@ -4328,15 +4321,15 @@ input[type=month] {
   padding-left: 15px;
 }
 
-.jxc-content {
+.jxc-content:not(:last-child) {
   border-bottom: 1px solid #e4e4e4;
 }
 
-.jxc-content-title {
-  height: 45px;
-  position: relative;
-  color: #747d88;
-}
+/*.jxc-content-title {*/
+  /*height: 45px;*/
+  /*position: relative;*/
+  /*color: #747d88;*/
+/*}*/
 
 .jxc-content input {
   display: inline-block;
@@ -4344,6 +4337,7 @@ input[type=month] {
   text-align: center;
   border-radius: 4px;
   width: 60%;
+  height: 28px;
 }
 
 .jxc-ul li {
@@ -4365,23 +4359,23 @@ input[type=month] {
   line-height: 40px;
 }
 
-.jxc-content-title-skuname {
-  position: absolute;
-  font-size: 1rem;
-  bottom: 6px;
-  left: 15px;
-}
+/*.jxc-content-title-skuname {*/
+  /*position: absolute;*/
+  /*font-size: 1rem;*/
+  /*bottom: 6px;*/
+  /*left: 15px;*/
+/*}*/
 
-.jxc-content-title-kc {
-  position: absolute;
-  font-size: 1rem;
-  bottom: 6px;
-  right: 15px;
-}
+/*.jxc-content-title-kc {*/
+  /*position: absolute;*/
+  /*font-size: 1rem;*/
+  /*bottom: 6px;*/
+  /*right: 15px;*/
+/*}*/
 
-.zjkc {
-  color: #419de7;
-}
+/*.zjkc {*/
+  /*color: #419de7;*/
+/*}*/
 
 .pxjl-content {
   margin-top: 5px;

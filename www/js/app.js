@@ -246,13 +246,13 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         })
       //进销存检查
       .state('main.purchasesellstockcheck', {
-          url: '/purchasesellstockcheck',
+          url: '/purchasesellstockcheck/:insId',
           templateUrl: "templates/callguide/purchasesellstockcheck.html",
           controller: "PurchasesellstockcheckCtrl"
         })
       //生意回顾
       .state('main.businessreview', {
-          url: '/businessreview',
+          url: '/businessreview/:insId',
           templateUrl: "templates/callguide/businessreview.html",
           controller: "BusinessreviewCtrl"
         })
