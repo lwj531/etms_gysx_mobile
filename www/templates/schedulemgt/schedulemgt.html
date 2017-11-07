@@ -23,7 +23,7 @@
       <li ng-repeat="date in weekDays" ng-bind="date | amDateFormat:'dd'">日</li>
     </ul>
     <!--左右滑动切周-->
-    <ul class="flex-row week-day" on-swipe-right="PrevWeek()" on-swipe-left="NextWeek()">
+    <ul class="flex-row week-day" on-swipe-right="prevWeek()" on-swipe-left="nextWeek()">
       <!--repeat周的日期-->
       <li ng-repeat="item in weekDays" ng-click="clickDate(item)"
           ng-class="{true: 'today'}[item.day()==selectedDate.day()]" ng-bind="item | amDateFormat:'DD'">
@@ -490,10 +490,10 @@
               ng-bind="date | amDateFormat: 'MM/DD'"></span>)
             </div>
             <div class="schedule-week-row">
-              <div class="col-73 flex-center" ng-show="date.route==null" ng-click="showHalfFooter('route',date )">
+              <div class="col-73 flex-center" ng-show="date.route.LineID==''||date.route==null" ng-click="showHalfFooter('route',date )">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-73" ng-show="date.route!=null" ng-click="showHalfFooter('route',date)">
+              <div class="col-73" ng-show="date.route.LineID!='' && date.route!=null" ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
                     <img src="img/route_green_44.png" width="18">
@@ -622,7 +622,7 @@
           <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
-                ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='AM')}"
+                ng-class="{'checked':(type.HalfdayTypeID==selectedMorningHalfType.type.HalfdayTypeID)}"
                 ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('AM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->
@@ -642,7 +642,7 @@
           <span ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
-                ng-class="{'checked':(type.HalfdayTypeID==selectedHalfType.type.HalfdayTypeID && selectedHalfType.ampm=='PM')}"
+                ng-class="{'checked':(type.HalfdayTypeID==selectedAfternoonHalfType.type.HalfdayTypeID)}"
                 ng-repeat="type in item.Halfdays" ng-click="chooseHalfType('PM',type)">
               <div class="item-content">
                 <!--点击选中，在选中的li的item-media上添加checked-->

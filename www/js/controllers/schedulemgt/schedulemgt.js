@@ -28,7 +28,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekPlanList = function (callback) {
       dailysrv.getWeekPlanList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (palnlist) {
         $scope.weekPlanList = palnlist;
-        // console.log(palnlist);
         if (callback != null) {
           callback();
         }
@@ -38,7 +37,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekActualList = function (callback) {
       dailysrv.getWeekActualList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (actuallist) {
         $scope.weekActualList = actuallist;
-        console.log(actuallist);
         if (callback != null) {
           callback();
         }
@@ -170,7 +168,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
             $scope.currentDaily = data;
             console.log(data);
             if($scope.staff.IsCCR){
-              if($scope.currentDaily.PlanRouteline.Institutions.length==0){
+              if($scope.currentDaily.PlanRouteline.Institutions.length==0 && $scope.currentDaily.Checkins.length>0){
                 $scope.currentDaily.PlanRouteline.Institutions =[];
               }
               //添加计划外的签到
@@ -208,7 +206,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
                 }
               }
             }else if($scope.staff.IsAE){
-              if($scope.currentDaily.Citys.length==0){
+              if($scope.currentDaily.Citys.length==0 && $scope.currentDaily.Checkins.length>0){
                 $scope.currentDaily.Citys=[{Institutions:[]}];
               }
               for (var i = 0; i < $scope.currentDaily.Checkins.length; i++) {
@@ -258,7 +256,8 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     //点半天事务弹出底部框//CCR的
     $scope.showHalfFooter = function (tabtype, date) {
       $scope.currentRoute = null;
-      $scope.selectedHalfType = {};
+      $scope.selectedMorningHalfType = {};
+      $scope.selectedAfternoonHalfType = {};
       $scope.selectedDate = date;//选中的日期
       $scope.getRoutes(function () {
         dailysrv.getHalfdayType().then(function (data) {
@@ -271,10 +270,10 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     };
     //选择事务类型
     $scope.chooseHalfType = function (ampm, item) {
-      //选中的类型
-      $scope.selectedHalfType = {
-        ampm: ampm,
-        type: item
+      if(ampm=="AM"){
+        $scope.selectedMorningHalfType.type = item;
+      }else{
+        $scope.selectedAfternoonHalfType.type = item;
       }
     };
     //编辑页面中返回,如果状态是reload,关闭footer
@@ -312,15 +311,24 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     };
     //保存计划的半天事务
     $scope.saveHalfPlan = function (callback) {
-      if ($scope.selectedHalfType.type != null) {
-        $scope.selectedHalfType.type.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
-        $scope.selectedHalfType.type.AMPM = $scope.selectedHalfType.ampm;
-        dailysrv.saveHalfdayPlan($scope.selectedHalfType.type).then(function () {
+      var models=[];
+      if($scope.selectedAfternoonHalfType.type!=null){
+        $scope.selectedAfternoonHalfType.type.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
+        $scope.selectedAfternoonHalfType.type.AMPM = "PM";
+        models.push($scope.selectedAfternoonHalfType.type);
+      }
+      if($scope.selectedMorningHalfType.type!=null){
+        $scope.selectedMorningHalfType.type.ActivityDate = $scope.selectedDate.format("YYYY-MM-DD");
+        $scope.selectedMorningHalfType.type.AMPM = "AM";
+        models.push($scope.selectedMorningHalfType.type);
+      }
+      if(models.length>0){
+        dailysrv.saveHalfdayPlans(models).then(function () {
           if (callback != null) {
             callback();
           }
         });
-      } else {
+      }else{
         if (callback != null) {
           callback();
         }
@@ -328,7 +336,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     }
     //保存计划
     $scope.savePlan = function () {
-      if ($scope.selectedHalfType.type == null && $scope.currentRoute == null) {
+      if ($scope.selectedAfternoonHalfType.type==null && $scope.selectedMorningHalfType.type==null && $scope.currentRoute == null) {
         $rootScope.toast("请选择路线或者半天事务");
       } else {
         $scope.saveRoutePlan(function () {
@@ -502,19 +510,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.week.push(i == 0 ? new Date($scope.weekStartDay.setDate($scope.weekStartDay.getDate() + 0)) : new Date($scope.weekStartDay.setDate($scope.weekStartDay.getDate() + 1)));
       $scope.weekChange[i] = $scope.week[i];
     }
-
-    $scope.NextWeek = function () {
-      for (var n = 0; n < 7; n++) {
-        //week会改变，值赋给weekChange，不能只用一个数组
-        $scope.weekChange[n] = new Date($scope.week[n].setDate($scope.week[n].getDate() + 7));
-      }
-    };
-    $scope.PrevWeek = function () {
-      for (var m = 0; m < 7; m++) {
-        //week会改变，值赋给weekChange，不能只用一个数组
-        $scope.weekChange[m] = new Date($scope.week[m].setDate($scope.week[m].getDate() - 7));
-      }
-    };
     //点击日期时触发
     $scope.clickDate = function (date) {
       $scope.selectedDate = date;
