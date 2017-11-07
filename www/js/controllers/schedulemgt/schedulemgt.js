@@ -28,7 +28,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekPlanList = function (callback) {
       dailysrv.getWeekPlanList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (palnlist) {
         $scope.weekPlanList = palnlist;
-        // console.log(palnlist);
         if (callback != null) {
           callback();
         }
@@ -38,7 +37,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekActualList = function (callback) {
       dailysrv.getWeekActualList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (actuallist) {
         $scope.weekActualList = actuallist;
-        console.log(actuallist);
         if (callback != null) {
           callback();
         }
