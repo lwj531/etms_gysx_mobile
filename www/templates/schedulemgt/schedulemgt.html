@@ -490,10 +490,10 @@
               ng-bind="date | amDateFormat: 'MM/DD'"></span>)
             </div>
             <div class="schedule-week-row">
-              <div class="col-73 flex-center" ng-show="date.route.LineID==''" ng-click="showHalfFooter('route',date )">
+              <div class="col-73 flex-center" ng-show="date.route.LineID==''||date.route==null" ng-click="showHalfFooter('route',date )">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-73" ng-show="date.route.LineID!=''" ng-click="showHalfFooter('route',date)">
+              <div class="col-73" ng-show="date.route.LineID!='' && date.route!=null" ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
                     <img src="img/route_green_44.png" width="18">
