@@ -170,7 +170,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
             $scope.currentDaily = data;
             console.log(data);
             if($scope.staff.IsCCR){
-              if($scope.currentDaily.PlanRouteline.Institutions.length==0){
+              if($scope.currentDaily.PlanRouteline.Institutions.length==0 && $scope.currentDaily.Checkins.length>0){
                 $scope.currentDaily.PlanRouteline.Institutions =[];
               }
               //添加计划外的签到
@@ -208,7 +208,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
                 }
               }
             }else if($scope.staff.IsAE){
-              if($scope.currentDaily.Citys.length==0){
+              if($scope.currentDaily.Citys.length==0 && $scope.currentDaily.Checkins.length>0){
                 $scope.currentDaily.Citys=[{Institutions:[]}];
               }
               for (var i = 0; i < $scope.currentDaily.Checkins.length; i++) {
