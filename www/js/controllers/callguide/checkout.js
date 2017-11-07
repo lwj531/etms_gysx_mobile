@@ -1,6 +1,6 @@
-angular.module('checkout.ctrl', ['guide.srv','client.srv'])
+angular.module('checkout.ctrl', ['guide.srv', 'client.srv'])
 
-  .controller('CheckoutCtrl', function($scope,$compile, $stateParams, guidesrv,clientsrv,amMoment) {
+  .controller('CheckoutCtrl', function ($scope, $compile, $stateParams, guidesrv, clientsrv, amMoment) {
 
 
     $scope.insID = $stateParams.insId;
@@ -24,12 +24,12 @@ angular.module('checkout.ctrl', ['guide.srv','client.srv'])
       }
 
     });
-    $scope.dateToday=moment();
-    //获取用户所有机构
+    $scope.dateToday = moment();
+    //获取机构签到信息
     $scope.getCheckin = function () {
-      guidesrv.getCheckinInfo($scope.dateToday.format('YYYY-MM-DD'),$scope.insID).then(function (data) {
+      guidesrv.getCheckinInfo($scope.dateToday.format('YYYY-MM-DD'), $scope.insID).then(function (data) {
         $scope.insinfo = data[0];
-console.log(data)
+        console.log(data)
       });
     };
 
@@ -41,7 +41,7 @@ console.log(data)
 
     $scope.checkinGPS = function () {
       //判断required是否有
-      var model ={
+      var model = {
         "InstitutionID": $scope.insID,
         "InstitutionName": $scope.currentIns.InstitutionName,
         "Priority": $scope.currentIns.InstitutionPriority,
@@ -64,7 +64,7 @@ console.log(data)
     };
     $scope.checkinManual = function () {
       //判断required是否有
-      var model ={
+      var model = {
         "InstitutionID": $scope.insID,
         "InstitutionName": $scope.currentIns.InstitutionName,
         "Priority": $scope.currentIns.InstitutionPriority,
@@ -81,7 +81,7 @@ console.log(data)
       };
       $scope.save(model);
     };
-    $scope.save=function (model) {
+    $scope.save = function (model) {
 
       guidesrv.saveCheckin(model).then(function () {
         $scope.popup("操作成功");
@@ -89,20 +89,18 @@ console.log(data)
     };
 
 
-
-
-    $scope.local={
-      longitude:0,
-      latitude:0
+    $scope.local = {
+      longitude: 0,
+      latitude: 0
     };
     //定位地图
     var map = new AMap.Map("checkoutmapcontainer",
       {
-        view:new AMap.View2D({
+        view: new AMap.View2D({
           resizeEnable: true,
           zoom: 15
         }),
-        lang:"zh_cn"
+        lang: "zh_cn"
       });
     map.plugin(["AMap.Geolocation", "AMap.PlaceSearch"],
       function () {
@@ -130,7 +128,7 @@ console.log(data)
             $scope.$apply();
             var circle = new AMap.Circle({
               //center: [data.position.getLng(), data.position.getLat()],// 圆心位置
-              center:currPosition,
+              center: currPosition,
               radius: 500, //半径
               strokeColor: "#73b5f5", //线颜色
               strokeOpacity: 0.2, //线透明度
@@ -141,17 +139,27 @@ console.log(data)
             circle.setMap(map);
             //这里的storedata 到时候实际用用户所负责的机构
             var storedata = [
-              {"InstitutionName": "复方药店", "Address": "岚皋路121号", "InstitutionLat": "31.256124", "InstitutionLng": "121.41995","InstitutionPriority":"A"}
+              {
+                "InstitutionName": "复方药店",
+                "Address": "岚皋路121号",
+                "InstitutionLat": "31.256124",
+                "InstitutionLng": "121.41995",
+                "InstitutionPriority": "A"
+              }
             ];
             //加载marker
             for (var i = 0; i < storedata.length; i++) {
               var position = new AMap.LngLat(storedata[i].InstitutionLng, storedata[i].InstitutionLat);
               marker = new AMap.Marker({
                 icon: new AMap.Icon({
-                  image:storedata[i].InstitutionPriority=="A"? "/img/GradeA-icon.png":(storedata[i].InstitutionPriority=="B"? "/img/GradeB-icon.png":"/img/GradeC-icon.png"),
+                  image: storedata[i].InstitutionPriority == "A" ? "/img/GradeA-icon.png" : (storedata[i].InstitutionPriority == "B" ? "/img/GradeB-icon.png" : "/img/GradeC-icon.png"),
                   size: new AMap.Size(26, 30)
                 }),
-                extData: { address: storedata[i].Address, name: storedata[i].InstitutionName,priority: storedata[i].InstitutionPriority },
+                extData: {
+                  address: storedata[i].Address,
+                  name: storedata[i].InstitutionName,
+                  priority: storedata[i].InstitutionPriority
+                },
                 position: position //图标定位
               });
               marker.setMap(map);

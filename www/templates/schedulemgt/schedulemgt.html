@@ -363,7 +363,7 @@
       <div ng-show="statusTab=='actual'">
         <!--角色为CCR 时显示下面列表-->
         <ul class="schedule-week-list" ng-if="staff.IsCCR">
-          <li ng-repeat="date in actualWeekDays">
+          <li >
             <div class="content-block-title"><span ng-bind="date | amDateFormat:'ddd'"></span> (<span
               ng-bind="date | amDateFormat: 'DD/MM'"></span>)
             </div>
@@ -682,19 +682,19 @@
       </div>
     </div>
   </div>
-  <!--计划的FAB-->
+  <!--计划的FAB计划报告-->
   <div ng-show="statusTab=='plan'&&viewActive=='weekView'">
     <!--CCR显示计划报告-->
-    <div class="fab-week align-center" ng-show="staff.IsCCR">
+    <div class="fab-week align-center" ng-show="staff.IsCCR" ui-sref="main.planreport">
       <div>
         <div class="flex-center">
-          <img src="img/seal_blue_124.png" width="80">
+          <img src="img/doc_blue_126.png" width="80">
         </div>
         <!--<div>半天事务</div>-->
       </div>
     </div>
     <!--AE显示计划报告-->
-    <div class="fab-week align-center" ng-show="staff.IsAE">
+    <div class="fab-week align-center" ng-show="staff.IsAE" ui-sref="main.planreport">
       <div>
         <div class="flex-center">
           <img src="img/doc_blue_126.png" width="80">
@@ -703,10 +703,10 @@
       </div>
     </div>
   </div>
-  <!--实际的FAB-->
+  <!--实际的FAB半天事务审批-->
   <div ng-show="statusTab=='actual'&&viewActive=='weekView'">
     <!--CCR显示计划报告-->
-    <div class="fab-week align-center" ng-show="staff.IsCCR">
+    <div class="fab-week align-center" ng-show="staff.IsCCR" ui-sref="main.halfdayapproval">
       <div>
         <div class="flex-center">
           <img src="img/seal_blue_124.png" width="80">
@@ -715,10 +715,10 @@
       </div>
     </div>
     <!--AE显示计划报告-->
-    <div class="fab-week align-center" ng-show="staff.IsAE">
+    <div class="fab-week align-center" ng-show="staff.IsAE" ui-sref="main.halfdayapproval">
       <div>
         <div class="flex-center">
-          <img src="img/doc_blue_126.png" width="80">
+          <img src="img/seal_blue_124.png" width="80">
         </div>
         <!--<div>计划报告</div>-->
       </div>

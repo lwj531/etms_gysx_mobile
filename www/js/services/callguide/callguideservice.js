@@ -24,5 +24,18 @@ angular.module("guide.srv", ["http.srv"])
       return httpsrv.service("/api/Checkin/GetCheckin/"+ activityDate + '/'+ institutionId, {}, "get");
     };
 
+    //获取最近的库存
+    this.getLatestInventorys = function (institutionId) {
+      return httpsrv.service("/api/Checkin/GetLatestInventorys/"+ institutionId, {}, "get");
+    };
+    //获取当日填写过的进销存
+    this.getDailyInventorys = function (institutionId) {
+      return httpsrv.service("/api/Checkin/GetDailyInventorys/"+ institutionId, {}, "get");
+    };
+    //保存进销存
+    this.saveInventory = function (model) {
+      return httpsrv.service("/api/Checkin/SaveInventory", model, "post");
+    };
+
   }
   ]);

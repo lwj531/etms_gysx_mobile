@@ -1,6 +1,6 @@
 angular.module('checkin.ctrl', ['guide.srv','client.srv'])
 
-  .controller('CheckinCtrl', function ($scope, $compile, $stateParams, guidesrv,clientsrv) {
+  .controller('CheckinCtrl', function ($scope, $compile, $stateParams, guidesrv,clientsrv,$state) {
     $scope.local = {
       longitude: 0,
       latitude: 0
@@ -52,6 +52,7 @@ angular.module('checkin.ctrl', ['guide.srv','client.srv'])
         // ]
       };
       $scope.save(model);
+      $state.go("main.calldetails",{insId:$scope.insID})
     };
     $scope.checkinManual = function () {
       //判断required是否有
