@@ -6,106 +6,46 @@
     </button>
     <div class="h1 title">进销存检查</div>
     <div class="buttons" style="position: absolute;right: 5px;">
-      <button class="button button-icon" style="font-size: 15px;">保存</button>
+      <button class="button button-icon" style="font-size: 15px;" ng-click="SaveInventory()">保存</button>
     </div>
   </div>
-  <ion-content class="has-header">
-    <div class="bg-white jxc-content">
-      <div class="jxc-content-title"><span class="jxc-content-title-skuname">安康信 60mg*5片(盒)</span><span class="jxc-content-title-kc">最近库存  <span class="zjkc">1234</span></span></div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>购进</li>
-          <li>销量</li>
-          <li>库存</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>建议订单</li>
-          <li>SKU价格</li>
-          <li></li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li></li>
-        </ul>
-      </div>
-    </div>
-    <div class="bg-white jxc-content">
-      <div class="jxc-content-title"><span class="jxc-content-title-skuname">安康信 60mg*5片(盒)</span><span class="jxc-content-title-kc">最近库存  <span class="zjkc">1234</span></span></div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>购进</li>
-          <li>销量</li>
-          <li>库存</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>建议订单</li>
-          <li>SKU价格</li>
-          <li></li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li></li>
-        </ul>
-      </div>
-    </div>
-    <div class="bg-white jxc-content">
-      <div class="jxc-content-title"><span class="jxc-content-title-skuname">安康信 60mg*5片(盒)</span><span class="jxc-content-title-kc">最近库存  <span class="zjkc">1234</span></span></div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>购进</li>
-          <li>销量</li>
-          <li>库存</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>建议订单</li>
-          <li>SKU价格</li>
-          <li></li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="teltel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li></li>
-        </ul>
-      </div>
-    </div>
+  <ion-content class="has-header bg-white">
     <!--CCR角色进入的时候的页面-->
+    <ul>
+      <li class="jxc-content" ng-repeat="item in latestInventorys">
+        <div class="padding-1015 flex-between"><div class="" ng-bind="item.SkuName"></div><div><span class="">最近库存  <span class="color-blue" ng-bind="item.Stock">1234</span></span></div></div>
+        <div class="jxc-content-bt">
+          <ul class="jxc-ul">
+            <li>购进</li>
+            <li>销量</li>
+            <li>库存</li>
+          </ul>
+        </div>
+        <div class="jxc-content-sr">
+          <ul class="jxc-ul">
+            <li><input type="tel" placeholder="0" ng-model="item.SaleIn"></li>
+            <li><input type="tel" placeholder="0" ng-model="item.SaleOut"></li>
+            <li><input type="tel" placeholder="0" ng-model="item.Stock"></li>
+          </ul>
+        </div>
+        <div class="jxc-content-bt">
+          <ul class="jxc-ul">
+            <li>建议订单</li>
+            <li>SKU价格</li>
+            <li>排位面</li>
+          </ul>
+        </div>
+        <div class="jxc-content-sr">
+          <ul class="jxc-ul">
+            <li><input type="tel" placeholder="0" ng-model="item.ProposalOrder"></li>
+            <li><input type="tel" placeholder="0" ng-model="item.SKUPrice"></li>
+            <li><input type="tel" placeholder="0" ng-model="item.PositionCount"></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
     <div class="bg-white jxc-content">
-      <div class="jxc-content-title"><span class="jxc-content-title-skuname">安康信 60mg*5片(盒)</span><span class="jxc-content-title-kc">最近库存  <span class="zjkc">1234</span></span></div>
+      <div class="padding-1015 flex-between"><div class="">安康信 60mg*5片(盒)</div><div><span class="">最近库存  <span class="color-blue">1234</span></span></div></div>
       <div class="jxc-content-bt">
         <ul class="jxc-ul">
           <li>购进</li>
@@ -124,76 +64,14 @@
         <ul class="jxc-ul">
           <li>建议订单</li>
           <li>SKU价格</li>
-          <li>排位面</li>
+          <li></li>
         </ul>
       </div>
       <div class="jxc-content-sr">
         <ul class="jxc-ul">
           <li><input type="tel" placeholder="0"></li>
           <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="bg-white jxc-content">
-      <div class="jxc-content-title"><span class="jxc-content-title-skuname">安康信 60mg*5片(盒)</span><span class="jxc-content-title-kc">最近库存  <span class="zjkc">1234</span></span></div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>购进</li>
-          <li>销量</li>
-          <li>库存</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>建议订单</li>
-          <li>SKU价格</li>
-          <li>排位面</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-    </div>
-    <div class="bg-white jxc-content">
-      <div class="jxc-content-title"><span class="jxc-content-title-skuname">安康信 60mg*5片(盒)</span><span class="jxc-content-title-kc">最近库存  <span class="zjkc">1234</span></span></div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>购进</li>
-          <li>销量</li>
-          <li>库存</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-        </ul>
-      </div>
-      <div class="jxc-content-bt">
-        <ul class="jxc-ul">
-          <li>建议订单</li>
-          <li>SKU价格</li>
-          <li>排位面</li>
-        </ul>
-      </div>
-      <div class="jxc-content-sr">
-        <ul class="jxc-ul">
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
-          <li><input type="tel" placeholder="0"></li>
+          <li></li>
         </ul>
       </div>
     </div>

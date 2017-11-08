@@ -99,6 +99,12 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/schedulemgt/planreport.html",
         controller: "PlanReportCtrl"
       })
+      //日程管理半天事务审批
+      .state('main.halfdayapproval', {
+        url: '/halfdayapproval',
+        templateUrl: "templates/schedulemgt/halfdayapproval.html",
+        controller: "HalfDayApprovalCtrl"
+      })
       //客户管理
       .state('main.clientmgt', {
         url: '/clientmgt',
@@ -234,19 +240,19 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         })
       //(拜访)签入机构后的拜访向导
       .state('main.calldetails', {
-          url: '/calldetails',
+          url: '/calldetails/:insId',
           templateUrl: "templates/callguide/calldetails.html",
           controller: "CalldetailsCtrl"
         })
       //进销存检查
       .state('main.purchasesellstockcheck', {
-          url: '/purchasesellstockcheck',
+          url: '/purchasesellstockcheck/:insId',
           templateUrl: "templates/callguide/purchasesellstockcheck.html",
           controller: "PurchasesellstockcheckCtrl"
         })
       //生意回顾
       .state('main.businessreview', {
-          url: '/businessreview',
+          url: '/businessreview/:insId',
           templateUrl: "templates/callguide/businessreview.html",
           controller: "BusinessreviewCtrl"
         })
