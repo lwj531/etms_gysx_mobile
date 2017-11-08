@@ -14,23 +14,13 @@
       <div class="padding-1015 flex-start margin-img align-center color-darkgray"><img src="img/team.png" width="20">回顾对象</div>
       <div class="">
         <ul>
-          <li class="list-item">
+          <li class="list-item" ng-repeat="item in clientList">
             <div class="item-content">
               <div class="item-media"><span class="uicon user-checkbox"></span></div>
               <div class="item-inner">
-                <div class="item-title align-center">王医生 <span class="space-10"></span>
+                <div class="item-title align-center">{{item.ClientName}} <span class="space-10"></span>
                   <img src="img/job_gray_48.png" width="16">
-                  <span class="color-darkgray">所属职务</span></div>
-              </div>
-            </div>
-          </li>
-          <li class="list-item" ng-repeat="item in reviews.ReviewTarget">
-            <div class="item-content">
-              <div class="item-media"><span class="uicon user-checkbox"></span></div>
-              <div class="item-inner">
-                <div class="item-title align-center">王医生 <span class="space-10"></span>
-                  <img src="img/job_gray_48.png" width="16">
-                  <span class="color-darkgray">所属职务</span></div>
+                  <span class="color-darkgray">{{item.Titile}}</span></div>
               </div>
             </div>
           </li>
@@ -45,7 +35,11 @@
         </ul>
       </div>
       <div class="width-100 padding-1015 flex-between adding-manual">
-        <input type="text" placeholder="手动输入添加" ng-model="otherMember">
+        <div class="input-wrapper">
+          <!-- value="otherMember"-->
+          <input type="text" placeholder="手动输入添加" value="otherMember" ng-focus="isFocus=true">
+          <span class="uicon close-info" ng-show="isFocus" ng-click="clearInput()"></span>
+        </div>
         <button ng-click="addOtherMember(otherMember)">添加</button>
       </div>
     </div>

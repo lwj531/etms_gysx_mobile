@@ -2702,6 +2702,18 @@ ion-delete-button.button-icon.icon:before {
   margin-right: 3px;
 }
 
+.calendar-block {
+  overflow: hidden;
+}
+
+.calendar-block .col-7 .text-right {
+  padding: 0 1rem;
+}
+
+.calendar-block .col-7 .flex-center {
+  height: 1.9rem;
+}
+
 .calendar-block .col-7 {
   width: 14.28%;
   float: left;
@@ -2717,11 +2729,11 @@ ion-delete-button.button-icon.icon:before {
   color: #fff;
   border-radius: 3px;
   width: 9rem;
-  line-height: 21px;
+  line-height: 1.55rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   transform: scaleX(0.8) scaleY(0.8);
   text-align: center;
 }
@@ -5766,18 +5778,6 @@ input[type=date].deadline-input {
   padding: 0 3px;
 }
 
-.calendar-block {
-  overflow: hidden;
-}
-
-.calendar-block .col-7 .text-right {
-  padding: 0 1rem;
-}
-
-.calendar-block .col-7 .flex-center {
-  height: 1.7rem;
-}
-
 .halfday-approval {
   padding-top: 5px;
 }
@@ -5812,4 +5812,20 @@ input[type=date].deadline-input {
   display: block;
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
+}
+.amap-marker .marker-route{
+  position: absolute;
+  width: 40px;
+  height: 44px;
+  color: #fff;
+  cursor: pointer;
+}
+.amap-marker .marker-route.markerA {
+  background: url('../img/markerA_blank.png') no-repeat;
+}
+.amap-marker .marker-route.markerB {
+  background: url('../img/markerB_blank.png') no-repeat;
+}
+.amap-marker .marker-route.markerC {
+  background: url('../img/markerC_blank.png') no-repeat;
 }
