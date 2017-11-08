@@ -2046,13 +2046,18 @@ input[type="text"].route-name-input.wide {
 }
 
 .block-button.plan {
-  border-color: #419de7;
+  border-color: #fff;
   color: #419de7;
 }
-
+.block-button.plan.active {
+  border-color: #419de7;
+}
 .block-button.actual {
-  border-color: #26d07c;
+  border-color: #fff;
   color: #26d07c;
+}
+.block-button.actual.active {
+  border-color: #26d07c;
 }
 
 .uicon-home {
@@ -3461,13 +3466,13 @@ p.stick-left {
 .close-info:after {
   content: '';
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2044%2044'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cg%20stroke%3D'none'%20stroke-width%3D'1'%20fill%3D'none'%20fill-rule%3D'evenodd'%3E%3Cpath%20d%3D'M22.5%2C20.3786797%20L14.7218254%2C12.6005051%20L12.6005051%2C14.7218254%20L20.3786797%2C22.5%20L12.6005051%2C30.2781746%20L14.7218254%2C32.3994949%20L22.5%2C24.6213203%20L30.2781746%2C32.3994949%20L32.3994949%2C30.2781746%20L24.6213203%2C22.5%20L32.3994949%2C14.7218254%20L30.2781746%2C12.6005051%20L22.5%2C20.3786797%20Z%20M22%2C44%20C34.1502645%2C44%2044%2C34.1502645%2044%2C22%20C44%2C9.8497355%2034.1502645%2C0%2022%2C0%20C9.8497355%2C0%200%2C9.8497355%200%2C22%20C0%2C34.1502645%209.8497355%2C44%2022%2C44%20Z'%20fill%3D'%23ffffff'%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-  background-size: 21px;
+  background-size: 20px;
   background-repeat: no-repeat;
   display: block;
-  width: 21px;
+  width: 20px;
   height: 20px;
   position: absolute;
-  top: 0px;
+  top: 0;
   right: 3px;
   border-radius: 10px;
   background-color: #a7a7a7;
@@ -4296,12 +4301,31 @@ input[type=month] {
   font-size: 16px;
 }
 
-.adding-manual input {
+.adding-manual .input-wrapper{
+  position: relative;
+}
+.adding-manual .input-wrapper {
   width: calc(100% - 100px);
+
+}
+.adding-manual .input-wrapper input{
+  width: 100%;
   border: 1px solid #e4e4e4;
   height: 35px;
   padding: 0 10px;
   font-size: 1rem;
+}
+.adding-manual .close-info{
+  top:2px;
+  right: 0;
+}
+.adding-manual .close-info:after{
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2044%2044'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cg%20stroke%3D'none'%20stroke-width%3D'1'%20fill%3D'none'%20fill-rule%3D'evenodd'%3E%3Cpath%20d%3D'M22.5%2C20.3786797%20L14.7218254%2C12.6005051%20L12.6005051%2C14.7218254%20L20.3786797%2C22.5%20L12.6005051%2C30.2781746%20L14.7218254%2C32.3994949%20L22.5%2C24.6213203%20L30.2781746%2C32.3994949%20L32.3994949%2C30.2781746%20L24.6213203%2C22.5%20L32.3994949%2C14.7218254%20L30.2781746%2C12.6005051%20L22.5%2C20.3786797%20Z%20M22%2C44%20C34.1502645%2C44%2044%2C34.1502645%2044%2C22%20C44%2C9.8497355%2034.1502645%2C0%2022%2C0%20C9.8497355%2C0%200%2C9.8497355%200%2C22%20C0%2C34.1502645%209.8497355%2C44%2022%2C44%20Z'%20fill%3D'%23efefef'%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 17px;
+  width: 17px;
+  height: 17px;
+  top: 6px;
+  right: 4px;
 }
 
 .adding-manual button {
