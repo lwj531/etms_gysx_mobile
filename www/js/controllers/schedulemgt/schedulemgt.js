@@ -8,7 +8,7 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       console.log($scope.staff);
     });
     //日程管理初始化tab 打开日视图  (dayView | weekView)
-    $scope.viewActive = 'weekView';
+    $scope.viewActive = 'dayView';
     //日视图里切列表和地图 dayInfoTab：(list | map )
     $scope.dayInfoTab = 'list';
     //周视图内的实际和计划tab初始化 (actual | plan)
@@ -156,10 +156,15 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.TotalNumberOfPlans = 0;//计划内机构总数
       if ($scope.staff != null) {
         guidesrv.getPlanScheduleList($scope.selectedDate.format('YYYY-MM-DD')).then(function (data) {
+          $scope.currentOriginalDaily = data;//给日地图用
+          //如果当前视图是日地图时,同时刷新绑定题图
+          if ($scope.dayInfoTab == 'map') {
+            $scope.setInsMarker();
+          }
+
           //当天的线路
           $scope.currentDaily = data;
           $scope.currentDaily.Citys = data._Citys;
-          //console.log(data);
           if ($scope.staff.IsCCR) {
             if ($scope.currentDaily.PlanRouteline.Institutions.length == 0 && $scope.currentDaily.Checkins.length > 0) {
               $scope.currentDaily.PlanRouteline.Institutions = [];
@@ -496,16 +501,61 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     //地图初始化完成后执行
     $scope.$on('amap', function (errorType, data) {
       if (data == "mapcompleted") {
-        $scope.map.clearMap();
-        //$scope.currentDaily.PlanRouteline 计划线路
-        //$scope.currentDaily.Checkins 实际签到
-        console.log($scope.currentDaily);
+        $scope.setInsMarker();
+        //console.log($scope.currentDaily);
       }
-      ;
     });
-    $scope.mapSwitchTab='actual';
+    $scope.mapSwitchTab = 'actual';
     //切换地图上实际路线和计划路线
-    $scope.switchPlanActualInMap = function () {
-      $scope.mapSwitchTab == "plan" ? $scope.mapSwitchTab = "actual" : $scope.mapSwitchTab = "plan";
+    $scope.switchPlanActualInMap = function (type) {
+      $scope.mapSwitchTab = type;
+
+      $scope.setInsMarker();
     };
+    //根据地图上的实际、计划按钮绘制地图点
+    $scope.setInsMarker = function () {
+      $scope.map.clearMap();
+      //$scope.currentDaily.PlanRouteline 计划线路
+      //$scope.currentDaily.Checkins 实际签到
+      var institutions = [];
+      if ($scope.mapSwitchTab == 'plan') {
+        for (var i = 0; i < $scope.currentOriginalDaily.PlanRouteline.Institutions.length; i++) {
+          var ins = $scope.currentOriginalDaily.PlanRouteline.Institutions[i];
+          institutions.push({
+            Name: ins.InstitutionName,
+            Id: ins.InstitutionID,
+            LngLat: ins.lnglat,
+            Priority: ins.InstitutionPriority
+          });
+          if (i == $scope.currentOriginalDaily.PlanRouteline.Institutions.length - 1) {
+            $scope.setInsMarkerHandle(institutions);
+          }
+        }
+      } else if ($scope.mapSwitchTab == 'actual') {
+        for (var i = 0; i < $scope.currentOriginalDaily.Checkins.length; i++) {
+          var checkIn = $scope.currentOriginalDaily.Checkins[i];
+          institutions.push({
+            Name: checkIn.InstitutionName,
+            Id: checkIn.InstitutionID,
+            LngLat: [checkIn.CheckinLocation.Lng, checkIn.CheckinLocation.Lat],
+            Priority: checkIn.InstitutionPriority
+          });
+          if (i == $scope.currentOriginalDaily.Checkins.length - 1) {
+            $scope.setInsMarkerHandle(institutions);
+          }
+        }
+      }
+
+    }
+    $scope.setInsMarkerHandle = function (institutions) {
+      console.log(institutions);
+      for (var i = 0; i < institutions.length; i++) {
+        var ins = institutions[i];
+        new AMap.Marker({
+          map: $scope.map,
+          icon: ins.Priority == "A" ? "img/GradeA-icon.png" : (ins.Priority == "B" ? "img/GradeB-icon.png" : "img/GradeC-icon.png"),
+          position: ins.LngLat
+        });
+      }
+    }
   });
