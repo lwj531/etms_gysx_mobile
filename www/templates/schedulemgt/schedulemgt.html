@@ -62,10 +62,10 @@
             <div class="item-inner">
               <div class="item-title color-blue" ng-bind="selectedDate | amDateFormat:'YYYY/MM/DD'"></div>
               <div class="item-after" ng-show="staff.IsCCR">
-                <a class="button button-clear button-stable button-small flex-center" ng-click="dayInfoTab='list'"
+                <a class="button button-clear button-stable button-small flex-center" ng-click="switchmaptab('list')"
                    ng-class="{'selected':dayInfoTab=='list'}"><span class="uicon list-view"></span></a>
                 <span class="space-stick" style="font-size: 17px;color: #d5d5d5;">|</span>
-                <a class="button button-clear button-stable button-small flex-center" ng-click="dayInfoTab='map'"
+                <a class="button button-clear button-stable button-small flex-center" ng-click="switchmaptab('map')"
                    ng-class="{'selected':dayInfoTab=='map'}"><span class="uicon map-view"></span></a>
               </div>
             </div>
@@ -74,7 +74,8 @@
         <!--当角色为CCR时显示-->
         <div class="crl-tabs" ng-if="staff.IsCCR">
           <!--日视图里的列表-->
-          <div class="crl-tab height-100" ng-show="dayInfoTab=='list'&& currentDaily.PlanRouteline.Institutions.length>0">
+          <div class="crl-tab height-100"
+               ng-show="dayInfoTab=='list'&& currentDaily.PlanRouteline.Institutions.length>0">
             <div class="bg-white home-schedule height-100">
               <div class="list-item multi-line no-line">
                 <div class="item-content">
@@ -92,7 +93,8 @@
                                ng-style="{width:(TotalNumberOfPlans==0?('0%'):(TotalNumberOfPlansHasCheckOut/ TotalNumberOfPlans).toFixed(2)*100 + '%')}"></div>
                         </div>
                       </div>
-                      <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;{{TotalNumberOfPlans==0?('0%'):(TotalNumberOfPlansHasCheckOut/ TotalNumberOfPlans).toFixed(2)*100 + '%'}}
+                      <div class="item-after color-blue" style="margin-left: 15px;">计划匹配&nbsp;{{TotalNumberOfPlans==0?('0%'):(TotalNumberOfPlansHasCheckOut/
+                        TotalNumberOfPlans).toFixed(2)*100 + '%'}}
                       </div>
                     </div>
                   </div>
@@ -216,15 +218,22 @@
               <div class="sign-info">
                 <div class="route-action flex-between">
                   <div class="sign-time flex-start"><span>首次签入时间</span>
-                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18">
+                      <span>{{(currentOriginalDaily.Checkins | filter:{InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                    </div>
                   </div>
-                  <div class="block-button flex-center actual"><img src="img/route_green_44.png" width="22">实际路线</div>
+                  <div class="block-button flex-center actual " ng-click="switchPlanActualInMap('actual')"
+                       ng-class="{'active':mapSwitchTab=='actual'}"><img src="img/route_green_44.png" width="22">实际路线
+                  </div>
                 </div>
                 <div class="route-action flex-between">
                   <div class="sign-time flex-start"><span>末次签出时间</span>
-                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>{{(currentOriginalDaily.Checkins | filter:{InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                    </div>
                   </div>
-                  <div class="block-button flex-center plan"><img src="img/route_blue_42.png" width="22">计划路线</div>
+                  <div class="block-button flex-center plan" ng-click="switchPlanActualInMap('plan')"
+                       ng-class="{'active':mapSwitchTab=='plan'}"><img src="img/route_blue_42.png" width="22">计划路线
+                  </div>
                 </div>
               </div>
             </div>
@@ -246,14 +255,17 @@
                   <div class="item-media"><img src="img/route_green_44.png" width="24"></div>
                   <div class="item-inner">
                     <div class="item-title-row">
-                      <div class="item-title"><span>{{currentDaily.Citys[0].CityNames}}</span>({{currentDaily.Citys[0].Institutions.length}})</div>
+                      <div class="item-title"><span>{{currentDaily.Citys[0].CityNames}}</span>({{currentDaily.Citys[0].Institutions.length}})
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               <ul>
                 <li ng-repeat-start="city in currentDaily.Citys"></li>
-                <li class="list-item multi-line"  ng-class="{'schedule-called':(item.CheckModel!=null&& item.CheckModel.IsPlan),'schedule-calledout':(item.CheckModel!=null&& item.CheckModel.IsPlan==false),'schedule-plan':item.CheckModel==null}" ng-repeat="item in city.Institutions">
+                <li class="list-item multi-line"
+                    ng-class="{'schedule-called':(item.CheckModel!=null&& item.CheckModel.IsPlan),'schedule-calledout':(item.CheckModel!=null&& item.CheckModel.IsPlan==false),'schedule-plan':item.CheckModel==null}"
+                    ng-repeat="item in city.Institutions">
                   <div class="item-content align-top">
                     <div class="item-media"><span class="list-dot"></span></div>
                     <div class="item-inner">
@@ -381,7 +393,7 @@
                         ng-bind="date.routeActual.LineName + (date.routeActual.Institutions.length>0?( '('+date.routeActual.Institutions.length+')'):'') + (date.routeActual.MatchRate.toFixed(2)*100 + '%')"></span>
                     </div>
                     <div class="progress-track">
-                      <div class="progress"  ng-style="{width:(date.routeActual.MatchRate.toFixed(2)*100 + '%')}"></div>
+                      <div class="progress" ng-style="{width:(date.routeActual.MatchRate.toFixed(2)*100 + '%')}"></div>
                     </div>
                   </div>
                 </div>
@@ -391,15 +403,17 @@
               </div>
               <div class="col-33 flex-center">
                 <div ng-show="date.routeActual!=null">
-                  <div class="">首次签入<span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
-                  <div class="">末次签出 <span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
+                  <div class="">首次签入<span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                  </div>
+                  <div class="">末次签出 <span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                  </div>
                 </div>
                 <div ng-show="date.routeActual==null" class="placeholder-div">
 
                 </div>
               </div>
               <div class="col-27 flex-center">
-                <div class="width-100"  ng-if="date.routeActual!=null">
+                <div class="width-100" ng-if="date.routeActual!=null">
                   <div class="flex-between"
                        ng-class="{'affair-gray':date.halfDayActualAM==null,'affair-blue':date.halfDayActualAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayActualAM.GroupCode=='INTERNAL','affair-red':date.halfDayActualAM.GroupCode=='PERSONAL'}">
                     <div>{{date.halfDayActualAM == null?'无半天事务':date.halfDayActualAM.HalfdayTypeName}}</div>
@@ -427,20 +441,23 @@
                 <div class="flex-start margin-img" ng-show="date.routeActual!=null">
                   <img src="img/route_green_44.png" width="18">
                   <div class=""><span
-                    ng-bind="date.routeActual.CityNames + (date.routeActual.Institutions.length>0?( '('+date.routeActual.Institutions.length+')'):'')"></span></div>
+                    ng-bind="date.routeActual.CityNames + (date.routeActual.Institutions.length>0?( '('+date.routeActual.Institutions.length+')'):'')"></span>
+                  </div>
                 </div>
               </div>
               <div class="col-33 flex-center">
                 <div ng-show="date.routeActual!=null">
-                  <div class="">首次签入<span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
-                  <div class="">末次签出 <span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span></div>
+                  <div class="">首次签入<span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                  </div>
+                  <div class="">末次签出 <span>{{(weekActualList.Checkins | filter:{CheckinDate : date.format('YYYY-MM-DD'),InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                  </div>
                 </div>
                 <div ng-show="date.routeActual==null" class="placeholder-div">
 
                 </div>
               </div>
               <div class="col-27 flex-center">
-                <div class="width-100"  ng-if="date.routeActual!=null">
+                <div class="width-100" ng-if="date.routeActual!=null">
                   <div class="flex-between"
                        ng-class="{'affair-gray':date.halfDayActualAM==null,'affair-blue':date.halfDayActualAM.GroupCode=='EXTERNAL','affair-orange':date.halfDayActualAM.GroupCode=='INTERNAL','affair-red':date.halfDayActualAM.GroupCode=='PERSONAL'}">
                     <div>{{date.halfDayActualAM == null?'无半天事务':date.halfDayActualAM.HalfdayTypeName}}</div>
@@ -466,10 +483,12 @@
               ng-bind="date | amDateFormat: 'MM/DD'"></span>)
             </div>
             <div class="schedule-week-row">
-              <div class="col-73 flex-center" ng-show="date.route.LineID==''||date.route==null" ng-click="showHalfFooter('route',date )">
+              <div class="col-73 flex-center" ng-show="date.route.LineID==''||date.route==null"
+                   ng-click="showHalfFooter('route',date )">
                 <img src="img/add_gray_64.png" width="36">
               </div>
-              <div class="col-73" ng-show="date.route.LineID!='' && date.route!=null" ng-click="showHalfFooter('route',date)">
+              <div class="col-73" ng-show="date.route.LineID!='' && date.route!=null"
+                   ng-click="showHalfFooter('route',date)">
                 <div class="flex-between width-100">
                   <div class="flex-start width-50">
                     <img src="img/route_green_44.png" width="18">

@@ -6,17 +6,17 @@
   </div>
   <div class="padding-top44">
     <div class="align-center padding margin-img">
-      <img src="img/route_green_44.png" width="18"> 城市名称(5)
+      <img src="img/route_green_44.png" width="18"> {{currentActualRoute.routeActual.CityNames}}({{currentActualRoute.routeActual.Institutions.length}})
     </div>
     <ul>
-      <li class="list-item multi-line" ng-repeat="item in actualStoreList">
+      <li class="list-item multi-line" ng-repeat="item in currentActualRoute.routeActual.Institutions">
         <div class="item-content align-top">
           <div class="item-media"><img src="img/markerA_52.png" width="20"></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">{{item.name}} parent</div>
+              <div class="item-title">{{item.InstitutionName}}</div>
             </div>
-            <div class="item-text">{{item.city}} {{item.address}}</div>
+            <div class="item-text">{{item.City.Name}} {{item.Address}}</div>
             <div class="item-text color-orange">
               <span ng-repeat="typename in ['项目一','项目二','项目叁']">{{typename}}</span>
 
