@@ -39,9 +39,6 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.getWeekActualList = function (callback) {
       dailysrv.getWeekActualList($scope.weekSatrtDate.format("YYYY-MM-DD"), $scope.weekEndDate.format("YYYY-MM-DD")).then(function (actuallist) {
         $scope.weekActualList = actuallist;
-
-        console.log("周实际:");
-        console.log(actuallist);
         if (callback != null) {
           callback();
         }
@@ -156,15 +153,14 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       $scope.TotalNumberOfPlans = 0;//计划内机构总数
       if ($scope.staff != null) {
         guidesrv.getPlanScheduleList($scope.selectedDate.format('YYYY-MM-DD')).then(function (data) {
-          $scope.currentOriginalDaily = data;//给日地图用
+          //当天的线路
+          $scope.currentDaily = data;
+          $scope.currentOriginalDaily = angular.copy(data);//拷贝一份原始的日程计划给日地图用
+          $scope.currentDaily.Citys = $scope.currentDaily._Citys;
           //如果当前视图是日地图时,同时刷新绑定题图
           if ($scope.dayInfoTab == 'map') {
             $scope.setInsMarker();
           }
-
-          //当天的线路
-          $scope.currentDaily = data;
-          $scope.currentDaily.Citys = data._Citys;
           if ($scope.staff.IsCCR) {
             if ($scope.currentDaily.PlanRouteline.Institutions.length == 0 && $scope.currentDaily.Checkins.length > 0) {
               $scope.currentDaily.PlanRouteline.Institutions = [];
@@ -252,8 +248,8 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
       }
     });
     //切换map tab
-    $scope.switchmaptab = function () {
-      $scope.dayInfoTab == 'list' ? $scope.dayInfoTab = 'map' : $scope.dayInfoTab = 'list';
+    $scope.switchmaptab = function (type) {
+      $scope.dayInfoTab=type;
       if ($scope.dayInfoTab == 'map') {
         $scope.$broadcast("amap", "datacompleted");
       }
@@ -455,18 +451,21 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     //AE实际弹框
     $scope.showActualAE = function (data) {
       $scope.currentActualRoute = data;
-      var showActual = $ionicPopup.show({
-        cssClass: 'actual-alert',
-        templateUrl: 'templates/schedulemgt/actualAlertAE.html',
-        title: '',
-        scope: $scope
-      });
-      showActual.then(function (res) {
-        //console.log('Tapped Actual!', res);
-      });
-      $scope.closeActualAE = function () {
-        showActual.close();
-      };
+      console.log(data);
+      if(data.routeActual!=null){
+        var showActual = $ionicPopup.show({
+          cssClass: 'actual-alert',
+          templateUrl: 'templates/schedulemgt/actualAlertAE.html',
+          title: '',
+          scope: $scope
+        });
+        showActual.then(function (res) {
+          //console.log('Tapped Actual!', res);
+        });
+        $scope.closeActualAE = function () {
+          showActual.close();
+        };
+      }
     };
     //保存AE计划
     $scope.saveAEPlan = function () {
@@ -502,14 +501,12 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
     $scope.$on('amap', function (errorType, data) {
       if (data == "mapcompleted") {
         $scope.setInsMarker();
-        //console.log($scope.currentDaily);
       }
     });
     $scope.mapSwitchTab = 'actual';
     //切换地图上实际路线和计划路线
     $scope.switchPlanActualInMap = function (type) {
       $scope.mapSwitchTab = type;
-
       $scope.setInsMarker();
     };
     //根据地图上的实际、计划按钮绘制地图点
@@ -548,14 +545,27 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
 
     }
     $scope.setInsMarkerHandle = function (institutions) {
-      console.log(institutions);
+      var isPlan = $scope.mapSwitchTab == 'plan';
+      var lineArr=[];
       for (var i = 0; i < institutions.length; i++) {
         var ins = institutions[i];
         new AMap.Marker({
           map: $scope.map,
-          icon: ins.Priority == "A" ? "img/GradeA-icon.png" : (ins.Priority == "B" ? "img/GradeB-icon.png" : "img/GradeC-icon.png"),
-          position: ins.LngLat
+          position: ins.LngLat,
+          content: '<div class="marker-route '+(ins.Priority == "A" ? "markerA" : (ins.Priority == "B" ? "markerA" : "markerC"))+'">'+(i+1)+'</div>'
         });
+        lineArr.push(ins.LngLat);
+        if(i==institutions.length-1){
+          new AMap.Polyline({
+            path: lineArr,          //设置线覆盖物路径
+            strokeColor: isPlan?"#419de7":"#48d38e", //线颜色
+            strokeOpacity: 1,       //线透明度
+            strokeWeight: 2,        //线宽
+            strokeStyle: isPlan?'dashed':'solid',   //线样式
+            //strokeDasharray: [10, 5] //补充线样式
+          }).setMap($scope.map);
+          $scope.map.setFitView();//使地图自适应显示到合适的范围
+        }
       }
     }
   });

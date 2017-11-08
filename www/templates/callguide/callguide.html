@@ -7,18 +7,10 @@
     </button>
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
     <div class="h1 title">拜访向导</div>
-    <div class="buttons">
-      <button class="button button-icon" ng-click="search_nopositionstore()">
-        <img src="img/nolatlng-store-icon.png" width="25" style="padding-top: 4px;">
-      </button>
-      <button class="button button-icon" ng-click="searchstore()">
-        <img src="img/search-icon.png" width="25" style="padding-top: 6px;">
-      </button>
-    </div>
   </div>
   <ion-content class="call-guide">
     <!--地图-->
-    <div id="callguidemap"></div>
+    <amap></amap>
     <!--机构详情下面的黑色阴影层-->
     <div class="black-shadow-understoreinfo" ng-click="closestoreinfowindow()"></div>
     <!--点击窗体信息右边的图标查看机构详情上拉弹窗-->
@@ -122,46 +114,6 @@
            </tbody>
          </table>
        </div>
-    </div>
-    <!--搜索机构弹出框-->
-    <div class="route-action-block top-50" ng-show="searchmodal">
-      <div class="route-action">
-        <div class="route-action-bar">
-          <button class="button button-clear button-positive button-thin" ng-click="closesearchstorediv()">取消</button>
-          <input type="text" ng-model="searchmodel.Value" placeholder="请输入店名称关键字" maxlength="20"
-                 class="route-name-input wide"/>
-          <button class="button button-clear button-positive button-thin" ng-click="searchstorebykeyword()">搜索</button>
-        </div>
-        <ion-scroll class="window-list" ng-show="searchresult.length>0">
-          <ion-list class="no-latlng">
-            <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
-              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
-              <p class="item-text">{{item.Address}}</p>
-            </ion-item>
-          </ion-list>
-        </ion-scroll>
-        <div class="bg-white text-center color-blue" ng-show="searchresult.length>0" style="padding: 6px 0;">搜索到{{searchresult.length}}家机构</div>
-      </div>
-    </div>
-    <!--无坐标机构弹出框-->
-    <div class="route-action-block top-50" ng-show="nolatlngmodal">
-      <div class="route-action">
-        <div class="route-action-bar">
-          <div class="align-center margin-img" style="color: #4587f7;"><img src="img/nolatlng-icon.png" width="17" >无机构坐标（<span
-            class="color-orange">{{nolatlngresult.length}}</span>）
-          </div>
-          <button class="button button-clear button-positive button-thin" ng-click="close_nolatlngstorediv()">关闭</button>
-        </div>
-        <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
-          <ion-list class="no-latlng">
-            <ion-item ng-repeat="item in nolatlngresult" ng-click="openinsinfo(item)">
-              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
-              <p class="item-text">{{item.Address}}</p>
-            </ion-item>
-          </ion-list>
-        </ion-scroll>
-        <div class="bg-white text-center color-blue" ng-show="nolatlngresult.length>3" style="padding: 6px 0;">{{nolatlngresult.length}}家机构</div>
-      </div>
     </div>
   </ion-content>
   <!--底部上滑-->

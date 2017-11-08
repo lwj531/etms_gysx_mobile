@@ -62,10 +62,10 @@
             <div class="item-inner">
               <div class="item-title color-blue" ng-bind="selectedDate | amDateFormat:'YYYY/MM/DD'"></div>
               <div class="item-after" ng-show="staff.IsCCR">
-                <a class="button button-clear button-stable button-small flex-center" ng-click="switchmaptab()"
+                <a class="button button-clear button-stable button-small flex-center" ng-click="switchmaptab('list')"
                    ng-class="{'selected':dayInfoTab=='list'}"><span class="uicon list-view"></span></a>
                 <span class="space-stick" style="font-size: 17px;color: #d5d5d5;">|</span>
-                <a class="button button-clear button-stable button-small flex-center" ng-click="switchmaptab()"
+                <a class="button button-clear button-stable button-small flex-center" ng-click="switchmaptab('map')"
                    ng-class="{'selected':dayInfoTab=='map'}"><span class="uicon map-view"></span></a>
               </div>
             </div>
@@ -218,7 +218,9 @@
               <div class="sign-info">
                 <div class="route-action flex-between">
                   <div class="sign-time flex-start"><span>首次签入时间</span>
-                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18">
+                      <span>{{(currentOriginalDaily.Checkins | filter:{InOut:'IN'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                    </div>
                   </div>
                   <div class="block-button flex-center actual " ng-click="switchPlanActualInMap('actual')"
                        ng-class="{'active':mapSwitchTab=='actual'}"><img src="img/route_green_44.png" width="22">实际路线
@@ -226,7 +228,8 @@
                 </div>
                 <div class="route-action flex-between">
                   <div class="sign-time flex-start"><span>末次签出时间</span>
-                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>09:20:23</span></div>
+                    <div class="align-center"><img src="img/clock_blue_30.png" width="18"><span>{{(currentOriginalDaily.Checkins | filter:{InOut:'OUT'})[0].CheckinTime | amDateFormat:'H:mm:ss'}}</span>
+                    </div>
                   </div>
                   <div class="block-button flex-center plan" ng-click="switchPlanActualInMap('plan')"
                        ng-class="{'active':mapSwitchTab=='plan'}"><img src="img/route_blue_42.png" width="22">计划路线
