@@ -1,11 +1,11 @@
-angular.module('purchasesellstockcheck.ctrl', ['guide.srv','client.srv'])
+angular.module('purchasesellstockcheck.ctrl', ['guide.srv', 'client.srv'])
 
-  .controller('PurchasesellstockcheckCtrl', function($scope,guidesrv,clientsrv, $stateParams) {
-    clientsrv.getcurrentstaff().then(function (staff) {
-      //当前人员的信息
-      $scope.staff = staff;
-     console.log($scope.staff)
-    });
+  .controller('PurchasesellstockcheckCtrl', function ($scope, guidesrv, clientsrv, $stateParams) {
+    // clientsrv.getcurrentstaff().then(function (staff) {
+    //   //当前人员的信息
+    //   $scope.staff = staff;
+    //  console.log($scope.staff)
+    // });
 
     //获取最近的库存
     guidesrv.getlatestinventorys($stateParams.insId).then(function (data) {
@@ -32,19 +32,18 @@ angular.module('purchasesellstockcheck.ctrl', ['guide.srv','client.srv'])
     };
     $scope.init();
 
-    $scope.dateToday = moment();
 
     //保存库存
-    $scope.SaveInventory=function () {
+    $scope.SaveInventory = function () {
       console.log($scope.SKUList);
 
-      for(var i=0;i<$scope.SKUList.length;i++){
+      for (var i = 0; i < $scope.SKUList.length; i++) {
         $scope.SKUList[i].InstitutionID = $stateParams.insId;
         $scope.SKUList[i].SkuID = $scope.SKUList[i].Id;
         $scope.SKUList[i].SkuName = $scope.SKUList[i].Name;
 
 
-        if(i===$scope.SKUList.length-1){
+        if (i === $scope.SKUList.length - 1) {
           guidesrv.saveInventory($scope.SKUList).then(function () {
             $scope.popup("保存成功");
           });

@@ -5,7 +5,7 @@
       <span class="back-text" style="">返回</span>
     </button>
     <div class="h1 title">生意回顾</div>
-    <button class="button button-clear back-button">
+    <button class="button button-clear back-button" ng-click="saveReview()">
       保存
     </button>
   </div>
@@ -14,7 +14,7 @@
       <div class="padding-1015 flex-start margin-img align-center color-darkgray"><img src="img/team.png" width="20">回顾对象</div>
       <div class="">
         <ul>
-          <li class="list-item" ng-repeat="item in clientList">
+          <li class="list-item" ng-repeat="item in clientOptions" ng-class="{'checked':item.selected}" ng-click="item.selected=!item.selected">
             <div class="item-content">
               <div class="item-media"><span class="uicon user-checkbox"></span></div>
               <div class="item-inner">
@@ -24,7 +24,7 @@
               </div>
             </div>
           </li>
-          <li class="list-item" ng-repeat="item in otherList">
+          <li class="list-item" ng-repeat="item in otherList" ng-class="{'checked':item.selected}" ng-click="item.selected=!item.selected">
             <div class="item-content">
               <div class="item-media"><span class="uicon user-checkbox"></span></div>
               <div class="item-inner">
@@ -37,7 +37,7 @@
       <div class="width-100 padding-1015 flex-between adding-manual">
         <div class="input-wrapper">
           <!-- value="otherMember"-->
-          <input type="text" placeholder="手动输入添加" ng-model="businessReview.otherMember" ng-focus="isFocus=true">
+          <input type="text" placeholder="手动输入添加" ng-model="setOthers.Name" ng-focus="isFocus=true">
           <span class="uicon close-info" ng-show="isFocus" ng-click="clearInput()"></span>
         </div>
         <button ng-click="addOtherMember()">添加</button>
@@ -58,7 +58,7 @@
       </div>
     </div>
     <!--checked:选中-->
-    <div class="padding-1015 bg-white flex-between" ng-click="changeCheckPPT()" ng-class="{'checked':hasPPT}">
+    <div class="padding-1015 bg-white flex-between" ng-click="changeCheckPPT()" ng-class="{'checked':businessReview.HasPPT}">
       <div>包含PPT</div>
       <span class="uicon user-checkbox"></span>
     </div>

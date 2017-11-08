@@ -14,12 +14,12 @@
         <ul>
           <li class="list-item multi-line ">
             <div class="item-content align-top">
-              <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+              <div class="item-media"><span class="uicon {{inslevelflag}}"></span></div>
               <div class="item-inner">
                 <div class="item-title-row">
-                  <div class="item-title">国药控股大药房永新连锁店(A)</div>
+                  <div class="item-title">{{currentIns.InstitutionName}} ({{currentIns.InstitutionPriority}})</div>
                 </div>
-                <div class="item-text">上海市石泉路548号</div>
+                <div class="item-text">{{currentIns.Address}}</div>
               </div>
             </div>
           </li>
@@ -32,7 +32,7 @@
             <div class="item-content">
               <div class="item-media"><img src="img/flag_green_30.png" width="17"></div>
               <div class="item-inner">
-                <div class="item-title color-green">签入：09:32:30</div>
+                <div class="item-title color-green">签入时间：{{insinfo.CheckinTime}}</div>
               </div>
             </div>
           </li>
@@ -55,10 +55,10 @@
         </div>
       </div>
       <div id="btnCheck_GPS">
-        <a ui-sref="main.aecallguide" class="button checkintodo-r">GPS签出</a>
+        <a ui-sref="main.callguide" class="button checkintodo-r" ng-click="checkinGPS()">GPS签出</a>
       </div>
       <div id="btnCheck_Manual">
-        <a ui-sref="main.aecallguide" class="button  checkintodo-g">手动签出</a>
+        <a ui-sref="main.callguide" class="button  checkintodo-g" ng-click="checkinManual()">手动签出</a>
       </div>
     </div>
   </ion-content>

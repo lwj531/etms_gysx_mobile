@@ -184,7 +184,8 @@
     </ul>
     <!--我负责的机构tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='myins'">
-      <li class="list-item multi-line" ui-sref="main.checkin({insId:item.InstitutionID})" ng-repeat="item in insdata">
+      <!--ui-sref="main.checkin"-->
+      <li class="list-item multi-line"  ng-repeat="item in insdata" ng-click="toCheckIn(item.InstitutionID)">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon {{item.icon}}"></span></div>
           <div class="item-inner">

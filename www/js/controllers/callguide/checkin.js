@@ -6,7 +6,7 @@ angular.module('checkin.ctrl', ['guide.srv','client.srv'])
       latitude: 0
     };
 
-    $scope.insID = $stateParams.insId;
+    // $scope.insID = $stateParams.insId;
     clientsrv.getins($stateParams.insId).then(function (data) {
       $scope.currentIns = data;
 
@@ -33,7 +33,7 @@ angular.module('checkin.ctrl', ['guide.srv','client.srv'])
     $scope.checkinGPS = function () {
       //判断required是否有
       var model ={
-        "InstitutionID": $scope.insID,
+        "InstitutionID":  $stateParams.insId,
         "InstitutionName": $scope.currentIns.InstitutionName,
         "Priority": $scope.currentIns.InstitutionPriority,
         "CheckinType": "G",
@@ -52,12 +52,10 @@ angular.module('checkin.ctrl', ['guide.srv','client.srv'])
         // ]
       };
       $scope.save(model);
-      $state.go("main.calldetails",{insId:$scope.insID})
     };
     $scope.checkinManual = function () {
-      //没加表单验证
       var model ={
-        "InstitutionID": $scope.insID,
+        "InstitutionID":  $stateParams.insId,
         "InstitutionName": $scope.currentIns.InstitutionName,
         "Priority": $scope.currentIns.InstitutionPriority,
         "CheckinType": "M",
@@ -77,6 +75,7 @@ angular.module('checkin.ctrl', ['guide.srv','client.srv'])
 
       guidesrv.saveCheckin(model).then(function () {
         $scope.popup("操作成功");
+        $state.go("main.calldetails",{insId:$stateParams.insId});
       });
     };
 

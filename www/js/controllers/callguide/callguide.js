@@ -1,6 +1,6 @@
 angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'angularMoment'])
 
-  .controller('CallGuideCtrl', function ($scope, $compile, routesettingsrv, guidesrv, amMoment) {
+  .controller('CallGuideCtrl', function ($scope, $compile, routesettingsrv, guidesrv,$state, amMoment) {
     $scope.local = {
       longitude: 0,
       latitude: 0
@@ -26,17 +26,19 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
       $scope.isExpand = true;
 
     };
-
+    $scope.toCheckIn = function (insId) {
+      $state.go("main.checkin", {insId: insId});
+    };
 
     $scope.dateToday = moment();
     var todayModel = [
       {
-        InsID:'',
-        InsName:'',
-        InsPriority:'',
-        InsAddress:'',
-        CheckinTime:'',
-        CheckoutTime:''
+        InsID: '',
+        InsName: '',
+        InsPriority: '',
+        InsAddress: '',
+        CheckinTime: '',
+        CheckoutTime: ''
       }
     ];
     //获取今日行程

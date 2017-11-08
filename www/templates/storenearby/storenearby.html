@@ -1,59 +1,124 @@
-<!--AE的拜访流程-->
-<ion-view title="附近药店" view-title="附近药店">
+<!--AE附近药店-->
+<ion-view>
   <div class="bar bar-header bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button hide buttons button-clear header-item" style="">
       <i class="icon ion-android-arrow-back"></i>
       <span class="back-text" style=""></span>
     </button>
     <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
-    <div class="h1 title">附近药店</div>
-    <button class="button button-icon" ng-click="searchstore()">
-      <img src="img/search-icon.png" width="25" style="padding-top: 6px;">
-    </button>
+    <div class="h1 title">拜访向导</div>
   </div>
-  <ion-content class="has-header call-guide" scroll="false">
+  <ion-content class="call-guide">
     <!--地图-->
-    <div id="storenearbymap" style="width:100%;height:100%;position:absolute;z-index:0;"></div>
-
-    <!--搜索机构弹出框-->
-    <div class="route-action-block top-50" ng-show="searchmodal">
-      <div class="route-action">
-        <div class="route-action-bar">
-          <button class="button button-clear button-positive button-thin" ng-click="closesearchstorediv()">取消</button>
-          <input type="text" ng-model="searchmodel.Value" placeholder="请输入机构名称关键字" maxlength="20"
-                 class="route-name-input wide"/>
-          <button class="button button-clear button-positive button-thin" ng-click="searchstorebykeyword()">搜索</button>
+    <amap></amap>
+    <!--机构详情下面的黑色阴影层-->
+    <div class="black-shadow-understoreinfo" ng-click="closestoreinfowindow()"></div>
+    <!--点击窗体信息右边的图标查看机构详情上拉弹窗-->
+    <div class="storeinfo-drag-up-div bg-white">
+      <div class="storeinfo-up">
+        <div class="storeinfo-title-img-div"><img class="storeinfo-title-img" src="img/tc-bigstore-blue.png" width="48"></div>
+        <div class="storeinfo-title-inner">
+          <p class="storeinfo-title-inner-p">复方药店</p>
+          <span class="storeinfo-title-inner-span">岚皋路121号</span>
         </div>
-        <ion-scroll class="window-list" ng-show="searchresult.length>0">
-          <ion-list>
-            <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
-              <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
-              <p class="item-text">{{item.Address}}</p>
-            </ion-item>
-          </ion-list>
-        </ion-scroll>
-        <div class="bg-white text-center" ng-show="searchresult.length>0">搜索到{{searchresult.length}}家机构</div>
+      </div>
+      <div class="storeinfo-down">
+        <table class="table table-hover table-condensed" style="margin-top:0;padding:5px 15px;width:100%;">
+          <thead>
+          <tr style="background-color:rgba(255,165,0,0.11)">
+            <th></th>
+            <th class="caokao-orange">参考目标</th>
+            <th class="caokao-orange">购进量</th>
+            <th class="caokao-orange">百分比</th>
+          </tr>
+          </thead>
+          <tbody id="InstitutionList">
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td color-blue">YTD</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">1月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">2月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">3月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">4月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">5月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">6月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">7月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">8月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">9月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">10月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">11月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          <tr class="storeinfo-tbody-tr">
+            <td class="callguide-cankao-td">12月</td>
+            <td class="caokao-orange">100000</td>
+            <td class="callguide-cankao-td">100000</td>
+            <td class="callguide-cankao-td">100%</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <!--<div class="callguide-searchstorediv">-->
-      <!--<div class="bg-white" style="height:52px;line-height:68px;">-->
-        <!--<div class="callguide-searchstorediv-closebtn-div"><span class="callguide-searchstorediv-closebtn" ng-click="closesearchstorediv()">取消</span></div>-->
-        <!--<input type="text" id="KeyWordOfStoreName" style="position:absolute;width:60%;height:32px;top:10px;left: 18%;border-radius:8px;outline:none;border:1px solid lightgrey;text-align:center;padding:0;" placeholder="请输入店名称关键字" />-->
-        <!--<button class="callguide-searchstorediv-searchbtn btn btn-success" id="search-store-btn" ng-click="searchstorebykeyword()">搜索</button>-->
-      <!--</div>-->
-      <!--<div class="linestorearea bg-white">-->
-        <!--<ion-list>-->
-          <!--<ion-item ng-repeat="item in items" item="item" class="item-remove-animate" style="position: relative;">-->
-            <!--<span>{{item.name}}</span><br>-->
-            <!--<span style="font-size: 13px;color: darkgray;">{{item.address}}</span>-->
-          <!--</ion-item>-->
-        <!--</ion-list>-->
-      <!--</div>-->
-    <!--</div>-->
   </ion-content>
   <!--底部上滑-->
   <div class="footer-block" ng-class="{'visible':isExpand}">
-    <div class="toggle-bar flex-center" ng-click="NearbyFooter()"><img src="img/arrow_down_16.png" alt="15"></div>
+    <div class="toggle-bar flex-center" ng-click="ToggleFooter()"><img src="img/arrow_down_16.png" alt="15"></div>
     <div class="flex-around tab-title">
       <div class="flex-center" ng-repeat="item in tabs">
         <div class="tab-button" ng-class="{'active':currentTab==item}"
@@ -64,17 +129,17 @@
     </div>
     <!--今日行程tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='todaysch'">
-      <li class="list-item multi-line ">
+      <li class="list-item multi-line" ng-repeat="item in todaysch" ui-sref="main.checkout({insId:item.InstitutionID})">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+          <div class="item-media"><span class="uicon {{item.icon}}"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
             </div>
-            <div class="item-text">上海市石泉路548号</div>
-            <div class="flex-between align-end font-13">
-              <div class="color-green">首次签入&nbsp;10:21:21</div>
-              <div class="color-green">末次签出&nbsp;10:21:21</div>
+            <div class="item-text">{{item.InstitutionAddress}}</div>
+            <div class="flex-between align-end font-8">
+              <div class="color-green">签入时间&nbsp;{{item.CheckinTime | amDateFormat: 'HH:mm:ss'}}</div>
+              <div class="color-green">签出时间&nbsp;{{item.CheckinTime | amDateFormat: 'HH:mm:ss'}}</div>
               <div class="flex-end">
                 <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img src="img/search_gray_30.png" width="18">查看</a></div>
             </div>
@@ -89,7 +154,7 @@
               <div class="item-title">国药控股大药房永新连锁店(A)</div>
             </div>
             <div class="item-text">上海市石泉路548号</div>
-            <div class="flex-between align-end font-13">
+            <div class="flex-between align-end font-8">
               <div class="color-green">首次签入&nbsp;10:21:21</div>
               <div class="color-red">尚未签出</div>
               <div class="flex-end">
@@ -99,37 +164,38 @@
         </div>
       </li>
     </ul>
-    <!--附近药店tab-->
-    <ul class="dragup-ul" ng-show="currentTab.name=='nearbystore'">
-      <li class="list-item multi-line" ui-sref="main.aecheckin">
+    <!--已计划行程tab-->
+    <ul class="dragup-ul" ng-show="currentTab.name=='plansch'">
+      <li class="list-item multi-line" ui-sref="main.checkin({insId:item.InstitutionID})" ng-repeat="item in plansch.PlanRouteline.Institutions">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+          <div class="item-media"><span class="uicon {{item.icon}}"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
             </div>
-            <div class="flex-row align-end">
-              <div class="col-66 color-gray">上海市石泉路5412343242348号</div>
-              <div class="col-33 flex-end">
-                <a class="button button-clear button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
+            <div class="flex-row align-end font-8">
+              <div class="col-70 color-gray">{{item.Address}}</div>
+              <div class="col-30 flex-end">
+                <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
             </div>
           </div>
         </div>
       </li>
     </ul>
-    <!--下游门店tab-->
-    <ul class="dragup-ul" ng-show="currentTab.name=='chainstore'">
-      <li class="list-item multi-line" ui-sref="main.aecheckin">
+    <!--我负责的机构tab-->
+    <ul class="dragup-ul" ng-show="currentTab.name=='myins'">
+      <!--ui-sref="main.checkin"-->
+      <li class="list-item multi-line"  ng-repeat="item in insdata" ng-click="toCheckIn(item.InstitutionID)">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
+          <div class="item-media"><span class="uicon {{item.icon}}"></span></div>
           <div class="item-inner">
             <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+              <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
             </div>
-            <div class="flex-row align-end">
-              <div class="col-66 color-gray">上海市石泉路548号</div>
-              <div class="col-33 flex-end">
-                <a class="button button-clear button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
+            <div class="flex-row align-end font-8">
+              <div class="col-70 color-gray">{{item.Address}}</div>
+              <div class="col-30 flex-end">
+                <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
             </div>
           </div>
         </div>

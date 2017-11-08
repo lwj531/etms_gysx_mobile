@@ -11,37 +11,56 @@
   </div>
   <ion-content class="has-header">
     <div class="bg-white">
-      <div class="padding-1015 flex-start margin-img align-center"><img src="img/team.png" width="20">回顾对象</div>
+      <div class="padding-1015 flex-start margin-img align-center color-darkgray"><img src="img/team.png" width="20">回顾对象</div>
       <div class="">
         <ul>
-          <li class="list-item">
+          <li class="list-item" ng-repeat="item in clientList">
             <div class="item-content">
               <div class="item-media"><span class="uicon user-checkbox"></span></div>
               <div class="item-inner">
-                <div class="item-title align-center">王医生 <span class="space-10"></span>
+                <div class="item-title align-center">{{item.ClientName}} <span class="space-10"></span>
                   <img src="img/job_gray_48.png" width="16">
-                  <span class="color-darkgray">所属职务</span></div>
+                  <span class="color-darkgray">{{item.Titile}}</span></div>
+              </div>
+            </div>
+          </li>
+          <li class="list-item" ng-repeat="item in otherList">
+            <div class="item-content">
+              <div class="item-media"><span class="uicon user-checkbox"></span></div>
+              <div class="item-inner">
+                <div class="item-title align-center" ng-bind="item.name"></div>
               </div>
             </div>
           </li>
         </ul>
       </div>
-      <div class="width-100 padding-1015 flex-between">
-        <input id="zengjiaduixiang-sr" type="text" placeholder="手动输入添加">
-        <button class="zengjiaduixiang-btn">添加</button>
+      <div class="width-100 padding-1015 flex-between adding-manual">
+        <div class="input-wrapper">
+          <!-- value="otherMember"-->
+          <input type="text" placeholder="手动输入添加" ng-model="businessReview.otherMember" ng-focus="isFocus=true">
+          <span class="uicon close-info" ng-show="isFocus" ng-click="clearInput()"></span>
+        </div>
+        <button ng-click="addOtherMember()">添加</button>
       </div>
     </div>
+
     <div class="content-block">
       <div class="content-block-title">现场照片</div>
       <div class="tiled-block padding-1015 bg-white">
+        <div class="width-25 flex-center">
+          <input type="file" class="upload-img">
+          <img src="img/upload-photo.png">
+        </div>
+        <!--下方"width-25 flex-center" repeat-->
         <div class="width-25 flex-center">
           <img src="img/upload-photo.png">
         </div>
       </div>
     </div>
-    <div class="padding-1015 bg-white flex-between content-block">
+    <!--checked:选中-->
+    <div class="padding-1015 bg-white flex-between" ng-click="changeCheckPPT()" ng-class="{'checked':hasPPT}">
       <div>包含PPT</div>
-      <div><span class="uicon user-checkbox"></span></div>
+      <span class="uicon user-checkbox"></span>
     </div>
   </ion-content>
 </ion-view>

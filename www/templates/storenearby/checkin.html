@@ -10,55 +10,61 @@
 
     <div id="checkinmapcontainer" class="amap-container">
     </div>
-<div class="checkin-content">
-  <div class="list-item multi-line no-line" ui-sref="main.aecheckin">
-    <div class="item-content align-top">
-      <div class="item-media"><span class="uicon uicon-markerA"></span></div>
-      <div class="item-inner">
-        <div class="item-title-row">
-          <div class="item-title">国药控股大药房永新连锁店(A)</div>
-        </div>
-        <div class="item-text">上海市石泉路548号</div>
-      </div>
-    </div>
-  </div>
-  <div class="content-block-title">签到信息</div>
-  <div >
-    <ul style="">
-      <li class="list-item">
-        <div class="item-content">
-          <div class="item-media"><img src="img/flag_gray_30.png" width="20"></div>
+    <div class="checkin-content">
+      <div class="list-item multi-line no-line" ui-sref="main.checkin">
+        <div class="item-content align-top">
+          <div class="item-media"><span class="uicon {{inslevelflag}}"></span></div>
           <div class="item-inner">
-            <div class="item-title">尚未签入</div>
+            <div class="item-title-row">
+              <div class="item-title">{{currentIns.InstitutionName}} ({{currentIns.InstitutionPriority}})</div>
+            </div>
+            <div class="item-text">{{currentIns.Address}}</div>
           </div>
         </div>
-      </li>
-      <li class="list-item">
-        <div class="item-content">
-          <div class="item-media"><img src="img/flag_gray_30.png" width="20"></div>
-          <div class="item-inner">
-            <div class="item-title">尚未签出</div>
+      </div>
+      <div class="content-block-title">签到信息</div>
+      <div>
+        <ul style="">
+          <li class="list-item">
+            <div class="item-content">
+              <div class="item-media"><img src="img/flag_gray_30.png" width="20"></div>
+              <div class="item-inner">
+                <div class="item-title">尚未签入</div>
+              </div>
+            </div>
+          </li>
+          <li class="list-item">
+            <div class="item-content">
+              <div class="item-media"><img src="img/flag_gray_30.png" width="20"></div>
+              <div class="item-inner">
+                <div class="item-title">尚未签出</div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="content-block-title">签到照片</div>
+        <div class="tiled-block padding-1015 bg-white">
+          <div class="width-25 flex-center">
+            <input type="file" class="upload-img">
+            <img src="img/upload-photo.png">
+          </div>
+          <!--下方"width-25 flex-center" repeat-->
+          <div class="width-25 flex-center">
+            <img src="img/upload-photo.png">
           </div>
         </div>
-      </li>
-    </ul>
-  </div>
-  <div>
-    <div class="content-block-title">签到照片</div>
-    <div class="tiled-block padding-1015 bg-white">
-      <div class="width-25 flex-center">
-        <img src="img/upload-photo.png">
       </div>
-    </div>
-  </div>
 
-  <div id="btnCheck_GPS">
-    <a ui-sref="main.aecalldetails" class="button checkintodo-r">GPS签入</a>
-  </div>
-  <div id="btnCheck_Manual">
-    <a ui-sref="main.aecalldetails" class="button checkintodo-g">手动签入</a>
-  </div>
-</div>
+      <div id="btnCheck_GPS">
+        <!--ui-sref="main.calldetails" -->
+        <a class="button checkintodo-r" ng-click="checkinGPS()">GPS签入</a>
+      </div>
+      <div id="btnCheck_Manual">
+        <a class="button checkintodo-g" ng-click="checkinManual()">手动签入</a>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>
