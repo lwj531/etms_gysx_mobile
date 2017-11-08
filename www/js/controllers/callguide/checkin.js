@@ -55,7 +55,7 @@ angular.module('checkin.ctrl', ['guide.srv','client.srv'])
       $state.go("main.calldetails",{insId:$scope.insID})
     };
     $scope.checkinManual = function () {
-      //判断required是否有
+      //没加表单验证
       var model ={
         "InstitutionID": $scope.insID,
         "InstitutionName": $scope.currentIns.InstitutionName,

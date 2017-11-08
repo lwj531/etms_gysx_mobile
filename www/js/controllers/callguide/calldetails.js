@@ -20,6 +20,11 @@ angular.module('calldetails.ctrl', ['client.srv', 'guide.srv'])
       }
     });
 
+    clientsrv.getcurrentstaff().then(function (staff) {
+      //当前人员的信息
+      $scope.staff = staff;
+      console.log($scope.staff)
+    });
     $scope.dateToday = moment();
     //获取机构签到信息
     $scope.getCheckin = function () {

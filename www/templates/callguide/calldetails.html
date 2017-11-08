@@ -24,8 +24,8 @@
           <div class="item-content">
             <div class="item-media"><div class="fake-media"></div></div>
             <div class="item-inner">
-              <div class="flex-start margin-img font-9 color-green"><img src="img/done-signin-icon.png" width="15">签入 <span>{{insinfo.CheckinTime | amDateFormat: 'HH:mm:ss'}}</span></div>
-              <div><button class="button button-positive button-clear button-thin" ui-sref="main.todolist">下一步</button></div>
+              <div class="flex-start margin-img font-9 color-green"><img src="img/flag_green_30.png" width="15">签入 <span>{{insinfo.CheckinTime | amDateFormat: 'HH:mm:ss'}}</span></div>
+              <div><button class="button button-positive button-clear button-thin" ui-sref="main.todolist({insId:insID,staffId:staff.StaffId})">下一步</button></div>
             </div>
           </div>
         </li>
@@ -82,7 +82,7 @@
             </div>
           </div>
         </li>
-        <li class="list-item" ui-sref="main.checklist">
+        <li class="list-item" ui-sref="main.checklist({insId:insID,staffId:staff.StaffId})">
           <div class="item-content item-link">
             <div class="item-media"><img src="img/c-2x.png" width="26"/></div>
             <div class="item-inner">

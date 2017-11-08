@@ -37,10 +37,10 @@
       <div class="width-100 padding-1015 flex-between adding-manual">
         <div class="input-wrapper">
           <!-- value="otherMember"-->
-          <input type="text" placeholder="手动输入添加" value="otherMember" ng-focus="isFocus=true">
+          <input type="text" placeholder="手动输入添加" ng-model="businessReview.otherMember" ng-focus="isFocus=true">
           <span class="uicon close-info" ng-show="isFocus" ng-click="clearInput()"></span>
         </div>
-        <button ng-click="addOtherMember(otherMember)">添加</button>
+        <button ng-click="addOtherMember()">添加</button>
       </div>
     </div>
 

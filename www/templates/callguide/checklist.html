@@ -19,27 +19,11 @@
       <div class="content-block-title">请选择</div>
 
       <ul>
-        <li class="list-item">
+        <li class="list-item" ng-repeat="item in KAItems" ng-class="{'checked':true}">
           <div class="item-content">
             <div class="item-media"><span class="uicon user-checkbox"></span></div>
             <div class="item-inner">
-              <div class="item-title align-center">协议签取</div>
-            </div>
-          </div>
-        </li>
-        <li class="list-item">
-          <div class="item-content">
-            <div class="item-media"><span class="uicon user-checkbox"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center">达成跟进</div>
-            </div>
-          </div>
-        </li>
-        <li class="list-item">
-          <div class="item-content">
-            <div class="item-media"><span class="uicon user-checkbox"></span></div>
-            <div class="item-inner">
-              <div class="item-title align-center">产品购进</div>
+              <div class="item-title align-center" ng-bind="item.ItemName"></div>
             </div>
           </div>
         </li>
