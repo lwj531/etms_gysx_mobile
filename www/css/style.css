@@ -325,7 +325,6 @@ p {
 .content-block-title {
   position: relative;
   overflow: hidden;
-  margin: 0;
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 1rem;
@@ -402,7 +401,7 @@ ul {
 }
 
 .list-item .item-media + .item-inner {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .list-item .item-inner {
@@ -2627,7 +2626,7 @@ ion-delete-button.button-icon.icon:before {
   content: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2013%2010'%3E%3Cpolygon%20fill%3D'%23ffffff'%20points%3D'11.6%2C0%204.4%2C7.2%201.4%2C4.2%200%2C5.6%204.4%2C10%204.4%2C10%204.4%2C10%2013%2C1.4%20'%2F%3E%3C%2Fsvg%3E");
   position: absolute;
   display: block;
-  top: 4px;
+  top: 3px;
   left: 4px;
   width: 15px;
 }
@@ -2733,7 +2732,7 @@ ion-delete-button.button-icon.icon:before {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   transform: scaleX(0.8) scaleY(0.8);
   text-align: center;
 }
@@ -3767,14 +3766,14 @@ input[type=month] {
 
 .call-guide + .footer-block,
 .coaching-call + .footer-block {
-  height: 380px;
+  height: 300px;
   background-color: transparent;
-  bottom: -318px;
+  bottom: -238px;
 }
 
 .call-guide + .footer-block.visible,
 .coaching-call + .footer-block.visible {
-  bottom: 0px;
+  bottom: 0;
 }
 
 .call-guide + .footer-block .toggle-bar,
@@ -5060,7 +5059,7 @@ input[type=month] {
   color: #4e4e4e;
 }
 
-.xiaosanjiao {
+.triangle-left {
   position: absolute;
   top: 41%;
   left: -20px;
@@ -5071,7 +5070,7 @@ input[type=month] {
   height: 0px;
 }
 
-.xiaosanjiao-yy {
+.triangle-sound {
   position: absolute;
   top: 33%;
   left: -20px;

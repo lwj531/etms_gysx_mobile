@@ -252,13 +252,15 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         })
       //生意回顾
       .state('main.businessreview', {
-          url: '/businessreview/:insId',
+          url: '/businessreview/',
+          params:{"insId":null,"staffId":null},
           templateUrl: "templates/callguide/businessreview.html",
           controller: "BusinessreviewCtrl"
         })
       //checklist
       .state('main.checklist', {
           url: '/checklist',
+          params:{"insId":null,"staffId":null},
           templateUrl: "templates/callguide/checklist.html",
           controller: "ChecklistCtrl"
         })
@@ -283,7 +285,8 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       //待办事项
       .state('main.todolist', {
           url: '/todolist',
-          templateUrl: "templates/callguide/todolist.html",
+        params:{"insId":null,"staffId":null},
+        templateUrl: "templates/callguide/todolist.html",
           controller: "TodolistCtrl"
         })
       //拜访概览

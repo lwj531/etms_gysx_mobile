@@ -1,0 +1,62 @@
+<ion-view title="资料内容" view-title="资料内容">
+  <div class="bar bar-header bar-positive">
+    <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
+      <i class="icon ion-ios-arrow-back"></i>
+      <span class="back-text" style="">返回</span>
+    </button>
+    <div class="h1 title">资料内容</div>
+  </div>
+  <div class="bar bar-subheader item-input-inset bar-light">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="search" placeholder="输入关键字搜索资料">
+    </label>
+    <button class="button button-clear" ng-click="cannel()">
+      取消
+    </button>
+  </div>
+  <ion-content class="has-header has-subheader material-expand">
+    <div class="list-item item-link margin-top5">
+      <div class="item-content">
+        <div class="item-media"><img src="img/exercise_cube_50.png" width="26"></div>
+        <div class="item-inner flex-between">
+          <div>
+            <div class="item-title-row">
+              <div class="item-title">安康信</div>
+            </div>
+            <div class="item-text">60mg*5片(盒)</div>
+          </div>
+          <div class="align-center margin-img font-8">
+            <img src="img/pdf_red_36.png" width="20">文件：<span class="color-red">9</span>
+            <span class="space-10"></span>
+            <img src="img/vedio_blue_36.png" width="20">视频：<span class="color-red">9</span>
+            <span class="uicon fake-link"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="tiled-block padding">
+      <li class="width-33 text-center" ng-click="showVitality()">
+        <img src="img/cover_blank_200.png">
+        <p class="ellipsis">标题标题标题标题标题标题标题标题</p>
+      </li>
+      <li class="width-33 text-center">
+        <img src="img/cover_blank_200.png">
+        <p class="ellipsis">标题标题标题标题标题标题标题标题</p>
+      </li>
+      <li class="width-33 text-center">
+        <img src="img/cover_blank_200.png">
+        <p class="ellipsis">标题标题标题标题标题标题标题标题</p>
+      </li>
+      <li class="width-33 text-center">
+        <img src="img/cover_blank_200.png">
+        <p class="ellipsis">标题标题标题标题标题标题标题标题</p>
+      </li>
+      <li class="width-33 text-center">
+        <img src="img/cover_blank_200.png">
+        <p class="ellipsis">标题标题标题标题标题标题标题标题</p>
+      </li>
+    </ul>
+
+  </ion-content>
+</ion-view>
