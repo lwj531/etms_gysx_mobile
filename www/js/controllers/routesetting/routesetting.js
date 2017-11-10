@@ -1,6 +1,5 @@
 angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
   .controller('RouteSettingCtrl', function ($rootScope, $scope, $ionicPopup, $ionicListDelegate, $compile,$timeout, routesettingsrv) {
-
     $scope.route = {
       name: "",
       //路线篮子
@@ -289,7 +288,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
     $scope.routetoast=false;
     $scope.openinsinfo = function (model) {
       $scope.map.clearInfoWindow();
-      $scope.currentins = model;
+      //$scope.currentins = model;
       $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
       $scope.map.setCenter( model.lnglat);
       $scope.map.panBy(0,50);
