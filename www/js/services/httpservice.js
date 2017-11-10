@@ -5,14 +5,14 @@ angular.module("http.srv", [])
         if(showloading || showloading==null){
           //显示菊花
           $ionicLoading.show({
-            template: 'Loading...'
+            template: '加载中...'
           });
         }
         var deferred = $q.defer();
         $http({
           method: method,
-           url: "http://dev.crmatmobile.com:9151/"+ url,
-           //url: "http://10.0.0.44:9151"+ url,
+           // url: "http://dev.crmatmobile.com:9151/"+ url,
+           url: "http://10.0.0.81:9151"+ url,
           data: data
         }).success(function (data) {
           deferred.resolve(data);
@@ -20,7 +20,7 @@ angular.module("http.srv", [])
         }).error(function (data) {
           deferred.reject(data);
           $ionicLoading.hide();
-        })
+        });
         return deferred.promise;
       };
     }

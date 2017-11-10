@@ -13,8 +13,9 @@ angular.module('purchasesellstockcheck.ctrl', ['guide.srv', 'client.srv'])
       console.log($scope.latestInventorys);
     });
     //获取库存
-    guidesrv.getskus().then(function (data) {
+    guidesrv.getskus($stateParams.insId).then(function (data) {
       $scope.SKUList = data;
+      console.log($scope.SKUList);
 
     });
     //获取当日填写过的进销存
@@ -37,13 +38,15 @@ angular.module('purchasesellstockcheck.ctrl', ['guide.srv', 'client.srv'])
     $scope.SaveInventory = function () {
       console.log($scope.SKUList);
 
+      var model=[];
       for (var i = 0; i < $scope.SKUList.length; i++) {
         $scope.SKUList[i].InstitutionID = $stateParams.insId;
-        $scope.SKUList[i].SkuID = $scope.SKUList[i].Id;
-        $scope.SKUList[i].SkuName = $scope.SKUList[i].Name;
+        // $scope.SKUList[i].SkuID = $scope.SKUList[i].SkuID;
+        // $scope.SKUList[i].SkuName = $scope.SKUList[i].SkuName;
 
 
         if (i === $scope.SKUList.length - 1) {
+          // console.log($scope.SKUList);
           guidesrv.saveInventory($scope.SKUList).then(function () {
             $scope.popup("保存成功");
           });

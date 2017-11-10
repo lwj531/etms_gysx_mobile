@@ -11,7 +11,9 @@ body, .ionic-body {
 .padding {
   padding: 5px 10px;
 }
-
+input[disabled], select[disabled], textarea[disabled], input[readonly]:not(.cloned-text-input), textarea[readonly]:not(.cloned-text-input), select[readonly]{
+  background-color: #fff;
+}
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
   font-size: 1rem;
 }
@@ -59,7 +61,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .button-small {
   line-height: 26px;
   min-height: 26px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .item-right-edit {
@@ -67,7 +69,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 input {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .margin-top5 {
@@ -113,7 +115,7 @@ p {
 .list-item .button-small {
   line-height: 19px;
   min-height: 21px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .button-small.round {
@@ -338,7 +340,7 @@ p {
   box-sizing: border-box;
   position: relative;
   background-color: #fff;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 ul {
@@ -486,7 +488,7 @@ ul {
   display: -webkit-flex;
   display: flex;
   max-height: 28px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .list-count {
@@ -558,7 +560,7 @@ ul {
   line-height: 1.2rem;
   /*margin-top: 2px;*/
   white-space: normal;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .list-item .item-media {
@@ -857,7 +859,7 @@ ul {
 }
 
 .dense-list .item-title {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .home-schedule .button-row {
@@ -1034,7 +1036,7 @@ ul {
 .table .button {
   padding: 0 8px;
   min-height: 26px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   line-height: 22px;
 }
 
@@ -1232,7 +1234,7 @@ div.info-top {
 div.info-top div {
   display: inline-block;
   color: #333333;
-  font-size: 0.9rem
+  font-size: 1rem
 }
 
 a {
@@ -1247,7 +1249,7 @@ a {
 .route-line {
   color: dimgray;
   width: 25%;
-  font-size: 0.9rem;
+  font-size: 1rem;
   height: 47px;
 }
 
@@ -1269,7 +1271,7 @@ a {
   border-radius: 5px 0 0 5px;
   position: absolute;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 1rem;
   left: 0;
   top: 0;
 }
@@ -1293,7 +1295,7 @@ a {
   top: 8px;
   left: 11px;
   color: #ffffff;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .info-top .txt.inf-top-left:after {
@@ -1303,7 +1305,7 @@ a {
   bottom: 8px;
   left: 11px;
   color: #ffffff;
-  font-size: 0.9rem
+  font-size: 1rem
 }
 
 .info-top .inf-top-right {
@@ -1319,7 +1321,7 @@ a {
 }
 
 .info-top .inf-top-right span {
-  font-size: 0.9rem;
+  font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -1458,9 +1460,9 @@ ul.ins-detail .list-item .item-inner {
   font-size: 1rem;
 }
 
-ul.ins-detail input[readonly]:not(.cloned-text-input) {
-  background-color: #fff;
-}
+/*ul.ins-detail input[readonly]:not(.cloned-text-input) {*/
+  /*background-color: #fff;*/
+/*}*/
 
 .input-row {
   min-height: 48px;
@@ -1717,7 +1719,7 @@ ul.ins-detail .list-item .item-input input {
 .bar.week-slide .week-title {
   background-color: #f5f7fa;
   padding: 5px 15px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .bar.week-slide .week-title li {
@@ -1754,7 +1756,7 @@ ul.ins-detail .list-item .item-input input {
   right: 0;
   padding: 8px;
   box-shadow: -1px 2px 20px 0px rgba(0, 0, 0, 0.20);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .route-addbtn img {
@@ -1762,7 +1764,7 @@ ul.ins-detail .list-item .item-input input {
 }
 
 .route-addbtn span {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #419DE7;
   height: 12px;
   display: block;
@@ -1858,7 +1860,7 @@ input[type="text"].route-name-input.wide {
 .window-list .item p {
   white-space: normal;
   line-height: 15px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .no-latlng .item {
@@ -1882,7 +1884,7 @@ input[type="text"].route-name-input.wide {
 }
 
 .window-list h1.item-title {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #3e3e3e;
   white-space: normal;
   margin-bottom: 1px;
@@ -1890,7 +1892,7 @@ input[type="text"].route-name-input.wide {
 }
 
 .window-list .item-text {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #b5b5b5;
 }
 
@@ -2169,7 +2171,7 @@ ul.schedule-week-list {
 }
 
 .schedule-week-row {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .schedule-week-row .col-33 {
@@ -2394,12 +2396,12 @@ ul.schedule-week-list {
   position: relative;
   top: 53px;
   height: calc(100% - 63px);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .learning-index .button-group .button.group-button,
 .schedule-btg .button-group .button.group-button {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   min-height: 29px;
   height: 29px;
   background-color: #fff;
@@ -2526,7 +2528,7 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .edit-route.item p {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #b5b5b5;
 }
 
@@ -2534,7 +2536,7 @@ ion-delete-button.button-icon.icon:before {
   border: 1px solid #dedede;
   width: 60%;
   padding: 10px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #adb6bc;
   margin: 15px 0;
 }
@@ -2607,7 +2609,7 @@ ion-delete-button.button-icon.icon:before {
 
 .plan-alert .list-title {
   background-color: #eff5f6;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #b5b5b5;
   padding: 3px 15px;
 }
@@ -2679,7 +2681,7 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .font-12 {
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
 }
 
 .font-9 {
@@ -2687,13 +2689,13 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .font-8 {
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
 }
 
 .symbol-row {
   padding: 10px 8px;
   background-color: #f5f7fa;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 14px;
 }
 
@@ -2721,7 +2723,7 @@ ion-delete-button.button-icon.icon:before {
   height: 9rem;
   max-height: 9rem;
   padding: 2px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .calendar-block [class*=tag-], .calendar-block [class^=tag-] {
@@ -2732,7 +2734,7 @@ ion-delete-button.button-icon.icon:before {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   transform: scaleX(0.8) scaleY(0.8);
   text-align: center;
 }
@@ -2939,7 +2941,7 @@ ion-delete-button.button-icon.icon:before {
 
 .tiled-block {
   background-color: #fff;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   height: calc(100% - 55px);
   overflow: hidden;
 }
@@ -3059,13 +3061,13 @@ ion-delete-button.button-icon.icon:before {
 }
 
 .exercise-history .points-top .tag {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 ul.exercise-week {
   background-color: transparent;
   color: #fff;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   padding: 5px 15px 0;
   position: relative;
 }
@@ -3496,7 +3498,7 @@ p.stick-left {
 }
 
 .drag-list .item {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .drag-list .width-50 {
@@ -3693,7 +3695,7 @@ input[type=month] {
   font-family: inherit;
   text-align: right;
   height: 33px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #fff;
   line-height: 31px;
 }
@@ -3784,8 +3786,11 @@ input[type=month] {
 
 .call-guide + .footer-block .toggle-bar img,
 .coaching-call + .footer-block .toggle-bar img {
-  transform: rotate(180deg);
-  transition: all .3s;
+  width: 24px;
+  height: 12px;
+  opacity: 0.8;
+  transform: rotateX(180deg);
+  transition: all .5s;
 }
 
 .call-guide + .footer-block.visible .toggle-bar img,
@@ -3997,7 +4002,7 @@ input[type=month] {
   color: #e98338;
   background-color: #fff;
   padding: 15px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   position: relative;
 }
 
@@ -4024,7 +4029,7 @@ input[type=month] {
 .about .about-card .version-list {
   height: calc(100% - 110px);
   overflow: auto;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #98A6B7;
 }
 
@@ -4046,7 +4051,7 @@ input[type=month] {
   background-color: #419de7;
   color: #fff;
   margin-left: 10px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
 }
 
 .about .about-card .version-list > li li {
@@ -4250,7 +4255,7 @@ input[type=month] {
 
 .storeinfo-title-inner-span {
   margin-top: 5px;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #c4c4c4;
 }
 
@@ -4382,7 +4387,7 @@ input[type=month] {
 }
 
 .jxc-content-bt {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   height: 30px;
   line-height: 30px;
   background-color: #f5fafc;
@@ -4595,7 +4600,7 @@ input[type=month] {
 
 .qrsj {
   color: #3AC5A6;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   position: absolute;
   left: 30px;
   bottom: 2px;
@@ -4812,7 +4817,7 @@ input[type=month] {
 /*width: 20px;*/
 /*}*/
 /*.sku-spec{*/
-/*!*font-size: 0.9rem*!*/
+/*!*font-size: 1rem*!*/
 /*color: #c4c4c4;*/
 /*}*/
 /*.pdf-file{*/
@@ -4906,7 +4911,7 @@ input[type=month] {
 /*color: #419de7;*/
 /*}*/
 /*.doct-list{*/
-/*!*font-size: 0.9rem*!*/
+/*!*font-size: 1rem*!*/
 /*color:#c3c3c3;*/
 /*}*/
 /*.slt-doc-blackshadow{*/
@@ -4953,7 +4958,7 @@ input[type=month] {
 /*.slt-sdhdx-xbt{*/
 /*height: 24px;*/
 /*background-color: #f4f4f4;*/
-/*!*font-size: 0.9rem*!*/
+/*!*font-size: 1rem*!*/
 /*padding:5px 0 0 10px;*/
 /*}*/
 /*.sdhdx-content-sltdoc{*/
@@ -5029,7 +5034,7 @@ input[type=month] {
 }
 
 .kucun-content {
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #A9ACAF;
 }
 
@@ -5042,10 +5047,6 @@ input[type=month] {
   color: #3AC5A6;
 }
 
-.text-area-wz {
-  padding: 10px 0;
-}
-
 .dbsx-wz-content {
   width: 96%;
   background-color: #f4f4f4;
@@ -5055,30 +5056,22 @@ input[type=month] {
   word-wrap: break-word;
   padding: 6px 10px;
   position: relative;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   color: #4e4e4e;
+  margin: 10px 0;
+  line-height: 1.25rem;
 }
 
 .triangle-left {
   position: absolute;
-  top: 41%;
-  left: -20px;
+  top: 50%;
+  left: -17px;
   border-style: solid;
-  border-width: 7px 10px 7px 10px;
+  border-width: 7px 7px 7px 10px;
   border-color: transparent #f4f4f4 transparent transparent;
-  width: 0px;
-  height: 0px;
-}
-
-.triangle-sound {
-  position: absolute;
-  top: 33%;
-  left: -20px;
-  border-style: solid;
-  border-width: 4px 10px 4px 10px;
-  border-color: transparent #f4f4f4 transparent transparent;
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
+  margin-top:-7px;
 }
 
 .dbsx-yy-content {
@@ -5095,6 +5088,8 @@ input[type=month] {
   background-size: 11px;
   background-position: left 10px center;
   background-repeat: no-repeat;
+  margin: 10px 0;
+  position: relative;
 }
 
 .callguide-cankao-td {
@@ -5236,7 +5231,7 @@ input[type=month] {
 /*}*/
 .xd-dragup-ul-li-checkininfo-time-chakan {
   color: #c9c9c9;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   position: absolute;
   right: 18px;
 }
@@ -5588,7 +5583,7 @@ input[type=month] {
   background-image: linear-gradient(90deg, #41a0e7, #41bbe7 100%, transparent 50%);
   padding: 0 10px;
   color: #fff;
-  /*font-size: 0.9rem*/
+  /*font-size: 1rem*/
   z-index: 23;
   min-width: 28px;
   min-height: 28px;
@@ -5609,6 +5604,9 @@ input[type=month] {
   padding-left: 12px;
 }
 
+.home-schedule.todo-list li.schedule-plan .item-media{
+  padding-top: 14px;
+}
 .home-schedule.todo-list li.schedule-plan .list-dot {
   height: 11px;
   width: 11px;
@@ -5624,7 +5622,7 @@ input[type=month] {
 }
 
 .todo-content {
-  height: calc(100% - 140px);
+  height: calc(100% - 127px);
 }
 
 .todo-content .todo-list {
@@ -5691,7 +5689,7 @@ input[type=date].deadline-input {
   line-height: 28px;
   min-height: 28px;
   border-radius: 19px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   background: #fffbf7;
   padding: 0 30px;
 }
@@ -5746,7 +5744,7 @@ input[type=date].deadline-input {
 }
 
 .planreport-title .button-small {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .planreport-title .button-small.icon-left:before {
@@ -5762,7 +5760,7 @@ input[type=date].deadline-input {
 
 .stick-left-bar .bar-inner {
   padding: 7px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   border-right: 1px solid #eee;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;

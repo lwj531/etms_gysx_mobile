@@ -37,8 +37,8 @@
       <div class="width-100 padding-1015 flex-between adding-manual">
         <div class="input-wrapper">
           <!-- value="otherMember"-->
-          <input type="text" placeholder="手动输入添加" ng-model="setOthers.Name" ng-focus="isFocus=true">
-          <span class="uicon close-info" ng-show="isFocus" ng-click="clearInput()"></span>
+          <input type="text" placeholder="手动输入添加" ng-model="setOthers.Name">
+          <span class="uicon close-info" ng-show="setOthers.Name!==''" ng-click="clearInput()"></span>
         </div>
         <button ng-click="addOtherMember()">添加</button>
       </div>
