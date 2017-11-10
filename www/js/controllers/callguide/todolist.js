@@ -1,5 +1,5 @@
 angular.module('todolist.ctrl', [])
-  .controller('TodolistCtrl', function($scope, $stateParams,guidesrv,clientsrv,$state) {
+  .controller('TodolistCtrl', function ($scope, $stateParams, guidesrv, clientsrv,$state) {
 
     console.log($stateParams.insId);
     console.log($stateParams.staffId);
@@ -24,57 +24,63 @@ angular.module('todolist.ctrl', [])
       }
 
     });
-
-    guidesrv.gettodo().then(function (data) {
-      $scope.todoList = data;
-      console.log($scope.todoList);
-    });
-
-    $scope.todayToDo=[];
-
-    $scope.addNewToDo={
-      note:''
+    $scope.getToDOList = function () {
+      guidesrv.gettodo().then(function (data) {
+        $scope.todoList = data;
+        console.log($scope.todoList);
+      });
     };
+    //初始化
+    $scope.init = function () {
+      $scope.getToDOList();
+    };
+    $scope.init();
+    // $scope.todayToDo=[];
 
+    $scope.dateToday=new Date();
+    $scope.addNewNote = {
+      ActivityID: '',
+      ActivityDate: moment().format('YYYY-MM-DD'),
+      StaffID: $stateParams.staffId,
+      InstitutionID: $stateParams.insId,
+      Notes: '',
+      DeadlineDisplay: $scope.dateToday,
+      Deadline: moment($scope.dateToday).format('YYYY-MM-DD'),
+      FinishStatus: "ACTIVE"
+    };
 
     //加文本信息
-    $scope.addNote=function () {
-      $scope.todayToDo.push({
-        ActivityID:'',
-        ActivityDate: moment().format('YYYY/MM/DD'),
-        StaffID: $stateParams.staffId,
-        InstitutionID: $stateParams.insId,
-        Notes: $scope.addNewToDo.note,
-        Deadline: new Date(),
-        FinishStatus: "ACTIVE",
-        Recording: '',
-        RecordingUrl:''
-      });
-      $scope.addNewToDo.note='';
-    };
-    //加声音 假的
-    $scope.addSound=function () {
-      $scope.todayToDo.push({
-        ActivityID:'',
-        ActivityDate: moment().format('YYYY/MM/DD'),
-        StaffID: $stateParams.staffId,
-        InstitutionID: $stateParams.insId,
-        Deadline: new Date(),
-        FinishStatus: "ACTIVE",
-        Notes: '',
-        Recording: 'string sound url',
-        RecordingUrl:'string sound url'
-      });
-    };
-
-
-    $scope.saveToDo=function () {
-      guidesrv.savetodo(model).then(function () {
+    $scope.addNote = function () {
+      console.log($scope.addNewNote);
+      guidesrv.savetodo($scope.addNewNote).then(function () {
+        $scope.isPost = true;
         $scope.popup("操作成功");
-        console.log();
-
-        // $state.go("main.calldetails",{insId:$stateParams.insId});
       });
-    }
+      $scope.getToDOList();
+      $scope.isPost = false;
+      // $scope.addNewNote.Notes = '';
+    };
+    //加声音
+    $scope.addSound = function () {
 
+    };
+
+    $scope.deleteToDo = function () {
+      guidesrv.detetetodo($scope.todoList).then(function () {
+        $scope.getToDOList();
+        $scope.popup("操作成功");
+      });
+    };
+
+    $scope.saveToDo = function (id) {
+      guidesrv.savetodo(id).then(function () {
+        $scope.popup("操作成功");
+        $scope.getToDOList();
+
+      });
+    };
+
+    $scope.nextStep=function () {
+      $state.go("main.calloverview",{insId:$stateParams.insId,staffId:$stateParams.staffId});
+    }
   });

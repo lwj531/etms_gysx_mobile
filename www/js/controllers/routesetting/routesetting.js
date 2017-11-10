@@ -256,7 +256,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
           });
         }
       });
-    }
+    };
     //更新路线保存
     $scope.updateroute = function () {
       if ($scope.currentRoute.LineName == "") {
@@ -277,7 +277,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
           }
         });
       }
-    }
+    };
     //关闭明细框
     $scope.closeroutedetail = function () {
       $scope.routeedit = false;

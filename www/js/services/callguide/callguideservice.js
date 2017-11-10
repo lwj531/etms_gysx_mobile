@@ -73,7 +73,11 @@ angular.module("guide.srv", ["http.srv"])
     };
     //保存待办事项
     this.savetodo = function (model) {
-      return httpsrv.service("/api/Checkin/TodoModel", model, "post");
+      return httpsrv.service("/api/Checkin/SaveTodo", model, "post");
+    };
+    //删除路线
+    this.detetetodo = function (activityId) {
+      return httpsrv.service("/api/Checkin/TodoModel/" + activityId, {}, "delete");
     };
   }
   ]);

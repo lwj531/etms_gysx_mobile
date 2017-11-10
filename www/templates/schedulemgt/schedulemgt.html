@@ -614,7 +614,7 @@
       <!--半天事务列表：上午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='morning'">
         <li ng-repeat="item in halfdayTypeList">
-          <span ng-bind="item.HalfdayTypeName"></span>
+          <span class="halfday-title" ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
                 ng-class="{'checked':(type.HalfdayTypeID==selectedMorningHalfType.type.HalfdayTypeID)}"
@@ -634,7 +634,7 @@
       <!--半天事务列表：下午，单选-->
       <ul class="schedule-bottom-list" ng-show="footerTab=='afternoon'">
         <li ng-repeat="item in halfdayTypeList">
-          <span ng-bind="item.HalfdayTypeName"></span>
+          <span class="halfday-title" ng-bind="item.HalfdayTypeName"></span>
           <ul>
             <li class="list-item"
                 ng-class="{'checked':(type.HalfdayTypeID==selectedAfternoonHalfType.type.HalfdayTypeID)}"

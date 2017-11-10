@@ -241,7 +241,8 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       //(拜访)签入机构后的拜访向导
       .state('main.calldetails', {
           url: '/calldetails/:insId',
-          templateUrl: "templates/callguide/calldetails.html",
+        params: {"insId": null, "staffId": null},
+        templateUrl: "templates/callguide/calldetails.html",
           controller: "CalldetailsCtrl"
         })
       //进销存检查
@@ -281,17 +282,18 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
           url: '/trainingrecord',
           templateUrl: "templates/callguide/trainingrecord.html",
           controller: "TrainingrecordCtrl"
-        })
+      })
       //待办事项
       .state('main.todolist', {
-          url: '/todolist',
-        params:{"insId":null,"staffId":null},
+        url: '/todolist',
+        params: {"insId": null, "staffId": null},
         templateUrl: "templates/callguide/todolist.html",
-          controller: "TodolistCtrl"
-        })
+        controller: "TodolistCtrl"
+      })
       //拜访概览
       .state('main.calloverview', {
         url: '/calloverview',
+        params:{"insId":null,"staffId":null},
         templateUrl: "templates/callguide/calloverview.html",
         controller: "CalloverviewCtrl"
       })

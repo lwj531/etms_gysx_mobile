@@ -1,5 +1,5 @@
 angular.module('calldetails.ctrl', ['client.srv', 'guide.srv'])
-  .controller('CalldetailsCtrl', function ($scope, clientsrv, guidesrv, $stateParams) {
+  .controller('CalldetailsCtrl', function ($scope, clientsrv, guidesrv, $stateParams,$state) {
     $scope.insID = $stateParams.insId;
     clientsrv.getins($stateParams.insId).then(function (data) {
       $scope.currentIns = data;
@@ -23,7 +23,7 @@ angular.module('calldetails.ctrl', ['client.srv', 'guide.srv'])
     clientsrv.getcurrentstaff().then(function (staff) {
       //当前人员的信息
       $scope.staff = staff;
-      console.log($scope.staff)
+      console.log($scope.staff);
     });
     $scope.dateToday = moment();
     //获取机构签到信息
@@ -47,5 +47,8 @@ angular.module('calldetails.ctrl', ['client.srv', 'guide.srv'])
     };
     $scope.init();
 
+    $scope.nextStep=function () {
+      $state.go("main.todolist",{insId:$stateParams.insId,staffId:$scope.staff.StaffId});
+    }
 
   });
