@@ -1,5 +1,5 @@
 angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
-  .controller('RouteSettingCtrl', function ($rootScope, $scope, $ionicPopup, $ionicListDelegate, $compile,$timeout, routesettingsrv) {
+  .controller('RouteSettingCtrl', function ($rootScope, $scope, $ionicPopup, $ionicListDelegate, $compile, $timeout, routesettingsrv) {
     $scope.route = {
       name: "",
       //路线篮子
@@ -33,58 +33,62 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       if (data == "mapcompleted") {
         $scope.map.clearMap();
         $scope.map.clearInfoWindow();
-        //点击地图关闭编辑窗口
-        $scope.map.on('click', function (e) {
-         /* //通知关闭详细
-          $scope.$broadcast("close", "detail");
-          $scope.$apply();*/
-        });
-        $scope.style = [
-          {
-            url: "img/GradeA-icon.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(21, 24)
-          },
-          {
-            url: "img/GradeB-icon.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(21, 24)
-          },
-          {
-            url: "img/GradeC-icon.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(21, 24)
-          },
-          //小图
-          {
-            url: "img/GradeA-icon.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(21, 24)
-          },
-          {
-            url: "img/GradeB-icon.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(21, 24)
-          },
-          {
-            url: "img/GradeC-icon.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(21, 24)
-          },
-        ];
-        $scope.mass = new AMap.MassMarks($scope.insdata, {
-          zIndex: 111,
-          cursor: 'pointer',
-          style: $scope.style,
-        });
-        $scope.mass.on('click', $scope.showInfoWindow);
-        $scope.mass.setMap($scope.map);
 
+        $scope.map.plugin(['AMap.Geolocation', 'AMap.ToolBar'], function () {
+          $scope.geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+            maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+            convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+            showButton: true,        //显示定位按钮，默认：true
+            buttonPosition: 'LB',    //定位按钮停靠位置，默认：'LB'，左下角
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+            showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+            panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
+            zoomToAccuracy: true      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+          });
+          AMap.event.addListener($scope.geolocation, 'complete', $scope.getlocationComplete);//返回定位信息
+          AMap.event.addListener($scope.geolocation, 'error', $scope.getlocationError);      //返回定位出错信息
+          $scope.map.addControl($scope.geolocation);
+          //测试添加工具条
+          $scope.map.addControl(new AMap.ToolBar({
+            visible: true,
+            position: 'LT'
+          }));
+          $scope.geolocation.getCurrentPosition();
+        });
       }
     });
+    //获取定位坐标成功
+    $scope.getlocationComplete = function (data) {
+      $rootScope.toast("获取坐标成功。");
+      $scope.haslocal = true;
+      $scope.lnglat = [data.position.getLng(), data.position.getLat()];
+      $scope.setInsMarker();
+    };
+    //获取定位坐标失败
+    $scope.getlocationError = function () {
+      $rootScope.toast("获取坐标失败，请重新定位。");
+      $scope.lnglat = [];
+      $scope.haslocal = true;
+      $scope.setInsMarker();
+    };
+    //设置marker点
+    $scope.setInsMarker = function () {
+      for (var i = 0; i < $scope.insdata.length; i++) {
+        var ins = $scope.insdata[i];
+        new AMap.Marker({
+          map: $scope.map,
+          position: ins.lnglat,
+          extData: ins,//当前的机构信息
+          content: '<div class="uicon-' + (ins.InstitutionPriority == "A" ? "markerA" : (ins.InstitutionPriority == "B" ? "markerB" : "markerC")) + '"></div>'
+        }).on('click', $scope.showInfoWindow);
+      }
+    };
     //接收关闭窗口命令
     $scope.$on('close', function (errorType, data) {
-      if (data == "detail" && $scope.routeedit==false) {
+      if (data == "detail" && $scope.routeedit == false) {
         $scope.closeroutedetail();
       }
     });
@@ -112,24 +116,20 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       }
     };
     //关闭信息窗体
-    $scope.closeInfoWindow=function(){
+    $scope.closeInfoWindow = function () {
       $scope.map.clearInfoWindow();
     };
     $scope.infoWindow = new AMap.InfoWindow({
       offset: new AMap.Pixel(-5, 0),
       isCustom: true,
-      //closeWhenClickMap:true,
-      autoMove:true
+      closeWhenClickMap: true,
+      autoMove: true
     });
     //点击Marker
     $scope.showInfoWindow = function (event) {
       //点击的机构数据
-      /*$scope.currentins = event.data;
-      $scope.$apply();
-      $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
-      $scope.infoWindow.open($scope.map, event.data.lnglat);*/
-      $scope.currentins = event.data;
-      $scope.openinsinfo(event.data);
+      $scope.currentins = event.target.getExtData();
+      $scope.openinsinfo();
     };
     //是否为新增状态
     $scope.isnewly = false;
@@ -177,54 +177,39 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         });
       }
     };
-
     //显示路线明细
     $scope.routedetail = false;
     $scope.currentRoute = {};
     //显示路线明细
     $scope.showroutedetail = function (model) {
-      routesettingsrv.getroutedetail(model.LineID).then(function (data) {
-        $scope.currentRoute = data;
-        $scope.isnewly = false;
-        $scope.routedetail = true;
-        $scope.routeedit = false;
-        //关闭搜索框
-        $scope.closesearchmodal();
-        //关闭无坐标机构窗体
-        $scope.closenolatlngmodal();
-        //绘制路线图
-        var lineArr = [];
-        var markers = $scope.mass.getData();
-        for (var k = 0; k < markers.length; k++) {
-          if(markers[k].style < 3 ){
-            markers[k].style=markers[k].style + 3;
-          }
-        }
-        for (var i = 0; i < $scope.currentRoute.Institutions.length; i++) {
-          lineArr.push($scope.currentRoute.Institutions[i].lnglat);
-          if (i == $scope.currentRoute.Institutions.length - 1) {
-            //删除原来的折线
-            if ($scope.polyline != null) {
-              $scope.map.remove($scope.polyline);
-            }
-            $scope.polyline = new AMap.Polyline({
-              path: lineArr,          //设置线覆盖物路径
-              strokeColor: "#419de7", //线颜色
-              strokeOpacity: 1,       //线透明度
-              strokeWeight: 2,        //线宽
-              strokeStyle: "dashed",   //线样式
-              //strokeDasharray: [10, 5] //补充线样式
-            });
-            $scope.polyline.setMap($scope.map);
-            $scope.map.setFitView();
-          }
-          for (var k = 0; k < markers.length; k++) {
-            if (markers[k].InstitutionID == $scope.currentRoute.Institutions[i].InstitutionID) {
-              markers[k].style=markers[k].InstitutionPriority=="A"?0:(markers[k].InstitutionPriority=="B"?1:2);
+      if($scope.lnglat!=null){
+        routesettingsrv.getroutedetail(model.LineID).then(function (data) {
+          $scope.currentRoute = data;
+          $scope.isnewly = false;
+          $scope.routedetail = true;
+          $scope.routeedit = false;
+          //关闭搜索框
+          $scope.closesearchmodal();
+          //关闭无坐标机构窗体
+          $scope.closenolatlngmodal();
+          //绘制路线图
+          var lineArr = [];
+          for (var i = 0; i < $scope.currentRoute.Institutions.length; i++) {
+            lineArr.push($scope.currentRoute.Institutions[i].lnglat);
+            if (i == $scope.currentRoute.Institutions.length - 1) {
+              new AMap.Polyline({
+                path: lineArr,          //设置线覆盖物路径
+                strokeColor: "#419de7", //线颜色
+                strokeOpacity: 1,       //线透明度
+                strokeWeight: 2,        //线宽
+                strokeStyle:'solid',   //线样式
+                //strokeDasharray: [10, 5] //补充线样式
+              }).setMap($scope.map);
+              $scope.map.panTo(lineArr[0]);
             }
           }
-        }
-      });
+        });
+      }
     };
     //编辑线路模式
     $scope.showrouteedit = function () {
@@ -284,81 +269,80 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
       $scope.routedetail = false;
     };
     //点击明细中的机构
-    $scope.insroutesinfo="";//点击机构提示所在线路
-    $scope.routetoast=false;
-    $scope.openinsinfo = function (model) {
+    $scope.insroutesinfo = "";//点击机构提示所在线路
+    $scope.routetoast = false;
+    $scope.showinsinfo = function (model) {
+      $scope.currentins = model;
+      $scope.openinsinfo();
+    }
+    $scope.openinsinfo = function () {
+      var model = $scope.currentins;
       $scope.map.clearInfoWindow();
-      //$scope.currentins = model;
-      $scope.infoWindow.setContent($compile($("#infowindow").html())($scope)[0]);
-      $scope.map.setCenter( model.lnglat);
-      $scope.map.panBy(0,50);
-      $scope.infoWindow.open($scope.map, model.lnglat);
+      var content = $compile($("#infowindow").html())($scope)[0];
+      var infoWindow = new AMap.InfoWindow({
+        offset: new AMap.Pixel(-10, -40),
+        isCustom: true,
+        closeWhenClickMap: true,
+        autoMove: true,
+        content: content
+      });
+      infoWindow.open($scope.map, model.lnglat);
       //机构提示存在线路
       routesettingsrv.getRoutelinesByInstitution(model.InstitutionID).then(function (data) {
-        if(data.length>0){
-          $scope.routetoast=true;
-          var str =[];
-          for (var i= 0;i<data.length;i++){
+        if (data.length > 0) {
+          $scope.routetoast = true;
+          var str = [];
+          for (var i = 0; i < data.length; i++) {
             str.push(data[i].LineName);
-            if(i==data.length-1){
-              $scope.insroutesinfo="此机构存在 "+str.join(",") +"中";
+            if (i == data.length - 1) {
+              $scope.insroutesinfo = "此机构存在 " + str.join(",") + "中";
               $timeout(function () {
-                $scope.insroutesinfo= "";
-                $scope.routetoast=false;
+                $scope.insroutesinfo = "";
+                $scope.routetoast = false;
               }, 2000);
             }
           }
-
         }
-
       });
     }
-
     //点击显示搜索窗体
-    $scope.searchmodal=false;
-    $scope.searchmodel={
-      Key:"InstitutionName",
-      Value:""
+    $scope.searchmodal = false;
+    $scope.searchmodel = {
+      Key: "InstitutionName",
+      Value: ""
     };
-    $scope.searchresult=[];
+    $scope.searchresult = [];
     //打开搜索窗体
-    $scope.showsearchmodal=function(){
-      //关闭其他窗体
-      /*$scope.closeroutedetail();
-      $scope.closeaddroute();*/
+    $scope.showsearchmodal = function () {
       $scope.closenolatlngmodal();
       //清空当前搜索结果
-      $scope.searchmodal=true;
-      $scope.searchresult=[];
+      $scope.searchmodal = true;
+      $scope.searchresult = [];
     }
     //关闭搜索窗体
-    $scope.closesearchmodal=function(){
-      $scope.searchmodal=false;
-      $scope.searchresult=[];
+    $scope.closesearchmodal = function () {
+      $scope.searchmodal = false;
+      $scope.searchresult = [];
     }
     //搜索门店
-    $scope.searchstorebykeyword= function(){
-      var model =[$scope.searchmodel];
+    $scope.searchstorebykeyword = function () {
+      var model = [$scope.searchmodel];
       routesettingsrv.searchins(model).then(function (data) {
         $scope.searchresult = data;
       });
     }
     //无坐标机构
-    $scope.nolatlngmodal=false;
-    $scope.nolatlngresult=[];
-    $scope.shownolatlngmodal=function(){
-      //关闭其他窗体
-      /*$scope.closeroutedetail();
-      $scope.closeaddroute();*/
-      $scope.closesearchmodal();
+    $scope.nolatlngmodal = false;
+    $scope.nolatlngresult = [];
+    $scope.shownolatlngmodal = function () {
       routesettingsrv.getnolatlngins().then(function (data) {
         $scope.nolatlngresult = data;
-        $scope.nolatlngmodal=true;
+        $scope.nolatlngmodal = true;
       });
     }
     //关闭无坐标机构窗体
-    $scope.closenolatlngmodal=function(){
-      $scope.nolatlngmodal=false;
+    $scope.closenolatlngmodal = function () {
+      $scope.nolatlngmodal = false;
       $scope.nolatlngresult = [];
     }
   });

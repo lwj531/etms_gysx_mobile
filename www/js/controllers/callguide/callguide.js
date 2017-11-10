@@ -11,10 +11,14 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
     $scope.currentTab = $scope.tabs[0];
     //展开底部footer
     $scope.isExpand = false;
+    //开启(关闭)底部
     $scope.ToggleFooter = function () {
       $scope.isExpand = !$scope.isExpand;
-      $scope.searchmodal = false;
-      $scope.nolatlngmodal = false;
+    };
+    //关闭底部
+    $scope.closeFooter = function () {
+      $scope.isExpand = false;
+      $scope.$apply();
     };
     //切换tab
     $scope.switchTab = function (tab) {
@@ -24,7 +28,6 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
     //地图初始化完成后执行
     $scope.$on('amap', function (errorType, data) {
       if (data == "mapcompleted") {
-        console.log("mapcompleted");
         $scope.map.clearMap();
         $scope.map.clearInfoWindow();
         $scope.map.plugin(['AMap.Geolocation', 'AMap.ToolBar'], function () {
@@ -52,6 +55,7 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
           $scope.geolocation.getCurrentPosition();
         });
         $scope.map.on('moveend', $scope.getCenter);
+        $scope.map.on('click',$scope.closeFooter)
 
       }
     });
@@ -71,16 +75,22 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
     //地图移动时重新获取当前的中心点
     $scope.getCenter = function () {
       if ($scope.haslocal) {
-        $scope.map.clearMap();
+        if($scope.marker!=null && $scope.circle!=null){
+          $scope.map.remove([$scope.marker,$scope.circle]);
+        }
         var center = $scope.map.getCenter();
+        //如果与上次中心点相差500米，清空地图覆盖物
+        if(center.distance($scope.lnglat) > 500){
+          $scope.map.clearMap();
+        }
         $scope.lnglat = [center.lng, center.lat];
-        new AMap.Marker({
+        $scope.marker = new AMap.Marker({
           icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
           map: $scope.map,
           position: $scope.lnglat
         });
-        new AMap.Circle({
-          center: new AMap.LngLat($scope.lnglat[0], $scope.lnglat[1]),// 圆心位置
+        $scope.circle = new AMap.Circle({
+          center: $scope.lnglat,// 圆心位置
           radius: 500, //半径
           strokeColor: "#1a51ff", //线颜色
           strokeOpacity: 0.5, //线透明度
@@ -88,7 +98,7 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
           fillColor: "#8fd9ff", //填充颜色
           fillOpacity: 0.35,//填充透明度
           map: $scope.map
-        });
+        }).on('click',$scope.closeFooter);
         //判断当前范围500米之内的机构
         $scope.calculationNearby();
       }
@@ -99,7 +109,7 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
       $scope.withinIns = [];
       var lnglat = new AMap.LngLat($scope.lnglat[0], $scope.lnglat[1]);//当前位置坐标
       for (var i = 0; i < $scope.insdata.length; i++) {
-        var ins = $scope.insdata[i];
+        var ins = $scope.insdata[i].InstitutionModel;
         if (lnglat.distance(ins.lnglat) <= 500) {
           $scope.withinIns.push(ins);
         }
@@ -115,70 +125,80 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
         var ins = $scope.withinIns[i];
         new AMap.Marker({
           map: $scope.map,
-          position: ins.lnglat,
-          extData: ins,//当前的机构信息
-          content: '<div class="uicon-' + (ins.Priority == "A" ? "markerA" : (ins.Priority == "B" ? "markerA" : "markerC")) + '"></div>'
+          position: $scope.withinIns[i].lnglat,
+          extData: $scope.withinIns[i],//当前的机构信息
+          content: '<div class="uicon-' + (ins.InstitutionPriority == "A" ? "markerA" : (ins.InstitutionPriority == "B" ? "markerB" : "markerC")) + '"></div>'
         }).on('click', $scope.showInfoWindow);
       }
     };
     //点击Marker显示信息窗体
     $scope.showInfoWindow = function (event) {
-      $scope.currentins = event.target.getExtData();
-      $scope.currentins.allowVisit = false;//是否允许拜访
-      //判断是否允许拜访
-      for (var i = 0; i < $scope.todaysch.length; i++) {
-        if ($scope.todaysch[i].CheckOut != null && $scope.todaysch[i].InstitutionModel.InstitutionID == $scope.currentins.InstitutionID) {
-          $scope.currentins.allowVisit = true;
-        }
-        if (i == $scope.todaysch.length - 1) {
-          var content = $compile('<div>' +
-            '      <div class="info">' +
-            '        <div class="info-top">' +
-            '          <div class="inf-top-left txt">' +
-            '          </div>' +
-            '          <div class="inf-top-right">' +
-            '            <span ng-bind="currentins.InstitutionName"></span>' +
-            '          </div>' +
-            '        </div>' +
-            '        <div class="info-bottom">' +
-            '          <span></span>' +
-            '        </div>' +
-            '      </div>' +
-            '    </div>')($scope)[0];
-          $scope.$apply();
-          $scope.map.clearInfoWindow();
-          var infoWindow = new AMap.InfoWindow({
-            offset: new AMap.Pixel(-10, -40),
-            isCustom: true,
-            closeWhenClickMap: true,
-            autoMove: true,
-            content: content
-          });
-          infoWindow.open($scope.map, $scope.currentins.lnglat);
+      $scope.currentins ={
+        InstitutionModel:event.target.getExtData(),
+        CheckIn:null,
+        CheckOut:null
+      };
+      if($scope.todaysch.length==0){
+        $scope.setInfoWindow();
+      }else{
+        //判断是否允许拜访
+        for (var i = 0; i < $scope.todaysch.length; i++) {
+          if ($scope.todaysch[i].InstitutionModel.InstitutionID == $scope.currentins.InstitutionModel.InstitutionID) {
+            $scope.currentins.CheckIn = $scope.todaysch[i].CheckIn;
+            $scope.currentins.CheckOut = $scope.todaysch[i].CheckOut;
+          }
+          if (i == $scope.todaysch.length - 1) {
+            $scope.setInfoWindow();
+          }
         }
       }
-
     };
+    $scope.setInfoWindow =function(){
+      var content = $compile('<div>' +
+        '      <div class="info">' +
+        '        <div class="info-top">' +
+        '          <div class="inf-top-left txt" ng-click="govisit(currentins)">' +
+        '          </div>' +
+        '          <div class="inf-top-right">' +
+        '            <span ng-bind="currentins.InstitutionModel.InstitutionName"></span>' +
+        '          </div>' +
+        '        </div>' +
+        '        <div class="info-bottom">' +
+        '          <span></span>' +
+        '        </div>' +
+        '      </div>' +
+        '    </div>')($scope)[0];
+      $scope.$apply();
+      $scope.map.clearInfoWindow();
+      var infoWindow = new AMap.InfoWindow({
+        offset: new AMap.Pixel(-10, -40),
+        isCustom: true,
+        closeWhenClickMap: true,
+        autoMove: true,
+        content: content
+      });
+      infoWindow.open($scope.map, $scope.currentins.InstitutionModel.lnglat);
+    }
     //今日行程拜访或者查看
     $scope.govisit = function (item) {
       if (item.CheckOut == null && item.CheckIn != null) {
         $state.go("main.calldetails", {insId: item.InstitutionModel.InstitutionID});
       } else if (item.CheckOut != null && item.CheckIn != null) {
-
         $state.go("main.calloverview", {insId: item.InstitutionModel.InstitutionID});
       } else {
         $state.go("main.checkin", {insId: item.InstitutionModel.InstitutionID});
       }
     };
     //今日行程列表选中机构
-    $scope.todayRouteSelectIns = function (item) {
+    $scope.selectIns = function (item) {
       //优先定位置签出
       if (item.CheckOut != null) {
         $scope.map.panTo(item.CheckOut.LngLat);
-      } else {
+      } else if(item.CheckIn!=null) {
         $scope.map.panTo(item.CheckIn.LngLat);
+      }else{
+        $scope.map.panTo(item.InstitutionModel.lnglat);
       }
-
     };
 
     $scope.dateToday = moment();
@@ -194,31 +214,85 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
     //获取已计划行程
     $scope.getPlanSch = function (callback) {
       guidesrv.getPlanScheduleList($scope.dateToday.format('YYYY-MM-DD')).then(function (data) {
-        $scope.plansch = data;
-        if (callback != null) {
-          callback();
+        var result =[];
+        if(data.PlanRouteline.Institutions.length==0){
+          $scope.plansch = result;
+          if (callback != null) {
+            callback();
+          }
+        }else{
+          for(var i=0;i<data.PlanRouteline.Institutions.length;i++){
+            var item ={
+              InstitutionModel:data.PlanRouteline.Institutions[i],
+              CheckIn:null,
+              CheckOut:null
+            };
+            //判断是否允许拜访
+            for (var j = 0; j < $scope.todaysch.length; j++) {
+              if ($scope.todaysch[j].InstitutionModel.InstitutionID == item.InstitutionModel.InstitutionID) {
+                item.CheckIn = $scope.todaysch[j].CheckIn;
+                item.CheckOut = $scope.todaysch[j].CheckOut;
+              }
+              if (j == $scope.todaysch.length - 1) {
+                result.push(item);
+              }
+            }
+            if(i==data.PlanRouteline.Institutions.length-1){
+              $scope.plansch = result;
+              if (callback != null) {
+                callback();
+              }
+            }
+          }
         }
       });
     };
     //获取用户所有机构
     $scope.getmyins = function (callback) {
       routesettingsrv.getins().then(function (data) {
-        $scope.insdata = data;
-        if (callback != null) {
-          callback();
+        var result =[];
+        if(data.length==0){
+          $scope.insdata = result;
+          if (callback != null) {
+            callback();
+          }
+        }else{
+          for(var i=0;i<data.length;i++){
+            var item ={
+              InstitutionModel:data[i],
+              CheckIn:null,
+              CheckOut:null
+            };
+            //判断是否允许拜访
+            for (var j = 0; j < $scope.todaysch.length; j++) {
+              if ($scope.todaysch[j].InstitutionModel.InstitutionID == item.InstitutionModel.InstitutionID) {
+                item.CheckIn = $scope.todaysch[j].CheckIn;
+                item.CheckOut = $scope.todaysch[j].CheckOut;
+              }
+              if (j == $scope.todaysch.length - 1) {
+                result.push(item);
+              }
+            }
+            if(i==data.length-1){
+              $scope.insdata = result;
+              if (callback != null) {
+                callback();
+              }
+            }
+          }
         }
       });
     };
     //初始化
     $scope.init = function () {
-      $scope.getmyins(function () {
-        $scope.getTodaySch(function () {
+      $scope.getTodaySch(function(){
+        $scope.getmyins(function(){
           $scope.getPlanSch(function () {
             //通知地图数据准备完毕
             $scope.$broadcast("amap", "datacompleted");
           });
-        });
-      });
+        })
+      })
     };
     $scope.init();
   });
