@@ -5,21 +5,15 @@
       <span class="back-text" style="">返回</span>
     </button>
     <div class="h1 title">CheckList</div>
-    <button class="button button-clear back-button">
+    <button class="button button-clear back-button" ng-click="saveChecklist()">
       保存
     </button>
   </div>
   <ion-content class="has-header call-checklist">
     <div>
-      <div class="content-block-title">计划提醒</div>
-      <div class="bg-white padding-1015 plan-remind">
-        <!--用join添加逗号-->
-        协议签取 达成跟进 产品配送 产品购进
-      </div>
       <div class="content-block-title">请选择</div>
-
-      <ul>
-        <li class="list-item" ng-repeat="item in KAItems" ng-class="{'checked':true}">
+      <ul ng-show="KAItems.length>0">
+        <li class="list-item" ng-repeat="item in KAItems" ng-class="{'checked':item.selected}" ng-click="item.selected=!item.selected">
           <div class="item-content">
             <div class="item-media"><span class="uicon user-checkbox"></span></div>
             <div class="item-inner">
@@ -28,6 +22,9 @@
           </div>
         </li>
       </ul>
+      <div ng-show="KAItems==0" class="flex-center width-100 color-gray">
+        暂无数据
+      </div>
     </div>
   </ion-content>
 </ion-view>

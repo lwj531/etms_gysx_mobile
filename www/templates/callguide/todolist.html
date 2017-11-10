@@ -36,68 +36,29 @@
         <p class="stick-left padding-left">待办事项</p>
       </div>
       <div class="home-schedule todo-list">
-        <ul>
-          <li class="list-item multi-line schedule-plan">
+        <div class="width-100 flex-center color-gray" ng-show="todayToDo.length==0">--暂无记录--</div>
+        <ul ng-show="todayToDo.length>0">
+          <li class="list-item multi-line schedule-plan" ng-repeat="item in todayToDo">
             <div class="item-content align-top">
               <div class="item-media"><span class="list-dot"></span></div>
               <div class="item-inner">
                 <div class="item-title-row">
-                  <div class="item-title color-blue margin-img align-center"><img src="img/fundation-date.png" width="15"><span class="cj-date">创建 2017-08-21</span></div>
-                  <div class="item-after color-orange margin-img align-center"><img src="img/deadline.png" width="15"><span style="color: #f5a623;">到期时间 2017-08-28</span></div>
+                  <div class="item-title color-blue margin-img align-center"><img src="img/create_blue_48.png" width="12"><span class="cj-date">创建 <span ng-bind="item.ActivityDate"></span></span></div>
+                  <div class="item-after color-orange margin-img align-center"><img src="img/create_orange_48.png" width="12"><span style="color: #f5a623;">到期时间 </span>
+                    <input type="date" class="deadline-input" ng-model="item.Deadline"></div>
                 </div>
-                <div class="item-text text-area-wz">
-                  <div class="dbsx-wz-content">
-                    待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项
-                    <div class="triangle-left"></div>
-                  </div>
+                <div class="dbsx-wz-content" ng-if="item.Notes!=''">
+                  {{item.Notes}}
+                  <div class="triangle-left"></div>
                 </div>
-                <div class="item-text">
-                  <div class="dbsx-yy-content">
-                    35秒
-                    <div class="triangle-sound"></div>
-                  </div>
+                <div class="dbsx-yy-content" ng-if="item.Recording!=''">
+                  35秒
+                  <div class="triangle-left"></div>
                 </div>
-                <div class="flex-row align-end">
-                  <div class="col-30 color-green"></div>
-                  <div class="col-30 color-green"></div>
-                  <div class="col-40">
-                    <a class="button button-clear button-small flex-end margin-img color-red">
-                      <img src="img/red-dlt.png" width="12"> <span>删除记录</span>
-                    </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="list-item multi-line schedule-plan">
-            <div class="item-content align-top">
-              <div class="item-media"><span class="list-dot"></span></div>
-              <div class="item-inner">
-                <div class="item-title-row">
-                  <div class="item-title color-blue margin-img align-center"><img src="img/fundation-date.png" width="15"><span class="cj-date">创建 2017-08-21</span></div>
-                  <div class="item-after color-orange margin-img align-center"><img src="img/deadline.png" width="15"><span style="color: #f5a623;">到期时间 </span><input
-                    type="date" class="deadline-input"></div>
-                </div>
-                <div class="item-text text-area-wz">
-                  <div class="dbsx-wz-content">
-                    待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事项待办事事项待办事项待办事项待办事项待办事项待办事项
-                    <div class="triangle-left"></div>
-                  </div>
-                </div>
-                <div class="item-text">
-                  <div class="dbsx-yy-content">
-                    35秒
-                    <div class="triangle-sound"></div>
-                  </div>
-                </div>
-                <div class="flex-row align-end">
-                  <div class="col-30 color-green"></div>
-                  <div class="col-30 color-green"></div>
-                  <div class="col-40">
-                    <a class="button button-clear button-small flex-end margin-img color-red">
-                      <img src="img/red-dlt.png" width="11"> <span>删除记录</span>
-                    </a>
-                   </div>
+                <div class="flex-end align-end">
+                  <a class="button button-clear button-small flex-end margin-img color-red">
+                    <img src="img/del_red_36.png" width="10"> <span>删除记录</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -107,8 +68,8 @@
     </div>
     <div class="sr-area flex-between">
       <img src="img/sound_blue_45.png" width="15">
-      <input id="inputarea" type="text" placeholder="请输入待办事项或语音">
-      <button class="button-thin button button-positive">保存</button>
+      <input id="inputarea" type="text" placeholder="请输入待办事项或语音" maxlength="100" ng-model="addNewToDo.note">
+      <button class="button-thin button button-positive" ng-click="addNote()">保存</button>
     </div>
   </ion-content>
 </ion-view>

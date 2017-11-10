@@ -24,9 +24,57 @@ angular.module('todolist.ctrl', [])
       }
 
     });
+
     guidesrv.gettodo().then(function (data) {
       $scope.todoList = data;
       console.log($scope.todoList);
     });
+
+    $scope.todayToDo=[];
+
+    $scope.addNewToDo={
+      note:''
+    };
+
+
+    //加文本信息
+    $scope.addNote=function () {
+      $scope.todayToDo.push({
+        ActivityID:'',
+        ActivityDate: moment().format('YYYY/MM/DD'),
+        StaffID: $stateParams.staffId,
+        InstitutionID: $stateParams.insId,
+        Notes: $scope.addNewToDo.note,
+        Deadline: new Date(),
+        FinishStatus: "ACTIVE",
+        Recording: '',
+        RecordingUrl:''
+      });
+      $scope.addNewToDo.note='';
+    };
+    //加声音 假的
+    $scope.addSound=function () {
+      $scope.todayToDo.push({
+        ActivityID:'',
+        ActivityDate: moment().format('YYYY/MM/DD'),
+        StaffID: $stateParams.staffId,
+        InstitutionID: $stateParams.insId,
+        Deadline: new Date(),
+        FinishStatus: "ACTIVE",
+        Notes: '',
+        Recording: 'string sound url',
+        RecordingUrl:'string sound url'
+      });
+    };
+
+
+    $scope.saveToDo=function () {
+      guidesrv.savetodo(model).then(function () {
+        $scope.popup("操作成功");
+        console.log();
+
+        // $state.go("main.calldetails",{insId:$stateParams.insId});
+      });
+    }
 
   });

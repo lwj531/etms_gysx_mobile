@@ -29,8 +29,8 @@ angular.module("guide.srv", ["http.srv"])
       return httpsrv.service("/api/Checkin/GetLatestInventorys/" + institutionId, {}, "get");
     };
     //获取库存
-    this.getskus = function () {
-      return httpsrv.service("/api/StaffSkus/GetSkus/", {}, "get");
+    this.getskus = function (institutionId) {
+      return httpsrv.service("/api/Product/GetProductSkus/" + institutionId, {}, "get");
     };
     //获取当日填写过的进销存
     this.getdailyinventorys = function (institutionId) {
