@@ -43,7 +43,6 @@
           <div class="inf-top-left txt" ng-show="isnewly || routeedit" ng-click="addinline()">
           </div>
           <div class="inf-top-right">
-            <span ng-click="closeInfoWindow()" class="uicon close-info"></span>
             <span ng-bind="currentins.InstitutionName"></span>
           </div>
         </div>
@@ -94,7 +93,7 @@
         <ion-scroll class="window-list" ng-show="currentRoute.Institutions.length>0">
           <ion-list show-delete="routeedit"
                     show-reorder="routeedit">
-            <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="openinsinfo(item)">
+            <ion-item ng-repeat="item in currentRoute.Institutions" ng-click="showinsinfo(item)">
               <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
               <p class="item-text">{{item.Address}}</p>
               <ion-delete-button class="ion-minus-circled"
@@ -121,7 +120,7 @@
         </div>
         <ion-scroll class="window-list" ng-show="searchresult.length>0">
           <ion-list class="no-latlng">
-            <ion-item ng-repeat="item in searchresult" ng-click="openinsinfo(item)">
+            <ion-item ng-repeat="item in searchresult" ng-click="showinsinfo(item)">
               <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
               <p class="item-text">{{item.Address}}</p>
             </ion-item>
@@ -142,7 +141,7 @@
         </div>
         <ion-scroll class="window-list" ng-show="nolatlngresult.length>0">
           <ion-list class="no-latlng">
-            <ion-item ng-repeat="item in nolatlngresult" ng-click="openinsinfo(item)">
+            <ion-item ng-repeat="item in nolatlngresult" ng-click="showinsinfo(item)">
               <h1 class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</h1>
               <p class="item-text">{{item.Address}}</p>
             </ion-item>

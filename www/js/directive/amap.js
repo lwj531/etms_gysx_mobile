@@ -38,6 +38,7 @@ angular.module('amap.dt', [])
             {
               //center:$scope.center,
               resizeEnable: true,
+              zooms:[10,17],
               //zoom: 10,
               draggable: true,
               /*mapStyle: 'amap://styles/b8bc3f4188432ed34aa545312ddf20f9'//样式URL*/
