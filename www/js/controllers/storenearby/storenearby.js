@@ -1,7 +1,13 @@
 angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'angularMoment'])
   .controller('StorenearbyCtrl', function ($scope, $state, $rootScope, $compile, routesettingsrv, guidesrv, amMoment) {
-//是否获取当前定位成功
+    //是否获取当前定位成功
     $scope.haslocal = false;
+    //无坐标时临时测试----------
+    $scope.haslocal = true;
+    $scope.lnglat = [121.421070,31.256720];
+    //----------end------------
+
+
     //初始化tab
     $scope.tabs = [
       {name: 'todaysch', title: '今日行程'},
@@ -54,7 +60,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
           }));
           $scope.geolocation.getCurrentPosition();
         });
-        $scope.map.on('moveend', $scope.getCenter);
+        //$scope.map.on('moveend', $scope.getCenter);
         $scope.map.on('click', $scope.closeFooter)
 
       }
@@ -69,8 +75,12 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
     //获取定位坐标失败
     $scope.getlocationError = function () {
       $rootScope.toast("获取坐标失败，请重新定位。");
-      $scope.lnglat = [];
-      $scope.haslocal = true;
+      //无法获取坐标时暂时关闭，方便测试
+      //$scope.lnglat = [];
+      //$scope.haslocal = false;
+      //为方便测试
+      $scope.map.setCenter($scope.lnglat);
+      $scope.getCenter();
     };
     //地图移动时重新获取当前的中心点
     $scope.getCenter = function () {
@@ -107,6 +117,17 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
     $scope.calculationNearby = function () {
       //判断当前范围500米之内的机构
       $scope.withinIns = [];
+      $scope.getnearby($scope.lnglat,function(){
+        for (var i = 0; i < $scope.insdata.length; i++) {
+          var ins = $scope.insdata[i].InstitutionModel;
+          $scope.withinIns.push(ins);
+          if (i == $scope.insdata.length - 1) {
+            //重新显示门店marker
+            $scope.setInsMarker();
+          }
+        }
+      });
+     /* $scope.withinIns = [];
       var lnglat = new AMap.LngLat($scope.lnglat[0], $scope.lnglat[1]);//当前位置坐标
       for (var i = 0; i < $scope.insdata.length; i++) {
         var ins = $scope.insdata[i].InstitutionModel;
@@ -117,7 +138,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
           //重新显示门店marker
           $scope.setInsMarker();
         }
-      }
+      }*/
     };
     //设置marker点
     $scope.setInsMarker = function () {
@@ -210,9 +231,9 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
         }
       });
     };
-    //获取连锁总部
-    $scope.getmyins = function (callback) {
-      routesettingsrv.getins().then(function (data) {
+    //获取附近药店
+    $scope.getnearby = function (lnglat,callback) {
+      guidesrv.getNearBy(lnglat).then(function (data) {
         var result = [];
         if (data.length == 0) {
           $scope.insdata = result;
@@ -226,6 +247,9 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
               CheckIn: null,
               CheckOut: null
             };
+            if($scope.todaysch.length==0){
+              result.push(item);
+            }
             //判断是否允许拜访
             for (var j = 0; j < $scope.todaysch.length; j++) {
               if ($scope.todaysch[j].InstitutionModel.InstitutionID == item.InstitutionModel.InstitutionID) {
@@ -250,10 +274,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
     //初始化
     $scope.init = function () {
       $scope.getTodaySch(function () {
-        $scope.getmyins(function () {
-          //通知地图数据准备完毕
-          $scope.$broadcast("amap", "datacompleted");
-        })
+        $scope.$broadcast("amap", "datacompleted");
       })
     };
     $scope.init();

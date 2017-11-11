@@ -70,7 +70,7 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
     $scope.getlocationError = function () {
       $rootScope.toast("获取坐标失败，请重新定位。");
       $scope.lnglat = [];
-      $scope.haslocal = true;
+      $scope.haslocal = false;
     };
     //地图移动时重新获取当前的中心点
     $scope.getCenter = function () {

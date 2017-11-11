@@ -79,5 +79,9 @@ angular.module("guide.srv", ["http.srv"])
     this.detetetodo = function (activityId) {
       return httpsrv.service("/api/Checkin/TodoModel/" + activityId, {}, "delete");
     };
+    //获取附近门店
+    this.getNearBy = function (lnglat) {
+      return httpsrv.service("/api/Institution/GetNearbyChainStores/", lnglat, "post");
+    }
   }
   ]);
