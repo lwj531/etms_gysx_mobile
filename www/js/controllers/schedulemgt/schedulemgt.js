@@ -556,7 +556,10 @@ angular.module('schedulemgt.ctrl', ['routesetting.srv', 'daily.srv', 'angularMom
         });
         lineArr.push(ins.LngLat);
         if(i==institutions.length-1){
-          new AMap.Polyline({
+          if($scope.polyline!=null){
+            $scope.map.remove([$scope.polyline]);
+          }
+          $scope.polyline = new AMap.Polyline({
             path: lineArr,          //设置线覆盖物路径
             strokeColor: isPlan?"#419de7":"#48d38e", //线颜色
             strokeOpacity: 1,       //线透明度

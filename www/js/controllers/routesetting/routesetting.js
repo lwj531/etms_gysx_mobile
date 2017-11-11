@@ -34,7 +34,7 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
         $scope.map.clearMap();
         $scope.map.clearInfoWindow();
 
-        $scope.map.plugin(['AMap.Geolocation', 'AMap.ToolBar'], function () {
+        $scope.map.plugin(['AMap.Geolocation'], function () {
           $scope.geolocation = new AMap.Geolocation({
             enableHighAccuracy: true,//是否使用高精度定位，默认:true
             timeout: 10000,          //超过10秒后停止定位，默认：无穷大
@@ -51,11 +51,6 @@ angular.module('routesetting.ctrl', ['ionic', 'routesetting.srv'])
           AMap.event.addListener($scope.geolocation, 'complete', $scope.getlocationComplete);//返回定位信息
           AMap.event.addListener($scope.geolocation, 'error', $scope.getlocationError);      //返回定位出错信息
           $scope.map.addControl($scope.geolocation);
-          //测试添加工具条
-          $scope.map.addControl(new AMap.ToolBar({
-            visible: true,
-            position: 'LT'
-          }));
           $scope.geolocation.getCurrentPosition();
         });
       }

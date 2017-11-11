@@ -264,14 +264,18 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
               CheckOut:null
             };
             //判断是否允许拜访
-            for (var j = 0; j < $scope.todaysch.length; j++) {
-              if ($scope.todaysch[j].InstitutionModel.InstitutionID == item.InstitutionModel.InstitutionID) {
-                item.CheckIn = $scope.todaysch[j].CheckIn;
-                item.CheckOut = $scope.todaysch[j].CheckOut;
+            if($scope.todaysch.length>0){
+              for (var j = 0; j < $scope.todaysch.length; j++) {
+                if ($scope.todaysch[j].InstitutionModel.InstitutionID == item.InstitutionModel.InstitutionID) {
+                  item.CheckIn = $scope.todaysch[j].CheckIn;
+                  item.CheckOut = $scope.todaysch[j].CheckOut;
+                }
+                if (j == $scope.todaysch.length - 1) {
+                  result.push(item);
+                }
               }
-              if (j == $scope.todaysch.length - 1) {
-                result.push(item);
-              }
+            }else{
+              result.push(item);
             }
             if(i==data.length-1){
               $scope.insdata = result;

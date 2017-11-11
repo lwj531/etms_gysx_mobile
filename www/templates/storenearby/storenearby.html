@@ -129,61 +129,57 @@
     </div>
     <!--今日行程tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='todaysch'">
-      <li class="list-item multi-line" ng-repeat="item in todaysch" ui-sref="main.checkout({insId:item.InstitutionID})">
+      <li class="list-item multi-line" ng-repeat="item in todaysch">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon {{item.icon}}"></span></div>
-          <div class="item-inner">
-            <div class="item-title-row">
-              <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
-            </div>
-            <div class="item-text">{{item.InstitutionAddress}}</div>
-            <div class="flex-between align-end font-8">
-              <div class="color-green">签入时间&nbsp;{{item.CheckinTime | amDateFormat: 'HH:mm:ss'}}</div>
-              <div class="color-green">签出时间&nbsp;{{item.CheckinTime | amDateFormat: 'HH:mm:ss'}}</div>
-              <div class="flex-end">
-                <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img src="img/search_gray_30.png" width="18">查看</a></div>
-            </div>
+          <div class="item-media"><span class="uicon uicon-markerA"></span>
           </div>
-        </div>
-      </li>
-      <li class="list-item multi-line ">
-        <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span></div>
           <div class="item-inner">
-            <div class="item-title-row">
-              <div class="item-title">国药控股大药房永新连锁店(A)</div>
+            <div class="item-title-row" ng-click="selectIns(item)">
+              <div class="item-title">{{item.InstitutionModel.InstitutionName}}
+                ({{item.InstitutionModel.InstitutionPriority}})
+              </div>
             </div>
-            <div class="item-text">上海市石泉路548号</div>
+            <div class="item-text">{{item.InstitutionModel.InstitutionAddress}}</div>
             <div class="flex-between align-end font-8">
-              <div class="color-green">首次签入&nbsp;10:21:21</div>
-              <div class="color-red">尚未签出</div>
+              <div class="color-green">签入时间&nbsp;{{item.CheckIn.Time | amDateFormat: 'HH:mm:ss'}}</div>
+              <div ng-class="{'color-red':item.CheckOut==null,'color-green':item.CheckOut!=null}"><span>{{item.CheckOut!=null?'签出时间':'尚未签出'}}</span>{{item.CheckOut.Time
+                | amDateFormat: 'HH:mm:ss'}}
+              </div>
               <div class="flex-end">
-                <a class="button button-clear button-stable button-small flex-center icon-button margin-img"><img src="img/search_gray_30.png" width="18">查看</a></div>
+                <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
+                  ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
+                  width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
             </div>
           </div>
         </div>
       </li>
     </ul>
-    <!--已计划行程tab-->
-    <ul class="dragup-ul" ng-show="currentTab.name=='plansch'">
-      <li class="list-item multi-line" ui-sref="main.checkin({insId:item.InstitutionID})" ng-repeat="item in plansch.PlanRouteline.Institutions">
+    <!--附近药店tab-->
+    <ul class="dragup-ul" ng-show="currentTab.name=='storenearby'">
+      <li>
+        <input type="text" ng-model="searchKey" placeholder="搜索关键字"/>
+      </li>
+      <li class="list-item multi-line"  ng-repeat="item in insdata | filter:searchKey">
         <div class="item-content align-top">
-          <div class="item-media"><span class="uicon {{item.icon}}"></span></div>
+          <div class="item-media"><span class="uicon uicon-markerA"></span>
+          </div>
           <div class="item-inner">
-            <div class="item-title-row">
-              <div class="item-title">{{item.InstitutionName}} ({{item.InstitutionPriority}})</div>
+            <div class="item-title-row"  ng-click="selectIns(item)">
+              <div class="item-title">{{item.InstitutionModel.InstitutionName}}</div>
             </div>
             <div class="flex-row align-end font-8">
-              <div class="col-70 color-gray">{{item.Address}}</div>
+              <div class="col-70 color-gray">{{item.InstitutionModel.Address}}</div>
               <div class="col-30 flex-end">
-                <a class="button button-clear button-stable button-small flex-center color-blue icon-button margin-img"><img src="img/entrance_blue_30.png" width="18">拜访</a></div>
+                <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
+                  ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
+                  width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
             </div>
           </div>
         </div>
       </li>
     </ul>
-    <!--我负责的机构tab-->
-    <ul class="dragup-ul" ng-show="currentTab.name=='myins'">
+    <!--下游门店tab-->
+    <ul class="dragup-ul" ng-show="currentTab.name=='chainstore'">
       <!--ui-sref="main.checkin"-->
       <li class="list-item multi-line"  ng-repeat="item in insdata" ng-click="toCheckIn(item.InstitutionID)">
         <div class="item-content align-top">

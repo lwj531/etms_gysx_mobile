@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'route','ngCordova'])
+angular.module('starter', ['ionic', 'route', 'ngCordova'])
 
   .run(function ($ionicPlatform, $rootScope, $state, $ionicPopup) {
     $ionicPlatform.ready(function () {
@@ -21,16 +21,16 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         StatusBar.styleDefault();
       }
       //如果未登录
-      $rootScope.$on('userIntercepted', function (errorType,data) {
-        if(data=="notLogin"){
+      $rootScope.$on('userIntercepted', function (errorType, data) {
+        if (data == "notLogin") {
           $ionicPopup.alert({
             title: '提示',
             template: '尚未登录'
-          }).then(function(res) {
+          }).then(function (res) {
             $state.go("app");
           });
         }
-        if(data=="loginfailed"){
+        if (data == "loginfailed") {
           $ionicPopup.alert({
             title: '提示',
             template: '用户名或密码错误'
@@ -234,42 +234,42 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //(拜访)签入
       .state('main.checkin', {
-          url: '/checkin/:insId',
-          templateUrl: "templates/callguide/checkin.html",
-          controller: "CheckinCtrl"
-        })
+        url: '/checkin/:insId',
+        templateUrl: "templates/callguide/checkin.html",
+        controller: "CheckinCtrl"
+      })
       //(拜访)签入机构后的拜访向导
       .state('main.calldetails', {
-          url: '/calldetails/:insId',
-          templateUrl: "templates/callguide/calldetails.html",
-          controller: "CalldetailsCtrl"
-        })
+        url: '/calldetails/:insId',
+        templateUrl: "templates/callguide/calldetails.html",
+        controller: "CalldetailsCtrl"
+      })
       //进销存检查
       .state('main.purchasesellstockcheck', {
-          url: '/purchasesellstockcheck/:insId',
-          templateUrl: "templates/callguide/purchasesellstockcheck.html",
-          controller: "PurchasesellstockcheckCtrl"
-        })
+        url: '/purchasesellstockcheck/:insId',
+        templateUrl: "templates/callguide/purchasesellstockcheck.html",
+        controller: "PurchasesellstockcheckCtrl"
+      })
       //生意回顾
       .state('main.businessreview', {
-          url: '/businessreview/',
-          params:{"insId":null,"staffId":null},
-          templateUrl: "templates/callguide/businessreview.html",
-          controller: "BusinessreviewCtrl"
-        })
+        url: '/businessreview/',
+        params: {"insId": null, "staffId": null},
+        templateUrl: "templates/callguide/businessreview.html",
+        controller: "BusinessreviewCtrl"
+      })
       //checklist
       .state('main.checklist', {
-          url: '/checklist',
-          params:{"insId":null,"staffId":null},
-          templateUrl: "templates/callguide/checklist.html",
-          controller: "ChecklistCtrl"
-        })
+        url: '/checklist',
+        params: {"insId": null, "staffId": null},
+        templateUrl: "templates/callguide/checklist.html",
+        controller: "ChecklistCtrl"
+      })
       //疾病知识教育
       .state('main.diseaseknwoledgeeducate', {
-          url: '/diseaseknwoledgeeducate',
-          templateUrl: "templates/callguide/diseaseknwoledgeeducate.html",
-          controller: "DiseaseknwoledgeeducateCtrl"
-        })
+        url: '/diseaseknwoledgeeducate',
+        templateUrl: "templates/callguide/diseaseknwoledgeeducate.html",
+        controller: "DiseaseknwoledgeeducateCtrl"
+      })
       //资料详情
       .state('main.materialdetail', {
         url: '/materialdetail',
@@ -278,17 +278,17 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       })
       //培训记录
       .state('main.trainingrecord', {
-          url: '/trainingrecord',
-          templateUrl: "templates/callguide/trainingrecord.html",
-          controller: "TrainingrecordCtrl"
-        })
+        url: '/trainingrecord',
+        templateUrl: "templates/callguide/trainingrecord.html",
+        controller: "TrainingrecordCtrl"
+      })
       //待办事项
       .state('main.todolist', {
-          url: '/todolist',
-        params:{"insId":null,"staffId":null},
+        url: '/todolist',
+        params: {"insId": null, "staffId": null},
         templateUrl: "templates/callguide/todolist.html",
-          controller: "TodolistCtrl"
-        })
+        controller: "TodolistCtrl"
+      })
       //拜访概览
       .state('main.calloverview', {
         url: '/calloverview',
@@ -305,7 +305,8 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       .state('main.storenearby', {
         url: '/storenearby',
         templateUrl: "templates/storenearby/storenearby.html",
-        controller: "StorenearbyCtrl"
+        controller: "StorenearbyCtrl",
+        cache: false
       })
       //(拜访)签入
       .state('main.aecheckin', {
