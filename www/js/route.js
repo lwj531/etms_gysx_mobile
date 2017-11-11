@@ -46,8 +46,6 @@ angular.module('route', [
   'checkout.ctrl',
   'storenearby.ctrl',
   'aepurchasesellstockcheck.ctrl',
-  'aechecklist.ctrl',
-  'aebusinessreview.ctrl',
   'aetrainingrecord.ctrl',
   'aediseaseknwoledgeeducate.ctrl',
   'aematerialdetail.ctrl',

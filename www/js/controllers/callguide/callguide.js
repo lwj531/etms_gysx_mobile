@@ -287,6 +287,9 @@ angular.module('callguide.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'ang
         }
       });
     };
+    $scope.cancelSearch=function () {
+      $scope.searchKey='';
+    };
     //初始化
     $scope.init = function () {
       $scope.getTodaySch(function(){

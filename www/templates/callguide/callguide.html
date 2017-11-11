@@ -182,29 +182,34 @@
       </li>
     </ul>
     <!--我负责的机构tab-->
-    <ul class="dragup-ul" ng-show="currentTab.name=='myins'">
-      <li>
-        <input type="text" ng-model="searchKey" placeholder="搜索关键字"/>
-      </li>
-      <li class="list-item multi-line"  ng-repeat="item in insdata | filter:searchKey">
-        <div class="item-content align-top">
-          <div class="item-media"><span class="uicon"
-                                        ng-class="{'uicon-markerA':item.InstitutionModel.InstitutionPriority=='A','uicon-markerB':item.InstitutionModel.InstitutionPriority=='B','uicon-markerC':item.InstitutionModel.InstitutionPriority=='C'}"></span>
-          </div>
-          <div class="item-inner">
-            <div class="item-title-row"  ng-click="selectIns(item)">
-              <div class="item-title">{{item.InstitutionModel.InstitutionName}} ({{item.InstitutionModel.InstitutionPriority}})</div>
-            </div>
-            <div class="flex-row align-end font-8">
-              <div class="col-70 color-gray">{{item.InstitutionModel.Address}}</div>
-              <div class="col-30 flex-end">
-                <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
-                  ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
-                  width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
-            </div>
-          </div>
+    <div ng-show="currentTab.name=='myins'" class="tab-myins">
+      <div class="user-searchbar flex-center margin-0">
+        <div class="width-90 flex-between">
+          <input type="text" placeholder="输入关键字搜索机构 " ng-model="searchKey">
+          <button class="button button-positive button-small" ng-click="cancelSearch()">取消</button>
         </div>
-      </li>
-    </ul>
+      </div>
+      <ul class="dragup-ul third">
+        <li class="list-item multi-line"  ng-repeat="item in insdata | filter:searchKey">
+          <div class="item-content align-top">
+            <div class="item-media"><span class="uicon"
+                                          ng-class="{'uicon-markerA':item.InstitutionModel.InstitutionPriority=='A','uicon-markerB':item.InstitutionModel.InstitutionPriority=='B','uicon-markerC':item.InstitutionModel.InstitutionPriority=='C'}"></span>
+            </div>
+            <div class="item-inner">
+              <div class="item-title-row"  ng-click="selectIns(item)">
+                <div class="item-title">{{item.InstitutionModel.InstitutionName}} ({{item.InstitutionModel.InstitutionPriority}})</div>
+              </div>
+              <div class="flex-row align-end font-8">
+                <div class="col-70 color-gray">{{item.InstitutionModel.Address}}</div>
+                <div class="col-30 flex-end">
+                  <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
+                    ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
+                    width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </ion-view>

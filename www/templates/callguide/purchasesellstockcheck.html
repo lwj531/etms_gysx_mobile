@@ -32,14 +32,14 @@
           <ul class="jxc-ul">
             <li>建议订单</li>
             <li>SKU价格</li>
-            <li>排位面</li>
+            <li ng-show="staff.IsCCR">排位面</li>
           </ul>
         </div>
         <div class="jxc-content-sr">
           <ul class="jxc-ul">
             <li><input type="number" placeholder="0" ng-model="item.ProposalOrder"></li>
-            <li><input type="number" placeholder="0" ng-model="item.SKUPrice"></li>
-            <li><input type="number" placeholder="0" ng-model="item.PositionCount"></li>
+            <li><input type="number" placeholder="0.00" ng-model="item.SKUPrice"></li>
+            <li ng-show="staff.IsCCR"><input type="number" placeholder="0" ng-model="item.PositionCount"></li>
           </ul>
         </div>
       </li>

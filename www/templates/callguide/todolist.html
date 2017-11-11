@@ -67,10 +67,10 @@
         </ul>
       </div>
     </div>
-    <div class="sr-area flex-between">
-      <img src="img/sound_blue_45.png" width="15">
-      <input id="inputarea" type="text" placeholder="请输入待办事项或语音" maxlength="100" ng-model="addNewToDo.Notes">
-      <button class="button-thin button button-positive" ng-click="addNote()" ng-class="{'disabled':canClick}">保存</button>
+    <div class="inputarea flex-between">
+      <button class="button-thin button button-clear button-sound"><img src="img/sound_blue_45.png" width="15"></button>
+      <input type="text" placeholder="请输入待办事项或语音" maxlength="100" ng-model="addNewNote.Notes">
+      <button class="button-thin button button-positive" ng-click="addNote()">保存</button>
     </div>
   </ion-content>
 </ion-view>

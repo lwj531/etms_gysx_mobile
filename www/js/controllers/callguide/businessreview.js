@@ -14,18 +14,34 @@ angular.module('businessreview.ctrl', ['guide.srv', 'client.srv'])
         // Others: [],
         ReviewTargetCount: '',
         HasPPT: false,
-        PhotosList:['qweqweqw']
+        PhotosList: ['placeholder']
       };
 
       clientsrv.getcurrentstaff().then(function (staff) {
         //获取当前人员的信息
         $scope.staff = staff;
         console.log($scope.staff);
-        $scope.businessReview.StaffID= $scope.staff.StaffId;
+        $scope.businessReview.StaffID = $scope.staff.StaffId;
       });
     };
+    $scope.otherList = [];
     clientsrv.getclients($stateParams.insId).then(function (clients) {
       guidesrv.getkareviews(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (reviews) {
+        console.log(reviews);
+        //如果今天填写过了有others
+        if (reviews.length > 0) {
+          //之前填写的其他人数组
+          for (var p = 0; p < reviews[0].Others.length; p++) {
+            $scope.otherList.push({
+              name: reviews[0].Others[p],
+              selected: true
+            });
+          }
+          $scope.businessReview.HasPPT = reviews[0].HasPPT;
+        }
+        else {
+          $scope.businessReview.HasPPT = false;
+        }
         for (var i = 0; i < clients.length; i++) {
           clients[i].selected = false;
 
@@ -56,8 +72,6 @@ angular.module('businessreview.ctrl', ['guide.srv', 'client.srv'])
     $scope.setOthers = {
       Name: ''
     };
-    //暂存other列表
-    $scope.otherList = [];
 
 
     //初始化

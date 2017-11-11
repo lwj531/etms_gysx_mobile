@@ -34,12 +34,12 @@
     </div>
     <div class="content-block" >
       <!--CCR-->
-      <ul class="">
+      <ul class="" ng-show="staff.IsCCR">
         <li class="list-item" ui-sref="main.purchasesellstockcheck({insId:insID})">
           <div class="item-content item-link">
             <div class="item-media"><img src="img/jian_line_50.png" width="26"/></div>
             <div class="item-inner">
-              <div class="item-title">CCR进销存检查</div>
+              <div class="item-title">进销存检查</div>
               <div class="item-after color-blue">3</div>
             </div>
           </div>
@@ -48,7 +48,7 @@
           <div class="item-content item-link">
             <div class="item-media"><img src="img/j_line_50.png" width="26"/></div>
             <div class="item-inner">
-              <div class="item-title">CCR疾病知识教育</div>
+              <div class="item-title">疾病知识教育</div>
               <div class="item-after color-blue">3</div>
             </div>
           </div>
@@ -57,19 +57,19 @@
           <div class="item-content item-link">
             <div class="item-media"><img src="img/ji_line_50.png" width="26"/></div>
             <div class="item-inner">
-              <div class="item-title">CCR培训记录</div>
+              <div class="item-title">培训记录</div>
               <div class="item-after color-blue">3</div>
             </div>
           </div>
         </li>
       </ul>
       <!--AE-->
-      <ul class="" ng-show="true">
-        <li class="list-item" ui-sref="main.purchasesellstockcheck">
+      <ul class="" ng-if="staff.IsAE">
+        <li class="list-item" ui-sref="main.purchasesellstockcheck({insId:insID})">
           <div class="item-content item-link">
             <div class="item-media"><img src="img/jian_line_50.png" width="26"/></div>
             <div class="item-inner">
-              <div class="item-title">AE进销存检查</div>
+              <div class="item-title">进销存检查</div>
               <div class="item-after color-blue">3</div>
             </div>
           </div>
@@ -78,7 +78,7 @@
           <div class="item-content item-link">
             <div class="item-media"><img src="img/s_line_50.png" width="26"/></div>
             <div class="item-inner">
-              <div class="item-title">AE生意回顾</div>
+              <div class="item-title">生意回顾</div>
               <div class="item-after color-blue">3</div>
             </div>
           </div>
@@ -87,7 +87,7 @@
           <div class="item-content item-link">
             <div class="item-media"><img src="img/c_line_50.png" width="26"/></div>
             <div class="item-inner">
-              <div class="item-title">AECheckList</div>
+              <div class="item-title">CheckList</div>
               <div class="item-after color-blue">3</div>
             </div>
           </div>
