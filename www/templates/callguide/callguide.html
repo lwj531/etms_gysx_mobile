@@ -183,8 +183,10 @@
     </ul>
     <!--我负责的机构tab-->
     <ul class="dragup-ul" ng-show="currentTab.name=='myins'">
-      <!--ui-sref="main.checkin"-->
-      <li class="list-item multi-line"  ng-repeat="item in insdata">
+      <li>
+        <input type="text" ng-model="searchKey" placeholder="搜索关键字"/>
+      </li>
+      <li class="list-item multi-line"  ng-repeat="item in insdata | filter:searchKey">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon"
                                         ng-class="{'uicon-markerA':item.InstitutionModel.InstitutionPriority=='A','uicon-markerB':item.InstitutionModel.InstitutionPriority=='B','uicon-markerC':item.InstitutionModel.InstitutionPriority=='C'}"></span>

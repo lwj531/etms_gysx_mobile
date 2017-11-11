@@ -282,7 +282,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
           url: '/trainingrecord',
           templateUrl: "templates/callguide/trainingrecord.html",
           controller: "TrainingrecordCtrl"
-      })
+        })
       //待办事项
       .state('main.todolist', {
         url: '/todolist',
@@ -307,7 +307,8 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       .state('main.storenearby', {
         url: '/storenearby',
         templateUrl: "templates/storenearby/storenearby.html",
-        controller: "StorenearbyCtrl"
+        controller: "StorenearbyCtrl",
+        cache: false
       })
       //(拜访)签入
       .state('main.aecheckin', {

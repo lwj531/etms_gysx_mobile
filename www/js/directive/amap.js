@@ -3,9 +3,6 @@ angular.module('amap.dt', [])
   return {
     restrict: "AE",
    replace: true,
-    /* scope:{
-      map:'='
-    },*/
     template: "<div style='width: 100%;height: 100%'></div>",
     /*controller:function($scope,$element){
       $scope.$on('amap', function (errorType,data) {
