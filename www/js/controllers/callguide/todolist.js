@@ -3,11 +3,25 @@ angular.module('todolist.ctrl', [])
 
     console.log($stateParams.insId);
 
-    clientsrv.getcurrentstaff().then(function (staff) {
-      //当前人员的信息
-      $scope.staff = staff;
-      console.log($scope.staff);
-    });
+    $scope.dateToday=new Date();
+   $scope.getToDoInit=function () {
+     $scope.addNewNote = {
+       ActivityID: '',
+       ActivityDate: moment().format('YYYY-MM-DD'),
+       // StaffID: $scope.staff.StaffId,
+       InstitutionID: $stateParams.insId,
+       Notes: '',
+       DeadlineDisplay: $scope.dateToday,
+       Deadline: moment($scope.dateToday).format('YYYY-MM-DD'),
+       FinishStatus: "ACTIVE"
+     };
+     clientsrv.getcurrentstaff().then(function (staff) {
+       //当前人员的信息
+       $scope.staff = staff;
+       console.log($scope.staff);
+       $scope.addNewNote.StaffID= $scope.staff.StaffId;
+     });
+   };
 
     clientsrv.getins($stateParams.insId).then(function (data) {
       $scope.currentIns = data;
@@ -30,7 +44,7 @@ angular.module('todolist.ctrl', [])
 
     });
     $scope.getToDOList = function () {
-      guidesrv.gettodo().then(function (data) {
+      guidesrv.gettodo($stateParams.insId).then(function (data) {
         $scope.todoList = data;
         console.log($scope.todoList);
       });
@@ -38,21 +52,11 @@ angular.module('todolist.ctrl', [])
     //初始化
     $scope.init = function () {
       $scope.getToDOList();
+      $scope.getToDoInit();
     };
     $scope.init();
     // $scope.todayToDo=[];
 
-    $scope.dateToday=new Date();
-    $scope.addNewNote = {
-      ActivityID: '',
-      ActivityDate: moment().format('YYYY-MM-DD'),
-      StaffID: $scope.staff.staffId,
-      InstitutionID: $stateParams.insId,
-      Notes: '',
-      DeadlineDisplay: $scope.dateToday,
-      Deadline: moment($scope.dateToday).format('YYYY-MM-DD'),
-      FinishStatus: "ACTIVE"
-    };
 
     //加文本信息
     $scope.addNote = function () {

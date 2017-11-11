@@ -1,5 +1,5 @@
 angular.module('calloverview.ctrl', ['guide.srv'])
-  .controller('CalloverviewCtrl', function($scope,$stateParams,guidesrv) {
+  .controller('CalloverviewCtrl', function($scope,$stateParams,guidesrv,clientsrv) {
 
     console.log($stateParams.insId);
 
