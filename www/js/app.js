@@ -241,7 +241,7 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       //(拜访)签入机构后的拜访向导
       .state('main.calldetails', {
           url: '/calldetails/:insId',
-        params: {"insId": null, "staffId": null},
+        params: {"insId": null},
         templateUrl: "templates/callguide/calldetails.html",
           controller: "CalldetailsCtrl"
         })
@@ -254,14 +254,14 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       //生意回顾
       .state('main.businessreview', {
           url: '/businessreview/',
-          params:{"insId":null,"staffId":null},
+          params:{"insId":null},
           templateUrl: "templates/callguide/businessreview.html",
           controller: "BusinessreviewCtrl"
         })
       //checklist
       .state('main.checklist', {
           url: '/checklist',
-          params:{"insId":null,"staffId":null},
+          params:{"insId":null},
           templateUrl: "templates/callguide/checklist.html",
           controller: "ChecklistCtrl"
         })
@@ -286,14 +286,14 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
       //待办事项
       .state('main.todolist', {
         url: '/todolist',
-        params: {"insId": null, "staffId": null},
+        params: {"insId": null},
         templateUrl: "templates/callguide/todolist.html",
         controller: "TodolistCtrl"
       })
       //拜访概览
       .state('main.calloverview', {
         url: '/calloverview',
-        params:{"insId":null,"staffId":null},
+        params:{"insId":null},
         templateUrl: "templates/callguide/calloverview.html",
         controller: "CalloverviewCtrl"
       })

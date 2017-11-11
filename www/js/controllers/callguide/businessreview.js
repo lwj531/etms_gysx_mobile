@@ -2,7 +2,28 @@ angular.module('businessreview.ctrl', ['guide.srv', 'client.srv'])
 
   .controller('BusinessreviewCtrl', function ($scope, guidesrv, clientsrv, $stateParams, $state) {
     console.log($stateParams.insId);
-    console.log($stateParams.staffId);
+
+    $scope.getClientInfo = function () {
+
+      //初始化生意回顾页面提交数据
+      $scope.businessReview = {
+        ActivityDate: moment().format('YYYY-MM-DD'),
+        // StaffID: $scope.staff.StaffId,
+        InstitutionID: $stateParams.insId,
+        // ReviewTarget: [],
+        // Others: [],
+        ReviewTargetCount: '',
+        HasPPT: false,
+        PhotosList:['qweqweqw']
+      };
+
+      clientsrv.getcurrentstaff().then(function (staff) {
+        //获取当前人员的信息
+        $scope.staff = staff;
+        console.log($scope.staff);
+        $scope.businessReview.StaffID= $scope.staff.StaffId;
+      });
+    };
     clientsrv.getclients($stateParams.insId).then(function (clients) {
       guidesrv.getkareviews(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (reviews) {
         for (var i = 0; i < clients.length; i++) {
@@ -30,23 +51,20 @@ angular.module('businessreview.ctrl', ['guide.srv', 'client.srv'])
       $scope.businessReview.HasPPT = !$scope.businessReview.HasPPT;
 
     };
-$scope.isFocus=false;
+    $scope.isFocus = false;
     //要用 .  否则取不到值
     $scope.setOthers = {
       Name: ''
     };
     //暂存other列表
     $scope.otherList = [];
-    //生意回顾页面提交数据
-    $scope.businessReview = {
-      ActivityDate: moment().format('YYYY-MM-DD'),
-      StaffID: $stateParams.staffId,
-      InstitutionID: $stateParams.insId,
-      // ReviewTarget: [],
-      // Others: [],
-      ReviewTargetCount: '',
-      HasPPT: false
+
+
+    //初始化
+    $scope.init = function () {
+      $scope.getClientInfo();
     };
+    $scope.init();
 
     $scope.clearInput = function () {
       $scope.setOthers.Name = '';
@@ -55,8 +73,8 @@ $scope.isFocus=false;
     $scope.addOtherMember = function () {
       if ($scope.setOthers.Name !== '') {
         $scope.otherList.push({name: $scope.setOthers.Name, selected: true});
-        $scope.setOthers.Name='';
-        $scope.inputFocus=true;
+        $scope.setOthers.Name = '';
+        $scope.inputFocus = true;
         console.log($scope.otherList);
       }
     };
