@@ -1,5 +1,11 @@
 angular.module('checklist.ctrl', ['guide.srv', 'client.srv'])
   .controller('ChecklistCtrl', function ($scope, guidesrv, clientsrv, $stateParams, $state) {
+
+    clientsrv.getcurrentstaff().then(function (staff) {
+      //当前人员的信息
+      $scope.staff = staff;
+      console.log($scope.staff);
+    });
     //获取所有的KAItem
     guidesrv.getkaitems().then(function (items) {
       $scope.KAItems = items;
@@ -36,7 +42,7 @@ angular.module('checklist.ctrl', ['guide.srv', 'client.srv'])
       for (var k = 0; k < $scope.KAItems.length; k++) {
         if ($scope.KAItems[k].selected === true) {
           model.push({
-            StaffID: $stateParams.staffId,
+            StaffID: $scope.staff.staffId,
             ActivityDate: moment().format('YYYY-MM-DD'),
             InstitutionID: $stateParams.insId,
             ItemID: $scope.KAItems[k].ItemID,

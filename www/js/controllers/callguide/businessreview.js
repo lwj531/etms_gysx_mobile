@@ -2,7 +2,12 @@ angular.module('businessreview.ctrl', ['guide.srv', 'client.srv'])
 
   .controller('BusinessreviewCtrl', function ($scope, guidesrv, clientsrv, $stateParams, $state) {
     console.log($stateParams.insId);
-    console.log($stateParams.staffId);
+
+    clientsrv.getcurrentstaff().then(function (staff) {
+      //当前人员的信息
+      $scope.staff = staff;
+      console.log($scope.staff);
+    });
     clientsrv.getclients($stateParams.insId).then(function (clients) {
       guidesrv.getkareviews(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (reviews) {
         for (var i = 0; i < clients.length; i++) {
@@ -40,7 +45,7 @@ $scope.isFocus=false;
     //生意回顾页面提交数据
     $scope.businessReview = {
       ActivityDate: moment().format('YYYY-MM-DD'),
-      StaffID: $stateParams.staffId,
+      StaffID: $scope.staff.staffId,
       InstitutionID: $stateParams.insId,
       // ReviewTarget: [],
       // Others: [],

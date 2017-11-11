@@ -2,7 +2,12 @@ angular.module('todolist.ctrl', [])
   .controller('TodolistCtrl', function ($scope, $stateParams, guidesrv, clientsrv,$state) {
 
     console.log($stateParams.insId);
-    console.log($stateParams.staffId);
+
+    clientsrv.getcurrentstaff().then(function (staff) {
+      //当前人员的信息
+      $scope.staff = staff;
+      console.log($scope.staff);
+    });
 
     clientsrv.getins($stateParams.insId).then(function (data) {
       $scope.currentIns = data;
@@ -41,7 +46,7 @@ angular.module('todolist.ctrl', [])
     $scope.addNewNote = {
       ActivityID: '',
       ActivityDate: moment().format('YYYY-MM-DD'),
-      StaffID: $stateParams.staffId,
+      StaffID: $scope.staff.staffId,
       InstitutionID: $stateParams.insId,
       Notes: '',
       DeadlineDisplay: $scope.dateToday,
@@ -81,6 +86,6 @@ angular.module('todolist.ctrl', [])
     };
 
     $scope.nextStep=function () {
-      $state.go("main.calloverview",{insId:$stateParams.insId,staffId:$stateParams.staffId});
+      $state.go("main.calloverview",{insId:$stateParams.insId});
     }
   });
