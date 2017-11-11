@@ -26,7 +26,8 @@
         </li>
         <li class="list-item flex-between" style="padding: 4px 15px;">
           <div><button class="button button-positive button-clear button-thin" ng-click="$ionicGoBack()">上一步</button></div>
-          <div><button class="button button-positive button-clear button-thin" ui-sref="main.calloverview">下一步</button></div>
+          <!-- ui-sref="main.calloverview({insId:insID,staffId:staff.StaffId})" -->
+          <div><button class="button button-positive button-clear button-thin" ng-click="nextStep()">下一步</button></div>
         </li>
       </ul>
     </div>
@@ -36,16 +37,16 @@
         <p class="stick-left padding-left">待办事项</p>
       </div>
       <div class="home-schedule todo-list">
-        <div class="width-100 flex-center color-gray" ng-show="todayToDo.length==0">--暂无记录--</div>
-        <ul ng-show="todayToDo.length>0">
-          <li class="list-item multi-line schedule-plan" ng-repeat="item in todayToDo">
+        <div class="width-100 flex-center color-gray" ng-show="todoList.length==0">--暂无记录--</div>
+        <ul ng-show="todoList.length>0">
+          <li class="list-item multi-line schedule-plan" ng-repeat="item in todoList">
             <div class="item-content align-top">
               <div class="item-media"><span class="list-dot"></span></div>
               <div class="item-inner">
                 <div class="item-title-row">
                   <div class="item-title color-blue margin-img align-center"><img src="img/create_blue_48.png" width="12"><span class="cj-date">创建 <span ng-bind="item.ActivityDate"></span></span></div>
                   <div class="item-after color-orange margin-img align-center"><img src="img/create_orange_48.png" width="12"><span style="color: #f5a623;">到期时间 </span>
-                    <input type="date" class="deadline-input" ng-model="item.Deadline"></div>
+                    <input type="date" class="deadline-input" ng-model="item.DeadlineDisplay"></div>
                 </div>
                 <div class="dbsx-wz-content" ng-if="item.Notes!=''">
                   {{item.Notes}}
@@ -56,7 +57,7 @@
                   <div class="triangle-left"></div>
                 </div>
                 <div class="flex-end align-end">
-                  <a class="button button-clear button-small flex-end margin-img color-red">
+                  <a class="button button-clear button-small flex-end margin-img color-red" ng-click="deleteToDo(item.ActivityID)">
                     <img src="img/del_red_36.png" width="10"> <span>删除记录</span>
                   </a>
                 </div>
@@ -68,8 +69,8 @@
     </div>
     <div class="sr-area flex-between">
       <img src="img/sound_blue_45.png" width="15">
-      <input id="inputarea" type="text" placeholder="请输入待办事项或语音" maxlength="100" ng-model="addNewToDo.note">
-      <button class="button-thin button button-positive" ng-click="addNote()">保存</button>
+      <input id="inputarea" type="text" placeholder="请输入待办事项或语音" maxlength="100" ng-model="addNewToDo.Notes">
+      <button class="button-thin button button-positive" ng-click="addNote()" ng-class="{'disabled':canClick}">保存</button>
     </div>
   </ion-content>
 </ion-view>

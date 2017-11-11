@@ -333,7 +333,7 @@ p {
   text-transform: uppercase;
   line-height: 14px;
   color: #919192;
-  margin: 15px 15px 10px;
+  margin: 15px 15px 7px;
 }
 
 .list-item {
@@ -1176,6 +1176,11 @@ select {
 .space-10 {
   display: inline-block;
   width: 10px;
+}
+.space-9 {
+  display: inline-block;
+  width: 9px;
+  text-align: center;
 }
 
 .space-5 {
@@ -5827,4 +5832,10 @@ input[type=date].deadline-input {
 }
 .amap-marker .marker-route.markerC {
   background: url('../img/markerC_blank.png') no-repeat;
+}
+.halfday-title{
+  background-color: #eff5f6;
+  display: block;
+  padding: 5px 15px;
+  color: #adb6bc;
 }

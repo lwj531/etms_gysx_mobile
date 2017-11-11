@@ -45,7 +45,7 @@ angular.module('checklist.ctrl', ['guide.srv', 'client.srv'])
         }
         //提交选中的item
         if (k === $scope.KAItems.length - 1) {
-          // console.log(model);
+          console.log(model);
           guidesrv.savekaactualitems(moment().format('YYYY-MM-DD'), $stateParams.insId, model).then(function () {
             $scope.popup("操作成功");
             $state.go("main.calldetails", {insId: $stateParams.insId});
