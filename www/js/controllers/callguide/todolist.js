@@ -1,27 +1,29 @@
 angular.module('todolist.ctrl', [])
-  .controller('TodolistCtrl', function ($scope, $stateParams, guidesrv, clientsrv,$state) {
+  .controller('TodolistCtrl', function ($scope, $stateParams, guidesrv, clientsrv, $state) {
 
     console.log($stateParams.insId);
 
-    $scope.dateToday=new Date();
-   $scope.getToDoInit=function () {
-     $scope.addNewNote = {
-       ActivityID: '',
-       ActivityDate: moment().format('YYYY-MM-DD'),
-       // StaffID: $scope.staff.StaffId,
-       InstitutionID: $stateParams.insId,
-       Notes: '',
-       DeadlineDisplay: $scope.dateToday,
-       Deadline: moment($scope.dateToday).format('YYYY-MM-DD'),
-       FinishStatus: "ACTIVE"
-     };
-     clientsrv.getcurrentstaff().then(function (staff) {
-       //当前人员的信息
-       $scope.staff = staff;
-       console.log($scope.staff);
-       $scope.addNewNote.StaffID= $scope.staff.StaffId;
-     });
-   };
+    $scope.dateToday = new Date();
+    $scope.addNewNote = {
+      ActivityID: '',
+      ActivityDate: moment().format('YYYY-MM-DD'),
+      // StaffID: $scope.staff.StaffId,
+      InstitutionID: $stateParams.insId,
+      Notes: '',
+      DeadlineDisplay: $scope.dateToday,
+      Deadline: moment($scope.dateToday).format('YYYY-MM-DD'),
+      FinishStatus: "ACTIVE",
+      Recording: "sample string 8",
+      RecordingUrl: "sample string 9"
+    };
+    $scope.getToDoInit = function () {
+      clientsrv.getcurrentstaff().then(function (staff) {
+        //当前人员的信息
+        $scope.staff = staff;
+        console.log($scope.staff);
+        $scope.addNewNote.StaffID = $scope.staff.StaffId;
+      });
+    };
 
     clientsrv.getins($stateParams.insId).then(function (data) {
       $scope.currentIns = data;
@@ -55,19 +57,43 @@ angular.module('todolist.ctrl', [])
       $scope.getToDoInit();
     };
     $scope.init();
-    // $scope.todayToDo=[];
 
 
     //加文本信息
     $scope.addNote = function () {
-      console.log($scope.addNewNote);
-      guidesrv.savetodo($scope.addNewNote).then(function () {
-        $scope.isPost = true;
-        $scope.popup("操作成功");
-      });
-      $scope.getToDOList();
-      $scope.isPost = false;
-      // $scope.addNewNote.Notes = '';
+      if ($scope.addNewNote.Notes !== '') {
+        console.log($scope.addNewNote);
+        guidesrv.savetodo($scope.addNewNote).then(function () {
+          $scope.popup("操作成功");
+        });
+
+        $scope.getToDOList();
+        // $scope.addNewNote.Notes = '';
+      }
+      else {
+        var myPopup = $ionicPopup.show({
+          template: '<input type="password" ng-model="data.wifi">',
+          title: 'Enter Wi-Fi Password',
+          subTitle: 'Please use normal things',
+          scope: $scope,
+          buttons: [
+            { text: 'Cancel' },
+            {
+              text: '<b>Save</b>',
+              type: 'button-positive',
+              onTap: function(e) {
+                if (!$scope.data.wifi) {
+                  //不允许用户关闭，除非他键入wifi密码
+                  e.preventDefault();
+                } else {
+                  return $scope.data.wifi;
+                }
+              }
+            },
+          ]
+        });
+
+      }
     };
     //加声音
     $scope.addSound = function () {
@@ -81,15 +107,7 @@ angular.module('todolist.ctrl', [])
       });
     };
 
-    $scope.saveToDo = function (id) {
-      guidesrv.savetodo(id).then(function () {
-        $scope.popup("操作成功");
-        $scope.getToDOList();
-
-      });
-    };
-
-    $scope.nextStep=function () {
-      $state.go("main.calloverview",{insId:$stateParams.insId});
+    $scope.nextStep = function () {
+      $state.go("main.calloverview", {insId: $stateParams.insId});
     }
   });

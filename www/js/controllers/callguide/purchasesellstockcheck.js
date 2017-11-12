@@ -1,6 +1,6 @@
 angular.module('purchasesellstockcheck.ctrl', ['guide.srv', 'client.srv'])
 
-  .controller('PurchasesellstockcheckCtrl', function ($scope, guidesrv, clientsrv, $stateParams) {
+  .controller('PurchasesellstockcheckCtrl', function ($scope, guidesrv, clientsrv, $state, $stateParams) {
     // clientsrv.getcurrentstaff().then(function (staff) {
     //   //当前人员的信息
     //   $scope.staff = staff;
@@ -13,6 +13,13 @@ angular.module('purchasesellstockcheck.ctrl', ['guide.srv', 'client.srv'])
       console.log($scope.latestInventorys);
     });
 
+    //判断当前角色
+    clientsrv.getcurrentstaff().then(function (staff) {
+      $scope.staff = staff;
+      $scope.staff.IsAE = staff.Roles.indexOf('AE_REP') != -1;
+      $scope.staff.IsCCR = !$scope.staff.IsAE;
+      console.log($scope.staff);
+    });
     //获取当日填写过的进销存
     guidesrv.getdailyinventorys($stateParams.insId).then(function (dailyData) {
       //获取全部库存
@@ -65,6 +72,7 @@ angular.module('purchasesellstockcheck.ctrl', ['guide.srv', 'client.srv'])
           // console.log($scope.SKUList);
           guidesrv.saveInventory($scope.SKUList).then(function () {
             $scope.popup("保存成功");
+            $state.go("main.calldetails", {insId: $stateParams.insId});
           });
         }
       }

@@ -19,16 +19,16 @@ angular.module('calldetails.ctrl', ['client.srv', 'guide.srv'])
           $scope.inslevelflag = "uicon-markerA";
       }
     });
-
+    //判断当前角色
     clientsrv.getcurrentstaff().then(function (staff) {
-      //当前人员的信息
       $scope.staff = staff;
+      $scope.staff.IsAE = staff.Roles.indexOf('AE_REP') != -1;
+      $scope.staff.IsCCR = !$scope.staff.IsAE;
       console.log($scope.staff);
     });
-    $scope.dateToday = moment();
     //获取机构签到信息
     $scope.getCheckin = function () {
-      guidesrv.getCheckinInfo($scope.dateToday.format('YYYY-MM-DD'), $scope.insID).then(function (data) {
+      guidesrv.getCheckinInfo(moment().format('YYYY-MM-DD'), $scope.insID).then(function (data) {
         $scope.insinfo = data[0];
         console.log(data)
       });

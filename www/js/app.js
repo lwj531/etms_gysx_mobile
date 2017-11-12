@@ -328,18 +328,6 @@ angular.module('starter', ['ionic', 'route','ngCordova'])
         templateUrl: "templates/storenearby/purchasesellstockcheck.html",
         controller: "aePurchasesellstockcheckCtrl"
       })
-      //生意回顾
-      .state('main.aebusinessreview', {
-        url: '/aebusinessreview',
-        templateUrl: "templates/storenearby/businessreview.html",
-        controller: "aeBusinessreviewCtrl"
-      })
-      //checklist
-      .state('main.aechecklist', {
-        url: '/aechecklist',
-        templateUrl: "templates/storenearby/checklist.html",
-        controller: "aeChecklistCtrl"
-      })
       //疾病知识教育
       .state('main.aediseaseknwoledgeeducate', {
         url: '/aediseaseknwoledgeeducate',
