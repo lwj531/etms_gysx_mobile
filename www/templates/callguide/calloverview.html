@@ -54,23 +54,24 @@
       </div>
       <div>
         <div class="content-block-title color-darkgray">进销存检查 ({{overviewModel.PSIList.length}})</div>
-        <ul class="psi-list">
+        <div class="flex-center color-gray padding-1015" ng-if="overviewModel.PSIList.length==0">--无进销存检查--</div>
+        <ul class="psi-list" ng-if="overviewModel.PSIList.length>0">
           <li class="list-item multi-line" ng-repeat="sku in overviewModel.PSIList">
             <div class="item-content">
               <div class="item-inner">
-                <div class="item-title" ng-bind="sku.SkuModel.SkuName">安康信 60mg*5片(盒)</div>
+                <div class="item-title" ng-bind="sku.SkuModel.SkuName"></div>
                 <div class="item-text">
-                  <span class="check-item">购进: <span ng-bind="sku.DailySkuContentModel.SaleIn">20</span></span>
+                  <span class="check-item">购进: <span ng-bind="sku.DailySkuContentModel.SaleIn"></span></span>
                   <span class="check-item">库存: <span
-                    ng-bind="sku.DailySkuContentModel.Stock">20</span></span>
+                    ng-bind="sku.DailySkuContentModel.Stock"></span></span>
                   <span class="check-item">订单: <span
-                    ng-bind="sku.DailySkuContentModel.ProposalOrder">5</span></span>
+                    ng-bind="sku.DailySkuContentModel.ProposalOrder"></span></span>
                   <span class="check-item">价格: <span
-                    ng-bind="sku.DailySkuContentModel.SkuPrice">23</span></span>
-                  <span class="check-item">排位面: <span
-                    ng-bind="sku.DailySkuContentModel.PositionCount">5</span></span>
+                    ng-bind="sku.DailySkuContentModel.SkuPrice"></span></span>
+                  <span class="check-item" ng-if="staff.IsCCR">排位面: <span
+                    ng-bind="sku.DailySkuContentModel.PositionCount"></span></span>
                   <span class="check-item">上次库存: <span
-                    ng-bind="sku.DailySkuContentModel.Inventory==''?0:sku.DailySkuContentModel.Inventory">412</span></span>
+                    ng-bind="sku.SkuModel.Inventory"></span></span>
                 </div>
               </div>
             </div>
@@ -78,8 +79,8 @@
         </ul>
       </div>
       <!--CCR显示的list 疾病知识教育-->
-      <div ng-show="true">
-        <div class="content-block-title color-darkgray">疾病知识教育 (3)</div>
+      <div>
+        <div class="content-block-title color-darkgray">疾病知识教育 (3){{staff.IsCCR}}</div>
         <ul class="material-list">
           <li class="list-item multi-line">
             <div class="item-content">
@@ -104,19 +105,27 @@
         </ul>
       </div>
       <!--AE显示的list生意回顾-->
-      <div ng-show="true">
-        <div class="content-block-title color-darkgray">生意回顾</div>
-        <ul class="">
+      <div>
+        <div class="content-block-title color-darkgray">生意回顾{{staff.IsAE}}</div>
+        <div class="flex-center color-gray padding-1015" ng-if="overviewModel.businessReview.displayList.length==0">
+          --无生意回顾--
+        </div>
+        <ul class="" ng-if="overviewModel.businessReview.displayList.length>0">
           <li class="list-item multi-line">
             <div class="item-content align-top">
               <div class="item-media"><img src="img/peoples_blue_56.png" width="25"></div>
               <div class="item-inner">
-                <div class="item-title">回顾对象 5人</div>
-                <div class="item-text"><span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>&nbsp;|&nbsp;<span>马萨地</span>
+                <div class="item-title">回顾对象 <span ng-bind="overviewModel.businessReview.displayList.length"></span>人
+                </div>
+                <div class="item-text">
+                  <span ng-repeat="rvItem in overviewModel.businessReview.displayList" ng-bind="rvItem"
+                        class="check-item"></span>
                 </div>
                 <div class="color-gray margin-img flex-start align-center">
-                  <img src="img/img_gray_48.png" width="16">照片 3张 <span class="space-10"></span>
-                  <img src="img/pdf_gray_45.png" width="15" height="15">包含PPT
+                  <img src="img/img_gray_48.png" width="16">照片 <span
+                  ng-bind="overviewModel.businessReview.photoCount"></span>张 <span class="space-10"></span>
+                  <img src="img/pdf_gray_45.png" width="15" height="15"><span
+                  ng-bind="overviewModel.businessReview.hasPPT"></span>
                 </div>
               </div>
             </div>
@@ -124,9 +133,10 @@
         </ul>
       </div>
       <!--AE显示的list CheckList-->
-      <div ng-show="true">
-        <div class="content-block-title color-darkgray">CheckList</div>
-        <ul class="">
+      <div>
+        <div class="content-block-title color-darkgray">CheckList{{staff.IsAE}}</div>
+        <div class="flex-center color-gray padding-1015" ng-if="overviewModel.checklist.length==0">--无已选择项--</div>
+        <ul class="" ng-if="overviewModel.checklist.length>0">
           <li class="list-item multi-line">
             <div class="item-content align-top">
               <div class="item-media"><img src="img/list_blue_72.png" width="25"></div>

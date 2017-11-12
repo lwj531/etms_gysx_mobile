@@ -61,6 +61,8 @@ angular.module('route', [
   'http.srv',
   'routesetting.srv',
   'client.srv',
+  'home.srv',
+  'guide.srv',
   'daily.srv',
   'trainingrecord.srv',
   //directive 指令

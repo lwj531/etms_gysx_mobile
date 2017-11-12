@@ -1,10 +1,10 @@
-<ion-view title="拜访向导" view-title="拜访向导">
+<ion-view title="拜访详情" view-title="拜访详情">
   <div class="bar bar-header bar-positive">
     <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item" style="">
       <i class="icon ion-ios-arrow-back"></i>
       <span class="back-text" style="">返回</span>
     </button>
-    <div class="h1 title">拜访向导</div>
+    <div class="h1 title">拜访详情</div>
   </div>
   <ion-content class="has-header">
     <div class="content-block">
@@ -34,7 +34,7 @@
     </div>
     <div class="content-block" >
       <!--CCR-->
-      <ul class="" ng-show="staff.IsCCR">
+      <ul class="" ng-if="staff.IsCCR">
         <li class="list-item" ui-sref="main.purchasesellstockcheck({insId:insID})">
           <div class="item-content item-link">
             <div class="item-media"><img src="img/jian_line_50.png" width="26"/></div>

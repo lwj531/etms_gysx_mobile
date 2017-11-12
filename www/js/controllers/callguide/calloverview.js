@@ -1,21 +1,37 @@
-angular.module('calloverview.ctrl', ['guide.srv'])
+angular.module('calloverview.ctrl', ['guide.srv','client.srv'])
   .controller('CalloverviewCtrl', function ($scope, $stateParams, guidesrv, clientsrv) {
 
     console.log($stateParams.insId);
 
-    $scope.overviewModel={
-      call:{
-        checkInTime:'',
-        checkOutTime:''
+    $scope.staff={
+      IsAE:'',
+      IsCCR:''
+    };
+    //初始化
+    $scope.init = function () {
+      //判断当前角色
+      clientsrv.getcurrentstaff().then(function (staff) {
+        $scope.staff = staff;
+        $scope.staff.IsAE = staff.Roles.indexOf('AE_REP') !== -1;
+        $scope.staff.IsCCR = !$scope.staff.IsAE;
+        console.log($scope.staff.IsAE);
+      });
+    };
+    $scope.init();
+    $scope.overviewModel = {
+      call: {
+        checkInTime: '',
+        checkOutTime: ''
       },
-      PSIList:[],
-      businessReview:{
-        Members:[],
-        photoCount:'',
-        hasPPT:false
+      PSIList: [],
+      businessReview: {
+        reviewModel: {},
+        displayList: [],
+        hasPPT: '',
+        photoCount: ''
       },
-      checklist:[],
-      diseaseKnowledge:[]
+      checklist: [],
+      diseaseKnowledge: []
     };
 
     clientsrv.getins($stateParams.insId).then(function (data) {
@@ -45,42 +61,35 @@ angular.module('calloverview.ctrl', ['guide.srv'])
     //获取当天填写进销存
     guidesrv.getdailyinventorys($stateParams.insId).then(function (dailySKU) {
       $scope.SKUList = dailySKU;
-      $scope.overviewModel.PSIList=dailySKU;
+      $scope.overviewModel.PSIList = dailySKU;
       console.log($scope.overviewModel.PSIList);
     });
     //获取当天选择过的
     guidesrv.getactualdailykaitems(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (actualItems) {
-      if (actualItems.length === 0) {
-        //如果没选择过则带出计划中的
-        guidesrv.getplandailykaitems(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (planItems) {
-          $scope.overviewModel.checklist=planItems;
-          console.log(planItems);
-        });
-      }
-      else {
-        $scope.overviewModel.checklist=actualItems;
-        console.log(actualItems);
-      }
+      $scope.overviewModel.checklist = actualItems;
+      console.log(actualItems);
     });
     //获取生意回顾
     guidesrv.getkareviews(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (reviews) {
-      // for (var i = 0; i < clients.length; i++) {
-      //   clients[i].selected = false;
-      //
-      //   for (var j = 0; j < reviews.length; j++) {
-      //     for (var k = 0; k < reviews[j].ReviewTarget.length; k++) {
-      //       if (reviews[j].ReviewTarget[k] === clients[i].ClientID) {
-      //         clients[i].selected = true;
-      //       }
-      //     }
-      //   }
-      //
-      //   if (i === clients.length - 1) {
-      //     $scope.clientOptions = clients;
-      //     console.log(clients);
-      //   }
-      // }
-      console.log(reviews);
+      if(reviews.length>0){
+        $scope.overviewModel.businessReview.reviewModel = reviews[0];
+        console.log($scope.overviewModel.businessReview.reviewModel);
+
+        $scope.overviewModel.businessReview.hasPPT = $scope.overviewModel.businessReview.reviewModel.HasPPT === false ? '不包含PPT' : '包含PPT';
+        $scope.overviewModel.businessReview.photoCount = $scope.overviewModel.businessReview.reviewModel.PhotosList === null ? 0 : $scope.overviewModel.businessReview.reviewModel.PhotosList.length;
+        clientsrv.getclients($stateParams.insId).then(function (clients) {
+          for (var i = 0; i < $scope.overviewModel.businessReview.reviewModel.ReviewTarget.length; i++) {
+            for (var j = 0; j < clients.length; j++) {
+              if ($scope.overviewModel.businessReview.reviewModel.ReviewTarget[i] === clients[j].ClientID) {
+                $scope.overviewModel.businessReview.displayList.push(clients[j].ClientName);
+              }
+            }
+          }
+          for (var k = 0; k < $scope.overviewModel.businessReview.reviewModel.Others.length; k++) {
+            $scope.overviewModel.businessReview.displayList.push($scope.overviewModel.businessReview.reviewModel.Others[k]);
+          }
+        });
+      }
     });
 
   });
