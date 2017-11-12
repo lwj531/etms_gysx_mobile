@@ -26,7 +26,6 @@ angular.module('dailymgt.ctrl', [])
 
     // 下拉刷新
     $scope.doRefresh= function(){
-      console.log("doRefresh")
       $scope.$broadcast('scroll.refreshComplete');
     }
 

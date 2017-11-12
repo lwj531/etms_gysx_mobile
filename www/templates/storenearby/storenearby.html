@@ -146,7 +146,8 @@
                 | amDateFormat: 'HH:mm:ss'}}
               </div>
               <div class="flex-end">
-                <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
+                <a class="button button-clear button-stable button-small flex-center icon-button margin-img"
+                   ng-click="govisit(item)"><img
                   ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
                   width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
             </div>
@@ -159,18 +160,19 @@
       <li>
         <input type="text" ng-model="searchKey" placeholder="搜索关键字"/>
       </li>
-      <li class="list-item multi-line"  ng-repeat="item in insdata | filter:searchKey">
+      <li class="list-item multi-line" ng-repeat="item in insdata | filter:searchKey">
         <div class="item-content align-top">
           <div class="item-media"><span class="uicon uicon-markerA"></span>
           </div>
           <div class="item-inner">
-            <div class="item-title-row"  ng-click="selectIns(item)">
+            <div class="item-title-row" ng-click="selectIns(item)">
               <div class="item-title">{{item.InstitutionModel.InstitutionName}}</div>
             </div>
             <div class="flex-row align-end font-8">
               <div class="col-70 color-gray">{{item.InstitutionModel.Address}}</div>
               <div class="col-30 flex-end">
-                <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
+                <a class="button button-clear button-stable button-small flex-center icon-button margin-img"
+                   ng-click="govisit(item)"><img
                   ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
                   width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
             </div>
@@ -179,29 +181,43 @@
       </li>
     </ul>
     <!--下游门店tab-->
-    <ul class="dragup-ul" ng-show="currentTab.name=='chainstore'">
-      <!--ui-sref="main.checkin"-->
-      <li>
-        <input type="text" ng-model="searchKey" placeholder="搜索关键字"/>
-      </li>
-      <li class="list-item multi-line"  ng-repeat="item in chainStores">
-        <div class="item-content align-top">
-          <div class="item-media"><span class="uicon uicon-markerA"></span>
-          </div>
-          <div class="item-inner">
-            <div class="item-title-row"  ng-click="selectIns(item)">
-              <div class="item-title">{{item.InstitutionModel.InstitutionName}}</div>
-            </div>
-            <div class="flex-row align-end font-8">
-              <div class="col-70 color-gray">{{item.InstitutionModel.Address}}</div>
-              <div class="col-30 flex-end">
-                <a class="button button-clear button-stable button-small flex-center icon-button margin-img" ng-click="govisit(item)"><img
-                  ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
-                  width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
-            </div>
-          </div>
+    <div ng-show="currentTab.name=='chainstore'" class="tab-myins">
+      <div class="user-searchbar flex-center margin-0">
+        <div class="width-90 flex-between">
+          <input type="text" placeholder="输入关键字搜索机构 " ng-model="storeQuery.Key">
+          <button class="button button-positive button-small" ng-click="search()">搜索</button>
         </div>
-      </li>
-    </ul>
+      </div>
+      <ul class="dragup-ul third">
+        <ion-content scroll="true">
+          <!--ui-sref="main.checkin"-->
+          <li class="list-item multi-line" ng-repeat="item in chainStores">
+            <div class="item-content align-top">
+              <div class="item-media"><span class="uicon uicon-markerA"></span>
+              </div>
+              <div class="item-inner">
+                <div class="item-title-row" ng-click="selectIns(item)">
+                  <div class="item-title">{{item.InstitutionModel.InstitutionName}}</div>
+                </div>
+                <div class="flex-row align-end font-8">
+                  <div class="col-70 color-gray">{{item.InstitutionModel.Address}}</div>
+                  <div class="col-30 flex-end">
+                    <a class="button button-clear button-stable button-small flex-center icon-button margin-img"
+                       ng-click="govisit(item)"><img
+                      ng-src="{{(item.CheckOut!=null && item.CheckIn!=null)?'img/search_gray_30.png':'img/entrance_blue_30.png'}}"
+                      width="18">{{(item.CheckOut!=null && item.CheckIn!=null)?'查看':'拜访'}}</a></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <ion-infinite-scroll
+            on-infinite="loadMoreStore()"
+            distance="1%"
+            ng-if="moreDataCanBeLoaded()"
+            immediate-check=false>
+          </ion-infinite-scroll>
+        </ion-content>
+      </ul>
+    </div>
   </div>
 </ion-view>

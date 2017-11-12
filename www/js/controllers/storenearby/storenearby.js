@@ -3,7 +3,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
     //是否获取当前定位成功
     $scope.haslocal = false;
     //无坐标时临时测试----------
-    $scope.lnglat = [121.421070,31.256720];
+    $scope.lnglat = [121.421070, 31.256720];
     //----------end------------
 
 
@@ -115,7 +115,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
     $scope.calculationNearby = function () {
       //判断当前范围500米之内的机构
       $scope.withinIns = [];
-      $scope.getnearby($scope.lnglat,function(){
+      $scope.getnearby($scope.lnglat, function () {
         for (var i = 0; i < $scope.insdata.length; i++) {
           var ins = $scope.insdata[i].InstitutionModel;
           $scope.withinIns.push(ins);
@@ -218,7 +218,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
       });
     };
     //获取附近药店
-    $scope.getnearby = function (lnglat,callback) {
+    $scope.getnearby = function (lnglat, callback) {
       guidesrv.getNearBy(lnglat).then(function (data) {
         var result = [];
         if (data.length == 0) {
@@ -233,7 +233,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
               CheckIn: null,
               CheckOut: null
             };
-            if($scope.todaysch.length==0){
+            if ($scope.todaysch.length == 0) {
               result.push(item);
             }
             //判断是否允许拜访
@@ -257,17 +257,18 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
       });
     };
     //下游门店搜索参数
-    $scope.storeQuery={
-      Key:"",//搜索关键字
-      Page:1,//当前页码
-      RemainingCount:0//剩余页码
+    $scope.storeQuery = {
+      Key: "",//搜索关键字
+      Page: 1,//当前页码
+      RemainingCount: 0//剩余页码
     };
     //获取下游门店
-    $scope.getChainStores=function(para,callback){
+    $scope.getChainStores = function (para, arr, callback) {
       guidesrv.getChainStores(para).then(function (data) {
-        var result = [];
-        $scope.storeQuery.Page=data.Page;
-        $scope.storeQuery.RemainingCount=data.RemainingCount
+        $scope.tabs[2].title ="下游门店("+ data.TotalCount +")";
+        var result = arr;
+        $scope.storeQuery.Page = data.Page;
+        $scope.storeQuery.RemainingCount = data.RemainingCount;
         if (data.Institutions.length == 0) {
           $scope.chainStores = result;
           if (callback != null) {
@@ -280,7 +281,7 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
               CheckIn: null,
               CheckOut: null
             };
-            if($scope.todaysch.length==0){
+            if ($scope.todaysch.length == 0) {
               result.push(item);
             }
             //判断是否允许拜访
@@ -295,7 +296,6 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
             }
             if (i == data.Institutions.length - 1) {
               $scope.chainStores = result;
-              console.log($scope.chainStores);
               if (callback != null) {
                 callback();
               }
@@ -304,11 +304,25 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
         }
       });
     };
+    // 通知到底了
+    $scope.moreDataCanBeLoaded = function () {
+      return $scope.storeQuery.RemainingCount > 0;
+    };
+    //加载更多下游门店
+    $scope.loadMoreStore = function () {
+      $scope.storeQuery.Page++;
+      $scope.getChainStores($scope.storeQuery, $scope.chainStores,function(){$scope.$broadcast('scroll.infiniteScrollComplete');});
+    };
+    //搜索
+    $scope.search=function () {
+      $scope.storeQuery.Page=1;
+      $scope.getChainStores($scope.storeQuery,[]);
+    };
 
     //初始化
     $scope.init = function () {
       $scope.getTodaySch(function () {
-        $scope.getChainStores($scope.storeQuery,function () {
+        $scope.getChainStores($scope.storeQuery, [], function () {
           $scope.$broadcast("amap", "datacompleted");
         })
       })
