@@ -1,16 +1,15 @@
 angular.module('todolist.ctrl', [])
-  .controller('TodolistCtrl', function ($scope, $stateParams, guidesrv, clientsrv, $state) {
+  .controller('TodolistCtrl', function ($scope, $stateParams, guidesrv, clientsrv, $state, $ionicPopup) {
 
     console.log($stateParams.insId);
-
+    //初始化deadline
     $scope.dateToday = new Date();
     $scope.addNewNote = {
       ActivityID: '',
       ActivityDate: moment().format('YYYY-MM-DD'),
-      // StaffID: $scope.staff.StaffId,
       InstitutionID: $stateParams.insId,
       Notes: '',
-      DeadlineDisplay: $scope.dateToday,
+      // DeadlineDisplay: $scope.dateToday,
       Deadline: moment($scope.dateToday).format('YYYY-MM-DD'),
       FinishStatus: "ACTIVE",
       Recording: "sample string 8",
@@ -24,10 +23,9 @@ angular.module('todolist.ctrl', [])
         $scope.addNewNote.StaffID = $scope.staff.StaffId;
       });
     };
-
+    //获取顶部机构信息
     clientsrv.getins($stateParams.insId).then(function (data) {
       $scope.currentIns = data;
-
       console.log($scope.currentIns.InstitutionName + $scope.currentIns.InstitutionPriority + $scope.currentIns.Address);
       //机构左侧图标
       switch ($scope.currentIns.InstitutionPriority) {
@@ -45,9 +43,13 @@ angular.module('todolist.ctrl', [])
       }
 
     });
+    //获取todo列表
     $scope.getToDOList = function () {
       guidesrv.gettodo($stateParams.insId).then(function (data) {
         $scope.todoList = data;
+        for (var i = 0; i < data.length; i++) {
+          $scope.todoList[i].deadlineDisplay = new Date(data[i].Deadline);
+        }
         console.log($scope.todoList);
       });
     };
@@ -57,56 +59,90 @@ angular.module('todolist.ctrl', [])
       $scope.getToDoInit();
     };
     $scope.init();
+    //没输入内容就点保存
+    $scope.showAlert = function () {
+      var voidPopup = $ionicPopup.show({
+        cssClass: 'user-alert',
+        title: '提示',
+        template: '请填写内容后再保存',
+        scope: $scope,
+        buttons: [
+          {
+            text: '好的',
+            type: 'button-alert button-clear button-positive',
+            onTap: function () {
+              voidPopup.close();
+            }
+          }
+        ]
+      });
+    };
 
+    //监视deadline
+    var count=1;
+    var unbindWatch=$scope.$watch('todoList',function(){
+      console.log('todoList changed');
+      count++;
+      //相当于在todoList变化了4次之后，就调用unbingWatch()取消这个watch
+      //在第5次todoList改变的时候,就不会输出todoList change了。
+      if(count>4){
+        unbindWatch();
+      }
+    },true);
 
+    //确认是否删除的弹框
+    $scope.showDelAlert = function (activityId) {
+      var deletePopup = $ionicPopup.show({
+        cssClass: 'user-alert',
+        title: '提示',
+        template: '是否确定删除该条',
+        scope: $scope,
+        buttons: [
+          {
+            text: '取消',
+            type: 'button-alert button-clear button-stable',
+            onTap: function () {
+              deletePopup.close();
+            }
+          },
+          {
+            text: '确定',
+            type: 'button-alert button-clear button-positive',
+            onTap: function () {
+              guidesrv.detetetodo(activityId).then(function () {
+                deletePopup.close();
+                $scope.popup("操作成功");
+                $scope.getToDOList();
+              });
+            }
+          }
+        ]
+      });
+    };
     //加文本信息
     $scope.addNote = function () {
       if ($scope.addNewNote.Notes !== '') {
         console.log($scope.addNewNote);
         guidesrv.savetodo($scope.addNewNote).then(function () {
           $scope.popup("操作成功");
+          $scope.getToDOList();
+          $scope.addNewNote.Notes = '';
         });
 
-        $scope.getToDOList();
-        // $scope.addNewNote.Notes = '';
       }
       else {
-        var myPopup = $ionicPopup.show({
-          template: '<input type="password" ng-model="data.wifi">',
-          title: 'Enter Wi-Fi Password',
-          subTitle: 'Please use normal things',
-          scope: $scope,
-          buttons: [
-            { text: 'Cancel' },
-            {
-              text: '<b>Save</b>',
-              type: 'button-positive',
-              onTap: function(e) {
-                if (!$scope.data.wifi) {
-                  //不允许用户关闭，除非他键入wifi密码
-                  e.preventDefault();
-                } else {
-                  return $scope.data.wifi;
-                }
-              }
-            },
-          ]
-        });
-
+        $scope.showAlert();
       }
     };
     //加声音
     $scope.addSound = function () {
 
     };
-
-    $scope.deleteToDo = function () {
-      guidesrv.detetetodo($scope.todoList).then(function () {
-        $scope.getToDOList();
-        $scope.popup("操作成功");
-      });
+    //删除一条记录
+    $scope.deleteToDo = function (activityId) {
+      $scope.showDelAlert(activityId);
     };
-
+    //下一步
     $scope.nextStep = function () {
       $state.go("main.calloverview", {insId: $stateParams.insId});
     }

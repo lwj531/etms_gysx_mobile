@@ -488,7 +488,7 @@ ul {
   display: -webkit-flex;
   display: flex;
   max-height: 28px;
-  /*font-size: 1rem*/
+  font-size: 1rem;
 }
 
 .list-count {
@@ -1066,7 +1066,7 @@ ul {
 
 .pagination ul li {
   display: inline-block;
-  width: 46px;
+  width: 36px;
   height: 36px;
   line-height: 36px;
   border: 1px solid #ddd;
@@ -1164,12 +1164,16 @@ select {
 
 .msg-alert .popup {
   width: 320px;
+  font-size: 1rem;
 }
-
+.user-alert .popup-buttons{
+  justify-content: flex-end;
+}
 .button-alert {
   text-align: right;
-  position: absolute;
-  right: 20px;
+  position: relative;
+  right: 5px;
+  max-width: 54px;
   padding: 10px;
 }
 
@@ -4585,7 +4589,7 @@ input[type=month] {
 }
 
 .todo-content .todo-list {
-  height: calc(100% - 44px);
+  height: calc(100% - 41px);
   overflow: auto;
 }
 
@@ -4801,9 +4805,6 @@ input[type=date].deadline-input {
   display: inline-block;
   line-height: 1.35rem;
 }
-.call-overview .check-item:first-child{
-  padding-right: 5px;
-}
 .call-overview .check-item:not(:first-child){
   padding: 0 5px;
 }
@@ -4812,6 +4813,10 @@ input[type=date].deadline-input {
 }
 .call-overview .check-item:last-child{
   padding-left: 5px;
+}
+.call-overview .check-item:first-child{
+  padding-right: 5px;
+  padding-left: 0;
 }
 .call-overview .check-item:not(:last-child):after{
   content: '';
@@ -4830,4 +4835,21 @@ input[type=date].deadline-input {
   min-width: 40px;
   max-width: 40px;
   padding: 0;
+}
+.user-alert .popup-head h3{
+  font-size:1.4rem;
+}
+.user-alert .popup-body{
+text-align: center;
+  font-size:1.2rem;
+}
+.popup-container .popup{
+  background-color: #fff;
+}
+.call-checklist .tag-blue{
+  background-color: #419de7;
+  color: #fff;
+  padding: 0 8px;
+  border-radius: 3px;
+  display: block;
 }

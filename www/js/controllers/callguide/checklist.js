@@ -1,39 +1,37 @@
 angular.module('checklist.ctrl', ['guide.srv', 'client.srv'])
   .controller('ChecklistCtrl', function ($scope, guidesrv, clientsrv, $stateParams, $state) {
-console.log($stateParams.insId)
+    console.log($stateParams.insId);
     clientsrv.getcurrentstaff().then(function (staff) {
       //当前人员的信息
       $scope.staff = staff;
       console.log($scope.staff);
     });
+
     //获取所有的KAItem
     guidesrv.getkaitems().then(function (items) {
       $scope.KAItems = items;
       //获取实际选择过的
       guidesrv.getactualdailykaitems(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (actualItems) {
         console.log(actualItems);
-        if (actualItems.length === 0) {
-          //如果没选择过则带出计划中的
-          guidesrv.getplandailykaitems(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (planItems) {
-            console.log(planItems);
-            for (var i = 0; i < items.length; i++) {
-              $scope.KAItems[i].selected = false;
-              for (var j = 0; j < planItems.length; j++) {
-                if (items[i].ItemID === planItems[j].ItemID) {
-                  $scope.KAItems[i].selected = true;
-                }
+        //标记出计划中的
+        guidesrv.getplandailykaitems(moment().format('YYYY-MM-DD'), $stateParams.insId).then(function (planItems) {
+          console.log(planItems);
+          for (var i = 0; i < items.length; i++) {
+            $scope.KAItems[i].isPlan = false;
+            for (var j = 0; j < planItems.length; j++) {
+              if (items[i].ItemID === planItems[j].ItemID) {
+                $scope.KAItems[i].isPlan = true;
               }
             }
-          });
-        }
-        else {
-          console.log(actualItems);
-          for (var p = 0; p < items.length; p++) {
-            $scope.KAItems[p].selected = false;
-            for (var q = 0; q < actualItems.length; q++) {
-              if (items[p].ItemID === actualItems[q].ItemID) {
-                $scope.KAItems[p].selected = true;
-              }
+          }
+        });
+        console.log(actualItems);
+        //获取实际选中状态
+        for (var p = 0; p < items.length; p++) {
+          $scope.KAItems[p].selected = false;
+          for (var q = 0; q < actualItems.length; q++) {
+            if (items[p].ItemID === actualItems[q].ItemID) {
+              $scope.KAItems[p].selected = true;
             }
           }
         }

@@ -1,16 +1,23 @@
-angular.module('home.ctrl', [])
-  .controller('HomeCtrl', function ($scope, $state, $ionicModal,$ionicPopup,$ionicHistory) {
+angular.module('home.ctrl', ['home.srv'])
+  .controller('HomeCtrl', function ($scope, $state, $ionicModal,$ionicPopup,$ionicHistory,homesrv) {
     //清除登陆页面的历史纪录
     $ionicHistory.clearHistory();
 
-    $scope.carinfo = function () {
-      carsrv.carinfo().then(function (data) {
-        $scope.cars = data;
-      });
-    };
-    $scope.loginout=function(){
-      localStorage.clear();
-    };
+    // $scope.carinfo = function () {
+    //   carsrv.carinfo().then(function (data) {
+    //     $scope.cars = data;
+    //   });
+    // };
+    // $scope.loginout=function(){
+    //   localStorage.clear();
+    // };
+
+    homesrv.getreceivelist().then(function (msg) {
+      //获取消息列表
+      $scope.msgList = msg;
+      console.log($scope.msgList);
+    });
+
 
     $ionicModal.fromTemplateUrl('/templates/home/sendMsgModal.html', {
       scope: $scope,
@@ -44,7 +51,7 @@ angular.module('home.ctrl', [])
       $scope.reciever.push({name:''});
     }
     $scope.homeMsgList=[];
-    for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
       $scope.homeMsgList.push(
         {title: '消息title消息title消息title消息title', sendTime: '2017-12-12  09:20:20'}
       );
@@ -77,7 +84,7 @@ angular.module('home.ctrl', [])
               //不允许用户关闭
               //e.preventDefault();
             }
-          },
+          }
         ]
       });
       msgPopup.then(function (res) {
