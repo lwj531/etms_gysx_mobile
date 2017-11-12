@@ -1166,6 +1166,7 @@ select {
   width: 320px;
   font-size: 1rem;
 }
+.msg-alert .popup-buttons,
 .user-alert .popup-buttons{
   justify-content: flex-end;
 }
