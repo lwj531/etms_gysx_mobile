@@ -83,5 +83,9 @@ angular.module("guide.srv", ["http.srv"])
     this.getNearBy = function (lnglat) {
       return httpsrv.service("/api/Institution/GetNearbyChainStores/", lnglat, "post");
     }
+    //获取下游门店
+    this.getChainStores = function (para) {
+      return httpsrv.service("/api/Institution/GetChainStoresSkipIns/", para, "post");
+    }
   }
   ]);

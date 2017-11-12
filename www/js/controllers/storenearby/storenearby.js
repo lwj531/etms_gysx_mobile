@@ -3,7 +3,6 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
     //是否获取当前定位成功
     $scope.haslocal = false;
     //无坐标时临时测试----------
-    $scope.haslocal = true;
     $scope.lnglat = [121.421070,31.256720];
     //----------end------------
 
@@ -73,14 +72,13 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
       $scope.getCenter();
     };
     //获取定位坐标失败
-    $scope.getlocationError = function () {
+    $scope.getlocationError = function (err) {
+      console.log(err);
       $rootScope.toast("获取坐标失败，请重新定位。");
       //无法获取坐标时暂时关闭，方便测试
-      //$scope.lnglat = [];
-      //$scope.haslocal = false;
-      //为方便测试
-      $scope.map.setCenter($scope.lnglat);
-      $scope.getCenter();
+      $scope.lnglat = [];
+      $scope.haslocal = false;
+
     };
     //地图移动时重新获取当前的中心点
     $scope.getCenter = function () {
@@ -127,18 +125,6 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
           }
         }
       });
-     /* $scope.withinIns = [];
-      var lnglat = new AMap.LngLat($scope.lnglat[0], $scope.lnglat[1]);//当前位置坐标
-      for (var i = 0; i < $scope.insdata.length; i++) {
-        var ins = $scope.insdata[i].InstitutionModel;
-        if (lnglat.distance(ins.lnglat) <= 500) {
-          $scope.withinIns.push(ins);
-        }
-        if (i == $scope.insdata.length - 1) {
-          //重新显示门店marker
-          $scope.setInsMarker();
-        }
-      }*/
     };
     //设置marker点
     $scope.setInsMarker = function () {
@@ -262,7 +248,6 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
             }
             if (i == data.length - 1) {
               $scope.insdata = result;
-              console.log($scope.insdata);
               if (callback != null) {
                 callback();
               }
@@ -271,10 +256,61 @@ angular.module('storenearby.ctrl', ['ionic', 'routesetting.srv', 'guide.srv', 'a
         }
       });
     };
+    //下游门店搜索参数
+    $scope.storeQuery={
+      Key:"",//搜索关键字
+      Page:1,//当前页码
+      RemainingCount:0//剩余页码
+    };
+    //获取下游门店
+    $scope.getChainStores=function(para,callback){
+      guidesrv.getChainStores(para).then(function (data) {
+        var result = [];
+        $scope.storeQuery.Page=data.Page;
+        $scope.storeQuery.RemainingCount=data.RemainingCount
+        if (data.Institutions.length == 0) {
+          $scope.chainStores = result;
+          if (callback != null) {
+            callback();
+          }
+        } else {
+          for (var i = 0; i < data.Institutions.length; i++) {
+            var item = {
+              InstitutionModel: data.Institutions[i],
+              CheckIn: null,
+              CheckOut: null
+            };
+            if($scope.todaysch.length==0){
+              result.push(item);
+            }
+            //判断是否允许拜访
+            for (var j = 0; j < $scope.todaysch.length; j++) {
+              if ($scope.todaysch[j].InstitutionModel.InstitutionID == item.InstitutionModel.InstitutionID) {
+                item.CheckIn = $scope.todaysch[j].CheckIn;
+                item.CheckOut = $scope.todaysch[j].CheckOut;
+              }
+              if (j == $scope.todaysch.length - 1) {
+                result.push(item);
+              }
+            }
+            if (i == data.Institutions.length - 1) {
+              $scope.chainStores = result;
+              console.log($scope.chainStores);
+              if (callback != null) {
+                callback();
+              }
+            }
+          }
+        }
+      });
+    };
+
     //初始化
     $scope.init = function () {
       $scope.getTodaySch(function () {
-        $scope.$broadcast("amap", "datacompleted");
+        $scope.getChainStores($scope.storeQuery,function () {
+          $scope.$broadcast("amap", "datacompleted");
+        })
       })
     };
     $scope.init();
